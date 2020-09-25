@@ -4,7 +4,7 @@ import AddReview from '../../components/forms/AddReview'
 
 const AddReviewContainer = ({ open, onClose, professor }) => {
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog fullWidth maxWidth='sm' open={open} onClose={onClose}>
       <DialogTitle>Add Review</DialogTitle>
       <DialogContent>
         <AddReview onClose={onClose} professor={professor} />

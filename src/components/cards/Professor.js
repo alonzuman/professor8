@@ -16,7 +16,7 @@ const Professor = ({ id }) => {
     <div className='page__container'>
       <h1>{professor.name}</h1>
       <ReviewsList reviews={professor.reviews} loading={loading} />
-      <Button onClick={() => setAddReview(true)}>Add Review</Button>
+      <Button variant='contained' color='primary' onClick={() => setAddReview(true)}>Add Review</Button>
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
     </div>
   )

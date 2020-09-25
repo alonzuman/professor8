@@ -4,7 +4,7 @@ import AddProfessor from '../../components/forms/AddProfessor';
 
 const AddProfessorContainer = ({ open, onClose }) => {
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog fullWidth maxWidth='md' dir='rtl' open={open} onClose={onClose}>
       <DialogTitle>Add Professor</DialogTitle>
       <DialogContent>
         <AddProfessor />

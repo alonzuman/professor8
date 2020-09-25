@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import DirectionProvider from './contexts/DirectionProvider';
 import Home from './pages/Home';
-import Results from './pages/Results';
 import theme from './utils/theme';
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
           <Switch>
             <div className='page__container'>
               <Route exact path='/' component={Home} />
-              <Route exact path='/:query' component={Results} />
             </div>
           </Switch>
         </Router>

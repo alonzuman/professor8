@@ -84,3 +84,7 @@ code {
   left: 50%;
   transform: translate(-50%, 0)
 }
+
+.form__group {
+  margin: 8px 0;
+}

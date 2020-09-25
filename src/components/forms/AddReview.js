@@ -8,6 +8,7 @@ import { validateStringInput } from '../../utils/form';
 const AddReview = ({ professor, onClose }) => {
   const { id } = professor
   const [rating, setRating] = useState(5);
+  const [author, setAuthor] = useState('')
   const [content, setContent] = useState('')
   const dispatch = useDispatch()
 
@@ -16,8 +17,10 @@ const AddReview = ({ professor, onClose }) => {
     if (validateStringInput(content)) {
       const review = {
         id,
+        author,
         content,
         rating,
+        dateCreated: Date.now(),
         upVotes: 0,
         downVotes: 0
       }
@@ -28,7 +31,16 @@ const AddReview = ({ professor, onClose }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <FormGroup>
+      <FormGroup className='form__group'>
+        <TextField
+          label='Author'
+          variant='outlined'
+          name='author'
+          value={author}
+          onChange={e => setAuthor(e.target.value)}
+        />
+      </FormGroup>
+      <FormGroup className='form__group'>
         <TextField
           label='Content'
           multiline
@@ -38,7 +50,7 @@ const AddReview = ({ professor, onClose }) => {
           onChange={e => setContent(e.target.value)}
         />
       </FormGroup>
-      <FormGroup>
+      <FormGroup className='form__group'>
         <input type='range' min='1' max='5' name='rating' onChange={e => setRating(parseInt(e.target.value))} />
       </FormGroup>
       <Button type='submit'>Submit</Button>

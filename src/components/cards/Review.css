@@ -1,0 +1,13 @@
+.review_card__container {
+  min-width: 300px;
+  min-height: 180px;
+  margin: 8px 16px;
+}
+
+.review_card__container:last-of-type {
+  margin: 8px 32px 8px 16px;
+}
+
+.review_card__content {
+  height: 100%;
+}

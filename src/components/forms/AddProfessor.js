@@ -57,11 +57,11 @@ const AddProfessor = () => {
     return <CircularProgress />
   } else {
     return (
-      <form onSubmit={handleSubmit}>
-        <FormGroup>
+      <form dir='rtl' onSubmit={handleSubmit}>
+        <FormGroup className='form__group'>
           <TextField variant='outlined' label='Full Name' name='name' onChange={handleChange} />
         </FormGroup>
-        <FormGroup>
+        <FormGroup className='form__group'>
           <InputLabel label='Role'>Role</InputLabel>
           <Select variant='outlined' value={professor.role} name='role' onChange={handleChange}>
             <MenuItem value={'Professor'}>Professor</MenuItem>
@@ -69,17 +69,13 @@ const AddProfessor = () => {
             <MenuItem value={'Teacher'}>Teacher</MenuItem>
           </Select>
         </FormGroup>
-        <FormGroup>
+        <FormGroup className='form__group'>
           <InputLabel label='Role'>Institution</InputLabel>
-          <Select variant='outlined' value={professor.institution} name='institution' onChange={handleChange}>
+          <Select variant='outlined' value={professor.institution || institutions[0]} name='institution' onChange={handleChange}>
             {institutions?.map((institution, index) => <MenuItem value={institution} key={index}>{institution.name}</MenuItem>)}
           </Select>
         </FormGroup>
-        {/* <FormGroup> */}
-          {/* TODO load select of only relevant departures */}
-          {/* <TextField variant='outlined' label='Departure' name='departure' onChange={handleChange} /> */}
-        {/* </FormGroup> */}
-        <Button type='submit'>Submit</Button>
+        <Button color='primary' variant='contained' type='submit'>Submit</Button>
       </form>
     )
   }

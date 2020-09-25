@@ -11,7 +11,7 @@ const Navbar = () => {
     <div className='navbar__container'>
       <AddProfessorContainer open={addingProfessor} onClose={() => setAddingProfessor(false)} />
       <div className='navbar__menu'>
-        <NavLink className='navbar__link' to='/' >Home</NavLink>
+        {/* <NavLink className='navbar__link' to='/' >Home</NavLink> */}
         <Button onClick={() => setAddingProfessor(!addingProfessor)}>Add Professor</Button>
       </div>
     </div>

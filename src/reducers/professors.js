@@ -46,7 +46,7 @@ export const professorsReducer = (state = initialState, action) => {
         ...state,
         professor: {
           ...state.professor,
-          reviews: [...state.professor.reviews, payload]
+          reviews: [payload, ...state.professor.reviews]
         },
         loading: false
       }

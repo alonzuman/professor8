@@ -1,6 +1,7 @@
 import React from 'react'
 import { CircularProgress } from '@material-ui/core'
 import Review from '../../components/cards/Review'
+import './ReviewsList.css'
 
 const ReviewsList = ({ reviews, loading }) => {
   if (loading) {
