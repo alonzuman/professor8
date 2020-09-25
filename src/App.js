@@ -1,20 +1,27 @@
+import { ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
+import DirectionProvider from './contexts/DirectionProvider';
 import Home from './pages/Home';
-import Professor from './pages/Professor';
+import Results from './pages/Results';
+import theme from './utils/theme';
 
 function App() {
   return (
-    <div dir='rtl'>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/professor/:id' component={Professor} />
-        </Switch>
-      </Router>
-    </div>
+    <ThemeProvider theme={theme}>
+      <DirectionProvider>
+        <Router>
+          <Navbar />
+          <Switch>
+            <div className='page__container'>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/:query' component={Results} />
+            </div>
+          </Switch>
+        </Router>
+      </DirectionProvider>
+    </ThemeProvider>
   );
 }
 

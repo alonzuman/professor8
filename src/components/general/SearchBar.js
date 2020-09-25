@@ -1,24 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { TextField } from '@material-ui/core'
-import AutoComplete from './AutoComplete'
+import { Button, TextField } from '@material-ui/core'
 import { db } from '../../firebase'
 import './SearchBar.css'
+import { Autocomplete } from '@material-ui/lab'
 
-const SearchBar = ({ handleSubmit, collection }) => {
+const SearchBar = ({ handleSubmit, collection, placeholder, noOptionsText = 'No results found' }) => {
   const [search, setSearch] = useState('')
   const [options, setOptions] = useState([])
-  const [suggestions, setSuggestions] = useState([])
-  const [show, setShow] = useState(false)
-
-  const handleFormSubmit = e => {
-    e.preventDefault()
-    handleSubmit(search)
-  }
-
-  const handleSuggestionClick = suggestion => {
-    setSearch(suggestion);
-    handleSubmit(suggestion);
-  }
 
   const fetchSuggestions = async () => {
     try {
@@ -26,33 +14,32 @@ const SearchBar = ({ handleSubmit, collection }) => {
       let results = []
       snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
       setOptions(results)
-      console.log(results)
     } catch (error) {
       console.log(error)
     }
   }
 
-  const filterSuggestions = () => {
-    const searchArr = search.split('')
-    setSuggestions(options?.filter(({ name }) => {
-      if (name.split('').slice(0, searchArr.length).join('') === searchArr.join('') && name !== search) {
-        return name
-      }
-    }))
-  }
-
   useEffect(() => { fetchSuggestions() }, [])
-  useEffect(() => { filterSuggestions() }, [search])
 
-  const handleSearchChange = e => {
-    setShow(true)
-    setSearch(e.target.value)
+  const submitSearch = e => {
+    e.preventDefault()
+    handleSubmit(search)
   }
 
   return (
-    <form onSubmit={handleFormSubmit} className='search_bar__container'>
-      <TextField placeholder='Find professors by school name' onClick={() => setShow(true)} className='search_bar__input' variant='outlined' value={search} onChange={handleSearchChange} />
-      <AutoComplete setShow={setShow} show={show} search={search} onClick={suggestion => handleSuggestionClick(suggestion)} suggestions={suggestions} />
+    <form onSubmit={submitSearch} className='search_bar__container'>
+      <Autocomplete
+        style={{ width: '100%', direction: 'rtl' }}
+        handleHomeEndKeys
+        autoHighlight
+        autoSelect
+        noOptionsText={noOptionsText}
+        value={search}
+        onChange={(event, newValue) => setSearch(newValue)}
+        options={options.map(v => v.name)}
+        renderInput={(params) => <TextField {...params} label={placeholder} variant="outlined" />}
+      />
+      <Button variant='contained' color='primary' type='submit'>Search</Button>
     </form>
   )
 }

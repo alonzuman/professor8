@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTitle } from '@material-ui/core'
 import React from 'react'
-import AddReview from '../components/forms/AddReview'
+import AddReview from '../../components/forms/AddReview'
 
 const AddReviewContainer = ({ open, onClose, professor }) => {
   return (

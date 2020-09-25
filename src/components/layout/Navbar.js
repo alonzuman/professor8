@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import AddProfessorContainer from '../../containers/AddProfessorContainer';
+import AddProfessorContainer from '../../containers/dialogs/AddProfessorContainer';
 import './Navbar.css';
 
 const Navbar = () => {

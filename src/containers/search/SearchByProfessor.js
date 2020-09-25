@@ -1,19 +1,18 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setFilters } from '../../actions/professors'
 import SearchBar from '../../components/general/SearchBar'
-import ProfessorsList from '../ProfessorsList'
+import ProfessorsList from '../lists/ProfessorsList'
 
 const SearchByProfessor = () => {
-  const { loading, professors } = useSelector(state => state.professors)
   const dispatch = useDispatch()
   const applySearch = (search) => { dispatch(setFilters({ name: search })) }
 
   return (
-    <>
-      <SearchBar handleSubmit={search => applySearch(search)} collection='professors' />
-      <ProfessorsList professors={professors} loading={loading} />
-    </>
+    <div style={{ width: '100%', margin: '16px 0' }}>
+      <SearchBar noOptionsText='No Results' placeholder='Search by professor name' handleSubmit={search => applySearch(search)} collection='professors' />
+      <ProfessorsList />
+    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@material-ui/core';
-import AddProfessor from '../components/forms/AddProfessor';
+import AddProfessor from '../../components/forms/AddProfessor';
 
 const AddProfessorContainer = ({ open, onClose }) => {
   return (

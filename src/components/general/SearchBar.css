@@ -1,4 +1,5 @@
-.search_bar__input,
 .search_bar__container {
   width: 100%;
+  display: flex;
+  direction: rtl;
 }

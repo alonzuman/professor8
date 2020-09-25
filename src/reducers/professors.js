@@ -4,6 +4,9 @@ const initialState = {
     institution: ''
   },
   professors: [],
+  professor: {
+    reviews: []
+  },
   loading: false,
 }
 
@@ -26,6 +29,31 @@ export const professorsReducer = (state = initialState, action) => {
       return {
         ...state,
         filters: { ...payload },
+        loading: false
+      }
+    case 'PROFESSORS/SET_ONE':
+      const { professor, reviews } = payload;
+      return {
+        ...state,
+        professor: {
+          ...professor,
+          reviews
+        },
+        loading: false,
+      }
+    case 'PROFESSORS/ADD_REVIEW':
+      return {
+        ...state,
+        professor: {
+          ...state.professor,
+          reviews: [...state.professor.reviews, payload]
+        },
+        loading: false
+      }
+    case 'PROFESSORS/CLEAR_ONE':
+      return {
+        ...state,
+        professor: {},
         loading: false
       }
     default: return state;
