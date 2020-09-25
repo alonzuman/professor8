@@ -1,0 +1,11 @@
+.filters_bar__container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.filters_bar__section {
+
+}

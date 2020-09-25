@@ -1,0 +1,80 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  /* Colors */
+  --primary-light: pink;
+  --primary-main: pink;
+  --primary-dark: pink;
+
+  --bg-00: #fff;
+  --bg-01: #f7f7f7;
+  --bg-02: #f4f4f4;
+  --bg-03: #f4f4f4;
+  --bg-04: #f4f4f4;
+  --bg-05: #f4f4f4;
+  --bg-06: #f4f4f4;
+  --bg-07: #f4f4f4;
+  --bg-08: #f4f4f4;
+}
+
+.light {
+  --primary-light: pink;
+  --primary-main: pink;
+  --primary-dark: pink;
+
+  --bg-00: #fff;
+  --bg-01: #f7f7f7;
+  --bg-02: #f4f4f4;
+  --bg-03: #f4f4f4;
+  --bg-04: #f4f4f4;
+  --bg-05: #f4f4f4;
+  --bg-06: #f4f4f4;
+  --bg-07: #f4f4f4;
+  --bg-08: #f4f4f4;
+}
+
+.dark {
+  --primary-light: pink;
+  --primary-main: pink;
+  --primary-dark: pink;
+
+  --bg-00: #fff;
+  --bg-01: #f7f7f7;
+  --bg-02: #f4f4f4;
+  --bg-03: #f4f4f4;
+  --bg-04: #f4f4f4;
+  --bg-05: #f4f4f4;
+  --bg-06: #f4f4f4;
+  --bg-07: #f4f4f4;
+  --bg-08: #454545;
+}
+
+/* Layout */
+.page__container {
+  padding: 16px;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.a__neutral {
+  text-decoration: none;
+  color: black;
+}

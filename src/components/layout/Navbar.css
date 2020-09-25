@@ -1,0 +1,16 @@
+.navbar__container {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-00);
+  padding: 8px 16px;
+}
+
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar__link {
+
+}
