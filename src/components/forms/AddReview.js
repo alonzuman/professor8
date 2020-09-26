@@ -15,7 +15,7 @@ const AddReview = ({ professor, onClose }) => {
     e.preventDefault();
     if (validateStringInput(content)) {
       const review = {
-        id,
+        pid: id,
         author,
         content,
         rating,

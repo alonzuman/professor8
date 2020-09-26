@@ -5,7 +5,7 @@ import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import './Review.css'
 
 const Review = ({ review }) => {
-  const { content, rating, author, avatar } = review
+  const { pid, content, rating, author, avatar, upVotes, downVotes } = review
   console.log(review)
   return (
       <Card className='review_card__container'>
@@ -20,12 +20,18 @@ const Review = ({ review }) => {
           {/* <h3>{rating}</h3> */}
         </CardContent>
         <CardActions>
-          <IconButton>
-            <ThumbDownAltIcon />
-          </IconButton>
-          <IconButton>
-            <ThumbUpAltIcon />
-          </IconButton>
+          <div onClick={() => console.log('liked')} className='flex align__center  justify__center'>
+            <IconButton>
+              <ThumbDownAltIcon />
+            </IconButton>
+            <Typography variant='subtitle1'>{upVotes}</Typography>
+          </div>
+          <div className='flex align__center  justify__center'>
+            <IconButton>
+              <ThumbUpAltIcon />
+            </IconButton>
+            <Typography variant='subtitle1'>{downVotes}</Typography>
+          </div>
         </CardActions>
       </Card>
   )

@@ -79,12 +79,22 @@ code {
   color: black;
 }
 
-.centered {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0)
-}
-
 .form__group {
   margin: 8px 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.align__center {
+  align-items: center;
+}
+
+.justify__between {
+  justify-content: space-between;
+}
+
+.justify__center {
+  justify-content: center;
 }

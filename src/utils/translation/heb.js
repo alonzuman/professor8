@@ -15,7 +15,10 @@ const heb = {
   role: "תפקיד",
   fullName: "שם מלא",
   institution: "מוסד",
-  submit: "הוספה"
+  submit: "הוספה",
+  noResultsFor: "לא נמצאו תוצאות עבור",
+  fieldOfResearch: "תחום מחקר",
+  reviews: "ביקורות"
 }
 
 export default heb;

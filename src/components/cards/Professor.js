@@ -5,6 +5,7 @@ import { getProfessor } from '../../actions/professors';
 import AddReviewContainer from '../../containers/dialogs/AddReviewContainer';
 import ReviewsList from '../../containers/lists/ReviewsList';
 import CloseIcon from '@material-ui/icons/Close';
+import heb from '../../utils/translation/heb';
 
 const Professor = ({ id, handleClose }) => {
   const [addReview, setAddReview] = useState(false)
@@ -27,11 +28,11 @@ const Professor = ({ id, handleClose }) => {
           action={<IconButton onClick={handleClose}><CloseIcon /></IconButton>}
         />
         <CardContent>
-          <Typography variant='subtitle1'>Field of research</Typography>
+          <Typography variant='subtitle1'>{heb.fieldOfResearch}</Typography>
           <div className='reviews_list__container'>
-            {fieldOfResearch?.map((v, i) => <Chip color='primary' key={i} label={v}/>)}
+            {fieldOfResearch?.map((v, i) => <Chip size='small' variant='outlined' key={i} label={v}/>)}
           </div>
-          <Typography variant='subtitle1'>Reviews</Typography>
+          <Typography variant='subtitle1'>{heb.reviews}</Typography>
           <ReviewsList reviews={reviews} loading={loading} />
         </CardContent>
         <CardActions>

@@ -57,6 +57,22 @@ export const professorsReducer = (state = initialState, action) => {
         professor: {},
         loading: false
       }
+    case 'PROFESSORS/UPVOTE_REVIEW':
+      return {
+        ...state,
+        professor: {
+          ...state.professor,
+          reviews: [...state.reviews]
+        }
+      }
+    case 'PROFESSORS/DOWNVOTE_REVIEW':
+      return {
+        ...state,
+        professor: {
+          ...state.professor,
+          reviews: [...state.reviews]
+        }
+      }
     default: return state;
   }
 }

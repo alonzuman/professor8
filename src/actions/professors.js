@@ -1,5 +1,7 @@
 import { db } from "../firebase"
 import qs from 'query-string'
+import firebase from 'firebase'
+import store from "../store"
 const professorsRef = db.collection('professors')
 
 export const getProfessors = () => async dispatch => {
@@ -36,10 +38,7 @@ export const getProfessor = (id) => async dispatch => {
   try {
     const professorSnapshot = await professorsRef.doc(id).get()
     const reviewsSnapshot = await professorsRef.doc(id).collection('reviews').get()
-    let professor = {
-      id: professorSnapshot.id,
-      ...professorSnapshot.data()
-    }
+    let professor = { id: professorSnapshot.id, ...professorSnapshot.data()}
     let reviews = []
     reviewsSnapshot.forEach(doc => reviews.push({ id: doc.id, ...doc.data() }))
     dispatch({
@@ -87,6 +86,34 @@ export const getFilterOptions = collection => async dispatch => {
     dispatch({
       type: 'PROFESSORS/SET_FILTER_OPTIONS',
       payload: results
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const upVoteReview = review => async dispatch => {
+  try {
+    await professorsRef.doc(review.pid).collection('reviews').doc(review.id).update({
+      upVotes: firebase.firestore.FieldValue.increment(1)
+    })
+    dispatch({
+      type: 'PROFESSORS/UPVOTE_REVIEW',
+      payload: review.id
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const downVoteReview = review => async dispatch => {
+  try {
+    await professorsRef.doc(review.pid).collection('reviews').doc(review.id).update({
+      upVotes: firebase.firestore.FieldValue.increment(-1)
+    })
+    dispatch({
+      type: 'PROFESSORS/DOWNVOTE_REVIEW',
+      payload: review.id
     })
   } catch (error) {
     console.log(error)

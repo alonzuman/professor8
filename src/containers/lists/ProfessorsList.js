@@ -31,13 +31,11 @@ const ProfessorsList = () => {
   }, [schools, name])
 
   if (loading && professors.length === 0) {
-    return <CircularProgress className='centered' />
+    return <CircularProgress/>
+  } else if (!loading && !schools && !name) {
+    return <div/>
   } else if (!loading && professors.length === 0) {
-    return (
-      <div>
-        <h1>No results for {schools || name}</h1>
-      </div>
-    )
+    return <Typography dir='rtl' variant='body1'>{heb.noResultsFor} {schools || name}</Typography>
   } else {
     return (
       <div dir='rtl' className='professors_list__container'>
