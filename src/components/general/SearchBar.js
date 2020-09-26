@@ -4,8 +4,7 @@ import { db } from '../../firebase'
 import './SearchBar.css'
 import { Autocomplete } from '@material-ui/lab'
 
-const SearchBar = ({ handleSubmit, collection, placeholder, noOptionsText = 'No results found' }) => {
-  const [search, setSearch] = useState('')
+const SearchBar = ({  search, setSearch, handleSubmit, collection, placeholder, noOptionsText = 'No results found' }) => {
   const [options, setOptions] = useState([])
 
   const fetchSuggestions = async () => {
@@ -19,7 +18,7 @@ const SearchBar = ({ handleSubmit, collection, placeholder, noOptionsText = 'No 
     }
   }
 
-  useEffect(() => { fetchSuggestions() }, [])
+  useEffect(() => { fetchSuggestions() }, [collection])
 
   const submitSearch = e => {
     e.preventDefault()
@@ -29,6 +28,7 @@ const SearchBar = ({ handleSubmit, collection, placeholder, noOptionsText = 'No 
   return (
     <form onSubmit={submitSearch} className='search_bar__container'>
       <Autocomplete
+        dir='rtl'
         style={{ width: '100%', direction: 'rtl' }}
         handleHomeEndKeys
         autoHighlight
@@ -38,8 +38,9 @@ const SearchBar = ({ handleSubmit, collection, placeholder, noOptionsText = 'No 
         onChange={(event, newValue) => setSearch(newValue)}
         options={options.map(v => v.name)}
         renderInput={(params) => <TextField {...params} label={placeholder} variant="outlined" />}
+        renderOption={option => <div style={{ textAlign: 'right', width: '100%' }} >{option}</div>}
       />
-      <Button variant='contained' color='primary' type='submit'>Search</Button>
+      <Button style={{ marginRight: '8px' }} variant='contained' color='primary' type='submit'>Search</Button>
     </form>
   )
 }

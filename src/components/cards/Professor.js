@@ -1,25 +1,42 @@
-import { Button, CircularProgress } from '@material-ui/core';
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Chip, CircularProgress, IconButton, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfessor } from '../../actions/professors';
 import AddReviewContainer from '../../containers/dialogs/AddReviewContainer';
 import ReviewsList from '../../containers/lists/ReviewsList';
+import CloseIcon from '@material-ui/icons/Close';
 
-const Professor = ({ id }) => {
+const Professor = ({ id, handleClose }) => {
   const [addReview, setAddReview] = useState(false)
   const dispatch = useDispatch()
   const { loading, professor } = useSelector(state => state.professors)
+  const { name, avatar, reviews, school, fieldOfResearch } = professor;
 
   useEffect(() => { dispatch(getProfessor(id)) }, [])
 
-  return (
-    <div className='page__container'>
-      <h1>{professor.name}</h1>
-      <ReviewsList reviews={professor.reviews} loading={loading} />
-      <Button variant='contained' color='primary' onClick={() => setAddReview(true)}>Add Review</Button>
-      <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
-    </div>
-  )
+  if (loading) {
+    return <CircularProgress />
+  } else {
+    return (
+      <Card dir='rtl'>
+        <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
+        <CardHeader
+          avatar={<Avatar src={avatar} alt={name}>{name?.split('')[0]}</Avatar>}
+          title={name}
+          subheader={school?.name}
+          action={<IconButton onClick={handleClose}><CloseIcon /></IconButton>}
+        />
+        <CardContent>
+          <Typography variant='subtitle1'>Field of research</Typography>
+          {fieldOfResearch?.map((v, i) => <Chip label={v} key={i} />)}
+        </CardContent>
+        <ReviewsList reviews={reviews} loading={loading} />
+        <CardActions>
+          <Button variant='contained' color='primary' onClick={() => setAddReview(true)}>Add Review</Button>
+        </CardActions>
+      </Card>
+    )
+  }
 }
 
 export default Professor

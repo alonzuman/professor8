@@ -31,7 +31,7 @@ const DbControls = () => {
   //   }
   // }
 
-  const seedProfessors = () => {
+  const seedProfessors = async () => {
     try {
       for (let i = 0; i < 10; i++) {
         const professor = {
@@ -39,12 +39,13 @@ const DbControls = () => {
           overallRating: Math.floor(Math.random() * 5),
           role: 'Professor',
           tags: [],
-          institution: {
+          school: {
             name: 'אוניברסיטת תל אביב',
             city: 'תל אביב'
           },
+          dateCreated: Date.now()
         }
-        db.collection('professors').add(professor)
+        await db.collection('professors').add(professor)
       }
     } catch (error) {
       console.log(error)

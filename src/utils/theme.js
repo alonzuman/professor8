@@ -4,9 +4,9 @@ const light = {
   direction: 'rtl',
   palette: {
     secondary: {
-      light: '#ffffff',
-      main: '#f7f7f7',
-      dark: '#f2f2f2'
+      light:'#e53453',
+      main:'#e53453',
+      dark:'#e53453'
     }
   }
 }

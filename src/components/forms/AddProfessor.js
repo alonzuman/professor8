@@ -5,30 +5,30 @@ import { validateInput, validateStringInput } from '../../utils';
 
 const AddProfessor = () => {
   const [loading, setLoading] = useState(false)
-  const [institutions, setInstitutions] = useState([])
+  const [schools, setSchools] = useState([])
   const [professor, setProfessor] = useState({
     name: '',
     role: 'Professor',
-    institution: '',
+    school: '',
     departure: '',
     tags: [],
     overallRating: 0,
   });
 
-  const fetchInstitutions = async () => {
+  const getSchools = async () => {
     setLoading(true)
     try {
-      const snapshot = await db.collection('institutions').get()
+      const snapshot = await db.collection('schools').get()
       let results = []
       snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
-      setInstitutions(results)
+      setSchools(results)
       setLoading(false)
     } catch (error) {
       console.log(error)
     }
   }
 
-  useEffect(() => { fetchInstitutions() }, [])
+  useEffect(() => { getSchools() }, [])
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -40,8 +40,8 @@ const AddProfessor = () => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const { name, role, institution } = professor;
-    if (validateStringInput(name) && validateStringInput(role) && institution) {
+    const { name, role, school } = professor;
+    if (validateStringInput(name) && validateStringInput(role) && school) {
       try {
         await db.collection('professors').add(professor)
         console.log('added')
@@ -70,9 +70,9 @@ const AddProfessor = () => {
           </Select>
         </FormGroup>
         <FormGroup className='form__group'>
-          <InputLabel label='Role'>Institution</InputLabel>
-          <Select variant='outlined' value={professor.institution || institutions[0]} name='institution' onChange={handleChange}>
-            {institutions?.map((institution, index) => <MenuItem value={institution} key={index}>{institution.name}</MenuItem>)}
+          <InputLabel label='Role'>school</InputLabel>
+          <Select variant='outlined' value={professor.school || schools[0]} name='school' onChange={handleChange}>
+            {schools?.map((school, index) => <MenuItem value={school} key={index}>{school.name}</MenuItem>)}
           </Select>
         </FormGroup>
         <Button color='primary' variant='contained' type='submit'>Submit</Button>

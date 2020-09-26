@@ -4,9 +4,7 @@ const initialState = {
     institution: ''
   },
   professors: [],
-  professor: {
-    reviews: []
-  },
+  professor: {},
   loading: false,
 }
 

@@ -1,29 +1,30 @@
 import { db } from "../firebase"
-import store from '../store';
+import qs from 'query-string'
 const professorsRef = db.collection('professors')
 
 export const getProfessors = () => async dispatch => {
-  const { institution, name } = store.getState().professors.filters
+  const parsed = qs.parse(window.location.search)
+  const { schools, name } = parsed
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
-  try {
-    let snapshot = {}
-    if (institution) {
-      snapshot = await professorsRef.where('institution.name', '==', institution).get()
-    } else if (name) {
-      snapshot = await professorsRef.where('name', '==', name).get()
-    } else {
-      snapshot = await professorsRef.get()
+  if (schools || name) {
+    try {
+      let snapshot;
+      if (schools) {
+        snapshot = await professorsRef.where("school.name", "==", schools).get()
+      } else {
+        snapshot = await professorsRef.where("name", "==", name).get()
+      }
+      let results = []
+      snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+      dispatch({
+        type: 'PROFESSORS/SET_ALL',
+        payload: results
+      })
+    } catch (error) {
+      console.log(error)
     }
-    let res = []
-    snapshot.forEach(doc => res.push({ id: doc.id, ...doc.data() }))
-    dispatch({
-      type: 'PROFESSORS/SET_ALL',
-      payload: res
-    })
-  } catch (error) {
-    console.log(error)
   }
 }
 
@@ -35,6 +36,7 @@ export const setFilters = (filters) => {
 }
 
 export const getProfessor = (id) => async dispatch => {
+  console.log(`getting ${id}`)
   dispatch({
     type: 'PROFESSORS/LOADING'
   })

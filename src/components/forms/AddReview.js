@@ -1,8 +1,7 @@
-import { Button, FormControl, FormGroup, Slider, TextField } from '@material-ui/core';
+import { Button, FormGroup, TextField } from '@material-ui/core';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addReview } from '../../actions/professors';
-import { db } from '../../firebase';
 import { validateStringInput } from '../../utils/form';
 
 const AddReview = ({ professor, onClose }) => {
