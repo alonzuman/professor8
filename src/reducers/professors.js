@@ -1,8 +1,5 @@
 const initialState = {
-  filters: {
-    name: '',
-    institution: ''
-  },
+  filterOptions: [],
   professors: [],
   professor: {},
   loading: false,
@@ -16,6 +13,12 @@ export const professorsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      }
+    case 'PROFESSORS/SET_FILTER_OPTIONS':
+      return {
+        ...state,
+        filterOptions: payload,
+        loading: false
       }
     case 'PROFESSORS/SET_ALL':
       return {

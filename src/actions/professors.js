@@ -28,13 +28,6 @@ export const getProfessors = () => async dispatch => {
   }
 }
 
-export const setFilters = (filters) => {
-  return ({
-    type: 'PROFESSORS/SET_FILTERS',
-    payload: filters
-  })
-}
-
 export const getProfessor = (id) => async dispatch => {
   console.log(`getting ${id}`)
   dispatch({
@@ -80,5 +73,22 @@ export const addReview = review => async dispatch => {
     })
   } catch (error) {
     console.log(error);
+  }
+}
+
+export const getFilterOptions = collection => async dispatch => {
+  dispatch({
+    type: 'PROFESSORS/LOADING'
+  })
+  try {
+    const snapshot = await db.collection(collection).get()
+    let results = []
+    snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+    dispatch({
+      type: 'PROFESSORS/SET_FILTER_OPTIONS',
+      payload: results
+    })
+  } catch (error) {
+    console.log(error)
   }
 }

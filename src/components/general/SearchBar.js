@@ -3,22 +3,14 @@ import { Button, TextField } from '@material-ui/core'
 import { db } from '../../firebase'
 import './SearchBar.css'
 import { Autocomplete } from '@material-ui/lab'
+import { getFilterOptions } from '../../actions/professors'
+import { useDispatch, useSelector } from 'react-redux'
 
 const SearchBar = ({  search, setSearch, handleSubmit, collection, placeholder, noOptionsText = 'No results found' }) => {
-  const [options, setOptions] = useState([])
+  const { filterOptions, loading } = useSelector(state => state.professors)
+  const dispatch = useDispatch()
 
-  const fetchSuggestions = async () => {
-    try {
-      const snapshot = await db.collection(collection).get()
-      let results = []
-      snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
-      setOptions(results)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => { fetchSuggestions() }, [collection])
+  useEffect(() => { dispatch(getFilterOptions(collection)) }, [collection])
 
   const submitSearch = e => {
     e.preventDefault()
@@ -36,7 +28,7 @@ const SearchBar = ({  search, setSearch, handleSubmit, collection, placeholder, 
         noOptionsText={noOptionsText}
         value={search}
         onChange={(event, newValue) => setSearch(newValue)}
-        options={options.map(v => v.name)}
+        options={filterOptions?.map(v => v.name)}
         renderInput={(params) => <TextField {...params} label={placeholder} variant="outlined" />}
         renderOption={option => <div style={{ textAlign: 'right', width: '100%' }} >{option}</div>}
       />

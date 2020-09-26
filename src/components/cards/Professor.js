@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Chip, CircularProgress, IconButton, Typography } from '@material-ui/core';
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Chip, CircularProgress, Grid, IconButton, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfessor } from '../../actions/professors';
@@ -28,7 +28,9 @@ const Professor = ({ id, handleClose }) => {
         />
         <CardContent>
           <Typography variant='subtitle1'>Field of research</Typography>
-          {fieldOfResearch?.map((v, i) => <Chip label={v} key={i} />)}
+          <Grid spacing={1} container>
+            {fieldOfResearch?.map((v, i) => <Grid item key={i}><Chip label={v}/></Grid>)}
+          </Grid>
         </CardContent>
         <ReviewsList reviews={reviews} loading={loading} />
         <CardActions>

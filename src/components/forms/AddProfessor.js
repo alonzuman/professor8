@@ -71,7 +71,7 @@ const AddProfessor = () => {
         </FormGroup>
         <FormGroup className='form__group'>
           <InputLabel label='Role'>school</InputLabel>
-          <Select variant='outlined' value={professor.school || schools[0]} name='school' onChange={handleChange}>
+          <Select variant='outlined' value={professor.school} name='school' onChange={handleChange}>
             {schools?.map((school, index) => <MenuItem value={school} key={index}>{school.name}</MenuItem>)}
           </Select>
         </FormGroup>
