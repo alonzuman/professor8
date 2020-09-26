@@ -1,6 +1,10 @@
 .review_card__container {
-  margin: 8px 16px;
+  margin: 8px;
   min-width: 220px;
+}
+
+.review_card__container:first-of-type {
+  margin: 8px 0px 8px 8px;
 }
 
 .review_card__container .MuiCardHeader-root {

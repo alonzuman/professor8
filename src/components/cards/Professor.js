@@ -26,12 +26,14 @@ const Professor = ({ id, handleClose }) => {
           subheader={school?.name}
           action={<IconButton onClick={handleClose}><CloseIcon /></IconButton>}
         />
-        <Typography style={{margin: '16px 16px 4px 16px'}} variant='subtitle1'>Field of research</Typography>
-        <div style={{ paddingRight: 16 }} className='reviews_list__container'>
-          {fieldOfResearch?.map((v, i) => <Chip color='primary' key={i} label={v}/>)}
-        </div>
-        <Typography style={{margin: '16px 16px 4px 16px'}} variant='subtitle1'>Reviews</Typography>
-        <ReviewsList reviews={reviews} loading={loading} />
+        <CardContent>
+          <Typography variant='subtitle1'>Field of research</Typography>
+          <div className='reviews_list__container'>
+            {fieldOfResearch?.map((v, i) => <Chip color='primary' key={i} label={v}/>)}
+          </div>
+          <Typography variant='subtitle1'>Reviews</Typography>
+          <ReviewsList reviews={reviews} loading={loading} />
+        </CardContent>
         <CardActions>
           <Button variant='contained' color='primary' onClick={() => setAddReview(true)}>Add Review</Button>
         </CardActions>
