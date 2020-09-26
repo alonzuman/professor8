@@ -5,6 +5,7 @@ import './SearchBar.css'
 import { Autocomplete } from '@material-ui/lab'
 import { getFilterOptions } from '../../actions/professors'
 import { useDispatch, useSelector } from 'react-redux'
+import heb from '../../utils/translation/heb'
 
 const SearchBar = ({  search, setSearch, handleSubmit, collection, placeholder, noOptionsText = 'No results found' }) => {
   const { filterOptions, loading } = useSelector(state => state.professors)
@@ -32,7 +33,7 @@ const SearchBar = ({  search, setSearch, handleSubmit, collection, placeholder, 
         renderInput={(params) => <TextField {...params} label={placeholder} variant="outlined" />}
         renderOption={option => <div style={{ textAlign: 'right', width: '100%' }} >{option}</div>}
       />
-      <Button style={{ marginRight: '8px' }} variant='contained' color='primary' type='submit'>Search</Button>
+      <Button style={{ marginRight: '8px' }} variant='contained' color='primary' type='submit'>{heb.search}</Button>
     </form>
   )
 }

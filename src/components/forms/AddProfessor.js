@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, CircularProgress, FormGroup, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import { db } from '../../firebase';
 import { validateInput, validateStringInput } from '../../utils';
+import heb from '../../utils/translation/heb';
 
 const AddProfessor = () => {
   const [loading, setLoading] = useState(false)
@@ -59,23 +60,23 @@ const AddProfessor = () => {
     return (
       <form dir='rtl' onSubmit={handleSubmit}>
         <FormGroup className='form__group'>
-          <TextField variant='outlined' label='Full Name' name='name' onChange={handleChange} />
+          <TextField variant='outlined' label={heb.fullName} name='name' onChange={handleChange} />
         </FormGroup>
         <FormGroup className='form__group'>
-          <InputLabel label='Role'>Role</InputLabel>
+          <InputLabel label='Role'>{heb.role}</InputLabel>
           <Select variant='outlined' value={professor.role} name='role' onChange={handleChange}>
-            <MenuItem value={'Professor'}>Professor</MenuItem>
-            <MenuItem value={'Teacher Assistant'}>Teacher Assistant</MenuItem>
-            <MenuItem value={'Teacher'}>Teacher</MenuItem>
+            <MenuItem value={'Professor'}>{heb.professor}</MenuItem>
+            <MenuItem value={'Teacher Assistant'}>{heb.teacherAssistant}</MenuItem>
+            <MenuItem value={'Teacher'}>{heb.teacher}</MenuItem>
           </Select>
         </FormGroup>
         <FormGroup className='form__group'>
-          <InputLabel label='Role'>school</InputLabel>
-          <Select variant='outlined' value={professor.school} name='school' onChange={handleChange}>
-            {schools?.map((school, index) => <MenuItem value={school} key={index}>{school.name}</MenuItem>)}
+          <InputLabel label='Role'>{heb.institution}</InputLabel>
+          <Select dir='rtl' variant='outlined' value={professor.school} name='school' onChange={handleChange}>
+            {schools?.map((school, index) => <MenuItem style={{ direction: 'rtl', textAlign: 'right', width: '100%' }} value={school} key={index}>{school.name}</MenuItem>)}
           </Select>
         </FormGroup>
-        <Button color='primary' variant='contained' type='submit'>Submit</Button>
+        <Button color='primary' variant='contained' type='submit'>{heb.submit}</Button>
       </form>
     )
   }

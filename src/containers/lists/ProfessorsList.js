@@ -8,6 +8,7 @@ import qs from 'query-string'
 import './ProfessorsList.css'
 import { getSchool } from '../../actions/schools'
 import SchoolContainer from '../dialogs/SchoolContainer'
+import heb from '../../utils/translation/heb'
 
 const ProfessorsList = () => {
   const [schoolOpen, setSchoolOpen] = useState(false)
@@ -43,7 +44,7 @@ const ProfessorsList = () => {
         <SchoolContainer open={schoolOpen} onClose={() => setSchoolOpen(false)} />
         {schools &&
         <Typography style={{ display: 'flex', alignItems: 'center', padding: 8 }} variant='body1'>
-          נמצאו {professors?.length} תוצאות עבור <Chip style={{ margin: '0 8px' }} size='small' onClick={handleSchoolClick} label={schools} />
+          {heb.found} {professors?.length} {heb.results} {heb.for} <Chip style={{ margin: '0 8px' }} size='small' onClick={handleSchoolClick} label={schools} />
         </Typography>}
         {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
       </div>
