@@ -2,7 +2,7 @@
   display: flex;
   width: fit-content;
   overflow: scroll;
-  max-width: 500px;
+  width: 100%;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
@@ -10,3 +10,4 @@
 .reviews_list__container::-webkit-scrollbar {
   display: none;
 }
+

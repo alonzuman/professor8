@@ -1,11 +1,22 @@
 .review_card__container {
-  min-width: 300px;
-  min-height: 180px;
   margin: 8px 16px;
+  min-width: 220px;
+}
+
+.review_card__container .MuiCardHeader-root {
+  padding-bottom: 0;
+}
+
+.reviews_list__container .MuiChip-root {
+  margin: 0 4px;
+}
+
+.reviews_list__container .MuiChip-root:first-of-type {
+  margin: 0 0 0 4px;
 }
 
 .review_card__container:last-of-type {
-  margin: 8px 32px 8px 16px;
+  margin: 8px 16 8px 64px;
 }
 
 .review_card__content {

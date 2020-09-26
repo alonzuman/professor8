@@ -42,7 +42,7 @@ const ProfessorsList = () => {
       <div dir='rtl' className='professors_list__container'>
         <SchoolContainer open={schoolOpen} onClose={() => setSchoolOpen(false)} />
         {schools &&
-        <Typography style={{ display: 'flex', alignItems: 'center', padding: 8 }} variant='p'>
+        <Typography style={{ display: 'flex', alignItems: 'center', padding: 8 }} variant='body1'>
           נמצאו {professors?.length} תוצאות עבור <Chip style={{ margin: '0 8px' }} size='small' onClick={handleSchoolClick} label={schools} />
         </Typography>}
         {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
