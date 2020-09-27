@@ -25,7 +25,11 @@ const heb = {
   professorName: 'שם מרצה',
   addReview: 'הוספת ביקורת',
   author: 'שם כותב/ת הביקורת',
-  content: 'תוכן'
+  content: 'תוכן',
+  oneReview: 'ביקורת אחת',
+  areYouSure: 'האם את/ה בטוח/ה?',
+  approve: 'אישור',
+  decline: 'ביטול'
 }
 
 export default heb;
