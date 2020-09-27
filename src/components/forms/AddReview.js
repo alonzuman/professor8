@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addReview } from '../../actions/professors';
 import { validateStringInput } from '../../utils/form';
+import heb from '../../utils/translation/heb';
 
 const AddReview = ({ professor, onClose }) => {
   const { id } = professor
@@ -33,7 +34,7 @@ const AddReview = ({ professor, onClose }) => {
     <form onSubmit={handleSubmit}>
       <FormGroup className='form__group'>
         <TextField
-          label='Author'
+          label={heb.author}
           variant='outlined'
           name='author'
           value={author}
@@ -42,7 +43,7 @@ const AddReview = ({ professor, onClose }) => {
       </FormGroup>
       <FormGroup className='form__group'>
         <TextField
-          label='Content'
+          label={heb.content}
           multiline
           rows={4}
           variant='outlined'
@@ -53,7 +54,7 @@ const AddReview = ({ professor, onClose }) => {
       <FormGroup className='form__group'>
         <input type='range' min='1' max='5' name='rating' onChange={e => setRating(parseInt(e.target.value))} />
       </FormGroup>
-      <Button type='submit'>Submit</Button>
+      <Button className='full__width-mobile' color='primary' variant='contained' type='submit'>{heb.submit}</Button>
     </form>
   )
 }

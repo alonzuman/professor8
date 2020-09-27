@@ -19,7 +19,7 @@ const AddProfessorContainer = ({ open, onClose }) => {
         <IconButton onClick={onClose} style={{ marginLeft: -8 }}><CloseIcon /></IconButton>
       </div>
       <DialogContent>
-        <AddProfessor />
+        <AddProfessor onClose={onClose} />
       </DialogContent>
     </Dialog>
   )

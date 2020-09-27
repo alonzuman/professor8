@@ -1,4 +1,4 @@
-import { Chip, CircularProgress, Typography } from '@material-ui/core'
+import { Chip, CircularProgress, Divider, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -9,6 +9,7 @@ import './ProfessorsList.css'
 import { getSchool } from '../../actions/schools'
 import SchoolContainer from '../dialogs/SchoolContainer'
 import heb from '../../utils/translation/heb'
+import { Skeleton } from '@material-ui/lab'
 
 const ProfessorsList = () => {
   const [schoolOpen, setSchoolOpen] = useState(false)
@@ -30,8 +31,33 @@ const ProfessorsList = () => {
     }
   }, [schools, name])
 
+  const spanStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    padding: 8
+  }
+
   if (loading && professors.length === 0) {
-    return <h1>Skeletons</h1>
+    return (
+      <div dir='rtl' className='professors_list__container'>
+        <span style={spanStyle}>
+          <Typography variant='body1'><Skeleton width={180} /></Typography>
+        </span>
+        {[0, 0, 0].map((v, i) => {
+          return (
+            <div key={i}>
+            <ListItem>
+              <ListItemAvatar>
+                <Skeleton variant='circle' height={40} width={40} />
+              </ListItemAvatar>
+              <ListItemText primary={<Skeleton width={120} />} secondary={<Skeleton width={160} />} />
+            </ListItem>
+            <Divider />
+            </div>
+          )
+        })}
+      </div>
+    )
   } else if (!loading && !schools && !name) {
     return <div/>
   } else if (!loading && professors.length === 0) {
@@ -41,7 +67,7 @@ const ProfessorsList = () => {
       <div dir='rtl' className='professors_list__container'>
         <SchoolContainer open={schoolOpen} onClose={() => setSchoolOpen(false)} />
         {schools &&
-        <span style={{ display: 'flex', alignItems: 'center', padding: 8 }}>
+        <span style={spanStyle}>
           <Typography variant='body1'>
             {heb.found} {professors?.length} {heb.results} {heb.for}
           </Typography>

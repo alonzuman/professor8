@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, CircularProgress, FormGroup, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
-import { db } from '../../firebase';
-import { validateInput, validateStringInput } from '../../utils';
+import { validateStringInput } from '../../utils';
 import heb from '../../utils/translation/heb';
 import SearchBar from '../general/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProfessor } from '../../actions/professors';
 
-const AddProfessor = () => {
+const AddProfessor = ({ onClose }) => {
   const { loading } = useSelector(state => state.professors)
   const [name, setName] = useState('')
   const [role, setRole] = useState('')
@@ -18,7 +17,8 @@ const AddProfessor = () => {
     e.preventDefault()
     const professor = { name, role, school, departure: '', tags: [], overallRating: 0, }
     if (validateStringInput(name) && validateStringInput(role) && school) {
-      dispatch(addProfessor(professor))
+      await dispatch(addProfessor(professor))
+      onClose()
     } else {
       console.log('string not full')
     }

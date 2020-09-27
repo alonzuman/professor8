@@ -22,7 +22,10 @@ const heb = {
   findProfessorsByReview: "מצאו מרצים לפי ביקורות",
   home: 'דף הבית',
   schoolName: 'שם מוסד',
-  professorName: 'שם מרצה'
+  professorName: 'שם מרצה',
+  addReview: 'הוספת ביקורת',
+  author: 'שם כותב/ת הביקורת',
+  content: 'תוכן'
 }
 
 export default heb;

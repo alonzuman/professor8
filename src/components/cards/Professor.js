@@ -24,19 +24,26 @@ const Professor = ({ id, handleClose }) => {
         <CardHeader
           avatar={<Avatar src={avatar} alt={name}>{name?.split('')[0]}</Avatar>}
           title={name}
-          subheader={school?.name}
+          subheader={school}
           action={<IconButton onClick={handleClose}><CloseIcon /></IconButton>}
         />
         <CardContent>
-          <Typography variant='subtitle1'>{heb.fieldOfResearch}</Typography>
-          <div className='reviews_list__container'>
-            {fieldOfResearch?.map((v, i) => <Chip size='small' variant='outlined' key={i} label={v}/>)}
-          </div>
-          <Typography variant='subtitle1'>{heb.reviews}</Typography>
-          <ReviewsList reviews={reviews} loading={loading} />
+          {fieldOfResearch &&
+          <>
+            <Typography variant='subtitle1'>{heb.fieldOfResearch}</Typography>
+            <div className='reviews_list__container'>
+              {fieldOfResearch?.map((v, i) => <Chip size='small' variant='outlined' key={i} label={v}/>)}
+            </div>
+          </>}
+
+          {reviews?.length > 0 &&
+          <>
+            <Typography variant='subtitle1'>{heb.reviews}</Typography>
+            <ReviewsList reviews={reviews} loading={loading} />
+          </>}
         </CardContent>
         <CardActions>
-          <Button variant='contained' color='primary' onClick={() => setAddReview(true)}>Add Review</Button>
+          <Button variant='contained' color='primary' onClick={() => setAddReview(true)}>{heb.addReview}</Button>
         </CardActions>
       </Card>
     )

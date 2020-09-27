@@ -14,7 +14,9 @@ const Navbar = () => {
       <div className='navbar__menu'>
         <Button variant='outlined' onClick={() => setAddingProfessor(!addingProfessor)}>{heb.addProfessor}</Button>
         <NavLink className='navbar__link' to='/'>
-          <Typography variant='body1'>{heb.home}</Typography>
+          <Button>
+            {heb.home}
+          </Button>
         </NavLink>
       </div>
     </div>
