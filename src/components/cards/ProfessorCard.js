@@ -27,7 +27,7 @@ const ProfessorCard = ({ professor }) => {
       <ListItemAvatar>
         <Avatar src={avatar} alt={name}>{name[0]}</Avatar>
       </ListItemAvatar>
-      <ListItemText primary={name} secondary={`${numberOfReviews === 1 ? heb.oneReview : `${numberOfReviews} ${heb.reviews}`}`} />
+      <ListItemText primary={name} secondary={`${numberOfReviews === 1 ? heb.oneReview : `${numberOfReviews ? numberOfReviews : 0} ${heb.reviews}`}`} />
       <ListItemSecondaryAction>
         {overallRating > 0 && <Typography style={ratingStyle} variant='body1'>{(overallRating % 1 === 0) ? overallRating : overallRating.toFixed(1)}/5</Typography>}
       </ListItemSecondaryAction>
