@@ -13,7 +13,10 @@ export const getProfessors = () => async dispatch => {
   if (schools || name) {
     try {
       let snapshot;
-      if (schools) {
+
+      if (schools && name) {
+        snapshot = await professorsRef.where("school.name", "==", schools).where('name', '==', name).get()
+      } else if (schools) {
         snapshot = await professorsRef.where("school.name", "==", schools).get()
       } else {
         snapshot = await professorsRef.where("name", "==", name).get()

@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom'
 import SearchBar from '../components/general/SearchBar'
 import qs from 'query-string'
 import heb from '../utils/translation/heb'
+import { db } from '../firebase'
+
 
 const Home = () => {
   const history = useHistory()
@@ -37,19 +39,22 @@ const Home = () => {
       <form onSubmit={handleSubmit}>
         <SearchBar
           placeholder={heb.schoolName}
-          collection='schools'
+          collection='tags'
+          doc='schools'
+          filter='names'
           search={schools}
           setSearch={setSchools}
           freeSolo
-          />
+        />
         <SearchBar
           placeholder={heb.professorName}
-          collection='professors'
-          filter={{ key: 'school.name', value: schools }}
+          collection='tags'
+          doc='professors'
+          filter={schools}
           search={name}
           setSearch={setName}
           freeSolo
-          />
+        />
         <Button disabled={loading} variant='contained' color='primary' className='full__width-mobile mt-5' type='submit'>{loading ? <CircularProgress /> : heb.search}</Button>
       </form>
     </div>

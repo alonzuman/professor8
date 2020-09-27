@@ -40,16 +40,19 @@ const Results = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <SearchBar
-          placeholder={heb.schoolsName}
-          collection='schools'
+          placeholder={heb.schoolName}
+          collection='tags'
+          doc='schools'
+          filter='names'
           search={schools}
           setSearch={setSchools}
           freeSolo
         />
         <SearchBar
           placeholder={heb.professorName}
-          collection='professors'
-          filter={{ key: 'school.name', value: schools }}
+          collection='tags'
+          doc='professors'
+          filter={schools}
           search={name}
           setSearch={setName}
           freeSolo
