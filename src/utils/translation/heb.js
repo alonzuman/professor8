@@ -19,7 +19,7 @@ const heb = {
   noResultsFor: "לא נמצאו תוצאות עבור",
   fieldOfResearch: "תחום מחקר",
   reviews: "ביקורות",
-  findProfessorsByReview: "מצאו מרצים לפי ביקורות",
+  findProfessorsByReview: "מצאו מרצים ומרצות לפי ביקורות",
   home: 'דף הבית',
   schoolName: 'שם מוסד',
   professorName: 'שם מרצה',
