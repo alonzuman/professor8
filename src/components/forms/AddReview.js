@@ -20,8 +20,9 @@ const AddReview = ({ professor, onClose }) => {
         content,
         rating,
         dateCreated: Date.now(),
-        upVotes: 0,
-        downVotes: 0
+        votes: 0,
+        upVotesArray: [],
+        downVotesArray: []
       }
       dispatch(addReview(review))
       onClose()

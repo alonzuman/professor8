@@ -14,6 +14,18 @@ export const professorsReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case 'PROFESSORS/ADD_ONE':
+      return {
+        ...state,
+        professors: [...state.professors, payload],
+        loading: false
+      }
+    case 'PROFESSORS/REMOVE_ONE':
+      return {
+        ...state,
+        professors: [...state.professors.filter(professor => professor.id !== payload)],
+        loading: false
+      }
     case 'PROFESSORS/SET_FILTER_OPTIONS':
       return {
         ...state,
@@ -62,7 +74,7 @@ export const professorsReducer = (state = initialState, action) => {
         ...state,
         professor: {
           ...state.professor,
-          reviews: [...state.reviews]
+          reviews: [...state.professor.reviews]
         }
       }
     case 'PROFESSORS/DOWNVOTE_REVIEW':
@@ -70,7 +82,7 @@ export const professorsReducer = (state = initialState, action) => {
         ...state,
         professor: {
           ...state.professor,
-          reviews: [...state.reviews]
+          reviews: [...state.professor.reviews]
         }
       }
     default: return state;

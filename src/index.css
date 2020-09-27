@@ -117,4 +117,5 @@ code {
 .spinner__small {
   height: 24px!important;
   width: 24px!important;
+  color: var(--bg-01)!important;
 }

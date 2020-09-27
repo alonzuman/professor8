@@ -13,7 +13,11 @@ const SearchBar = ({ search, setSearch, collection, doc, filter, placeholder, no
     setLoading(true)
     try {
       const snapshot = await db.collection(collection).doc(doc).get()
-      setOptions(snapshot.data()[filter] || [])
+      if (filter === 'keys') {
+        setOptions(Object.keys(snapshot.data()) || [])
+      } else {
+        setOptions(snapshot.data()[filter] || [])
+      }
       setLoading(false)
     } catch (error) {
       console.log(error)

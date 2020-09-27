@@ -1,8 +1,29 @@
 import { db } from "../firebase"
 import qs from 'query-string'
 import firebase from 'firebase'
-import store from "../store"
 const professorsRef = db.collection('professors')
+const tagsRef = db.collection('tags')
+
+export const addProfessor = professor => async dispatch => {
+  dispatch({
+    type: 'PROFESSORS/LOADING'
+  })
+  try {
+    const snapshot = await professorsRef.add(professor)
+    await tagsRef.doc('professors').update({
+      [professor.school]: firebase.firestore.FieldValue.arrayUnion(professor.name)
+    })
+    dispatch({
+      type: 'PROFESSORS/ADD_ONE',
+      payload: {
+        id: snapshot.id,
+        ...professor
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const getProfessors = () => async dispatch => {
   const parsed = qs.parse(window.location.search)
@@ -13,11 +34,10 @@ export const getProfessors = () => async dispatch => {
   if (schools || name) {
     try {
       let snapshot;
-
       if (schools && name) {
-        snapshot = await professorsRef.where("school.name", "==", schools).where('name', '==', name).get()
+        snapshot = await professorsRef.where("school", "==", schools).where('name', '==', name).get()
       } else if (schools) {
-        snapshot = await professorsRef.where("school.name", "==", schools).get()
+        snapshot = await professorsRef.where("school", "==", schools).get()
       } else {
         snapshot = await professorsRef.where("name", "==", name).get()
       }
@@ -34,7 +54,6 @@ export const getProfessors = () => async dispatch => {
 }
 
 export const getProfessor = (id) => async dispatch => {
-  console.log(`getting ${id}`)
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
@@ -60,18 +79,21 @@ export const clearProfessor = () => {
 }
 
 export const addReview = review => async dispatch => {
-  const { id } = review;
+  const { pid } = review;
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
   try {
-    await db.collection('professors').doc(id).set({
+    await db.collection('professors').doc(pid).set({
       lastReview: review
     }, { merge: true })
-    await db.collection('professors').doc(id).collection('reviews').add(review)
+    const snap = await db.collection('professors').doc(pid).collection('reviews').add(review)
     dispatch({
       type: 'PROFESSORS/ADD_REVIEW',
-      payload: review
+      payload: {
+        id: snap.id,
+        ...review
+      }
     })
   } catch (error) {
     console.log(error);
@@ -80,8 +102,9 @@ export const addReview = review => async dispatch => {
 
 export const upVoteReview = review => async dispatch => {
   try {
+    // TODO add a anonymous sign in and set upvotes & downvotes array
     await professorsRef.doc(review.pid).collection('reviews').doc(review.id).update({
-      upVotes: firebase.firestore.FieldValue.increment(1)
+      votes: firebase.firestore.FieldValue.increment(1)
     })
     dispatch({
       type: 'PROFESSORS/UPVOTE_REVIEW',
@@ -95,11 +118,29 @@ export const upVoteReview = review => async dispatch => {
 export const downVoteReview = review => async dispatch => {
   try {
     await professorsRef.doc(review.pid).collection('reviews').doc(review.id).update({
-      upVotes: firebase.firestore.FieldValue.increment(-1)
+      votes: firebase.firestore.FieldValue.increment(-1)
     })
     dispatch({
       type: 'PROFESSORS/DOWNVOTE_REVIEW',
       payload: review.id
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const deleteProfessor = professor => async dispatch => {
+  dispatch({
+    type: 'PROFESSORS/LOADING'
+  })
+  try {
+    await professorsRef.doc(professor.id).delete()
+    await tagsRef.doc('professors').update({
+      [professor.school]: firebase.firestore.FieldValue.arrayRemove(professor.name)
+    })
+    dispatch({
+      type: 'PROFESSORS/DELETE_ONE',
+      payload: professor.id
     })
   } catch (error) {
     console.log(error)

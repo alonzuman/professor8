@@ -11,7 +11,7 @@ const ProfessorCard = ({ professor }) => {
     <ProfessorContainer open={open} onClose={() => setOpen(false)} id={id} />
     <ListItem dir='rtl' onClick={() => setOpen(true)} button>
       <ListItemAvatar>
-        <Avatar src={avatar} alt={name}>{name}</Avatar>
+        <Avatar src={avatar} alt={name}>{name[0]}</Avatar>
       </ListItemAvatar>
       <ListItemText primary={name} secondary={role} />
     </ListItem>

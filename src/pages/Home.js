@@ -40,8 +40,8 @@ const Home = () => {
         <SearchBar
           placeholder={heb.schoolName}
           collection='tags'
-          doc='schools'
-          filter='names'
+          doc='professors'
+          filter='keys'
           search={schools}
           setSearch={setSchools}
           freeSolo

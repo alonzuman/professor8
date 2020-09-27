@@ -1,12 +1,27 @@
 import { Avatar, Card, CardActions, CardContent, CardHeader, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import './Review.css'
+import { downVoteReview, upVoteReview } from '../../actions/professors';
+import { useDispatch } from 'react-redux';
 
 const Review = ({ review }) => {
-  const { pid, content, rating, author, avatar, upVotes, downVotes } = review
-  console.log(review)
+  const { pid, content, rating, author, avatar, upVotesArray, downVotesArray, votes } = review
+  const [votesCount, setVotesCount] = useState(votes)
+  const dispatch = useDispatch()
+
+  const handleClick = type => {
+    // Check if user is not in any of the vote arrays
+    if (type === 'up') {
+      dispatch(upVoteReview(review))
+      setVotesCount(votesCount + 1)
+    } else {
+      dispatch(downVoteReview(review))
+      setVotesCount(votesCount - 1)
+    }
+  }
+
   return (
       <Card className='review_card__container'>
         <CardHeader
@@ -20,17 +35,14 @@ const Review = ({ review }) => {
           {/* <h3>{rating}</h3> */}
         </CardContent>
         <CardActions>
-          <div onClick={() => console.log('liked')} className='flex align__center  justify__center'>
-            <IconButton>
-              <ThumbDownAltIcon />
-            </IconButton>
-            <Typography variant='subtitle1'>{upVotes}</Typography>
-          </div>
           <div className='flex align__center  justify__center'>
-            <IconButton>
+            <IconButton onClick={() => handleClick('up')}>
               <ThumbUpAltIcon />
             </IconButton>
-            <Typography variant='subtitle1'>{downVotes}</Typography>
+            <Typography variant='subtitle1'>{votesCount}</Typography>
+            <IconButton onClick={() => handleClick('down')}>
+              <ThumbDownAltIcon />
+            </IconButton>
           </div>
         </CardActions>
       </Card>

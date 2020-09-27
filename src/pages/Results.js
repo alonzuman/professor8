@@ -42,8 +42,8 @@ const Results = () => {
         <SearchBar
           placeholder={heb.schoolName}
           collection='tags'
-          doc='schools'
-          filter='names'
+          doc='professors'
+          filter='keys'
           search={schools}
           setSearch={setSchools}
           freeSolo
@@ -57,7 +57,7 @@ const Results = () => {
           setSearch={setName}
           freeSolo
         />
-        <Button className='full__width-mobile mt-5' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='spinner__small' color='default' /> : heb.search}</Button>
+        <Button className='full__width-mobile mt-5' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : heb.search}</Button>
       </form>
       <ProfessorsList />
     </div>

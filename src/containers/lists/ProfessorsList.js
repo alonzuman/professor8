@@ -41,9 +41,12 @@ const ProfessorsList = () => {
       <div dir='rtl' className='professors_list__container'>
         <SchoolContainer open={schoolOpen} onClose={() => setSchoolOpen(false)} />
         {schools &&
-        <Typography style={{ display: 'flex', alignItems: 'center', padding: 8 }} variant='body1'>
-          {heb.found} {professors?.length} {heb.results} {heb.for} <Chip style={{ margin: '0 8px' }} size='small' onClick={handleSchoolClick} label={schools} />
-        </Typography>}
+        <span style={{ display: 'flex', alignItems: 'center', padding: 8 }}>
+          <Typography variant='body1'>
+            {heb.found} {professors?.length} {heb.results} {heb.for}
+          </Typography>
+          <Chip style={{ margin: '0 8px' }} size='small' onClick={handleSchoolClick} label={schools} />
+        </span>}
         {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
       </div>
     )
