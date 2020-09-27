@@ -18,7 +18,11 @@ const heb = {
   submit: "הוספה",
   noResultsFor: "לא נמצאו תוצאות עבור",
   fieldOfResearch: "תחום מחקר",
-  reviews: "ביקורות"
+  reviews: "ביקורות",
+  findProfessorsByReview: "מצאו מרצים לפי ביקורות",
+  home: 'דף הבית',
+  schoolName: 'שם מוסד',
+  professorName: 'שם מרצה'
 }
 
 export default heb;

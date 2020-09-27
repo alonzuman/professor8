@@ -3,23 +3,35 @@ import { Button, TextField } from '@material-ui/core'
 import { db } from '../../firebase'
 import './SearchBar.css'
 import { Autocomplete } from '@material-ui/lab'
-import { getFilterOptions } from '../../actions/professors'
-import { useDispatch, useSelector } from 'react-redux'
 import heb from '../../utils/translation/heb'
 
-const SearchBar = ({  search, setSearch, handleSubmit, collection, placeholder, noOptionsText = 'No results found' }) => {
-  const { filterOptions, loading } = useSelector(state => state.professors)
-  const dispatch = useDispatch()
+const SearchBar = ({  search, filter, setSearch, collection, placeholder, noOptionsText = 'No results found', ...rest }) => {
+  const [loading, setLoading] = useState(false)
+  const [options, setOptions] = useState([])
 
-  useEffect(() => { dispatch(getFilterOptions(collection)) }, [collection])
-
-  const submitSearch = e => {
-    e.preventDefault()
-    handleSubmit(search)
+  const getFilterOptions = async () => {
+    setLoading(true)
+    try {
+      let snapshot;
+      if (filter) {
+        snapshot = await db.collection(collection).where(filter.key, '==', filter.value).get()
+      } else {
+        snapshot = await db.collection(collection).get()
+      }
+      let results = []
+      snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+      setOptions(results)
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+      setLoading(false)
+    }
   }
 
+  useEffect(() => { getFilterOptions() }, [filter])
+
   return (
-    <form onSubmit={submitSearch} className='search_bar__container'>
+    <div className='search_bar__container'>
       <Autocomplete
         dir='rtl'
         style={{ width: '100%', direction: 'rtl' }}
@@ -29,12 +41,12 @@ const SearchBar = ({  search, setSearch, handleSubmit, collection, placeholder, 
         noOptionsText={noOptionsText}
         value={search}
         onChange={(event, newValue) => setSearch(newValue)}
-        options={filterOptions?.map(v => v.name)}
+        options={options?.map(v => v.name)}
         renderInput={(params) => <TextField {...params} label={placeholder} variant="outlined" />}
         renderOption={option => <div style={{ textAlign: 'right', width: '100%' }} >{option}</div>}
+        {...rest}
       />
-      <Button style={{ marginRight: '8px' }} variant='contained' color='primary' type='submit'>{heb.search}</Button>
-    </form>
+    </div>
   )
 }
 

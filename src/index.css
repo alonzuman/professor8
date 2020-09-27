@@ -98,3 +98,23 @@ code {
 .justify__center {
   justify-content: center;
 }
+
+.full__width-mobile {
+  width: 100%;
+}
+
+/* Margins */
+.mt-5 {
+  margin-top: .5rem!important;
+}
+
+@media (min-width: 768px) {
+  .full__width-mobile {
+    width: auto;
+  }
+}
+
+.spinner__small {
+  height: 24px!important;
+  width: 24px!important;
+}

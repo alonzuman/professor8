@@ -10,7 +10,7 @@ const AddProfessor = () => {
   const [professor, setProfessor] = useState({
     name: '',
     role: 'Professor',
-    school: '',
+    school: {},
     departure: '',
     tags: [],
     overallRating: 0,

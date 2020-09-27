@@ -75,23 +75,6 @@ export const addReview = review => async dispatch => {
   }
 }
 
-export const getFilterOptions = collection => async dispatch => {
-  dispatch({
-    type: 'PROFESSORS/LOADING'
-  })
-  try {
-    const snapshot = await db.collection(collection).get()
-    let results = []
-    snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
-    dispatch({
-      type: 'PROFESSORS/SET_FILTER_OPTIONS',
-      payload: results
-    })
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 export const upVoteReview = review => async dispatch => {
   try {
     await professorsRef.doc(review.pid).collection('reviews').doc(review.id).update({

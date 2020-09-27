@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import AddProfessorContainer from '../../containers/dialogs/AddProfessorContainer';
@@ -12,8 +12,10 @@ const Navbar = () => {
     <div className='navbar__container'>
       <AddProfessorContainer open={addingProfessor} onClose={() => setAddingProfessor(false)} />
       <div className='navbar__menu'>
-        {/* <NavLink className='navbar__link' to='/' >Home</NavLink> */}
         <Button variant='outlined' onClick={() => setAddingProfessor(!addingProfessor)}>{heb.addProfessor}</Button>
+        <NavLink className='navbar__link' to='/'>
+          <Typography variant='body1'>{heb.home}</Typography>
+        </NavLink>
       </div>
     </div>
   )

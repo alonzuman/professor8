@@ -31,7 +31,7 @@ const ProfessorsList = () => {
   }, [schools, name])
 
   if (loading && professors.length === 0) {
-    return <CircularProgress/>
+    return <h1>Skeletons</h1>
   } else if (!loading && !schools && !name) {
     return <div/>
   } else if (!loading && professors.length === 0) {
