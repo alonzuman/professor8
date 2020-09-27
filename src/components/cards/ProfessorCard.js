@@ -1,19 +1,35 @@
 import React, { useState } from 'react';
-import { Avatar, Divider, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core';
-import ProfessorContainer from '../../containers/dialogs/ProfessorContainer';
+import { Avatar, Divider, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, Typography } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 const ProfessorCard = ({ professor }) => {
   const [open, setOpen] = useState(false)
-  const { name, tags, lastReview, avatar, id, departure, university, reviews, role, overallRating } = professor
+  const history = useHistory()
+  const { name, tags, lastReview, avatar, id, departure, numberOfReviews, university, reviews, role, overallRating } = professor
+
+  const handleClick = () => {
+    history.push({
+      pathname: `/professor/${id}`,
+    })
+  }
+
+  const ratingStyle = {
+    fontSize: 22,
+    fontWeight: 600,
+    letterSpacing: 1,
+    direction: 'ltr'
+  }
 
   return (
     <>
-    <ProfessorContainer open={open} onClose={() => setOpen(false)} id={id} />
-    <ListItem dir='rtl' onClick={() => setOpen(true)} button>
+    <ListItem dir='rtl' onClick={handleClick} button>
       <ListItemAvatar>
         <Avatar src={avatar} alt={name}>{name[0]}</Avatar>
       </ListItemAvatar>
-      <ListItemText primary={name} secondary={role} />
+      <ListItemText primary={name} secondary={numberOfReviews} />
+      <ListItemSecondaryAction>
+        {overallRating > 0 && <Typography style={ratingStyle} variant='body1'>{overallRating.toFixed(1)}/5</Typography>}
+      </ListItemSecondaryAction>
     </ListItem>
     <Divider />
     </>

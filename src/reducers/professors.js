@@ -50,7 +50,7 @@ export const professorsReducer = (state = initialState, action) => {
         ...state,
         professor: {
           ...professor,
-          reviews
+          reviews: [...reviews]
         },
         loading: false,
       }
@@ -60,6 +60,15 @@ export const professorsReducer = (state = initialState, action) => {
         professor: {
           ...state.professor,
           reviews: [payload, ...state.professor.reviews]
+        },
+        loading: false
+      }
+    case 'PROFESSORS/DELETE_REVIEW':
+      return {
+        ...state,
+        professor: {
+          ...state.professor,
+          reviews: [...state.professor.reviews.filter(v => v.id !== payload.id)]
         },
         loading: false
       }

@@ -15,7 +15,7 @@ const AddProfessor = ({ onClose }) => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const professor = { name, role, school, departure: '', tags: [], overallRating: 0, }
+    const professor = { name, role, school, departure: '', tags: [], overallRating: 0, numberOfReviews: 0 }
     if (validateStringInput(name) && validateStringInput(role) && school) {
       await dispatch(addProfessor(professor))
       onClose()

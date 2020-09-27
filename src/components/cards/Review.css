@@ -1,6 +1,10 @@
 .review_card__container {
   margin: 8px;
   min-width: 220px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .review_card__container:first-of-type {

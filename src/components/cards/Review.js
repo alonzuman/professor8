@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import './Review.css'
-import { downVoteReview, upVoteReview } from '../../actions/professors';
+import { deleteReview, downVoteReview, upVoteReview } from '../../actions/professors';
 import { useDispatch } from 'react-redux';
 
-const Review = ({ review }) => {
+const Review = ({ review, professor }) => {
   const { pid, content, rating, author, avatar, upVotesArray, downVotesArray, votes } = review
   const [votesCount, setVotesCount] = useState(votes)
   const dispatch = useDispatch()
@@ -44,6 +44,9 @@ const Review = ({ review }) => {
               <ThumbDownAltIcon />
             </IconButton>
           </div>
+          <IconButton onClick={() => dispatch(deleteReview({ review, professor }))}>
+            remove
+          </IconButton>
         </CardActions>
       </Card>
   )

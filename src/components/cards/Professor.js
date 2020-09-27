@@ -4,50 +4,49 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProfessor } from '../../actions/professors';
 import AddReviewContainer from '../../containers/dialogs/AddReviewContainer';
 import ReviewsList from '../../containers/lists/ReviewsList';
-import CloseIcon from '@material-ui/icons/Close';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import heb from '../../utils/translation/heb';
+import { useHistory } from 'react-router-dom';
+import { Skeleton } from '@material-ui/lab';
 
-const Professor = ({ id, handleClose }) => {
+const Professor = ({ match }) => {
+  const { id } = match.params
   const [addReview, setAddReview] = useState(false)
   const dispatch = useDispatch()
   const { loading, professor } = useSelector(state => state.professors)
   const { name, avatar, reviews, school, fieldOfResearch } = professor;
+  const history = useHistory()
 
   useEffect(() => { dispatch(getProfessor(id)) }, [])
 
-  if (loading) {
-    return <CircularProgress />
-  } else {
-    return (
-      <Card dir='rtl'>
-        <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
-        <CardHeader
-          avatar={<Avatar src={avatar} alt={name}>{name?.split('')[0]}</Avatar>}
-          title={name}
-          subheader={school}
-          action={<IconButton onClick={handleClose}><CloseIcon /></IconButton>}
-        />
-        <CardContent>
-          {fieldOfResearch &&
-          <>
-            <Typography variant='subtitle1'>{heb.fieldOfResearch}</Typography>
-            <div className='reviews_list__container'>
-              {fieldOfResearch?.map((v, i) => <Chip size='small' variant='outlined' key={i} label={v}/>)}
-            </div>
-          </>}
-
-          {reviews?.length > 0 &&
-          <>
-            <Typography variant='subtitle1'>{heb.reviews}</Typography>
-            <ReviewsList reviews={reviews} loading={loading} />
-          </>}
-        </CardContent>
-        <CardActions>
-          <Button variant='contained' color='primary' onClick={() => setAddReview(true)}>{heb.addReview}</Button>
-        </CardActions>
-      </Card>
-    )
-  }
+  return (
+    <div dir='rtl'>
+      <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
+      <IconButton onClick={() => history.goBack()}><KeyboardArrowRightIcon /></IconButton>
+      <div style={{ justifyContent: 'end' }} className='header__container'>
+        {!loading ?
+        <Avatar style={{ height: 72, width: 72, marginLeft: '16px' }} src={avatar} alt={name}>{name?.split('')[0]}</Avatar>:
+        <Skeleton style={{ height: 72, width: 72, marginLeft: '16px' }} variant='circle' height={72} width={72} />}
+        <div>
+          <Typography variant='h3'>{name ? name : <Skeleton width={120} />}</Typography>
+          <Typography variant='subtitle1'>{school ? school : <Skeleton width={150} />}</Typography>
+        </div>
+      </div>
+      <CardContent>
+        {fieldOfResearch &&
+        <>
+          <Typography variant='subtitle1'>{heb.fieldOfResearch}</Typography>
+          <div className='reviews_list__container'>
+            {fieldOfResearch?.map((v, i) => <Chip size='small' variant='outlined' key={i} label={v}/>)}
+          </div>
+        </>}
+        <ReviewsList professor={professor} reviews={reviews} loading={loading} />
+      </CardContent>
+      <CardActions>
+        <Button variant='contained' color='primary' onClick={() => setAddReview(true)}>{heb.addReview}</Button>
+      </CardActions>
+    </div>
+  )
 }
 
 export default Professor

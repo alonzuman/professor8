@@ -78,21 +78,81 @@ export const clearProfessor = () => {
   })
 }
 
-export const addReview = review => async dispatch => {
+
+export const deleteReview = ({ review, professor }) => async dispatch => {
   const { pid } = review;
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
   try {
+    // Calculate professor average rating
+    const { overallRating } = professor
+    const { rating } = review
+    const total = professor.reviews.length
+
+    let overall;
+    if (total === 1) {
+      overall = 0
+    } else {
+      overall = (((overallRating * total) - rating) / (total - 1))
+    }
+
     await db.collection('professors').doc(pid).set({
-      lastReview: review
+      numberOfReviews: firebase.firestore.FieldValue.increment(-1),
+      overallRating: overall
     }, { merge: true })
+
+    await db.collection('professors').doc(pid).collection('reviews').doc(review.id).delete()
+    dispatch({
+      type: 'PROFESSORS/SET_ONE',
+      payload: {
+        professor: {
+          ...professor,
+          numberOfReviews: (professor.numberOfReviews - 1),
+          overallRating: overall
+        },
+        reviews: [...professor.reviews.filter(v => v.id !== review.id)]
+      }
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const addReview = ({ review, professor }) => async dispatch => {
+  const { pid } = review;
+  dispatch({
+    type: 'PROFESSORS/LOADING'
+  })
+  try {
+    // Calculate professor average rating
+    const { overallRating } = professor
+    const { rating } = review
+    const total = professor.reviews.length
+
+    let overall;
+
+    if (total === 0) {
+      overall = rating
+    } else {
+      overall = (((overallRating * total) + rating) / (total + 1))
+    }
+
+    await db.collection('professors').doc(pid).set({
+      numberOfReviews: firebase.firestore.FieldValue.increment(1),
+      overallRating: overall
+    }, { merge: true })
+
     const snap = await db.collection('professors').doc(pid).collection('reviews').add(review)
     dispatch({
-      type: 'PROFESSORS/ADD_REVIEW',
+      type: 'PROFESSORS/SET_ONE',
       payload: {
-        id: snap.id,
-        ...review
+        professor: {
+          ...professor,
+          numberOfReviews: (professor.numberOfReviews + 1),
+          overallRating: overall
+        },
+        reviews: [...professor.reviews, { id: snap.id, ...review }]
       }
     })
   } catch (error) {
@@ -134,6 +194,7 @@ export const deleteProfessor = professor => async dispatch => {
     type: 'PROFESSORS/LOADING'
   })
   try {
+    await professorsRef.doc(professor.id).collection('reviews').delete()
     await professorsRef.doc(professor.id).delete()
     await tagsRef.doc('professors').update({
       [professor.school]: firebase.firestore.FieldValue.arrayRemove(professor.name)

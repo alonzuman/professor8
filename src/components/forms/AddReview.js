@@ -25,7 +25,7 @@ const AddReview = ({ professor, onClose }) => {
         upVotesArray: [],
         downVotesArray: []
       }
-      dispatch(addReview(review))
+      dispatch(addReview({ review, professor }))
       onClose()
     }
   }
