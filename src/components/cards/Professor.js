@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProfessor } from '../../actions/professors';
 import AddReviewContainer from '../../containers/dialogs/AddReviewContainer';
 import ReviewsList from '../../containers/lists/ReviewsList';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import heb from '../../utils/translation/heb';
 import { useHistory } from 'react-router-dom';
 import { Skeleton } from '@material-ui/lab';
+import BackButton from '../general/BackButton';
 
 const Professor = ({ match }) => {
   const { id } = match.params
@@ -22,7 +22,7 @@ const Professor = ({ match }) => {
   return (
     <div dir='rtl'>
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
-      <IconButton onClick={() => history.goBack()}><KeyboardArrowRightIcon /></IconButton>
+      <BackButton variant='contained' />
       <div style={{ justifyContent: 'end' }} className='header__container'>
         {!loading ?
         <Avatar style={{ height: 72, width: 72, marginLeft: '16px' }} src={avatar} alt={name}>{name?.split('')[0]}</Avatar>:
