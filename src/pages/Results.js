@@ -38,7 +38,7 @@ const Results = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className='search_form__container' onSubmit={handleSubmit}>
         <SearchBar
           placeholder={heb.schoolName}
           collection='tags'

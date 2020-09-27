@@ -5,7 +5,7 @@ import SearchBar from '../components/general/SearchBar'
 import qs from 'query-string'
 import heb from '../utils/translation/heb'
 import { db } from '../firebase'
-
+import './Home.css'
 
 const Home = () => {
   const history = useHistory()
@@ -34,7 +34,7 @@ const Home = () => {
   }
 
   return (
-    <div dir='rtl'>
+    <div className='home_content__container' dir='rtl'>
       <Typography style={titleStyle} variant='h1'>{heb.findProfessorsByReview}</Typography>
       <form onSubmit={handleSubmit}>
         <SearchBar
