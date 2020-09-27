@@ -6,6 +6,7 @@ import qs from 'query-string'
 import heb from '../utils/translation/heb'
 import { db } from '../firebase'
 import './Home.css'
+import { validateStringInput } from '../utils/form'
 
 const Home = () => {
   const history = useHistory()
@@ -15,17 +16,20 @@ const Home = () => {
 
   const handleSubmit = e => {
     e.preventDefault()
-    setLoading(true)
-    const query = {
-      schools,
-      name
-    }
 
-    const stringifiedQuery = qs.stringify(query)
-    history.push({
-      pathname: '/search',
-      search: stringifiedQuery
-    })
+    if (validateStringInput(schools)) {
+      setLoading(true)
+      const query = {
+        schools,
+        name
+      }
+
+      const stringifiedQuery = qs.stringify(query)
+      history.push({
+        pathname: '/search',
+        search: stringifiedQuery
+      })
+    }
   }
 
   const titleStyle = {
@@ -55,7 +59,7 @@ const Home = () => {
           setSearch={setName}
           freeSolo
         />
-        <Button disabled={loading} variant='contained' color='primary' className='full__width-mobile mt-5' type='submit'>{loading ? <CircularProgress /> : heb.search}</Button>
+        <Button disabled={loading} variant='contained' color='primary' className='full__width-mobile mt-1' type='submit'>{loading ? <CircularProgress /> : heb.search}</Button>
       </form>
     </div>
   )

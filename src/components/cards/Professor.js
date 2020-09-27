@@ -8,43 +8,48 @@ import heb from '../../utils/translation/heb';
 import { useHistory } from 'react-router-dom';
 import { Skeleton } from '@material-ui/lab';
 import BackButton from '../general/BackButton';
+import FieldOfResearch from '../general/FieldOfResearch';
+import ProfessorTags from '../general/ProfessorTags';
+import AverageRating from '../general/AverageRating';
 
 const Professor = ({ match }) => {
   const { id } = match.params
   const [addReview, setAddReview] = useState(false)
   const dispatch = useDispatch()
   const { loading, professor } = useSelector(state => state.professors)
-  const { name, avatar, reviews, school, fieldOfResearch } = professor;
-  const history = useHistory()
+  const { name, tags, overallRating, avatar, reviews, school, fieldOfResearch } = professor;
 
   useEffect(() => { dispatch(getProfessor(id)) }, [])
+
+  const avatarStyle = {
+    height: 72,
+    width: 72,
+    marginLeft: '16px'
+  }
+
+  const titleStyle = {
+    fontSize: 24,
+    fontWeight: 600
+  }
 
   return (
     <div dir='rtl'>
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
       <BackButton variant='contained' />
-      <div style={{ justifyContent: 'end' }} className='header__container'>
+      <div className='header__container justify__end'>
         {!loading ?
-        <Avatar style={{ height: 72, width: 72, marginLeft: '16px' }} src={avatar} alt={name}>{name?.split('')[0]}</Avatar>:
-        <Skeleton style={{ height: 72, width: 72, marginLeft: '16px' }} variant='circle' height={72} width={72} />}
+        <Avatar style={avatarStyle} src={avatar} alt={name}>{name?.split('')[0]}</Avatar>:
+        <Skeleton style={avatarStyle} variant='circle' height={72} width={72} />}
         <div>
-          <Typography variant='h3'>{name ? name : <Skeleton width={120} />}</Typography>
-          <Typography variant='subtitle1'>{school ? school : <Skeleton width={150} />}</Typography>
+          <Typography style={titleStyle} variant='h4'>{name ? name : <Skeleton width={120} />}</Typography>
+          <Typography variant='subtitle2'>{school ? school : <Skeleton width={150} />}</Typography>
         </div>
       </div>
-      <CardContent>
-        {fieldOfResearch &&
-        <>
-          <Typography variant='subtitle1'>{heb.fieldOfResearch}</Typography>
-          <div className='reviews_list__container'>
-            {fieldOfResearch?.map((v, i) => <Chip size='small' variant='outlined' key={i} label={v}/>)}
-          </div>
-        </>}
-        <ReviewsList professor={professor} reviews={reviews} loading={loading} />
-      </CardContent>
-      <CardActions>
-        <Button variant='contained' color='primary' onClick={() => setAddReview(true)}>{heb.addReview}</Button>
-      </CardActions>
+      <ProfessorTags tags={tags} loading={loading} />
+      <AverageRating loading={loading} averageRating={overallRating} />
+      <FieldOfResearch fieldOfResearch={fieldOfResearch} loading={loading} />
+      <ReviewsList professor={professor} reviews={reviews} loading={loading} />
+      <Button variant='contained' className='mt-2' color='primary' onClick={() => setAddReview(true)}>{heb.addReview}</Button>
     </div>
   )
 }

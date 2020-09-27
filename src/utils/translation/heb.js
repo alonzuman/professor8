@@ -7,6 +7,7 @@ const heb = {
   findBySchool: "חיפוש לפי מוסד",
   noResultsFor: "לא נמצאו תוצאות עבור",
   found: "נמצאו",
+  foundOneResult: "נמצאה תוצאה אחת עבור",
   results: "תוצאות",
   for: "עבור",
   professor: "מרצה",
@@ -16,7 +17,6 @@ const heb = {
   fullName: "שם מלא",
   institution: "מוסד",
   submit: "הוספה",
-  noResultsFor: "לא נמצאו תוצאות עבור",
   fieldOfResearch: "תחום מחקר",
   reviews: "ביקורות",
   findProfessorsByReview: "מצאו מרצים ומרצות לפי ביקורות",
@@ -29,7 +29,11 @@ const heb = {
   oneReview: 'ביקורת אחת',
   areYouSure: 'האם את/ה בטוח/ה?',
   approve: 'אישור',
-  decline: 'ביטול'
+  decline: 'ביטול',
+  noResults: 'לא נמצאו תוצאות',
+  tags: 'תגיות',
+  tag: 'תיוג',
+  overallRating: 'דירוג ממוצע'
 }
 
 export default heb;

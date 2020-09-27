@@ -69,9 +69,10 @@ const ProfessorsList = () => {
         {schools &&
         <span style={spanStyle}>
           <Typography variant='body1'>
-            {heb.found} {professors?.length} {heb.results} {heb.for}
+            {professors?.length === 1 && `${heb.foundOneResult}`}
+            {professors?.length > 1 && `${heb.found} ${professors?.length} ${heb.results} ${heb.for}`}
           </Typography>
-          <Chip style={{ margin: '0 8px' }} size='small' onClick={handleSchoolClick} label={schools} />
+          <Chip style={{ margin: '0 8px', maxWidth: 144 }} size='small' onClick={handleSchoolClick} label={schools} />
         </span>}
         {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
       </div>

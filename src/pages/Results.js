@@ -39,25 +39,29 @@ const Results = () => {
   return (
     <div>
       <form className='search_form__container' onSubmit={handleSubmit}>
-        <SearchBar
-          placeholder={heb.schoolName}
-          collection='tags'
-          doc='professors'
-          filter='keys'
-          search={schools}
-          setSearch={setSchools}
-          freeSolo
-        />
-        <SearchBar
-          placeholder={heb.professorName}
-          collection='tags'
-          doc='professors'
-          filter={schools}
-          search={name}
-          setSearch={setName}
-          freeSolo
-        />
-        <Button className='full__width-mobile mt-5' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : heb.search}</Button>
+        <div className='flex flex__row-reverse'>
+          <SearchBar
+            placeholder={heb.schoolName}
+            collection='tags'
+            doc='professors'
+            filter='keys'
+            search={schools}
+            setSearch={setSchools}
+            freeSolo
+            className='ml-5'
+            />
+          <SearchBar
+            placeholder={heb.professorName}
+            collection='tags'
+            doc='professors'
+            filter={schools}
+            search={name}
+            setSearch={setName}
+            freeSolo
+            className='mr-5'
+            />
+        </div>
+        <Button className='full__width-mobile mt-1' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : heb.search}</Button>
       </form>
       <ProfessorsList />
     </div>
