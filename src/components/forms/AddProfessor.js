@@ -9,14 +9,13 @@ import { addProfessor } from '../../actions/professors';
 const AddProfessor = ({ onClose }) => {
   const { loading } = useSelector(state => state.professors)
   const [name, setName] = useState('')
-  const [role, setRole] = useState('')
   const [school, setSchool] = useState('')
   const dispatch = useDispatch()
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const professor = { name, role, school, departure: '', tags: [], overallRating: 0, numberOfReviews: 0 }
-    if (validateStringInput(name) && validateStringInput(role) && school) {
+    const professor = { name, school, departure: '', tags: [], overallRating: 0, numberOfReviews: 0 }
+    if (validateStringInput(name) && validateStringInput(school)) {
       await dispatch(addProfessor(professor))
       onClose()
     } else {
@@ -33,14 +32,6 @@ const AddProfessor = ({ onClose }) => {
           <TextField variant='outlined' label={heb.fullName} onChange={e => setName(e.target.value)} />
         </FormGroup>
         <FormGroup className='form__group'>
-          <InputLabel label='Role'>{heb.role}</InputLabel>
-          <Select variant='outlined' value={role} onChange={e => setRole(e.target.value)}>
-            <MenuItem dir='rtl' value={'Professor'}>{heb.professor}</MenuItem>
-            <MenuItem dir='rtl' value={'Teacher Assistant'}>{heb.teacherAssistant}</MenuItem>
-            <MenuItem dir='rtl' value={'Teacher'}>{heb.teacher}</MenuItem>
-          </Select>
-        </FormGroup>
-        <FormGroup className='form__group'>
           <SearchBar
             search={school}
             setSearch={setSchool}
@@ -49,6 +40,7 @@ const AddProfessor = ({ onClose }) => {
             filter={'names'}
             placeholder={heb.institution}
             freeSolo
+            style={{ marginTop: 0 }}
           />
         </FormGroup>
         <Button color='primary' variant='contained' type='submit'>{loading ? <CircularProgress className='spinner__small' /> :heb.submit}</Button>

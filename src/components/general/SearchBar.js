@@ -4,7 +4,7 @@ import { db } from '../../firebase'
 import './SearchBar.css'
 import { Autocomplete } from '@material-ui/lab'
 
-const SearchBar = ({ search, setSearch, collection, doc, filter, placeholder, noOptionsText = 'No results found', ...rest }) => {
+const SearchBar = ({ search, setSearch, collection, doc, filter, placeholder, noOptionsText = 'No results found', style, ...rest }) => {
   const [options, setOptions] = useState([])
 
   const getFilterOptions = async () => {
@@ -23,7 +23,7 @@ const SearchBar = ({ search, setSearch, collection, doc, filter, placeholder, no
   useEffect(() => { getFilterOptions() }, [filter])
 
   return (
-    <div className='search_bar__container'>
+    <div style={style} className='search_bar__container'>
       <Autocomplete
         dir='rtl'
         style={{ width: '100%', direction: 'rtl' }}
