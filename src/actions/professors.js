@@ -98,7 +98,6 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
     type: 'PROFESSORS/LOADING'
   })
   try {
-    // Calculate professor average rating
     const { overallRating } = professor
     const { rating } = review
     const total = professor.reviews.length
@@ -166,6 +165,7 @@ export const addReview = ({ review, professor }) => async dispatch => {
     }, { merge: true })
 
     const snap = await db.collection('professors').doc(pid).collection('reviews').add(review)
+
     dispatch({
       type: 'PROFESSORS/SET_ONE',
       payload: {
@@ -224,6 +224,7 @@ export const deleteProfessor = professor => async dispatch => {
     await tagsRef.doc('professors').update({
       [professor.school]: firebase.firestore.FieldValue.arrayRemove(professor.name)
     })
+
     dispatch({
       type: 'PROFESSORS/DELETE_ONE',
       payload: professor.id

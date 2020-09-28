@@ -30,10 +30,10 @@ const Professor = ({ match }) => {
     <div dir='rtl'>
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
       <BackButton sticky={true} variant='contained' />
-      <ProfessorHeader loading={loading} name={name} avatar={avatar} school={school} />
-      <ProfessorTags tags={tags} loading={loading} />
-      <AverageRating loading={loading} averageRating={overallRating} />
-      <FieldOfResearch fieldOfResearch={fieldOfResearch} loading={loading} />
+      <ProfessorHeader name={name} avatar={avatar} school={school} loading={!professor && loading}/>
+      <ProfessorTags tags={tags} loading={!tags && loading} />
+      <AverageRating averageRating={overallRating} loading={!overallRating && loading} />
+      <FieldOfResearch fieldOfResearch={fieldOfResearch} loading={!fieldOfResearch && loading} />
       <ReviewsList professor={professor} reviews={reviews} loading={loading} addReview={handleAddReview} />
     </div>
   )

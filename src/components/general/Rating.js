@@ -12,7 +12,7 @@ const Rating = ({ big = false, rating, loading, icon = 'heart', showTotal = fals
       <div className='flex align__center'>
         {icon === 'star' && <StarIcon style={{ color: 'var(--primary-light)', height: 16, width: 16, marginLeft: 4 }} />}
         {icon === 'heart' && <FavoriteIcon style={{ color: 'red', height: 16, width: 16, marginLeft: 4 }} />}
-        {rating && <Typography dir='ltr' variant={big ? 'h2' : 'h4'}>{rating}{showTotal && '/5'}</Typography>}
+        {rating && <Typography dir='ltr' variant={big ? 'h2' : 'h4'}>{rating?.toFixed(2)}{showTotal && '/5'}</Typography>}
         {!rating && <Skeleton height={32} width={48} />}
       </div>}
     </>

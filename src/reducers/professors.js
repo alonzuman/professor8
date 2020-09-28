@@ -54,24 +54,6 @@ export const professorsReducer = (state = initialState, action) => {
         },
         loading: false,
       }
-    case 'PROFESSORS/ADD_REVIEW':
-      return {
-        ...state,
-        professor: {
-          ...state.professor,
-          reviews: [payload, ...state.professor.reviews]
-        },
-        loading: false
-      }
-    case 'PROFESSORS/DELETE_REVIEW':
-      return {
-        ...state,
-        professor: {
-          ...state.professor,
-          reviews: [...state.professor.reviews.filter(v => v.id !== payload.id)]
-        },
-        loading: false
-      }
     case 'PROFESSORS/CLEAR_ONE':
       return {
         ...state,
