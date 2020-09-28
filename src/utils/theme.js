@@ -21,6 +21,11 @@ const light = {
       fontSize: '2rem',
       fontWeight: 500
     },
+    h2: {
+      fontFamily: ['Heebo', 'Arimo'],
+      fontSize: '3rem',
+      fontWeight: 500
+    },
     h3: {
       fontFamily: ['Heebo', 'Arimo'],
       fontSize: '1.5rem',
