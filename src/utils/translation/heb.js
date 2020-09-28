@@ -17,9 +17,11 @@ const heb = {
   fullName: "שם מלא",
   institution: "מוסד",
   submit: "הוספה",
-  fieldOfResearch: "תחום מחקר",
+  fieldOfResearch: "תחומי מחקר",
   reviews: "ביקורות",
-  findProfessorsByReview: "מצאו מרצים ומרצות לפי ביקורות",
+  heroSlogan1: "מצאו את המרצים והמרצות",
+  heroSlogan2: "הטובים",
+  heroSlogan3: "ביותר",
   home: 'דף הבית',
   schoolName: 'שם מוסד',
   professorName: 'שם מרצה',
@@ -33,7 +35,16 @@ const heb = {
   noResults: 'לא נמצאו תוצאות',
   tags: 'תגיות',
   tag: 'תיוג',
-  overallRating: 'דירוג ממוצע'
+  overallRating: 'דירוג ממוצע',
+  showAll: "הצג הכל",
+  hide: "הסתר",
+  in: 'ב',
+  noReviewsFound: 'לא נמצאו ביקורות',
+  beTheFirst: 'היו הראשונים',
+  toAdd: 'להוסיף',
+  TOS: 'תנאי שימוש',
+  PP: 'מדיניות פרטיות',
+  aboutUs: 'מידע עלינו'
 }
 
 export default heb;

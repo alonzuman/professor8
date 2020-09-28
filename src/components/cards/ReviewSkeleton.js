@@ -15,9 +15,8 @@ const ReviewSkeleton = () => {
         avatar={<Skeleton height={40} width={40} variant='circle' />}
       />
       <CardContent>
-        <Typography variant='body1'><Skeleton width={180} /></Typography>
-        <Typography variant='body1'><Skeleton width={180} /></Typography>
-        {/* <h3>{rating}</h3> */}
+        <Typography variant='body1'><Skeleton width={'100%'} /></Typography>
+        <Typography variant='body1'><Skeleton width={'100%'} /></Typography>
       </CardContent>
       <CardActions>
         <div className='flex align__center  justify__center'>

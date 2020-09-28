@@ -1,0 +1,35 @@
+.home_search_bar__wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 16px;
+  max-width: 524px;
+}
+
+.home__search_bar-title {
+  margin-top: 8px!important;
+  margin-bottom: 8px!important;
+}
+
+.home_search_bar__container {
+  background-color: var(--bg-00);
+  padding: 16px;
+  border-radius: 32px;
+  box-shadow: 0px 0px 10px #00000015;
+}
+
+@media (min-width: 768px) {
+  .home_search_bar__wrapper {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+    width: 564px;
+  }
+
+  .home_search_bar__container {
+    padding: 24px;
+  }
+}

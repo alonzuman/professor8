@@ -54,7 +54,7 @@ const AddProfessor = ({ onClose }) => {
     return (
       <form dir='rtl' onSubmit={handleSubmit}>
         <FormGroup className='form__group'>
-          <TextField variant='outlined' label={heb.fullName} onChange={e => setName(e.target.value)} />
+          <TextField size='small' variant='outlined' label={heb.fullName} onChange={e => setName(e.target.value)} />
         </FormGroup>
         <FormGroup className='form__group'>
           <SearchBar
@@ -65,7 +65,7 @@ const AddProfessor = ({ onClose }) => {
             filter={'names'}
             placeholder={heb.institution}
             freeSolo
-            size='medium'
+            size='small'
             style={{ marginTop: 0 }}
           />
         </FormGroup>
@@ -77,6 +77,7 @@ const AddProfessor = ({ onClose }) => {
             value={tagsArray}
             onChange={(event, newTags) => handleAddTag(newTags)}
             freeSolo
+            size='small'
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
                 <Chip label={option} {...getTagProps({ index })} />
@@ -87,7 +88,7 @@ const AddProfessor = ({ onClose }) => {
             )}
           />
         </FormGroup>
-        <Button color='primary' variant='contained' type='submit'>{loading ? <CircularProgress className='spinner__small' /> :heb.submit}</Button>
+        <Button className='full__width mt-1 mb-1' color='primary' variant='contained' type='submit'>{loading ? <CircularProgress className='spinner__small' /> :heb.submit}</Button>
       </form>
     )
   }

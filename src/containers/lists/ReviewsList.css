@@ -5,6 +5,8 @@
   width: 100%;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+  margin-right: -8px;
+  padding-right: 8px;
 }
 
 .reviews_list__container::-webkit-scrollbar {

@@ -1,8 +1,9 @@
-import { Button, Typography } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import { Button } from '@material-ui/core';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import AddProfessorContainer from '../../containers/dialogs/AddProfessorContainer';
 import heb from '../../utils/translation/heb';
+import AddIcon from '@material-ui/icons/Add';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -11,7 +12,10 @@ const Navbar = () => {
     <div className='navbar__container'>
       <AddProfessorContainer open={addingProfessor} onClose={() => setAddingProfessor(false)} />
       <div className='navbar__menu'>
-        <Button variant='outlined' onClick={() => setAddingProfessor(!addingProfessor)}>{heb.addProfessor}</Button>
+        <Button className='add__btn' color='primary' variant='outlined' onClick={() => setAddingProfessor(!addingProfessor)}>
+          <AddIcon className='mr-1' />
+          {heb.addProfessor}
+        </Button>
         <NavLink activeClassName='hidden' className='navbar__link' exact to='/'>
           <Button>
             {heb.home}

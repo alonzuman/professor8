@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import heb from '../../utils/translation/heb';
 
 const ProfessorCard = ({ professor }) => {
-  const [open, setOpen] = useState(false)
   const history = useHistory()
   const { name, tags, lastReview, avatar, id, departure, numberOfReviews, university, reviews, role, overallRating } = professor
 

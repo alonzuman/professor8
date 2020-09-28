@@ -1,0 +1,16 @@
+.footer__container {
+  position: relative;
+  bottom: 0;
+  padding: 16px;
+  background-color: var(--bg-01);
+  display: flex;
+  justify-content: center;
+}
+
+.footer__link {
+  text-decoration: none;
+}
+
+.footer__link--active {
+
+}

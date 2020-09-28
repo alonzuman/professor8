@@ -1,0 +1,12 @@
+.results_search_bar__container {
+  display: flex;
+  position: sticky;
+  background-color: var(--bg-00);
+  z-index: 2;
+  top: 16px;
+  width: 100%;
+  max-width: 564px;
+  border-radius: 32px;
+  box-shadow: 0px 0px 10px #00000015;
+  padding: 16px;
+}

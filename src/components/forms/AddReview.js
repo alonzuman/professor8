@@ -6,6 +6,7 @@ import { addReview } from '../../actions/professors';
 import { db } from '../../firebase';
 import { validateStringInput } from '../../utils/form';
 import heb from '../../utils/translation/heb';
+import Slider from '../general/Slider';
 
 const AddReview = ({ professor, onClose }) => {
   const { id } = professor
@@ -60,8 +61,9 @@ const AddReview = ({ professor, onClose }) => {
           variant='outlined'
           name='author'
           value={author}
+          size='small'
           onChange={e => setAuthor(e.target.value)}
-        />
+          />
       </FormGroup>
       <FormGroup className='form__group'>
         <TextField
@@ -70,8 +72,9 @@ const AddReview = ({ professor, onClose }) => {
           rows={4}
           variant='outlined'
           name='content'
+          size='small'
           onChange={e => setContent(e.target.value)}
-        />
+          />
       </FormGroup>
       <FormGroup className='form__group'>
         <Autocomplete
@@ -80,6 +83,7 @@ const AddReview = ({ professor, onClose }) => {
           defaultValue={[tagOptions[2]]}
           value={tagsArray}
           onChange={(event, newTags) => handleAddTag(newTags)}
+          size='small'
           freeSolo
           renderTags={(value, getTagProps) =>
             value.map((option, index) => (
@@ -92,9 +96,10 @@ const AddReview = ({ professor, onClose }) => {
         />
       </FormGroup>
       <FormGroup className='form__group'>
-        <input type='range' min='1' max='5' name='rating' onChange={e => setRating(parseInt(e.target.value))} />
+        <Slider min={1} max={5} name='rating' onChange={e => setRating(parseInt(e.target.value))} />
+        {/* <input type='range' min='1' max='5' name='rating' onChange={} /> */}
       </FormGroup>
-      <Button className='full__width-mobile' color='primary' variant='contained' type='submit'>{heb.submit}</Button>
+      <Button className='full__width mb-1' color='primary' variant='contained' type='submit'>{heb.submit}</Button>
     </form>
   )
 }

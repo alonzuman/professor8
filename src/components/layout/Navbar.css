@@ -1,11 +1,14 @@
 .navbar__container {
-  position: sticky;
-  top: 0;
   background-color: var(--bg-00);
-  padding: 8px 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navbar__menu {
+  max-width: 1280px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,4 +16,10 @@
 
 .navbar__link {
   text-decoration: none!important;
+}
+
+.add__btn {
+  font-weight: 500!important;
+  padding-left: 12px!important;
+  padding-right: 12px!important;
 }

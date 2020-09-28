@@ -14,7 +14,7 @@ const AddReviewContainer = ({ open, onClose, professor }) => {
 
   return (
     <Dialog dir='rtl' fullWidth maxWidth='sm' open={open} onClose={onClose}>
-      <div style={headerStyle}>
+      <div className='header__container'>
         <Typography variant='h5'>{heb.addReview}</Typography>
         <IconButton onClick={onClose} style={{ marginLeft: -8 }}><CloseIcon /></IconButton>
       </div>

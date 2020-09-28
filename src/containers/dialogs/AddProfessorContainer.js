@@ -6,7 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 const AddProfessorContainer = ({ open, onClose }) => {
   return (
-    <Dialog fullWidth maxWidth='md' dir='rtl' open={open} onClose={onClose}>
+    <Dialog fullWidth maxWidth='xs' dir='rtl' open={open} onClose={onClose}>
       <div className='header__container'>
         <Typography variant='h5'>{heb.addProfessor}</Typography>
         <IconButton onClick={onClose} style={{ marginLeft: -8 }}><CloseIcon /></IconButton>

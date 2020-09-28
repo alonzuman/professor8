@@ -2,3 +2,14 @@
   width: 100%;
   margin: 16px 0;
 }
+
+.results_school__chip {
+  margin: 0 8px!important;
+  max-width: 144px;
+}
+
+@media (min-width: 728px) {
+  .results_school__chip {
+    max-width: none;
+  }
+}

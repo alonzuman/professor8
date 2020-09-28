@@ -10,6 +10,7 @@ import { getSchool } from '../../actions/schools'
 import SchoolContainer from '../dialogs/SchoolContainer'
 import heb from '../../utils/translation/heb'
 import { Skeleton } from '@material-ui/lab'
+import NoResults from '../../pages/Results/components/NoResults'
 
 const ProfessorsList = () => {
   const [schoolOpen, setSchoolOpen] = useState(false)
@@ -61,7 +62,7 @@ const ProfessorsList = () => {
   } else if (!loading && !schools && !name) {
     return <div/>
   } else if (!loading && professors.length === 0) {
-    return <Typography dir='rtl' variant='body1'>{heb.noResultsFor} {schools || name}</Typography>
+    return <NoResults msg={`${ heb.noResultsFor } "${name}" ${heb.in}${schools}`} />
   } else {
     return (
       <div dir='rtl' className='professors_list__container'>
@@ -72,7 +73,7 @@ const ProfessorsList = () => {
             {professors?.length === 1 && `${heb.foundOneResult}`}
             {professors?.length > 1 && `${heb.found} ${professors?.length} ${heb.results} ${heb.for}`}
           </Typography>
-          <Chip style={{ margin: '0 8px', maxWidth: 144 }} size='small' onClick={handleSchoolClick} label={schools} />
+          <Chip className='results_school__chip' size='small' onClick={handleSchoolClick} label={schools} />
         </span>}
         {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
       </div>
