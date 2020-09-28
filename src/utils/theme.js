@@ -18,12 +18,22 @@ const light = {
     fontFamily: ['Heebo', 'Arimo', 'sans-serif'],
     h1: {
       fontFamily: ['Heebo', 'Arimo'],
-      fontSize: 32,
+      fontSize: '2rem',
       fontWeight: 500
     },
     h3: {
       fontFamily: ['Heebo', 'Arimo'],
-      fontSize: 24,
+      fontSize: '1.5rem',
+      fontWeight: 500
+    },
+    h4: {
+      fontFamily: ['Heebo', 'Arimo'],
+      fontSize: '1.2rem',
+      fontWeight: 500
+    },
+    h5: {
+      fontFamily: ['Heebo', 'Arimo'],
+      fontSize: '1rem',
       fontWeight: 500
     },
     body1: {

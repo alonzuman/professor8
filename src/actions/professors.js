@@ -138,7 +138,6 @@ export const addReview = ({ review, professor }) => async dispatch => {
     type: 'PROFESSORS/LOADING'
   })
   try {
-    // Calculate professor average rating
     const { overallRating } = professor
     const { rating, tags } = review
     const total = professor.reviews.length
@@ -183,11 +182,12 @@ export const addReview = ({ review, professor }) => async dispatch => {
   }
 }
 
-export const upVoteReview = review => async dispatch => {
+export const upVoteReview = ({ review, uid }) => async dispatch => {
   try {
-    // TODO add a anonymous sign in and set upvotes & downvotes array
     await professorsRef.doc(review.pid).collection('reviews').doc(review.id).update({
-      votes: firebase.firestore.FieldValue.increment(1)
+      votes: firebase.firestore.FieldValue.increment(1),
+      upVotesArray: firebase.firestore.FieldValue.arrayUnion(uid),
+      downVotesArray: firebase.firestore.FieldValue.arrayRemove(uid)
     })
     dispatch({
       type: 'PROFESSORS/UPVOTE_REVIEW',
@@ -198,10 +198,12 @@ export const upVoteReview = review => async dispatch => {
   }
 }
 
-export const downVoteReview = review => async dispatch => {
+export const downVoteReview = ({ review, uid }) => async dispatch => {
   try {
     await professorsRef.doc(review.pid).collection('reviews').doc(review.id).update({
-      votes: firebase.firestore.FieldValue.increment(-1)
+      votes: firebase.firestore.FieldValue.increment(-1),
+      upVotesArray: firebase.firestore.FieldValue.arrayRemove(uid),
+      downVotesArray: firebase.firestore.FieldValue.arrayUnion(uid)
     })
     dispatch({
       type: 'PROFESSORS/DOWNVOTE_REVIEW',

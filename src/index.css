@@ -167,6 +167,14 @@ code {
   margin-right: 8px!important;
 }
 
+.mr-2 {
+  margin-right: 16px!important;
+}
+
+.mr-3 {
+  margin-right: 32px!important;
+}
+
 .ml-5 {
   margin-left: 4px!important;
 }
@@ -356,6 +364,10 @@ code {
   width: 100px;
 }
 
+.mw-fit {
+  min-width: fit-content;
+}
+
 .mh-32 {
   min-height: 32px;
 }
@@ -366,8 +378,4 @@ code {
 
 .mw-248 {
   max-width: 248px;
-}
-
-.mw-424 {
-  max-width: 424px;
 }

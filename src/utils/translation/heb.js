@@ -44,7 +44,8 @@ const heb = {
   toAdd: 'להוסיף',
   TOS: 'תנאי שימוש',
   PP: 'מדיניות פרטיות',
-  aboutUs: 'מידע עלינו'
+  aboutUs: 'מידע עלינו',
+  faculties: 'פקולטות'
 }
 
 export default heb;

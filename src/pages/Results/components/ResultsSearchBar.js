@@ -10,7 +10,6 @@ const ResultsSearchBar = ({ loading, handleSubmit, schools, setSchools, name, se
     <form className='rtl results_search_bar__container' onSubmit={handleSubmit}>
       <SearchBar
         placeholder={heb.schoolName}
-        collection='tags'
         doc='professors'
         filter='keys'
         search={schools}
@@ -20,7 +19,6 @@ const ResultsSearchBar = ({ loading, handleSubmit, schools, setSchools, name, se
       />
       <SearchBar
         placeholder={heb.professorName}
-        collection='tags'
         doc='professors'
         filter={schools}
         search={name}

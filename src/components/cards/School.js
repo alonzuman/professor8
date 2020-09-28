@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, Chip, Grid, IconButton, Typography } fro
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CloseIcon from '@material-ui/icons/Close';
+import heb from '../../utils/translation/heb';
 
 const School = ({ handleClose }) => {
   const { school } = useSelector(state => state.schools)
@@ -14,7 +15,7 @@ const School = ({ handleClose }) => {
         action={<IconButton onClick={handleClose}><CloseIcon /></IconButton>}
       />
       <CardContent>
-        <Typography variant='subtitle1'>Faculties</Typography>
+        <Typography variant='subtitle1'>{heb.faculties}</Typography>
         <Grid container spacing={1}>
           {school?.departures?.map((v, i) => <Grid key={i} item><Chip label={v.name} /></Grid>)}
         </Grid>

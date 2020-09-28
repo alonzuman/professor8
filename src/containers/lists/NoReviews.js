@@ -8,9 +8,10 @@ const NoReviews = ({ handleClick }) => {
     <div className='rtl p-2 full__width text__center'>
       <Typography variant='h3'>
         {heb.noReviewsFound},
+        <br/>
         {heb.beTheFirst} <span onClick={handleClick} className='primary__light underline pointer'>{heb.toAdd}</span>
       </Typography>
-      <NoReviewsFound className='m__center mt-2 mw-424' />
+      <NoReviewsFound className='m__center mt-2 mw-248' />
     </div>
   )
 }

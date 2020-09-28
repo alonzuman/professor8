@@ -5,23 +5,30 @@ import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import './Review.css'
 import { deleteReview, downVoteReview, upVoteReview } from '../../actions/professors';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import heb from '../../utils/translation/heb';
+import Rating from '../general/Rating';
 
 const Review = ({ review, professor }) => {
   const [isDeleting, setIsDeleting] = useState(false)
   const { pid, content, rating, author, avatar, upVotesArray, downVotesArray, votes } = review
+  const { uid } = useSelector(state => state.auth)
   const [votesCount, setVotesCount] = useState(votes)
+  const [upVoted, setUpVoted] = useState(upVotesArray?.includes(uid) || false)
+  const [downVoted, setDownVoted] = useState(downVotesArray?.includes(uid) || false)
   const dispatch = useDispatch()
 
   const handleClick = type => {
-    // Check if user is not in any of the vote arrays
-    if (type === 'up') {
-      dispatch(upVoteReview(review))
+    if (type === 'up' && downVoted) {
+      dispatch(upVoteReview({ review, uid }))
       setVotesCount(votesCount + 1)
-    } else {
-      dispatch(downVoteReview(review))
+      setUpVoted(true)
+      setDownVoted(false)
+    } else if (type === 'down' &&  upVoted) {
+      dispatch(downVoteReview({ review, uid }))
       setVotesCount(votesCount - 1)
+      setUpVoted(false)
+      setDownVoted(true)
     }
   }
 
@@ -38,27 +45,27 @@ const Review = ({ review, professor }) => {
         </Dialog>
         <CardHeader
           title={author}
-          avatar={<Avatar src={avatar} alt={author}>{author && author[0]}</Avatar>}
+          avatar={<Rating rating={rating} />}
         />
         <CardContent>
           <Typography variant='body1'>
             {content}
           </Typography>
-          {/* <h3>{rating}</h3> */}
         </CardContent>
         <CardActions className='justify__between'>
           <div className='flex align__center  justify__center'>
-            <IconButton onClick={() => handleClick('up')}>
+            <IconButton disabled={upVoted} onClick={() => handleClick('up')}>
               <ThumbUpAltIcon />
             </IconButton>
-            <Typography variant='body1'>{votesCount}</Typography>
-            <IconButton onClick={() => handleClick('down')}>
+            <Typography variant='h5'>{votesCount}</Typography>
+            <IconButton disabled={downVoted} onClick={() => handleClick('down')}>
               <ThumbDownAltIcon />
             </IconButton>
           </div>
+          {review?.uid === uid &&
           <IconButton onClick={() => setIsDeleting(true)}>
             <DeleteIcon />
-          </IconButton>
+          </IconButton>}
         </CardActions>
       </Card>
   )

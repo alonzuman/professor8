@@ -6,14 +6,13 @@ import SearchBar from '../general/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProfessor } from '../../actions/professors';
 import { Autocomplete } from '@material-ui/lab';
-import { db } from '../../firebase';
 
 const AddProfessor = ({ onClose }) => {
   const { loading } = useSelector(state => state.professors)
+  const tagOptions = useSelector(state => state.tags.professorTags.tags)
   const [name, setName] = useState('')
   const [school, setSchool] = useState('')
   const [tagsArray, setTagsArray] = useState([])
-  const [tagOptions, setTagOptions] = useState([])
   const dispatch = useDispatch()
 
   const handleAddTag = newTags => {
@@ -22,25 +21,10 @@ const AddProfessor = ({ onClose }) => {
     }
   }
 
-  const getTags = async () => {
-    try {
-      const snapshot = await db.collection('tags').doc('professorTags').get()
-      let results = []
-      snapshot.data().tags.forEach(v => results.push(v))
-      setTagOptions(results)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getTags()
-  }, [])
-
   const handleSubmit = async e => {
     e.preventDefault()
     const professor = { name, school, departure: '', tags: tagsArray, overallRating: 0, numberOfReviews: 0 }
-    if (validateStringInput(name) && validateStringInput(school) && tags.length > 0) {
+    if (validateStringInput(name) && validateStringInput(school) && tags?.length > 0) {
       await dispatch(addProfessor(professor))
       onClose()
     } else {

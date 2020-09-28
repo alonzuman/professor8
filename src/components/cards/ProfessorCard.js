@@ -13,13 +13,6 @@ const ProfessorCard = ({ professor }) => {
     })
   }
 
-  const ratingStyle = {
-    fontSize: 22,
-    fontWeight: 600,
-    letterSpacing: 1,
-    direction: 'ltr'
-  }
-
   return (
     <>
     <ListItem dir='rtl' onClick={handleClick} button>
@@ -28,7 +21,7 @@ const ProfessorCard = ({ professor }) => {
       </ListItemAvatar>
       <ListItemText primary={name} secondary={`${numberOfReviews === 1 ? heb.oneReview : `${numberOfReviews ? numberOfReviews : 0} ${heb.reviews}`}`} />
       <ListItemSecondaryAction>
-        {overallRating > 0 && <Typography style={ratingStyle} variant='body1'>{(overallRating % 1 === 0) ? overallRating : overallRating.toFixed(1)}/5</Typography>}
+        {overallRating > 0 && <Typography variant='h4'>{(overallRating % 1 === 0) ? overallRating : overallRating.toFixed(1)}/5</Typography>}
       </ListItemSecondaryAction>
     </ListItem>
     <Divider />

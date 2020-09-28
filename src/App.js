@@ -18,18 +18,18 @@ function App() {
     <ThemeProvider theme={theme}>
       <DirectionProvider>
         <Router>
-            <Navbar />
-            <Switch>
-              <PageContainer>
-                <Route exact path='/' component={Home} />
-                <Route path='/search' component={Results} />
-                <Route path='/professor/:id' component={Professor} />
-                <Route path='/terms-of-service' component={TermsOfService} />
-                <Route path='/privacy-policy' component={PrivacyPolicy} />
-                <Route path='/about-us' component={AboutUs} />
-              </PageContainer>
-            </Switch>
-            <Footer />
+          <Navbar />
+          <Switch>
+            <PageContainer>
+              <Route exact path='/' component={Home} />
+              <Route path='/search' component={Results} />
+              <Route path='/professor/:id' component={Professor} />
+              <Route path='/terms-of-service' component={TermsOfService} />
+              <Route path='/privacy-policy' component={PrivacyPolicy} />
+              <Route path='/about-us' component={AboutUs} />
+            </PageContainer>
+          </Switch>
+          <Footer />
         </Router>
       </DirectionProvider>
     </ThemeProvider>

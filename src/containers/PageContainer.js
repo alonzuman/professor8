@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { anonymousAuth, setUser } from '../actions/auth'
+import { getTags } from '../actions/tags'
+import { auth } from '../firebase'
 
 const PageContainer = ({ children }) => {
+  const dispatch = useDispatch()
   const [height, setHeight] = useState()
 
+  useEffect(() => { dispatch(getTags()) }, [])
   useEffect(() => {
     const handleResize = () => {
       setHeight(window.innerHeight - 136)
@@ -11,7 +17,14 @@ const PageContainer = ({ children }) => {
     window.addEventListener('resize', handleResize)
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
-  }, [window.innerHeight, window.location])
+  })
+
+  useEffect(() => {
+    auth.onAuthStateChanged(async user => {
+      if (user) return dispatch(setUser(user))
+    })
+  }, [])
+  // Set anonymous signin
 
   return (
     <div style={{ minHeight: height }} className='page__container'>

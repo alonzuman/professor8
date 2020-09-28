@@ -4,24 +4,21 @@ import { db } from '../../firebase'
 import './SearchBar.css'
 import { Autocomplete } from '@material-ui/lab'
 import heb from '../../utils/translation/heb'
+import { useSelector } from 'react-redux'
 
 const SearchBar = ({ size = 'small', search, setSearch, collection, doc, filter, placeholder, noOptionsText = `${heb.noResults}`, style, className, ...rest }) => {
+  const allTags = useSelector(state => state.tags)
   const [options, setOptions] = useState([])
 
-  const getFilterOptions = async () => {
-    try {
-      const snapshot = await db.collection(collection).doc(doc).get()
-      if (filter === 'keys') {
-        setOptions(Object.keys(snapshot.data()) || [])
-      } else {
-        setOptions(snapshot.data()[filter] || [])
-      }
-    } catch (error) {
-      console.log(error)
+  const mapTagsToArray = () => {
+    if (filter === 'keys') {
+      setOptions(Object.keys(allTags[doc]) || [])
+    } else {
+      setOptions(allTags[doc][filter] || [])
     }
   }
 
-  useEffect(() => { getFilterOptions() }, [filter])
+  useEffect(() => {if (allTags && allTags[doc]) return mapTagsToArray()}, [allTags, filter])
 
   return (
     <div style={style} className={`search_bar__container ${className}`}>
