@@ -14,7 +14,7 @@ const PageContainer = ({ children }) => {
   }, [window.innerHeight])
 
   return (
-    <div style={{ height }} className='page__container'>
+    <div style={{ minHeight: height }} className='page__container'>
       {children}
     </div>
   )
