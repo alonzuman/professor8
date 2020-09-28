@@ -13,7 +13,6 @@ const PageContainer = ({ children }) => {
     const handleResize = () => {
       setHeight(window.innerHeight - 136)
     }
-
     window.addEventListener('resize', handleResize)
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
@@ -24,7 +23,6 @@ const PageContainer = ({ children }) => {
       if (user) return dispatch(setUser(user))
     })
   }, [])
-  // Set anonymous signin
 
   return (
     <div style={{ minHeight: height }} className='page__container'>
