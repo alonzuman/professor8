@@ -1,5 +1,5 @@
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Dialog, DialogContent, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -14,21 +14,22 @@ const Review = ({ review, professor }) => {
   const { pid, content, rating, author, avatar, upVotesArray, downVotesArray, votes } = review
   const { uid } = useSelector(state => state.auth)
   const [votesCount, setVotesCount] = useState(votes)
-  const [upVoted, setUpVoted] = useState(upVotesArray?.includes(uid) || false)
-  const [downVoted, setDownVoted] = useState(downVotesArray?.includes(uid) || false)
+  const [canVote, setCanVote] = useState(false)
   const dispatch = useDispatch()
 
+  useEffect(() => { if (!upVotesArray.includes(uid) && !downVotesArray.includes(uid)) return setCanVote(true) }, [review])
+
   const handleClick = type => {
-    if (type === 'up' && downVoted) {
-      dispatch(upVoteReview({ review, uid }))
-      setVotesCount(votesCount + 1)
-      setUpVoted(true)
-      setDownVoted(false)
-    } else if (type === 'down' &&  upVoted) {
-      dispatch(downVoteReview({ review, uid }))
-      setVotesCount(votesCount - 1)
-      setUpVoted(false)
-      setDownVoted(true)
+    if (canVote) {
+      if (type === 'up') {
+        dispatch(upVoteReview({ review, uid }))
+        setVotesCount(votesCount + 1)
+        setCanVote(false)
+      } else {
+        dispatch(downVoteReview({ review, uid }))
+        setVotesCount(votesCount - 1)
+        setCanVote(false)
+      }
     }
   }
 
@@ -54,11 +55,11 @@ const Review = ({ review, professor }) => {
         </CardContent>
         <CardActions className='justify__between'>
           <div className='flex align__center  justify__center'>
-            <IconButton disabled={upVoted} onClick={() => handleClick('up')}>
+            <IconButton onClick={() => handleClick('up')}>
               <ThumbUpAltIcon />
             </IconButton>
             <Typography variant='h5'>{votesCount}</Typography>
-            <IconButton disabled={downVoted} onClick={() => handleClick('down')}>
+            <IconButton onClick={() => handleClick('down')}>
               <ThumbDownAltIcon />
             </IconButton>
           </div>

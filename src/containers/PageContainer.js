@@ -20,7 +20,11 @@ const PageContainer = ({ children }) => {
 
   useEffect(() => {
     auth.onAuthStateChanged(async user => {
-      if (user) return dispatch(setUser(user))
+      if (user) {
+        dispatch(setUser(user))
+      } else {
+        dispatch(anonymousAuth())
+      }
     })
   }, [])
 

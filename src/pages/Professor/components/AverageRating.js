@@ -8,9 +8,9 @@ const AverageRating = ({ loading, averageRating }) => {
     if (averageRating && averageRating === 0) {
       return ``;
     } else if (averageRating % 1 === 0) {
-      return `${averageRating} / 5`
+      return `${averageRating}/5`
     } else {
-      return `${averageRating} / 5`
+      return `${averageRating.toFixed(2)}/5`
     }
   }
 
