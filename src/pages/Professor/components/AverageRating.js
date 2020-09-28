@@ -1,6 +1,7 @@
 import { Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
+import Rating from '../../../components/general/Rating'
 import heb from '../../../utils/translation/heb'
 
 const AverageRating = ({ loading, averageRating }) => {
@@ -10,14 +11,14 @@ const AverageRating = ({ loading, averageRating }) => {
     } else if (averageRating % 1 === 0) {
       return `${averageRating}/5`
     } else {
-      return `${averageRating.toFixed(2)}/5`
+      return `${averageRating?.toFixed(2)}/5`
     }
   }
 
   return (
     <div className='page__section flex flex__column align__baseline'>
       <Typography className='text__right rtl' variant='subtitle1'>{loading ? <Skeleton width={104} /> : averageRating !== 0 ? heb.overallRating : ''}</Typography>
-      <Typography className='text__right ltr mt-1' variant='h2'>{loading ? <Skeleton width={120} height={120} /> : averageRating ? fixAverage() : ''}</Typography>
+      <Rating big={true} rating={fixAverage()} loading={loading} icon='star' />
     </div>
   )
 }

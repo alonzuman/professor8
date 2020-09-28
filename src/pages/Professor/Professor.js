@@ -29,7 +29,7 @@ const Professor = ({ match }) => {
   return (
     <div dir='rtl'>
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
-      <BackButton variant='contained' />
+      <BackButton sticky={true} variant='contained' />
       <ProfessorHeader loading={loading} name={name} avatar={avatar} school={school} />
       <ProfessorTags tags={tags} loading={loading} />
       <AverageRating loading={loading} averageRating={overallRating} />
