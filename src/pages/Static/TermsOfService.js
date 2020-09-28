@@ -6,6 +6,9 @@ const TermsOfService = () => {
   return (
     <div className='full__height text__right'>
       <Typography variant='h1'>{heb.TOS}</Typography>
+      <Typography variant='body1'>
+        {heb.TOS1}
+      </Typography>
     </div>
   )
 }
