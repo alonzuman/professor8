@@ -25,7 +25,7 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
     <div className='page__section carousel__fix'>
       <div className='flex align__center justify__between'>
         <Typography variant='subtitle1'>{!loading ? reviews?.length > 0 ? heb.reviews : '' : <Skeleton width={120} />}</Typography>
-        {reviews && <Button className='small__btn ml-2' color='primary' onClick={() => setShow(!show)}>{loading ? <Skeleton width={80} /> : show ? heb.hide : heb.showAll}</Button>}
+        {reviews?.length !== 0 && <Button className='small__btn ml-2' color='primary' onClick={() => setShow(!show)}>{loading ? <Skeleton width={80} /> : show ? heb.hide : heb.showAll}</Button>}
         {loading && <Button className='small__btn ml-2' color='primary'><Skeleton width={80} /></Button>}
       </div>
       <div className='reviews_list__container'>
