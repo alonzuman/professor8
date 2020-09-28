@@ -28,7 +28,7 @@ code {
 }
 
 #root {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
 }
@@ -124,6 +124,10 @@ code {
 
 .justify__center {
   justify-content: center;
+}
+
+.full__height {
+  height: 100%;
 }
 
 .full__width {

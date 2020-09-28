@@ -4,7 +4,7 @@ import heb from '../../utils/translation/heb'
 
 const AboutUs = () => {
   return (
-    <div className='text__right'>
+    <div className='full__height text__right'>
       <Typography variant='h1'>{heb.aboutUs}</Typography>
     </div>
   )

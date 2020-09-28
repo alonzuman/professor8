@@ -12,5 +12,5 @@
 }
 
 .footer__link--active {
-
+  color: var(--primary-main);
 }
