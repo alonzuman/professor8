@@ -9,9 +9,9 @@ const light = {
       dark: '#5f57e2'
     },
     secondary: {
-      light:'#e53453',
-      main:'#e53453',
-      dark:'#e53453'
+      light: '#8c85ff',
+      main: '#8c85ff',
+      dark: '#8c85ff'
     }
   },
   typography: {

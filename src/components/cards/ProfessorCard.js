@@ -3,12 +3,17 @@ import { Avatar, Divider, ListItem, ListItemAvatar, ListItemSecondaryAction, Lis
 import { useHistory } from 'react-router-dom';
 import heb from '../../utils/translation/heb';
 import Rating from '../general/Rating';
+import { useDispatch } from 'react-redux';
 
 const ProfessorCard = ({ professor }) => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const { name, avatar, id, departure, numberOfReviews, university, reviews, role, overallRating } = professor
 
   const handleClick = () => {
+    dispatch({
+      type: 'PROFESSORS/CLEAR_PROFESSOR'
+    })
     history.push({
       pathname: `/professor/${id}`,
     })

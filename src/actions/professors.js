@@ -4,7 +4,7 @@ import firebase from 'firebase'
 const professorsRef = db.collection('professors')
 const tagsRef = db.collection('tags')
 
-export const addProfessor = professor => async dispatch => {
+export const addProfessorAndReview = ({ professor, review }) => async dispatch => {
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
@@ -12,10 +12,12 @@ export const addProfessor = professor => async dispatch => {
   try {
     let tagsObj = {}
     tags.map(v => tagsObj[v] = 1)
+
     const snapshot = await professorsRef.add({
       ...professor,
       tags: tagsObj
     })
+
     await tagsRef.doc('professors').update({
       [school]: firebase.firestore.FieldValue.arrayUnion(name)
     })
@@ -26,12 +28,14 @@ export const addProfessor = professor => async dispatch => {
       })
     })
 
+    const newProfessor = { id: snapshot.id, ...professor }
+    const newReview = { pid: newProfessor.id, ...review }
+
+    await dispatch(addReview(newReview, newProfessor))
+
     dispatch({
       type: 'PROFESSORS/ADD_ONE',
-      payload: {
-        id: snapshot.id,
-        ...professor
-      }
+      payload: newProfessor
     })
   } catch (error) {
     console.log(error)
@@ -73,7 +77,7 @@ export const getProfessor = (id) => async dispatch => {
   try {
     const professorSnapshot = await professorsRef.doc(id).get()
     const reviewsSnapshot = await professorsRef.doc(id).collection('reviews').get()
-    let professor = { id: professorSnapshot.id, ...professorSnapshot.data()}
+    let professor = { id: professorSnapshot.id, ...professorSnapshot.data() }
     let reviews = []
     reviewsSnapshot.forEach(doc => reviews.push({ id: doc.id, ...doc.data() }))
     dispatch({
@@ -131,16 +135,14 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
   }
 }
 
-export const addReview = ({ review, professor }) => async dispatch => {
-  const { pid } = review;
+export const addReview = (review, professor) => async dispatch => {
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
   try {
     const { overallRating } = professor
-    const { rating, tags } = review
-    const total = professor.reviews.length
-
+    const { rating, tags, pid } = review
+    const total = professor?.reviews?.length || 0
     let overall;
 
     if (total === 0) {
@@ -158,13 +160,13 @@ export const addReview = ({ review, professor }) => async dispatch => {
       }
     })
 
-    await db.collection('professors').doc(pid).set({
+    await db.collection('professors').doc(professor.id).set({
       numberOfReviews: firebase.firestore.FieldValue.increment(1),
       overallRating: overall,
       tags: tagsObj
     }, { merge: true })
 
-    const snap = await db.collection('professors').doc(pid).collection('reviews').add(review)
+    const snap = await db.collection('professors').doc(professor.id).collection('reviews').add(review)
 
     dispatch({
       type: 'PROFESSORS/SET_ONE',
@@ -174,7 +176,7 @@ export const addReview = ({ review, professor }) => async dispatch => {
           numberOfReviews: (professor.numberOfReviews + 1),
           overallRating: overall
         },
-        reviews: [...professor.reviews, { id: snap.id, ...review }]
+        reviews: [...professor?.reviews, { id: snap.id, ...review }]
       }
     })
   } catch (error) {

@@ -1,7 +1,6 @@
 .review_card__container {
   margin: 8px 0px 8px 16px;
   min-width: 288px;
-  min-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

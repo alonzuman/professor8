@@ -2,7 +2,7 @@ import { Avatar, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 
-const ProfessorHeader = ({ professor, avatar, school, name, loading }) => {
+const ProfessorHeader = ({ avatar, school, name, loading }) => {
   const avatarStyle = {
     height: 72,
     width: 72,
@@ -19,8 +19,8 @@ const ProfessorHeader = ({ professor, avatar, school, name, loading }) => {
       {!loading && <Avatar style={avatarStyle} src={avatar} alt={name}>{name?.split('')[0]}</Avatar>}
       {loading && <Skeleton style={avatarStyle} variant='circle' height={72} width={72} />}
       <div>
-        <Typography style={titleStyle} variant='h4'>{name ? name : <Skeleton width={120} />}</Typography>
-        <Typography variant='subtitle2'>{school ? school : <Skeleton width={150} />}</Typography>
+        <Typography style={titleStyle} variant='h4'>{!loading ? name : <Skeleton width={120} />}</Typography>
+        <Typography variant='subtitle2'>{!loading ? school : <Skeleton width={150} />}</Typography>
       </div>
     </div>
   )

@@ -1,4 +1,5 @@
 .navbar__container {
+  min-height: 68px;
   background-color: var(--bg-00);
   padding: 16px;
   display: flex;

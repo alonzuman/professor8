@@ -1,14 +1,10 @@
-import { Avatar, Button, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfessor } from '../../actions/professors';
 import AddReviewContainer from '../../containers/dialogs/AddReviewContainer';
 import ReviewsList from '../../containers/lists/ReviewsList';
-import heb from '../../utils/translation/heb';
-import { useHistory } from 'react-router-dom';
-import { Skeleton } from '@material-ui/lab';
 import BackButton from '../../components/general/BackButton';
-import FieldOfResearch from './components/FieldOfResearch';
+import Courses from './components/Courses';
 import ProfessorTags from './components/ProfessorTags';
 import AverageRating from './components/AverageRating';
 import ProfessorHeader from './components/ProfessorHeader';
@@ -18,7 +14,7 @@ const Professor = ({ match }) => {
   const [addReview, setAddReview] = useState(false)
   const dispatch = useDispatch()
   const { loading, professor } = useSelector(state => state.professors)
-  const { name, tags, overallRating, avatar, reviews, school, fieldOfResearch } = professor;
+  const { name, tags, overallRating, avatar, reviews, school, fieldOfResearch, courses } = professor;
 
   const handleAddReview = () => {
     setAddReview(true)
@@ -30,11 +26,11 @@ const Professor = ({ match }) => {
     <div dir='rtl'>
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
       <BackButton sticky={true} variant='contained' />
-      <ProfessorHeader name={name} avatar={avatar} school={school} loading={!professor && loading}/>
+      <ProfessorHeader name={name} avatar={avatar} school={school} loading={!name && loading}/>
       <ProfessorTags tags={tags} loading={!tags && loading} />
       <AverageRating averageRating={overallRating} loading={!overallRating && loading} />
-      <FieldOfResearch fieldOfResearch={fieldOfResearch} loading={!fieldOfResearch && loading} />
-      <ReviewsList professor={professor} reviews={reviews} loading={loading} addReview={handleAddReview} />
+      <Courses courses={courses} loading={!courses && loading} />
+      <ReviewsList professor={professor} reviews={reviews} loading={!reviews && loading} addReview={handleAddReview} />
     </div>
   )
 }

@@ -46,7 +46,16 @@ const heb = {
   TOS1: 'אין תנאים תרקדו',
   PP: 'מדיניות פרטיות',
   aboutUs: 'מידע עלינו',
-  faculties: 'פקולטות'
+  faculties: 'פקולטות',
+  courses: 'קורסים',
+  courseName: 'שם קורס',
+  departure: 'פקולטה',
+  attendance: 'דורש/ת נוכחות חובה',
+  wouldTakeAgain: 'אשמח ללמוד איתו/איתה שוב',
+  difficulty: 'רמת קושי',
+  overall: 'סה״כ',
+  fullProfessorName: 'שם הפרופסור',
+  annonymous: 'אנונימי'
 }
 
 export default heb;

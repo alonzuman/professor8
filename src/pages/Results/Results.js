@@ -2,17 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import ProfessorsList from '../../containers/lists/ProfessorsList'
 import qs from 'query-string'
-import SearchBar from '../../components/general/SearchBar'
-import heb from '../../utils/translation/heb'
-import { Button, CircularProgress } from '@material-ui/core'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import ResultsSearchBar from './components/ResultsSearchBar'
 
 const Results = () => {
-  const { loading } = useSelector(state => state.professors)
+  const { loading, filters } = useSelector(state => state.professors)
   const [schools, setSchools] = useState('')
   const [name, setName] = useState('')
   const history = useHistory()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const query = history.location.search;

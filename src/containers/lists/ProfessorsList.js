@@ -14,14 +14,12 @@ import NoResults from '../../pages/Results/components/NoResults'
 
 const ProfessorsList = () => {
   const [schoolOpen, setSchoolOpen] = useState(false)
-  const history = useHistory()
   const { professors, loading } = useSelector(state => state.professors)
   const filters = qs.parse(useHistory().location.search)
   const { schools, name } = filters;
   const dispatch = useDispatch()
 
   const handleSchoolClick = () => {
-    // TODO set by url params
     dispatch(getSchool(schools))
     setSchoolOpen(true)
   }
@@ -73,7 +71,7 @@ const ProfessorsList = () => {
             {professors?.length === 1 && `${heb.foundOneResult}`}
             {professors?.length > 1 && `${heb.found} ${professors?.length} ${heb.results} ${heb.for}`}
           </Typography>
-          <Chip className='results_school__chip' size='small' onClick={handleSchoolClick} label={schools} />
+          <Chip className='results_school__chip' size='small' color='secondary' onClick={handleSchoolClick} label={schools} />
         </span>}
         {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
       </div>

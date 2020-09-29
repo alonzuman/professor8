@@ -14,6 +14,11 @@ export const professorsReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case 'PROFESSORS/CLEAR_PROFESSOR':
+      return {
+        ...state,
+        professor: {}
+      }
     case 'PROFESSORS/ADD_ONE':
       return {
         ...state,

@@ -1,5 +1,4 @@
 const initialState = {
-  tags: {},
   loading: true
 }
 

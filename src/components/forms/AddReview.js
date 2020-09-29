@@ -1,11 +1,10 @@
-import { Button, Chip, FormGroup, TextField } from '@material-ui/core';
+import { Button, Chip, FormGroup, Slider, TextField, Typography } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addReview } from '../../actions/professors';
 import { validateStringInput } from '../../utils/form';
 import heb from '../../utils/translation/heb';
-import Slider from '../general/Slider';
 
 const AddReview = ({ professor, onClose }) => {
   const { uid } = useSelector(state => state.auth)
@@ -32,7 +31,6 @@ const AddReview = ({ professor, onClose }) => {
         rating,
         dateCreated: Date.now(),
         tags: tagsArray,
-        votes: 0,
         upVotesArray: [],
         downVotesArray: []
       }
@@ -84,7 +82,11 @@ const AddReview = ({ professor, onClose }) => {
         />
       </FormGroup>
       <FormGroup className='form__group'>
-        <Slider value={rating} min={1} max={5} name='rating' onChange={e => setRating(parseInt(e.target.value))} />
+        <div className='flex justify__between align__center'>
+          <Typography variant='subtitle1'>{heb.overall}</Typography>
+          <Typography variant='h4'>{rating}/5</Typography>
+        </div>
+        <Slider value={rating} onChange={(e, newValue) => setRating(parseInt(newValue))} step={1} min={1} max={5} marks />
       </FormGroup>
       <Button className='full__width mb-1' color='primary' variant='contained' type='submit'>{heb.submit}</Button>
     </form>
