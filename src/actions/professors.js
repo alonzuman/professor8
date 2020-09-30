@@ -166,7 +166,10 @@ export const addReview = ({ review, professor, isNew }) => async dispatch => {
       tags: tagsObj
     }, { merge: true })
 
-    const snap = await db.collection('professors').doc(pid).collection('reviews').add(review)
+    const snap = await db.collection('professors').doc(pid).collection('reviews').add({
+      ...review,
+      dateCreated: Date.now()
+    })
     const newReviews = professor?.reviews ? [...professor.reviews, { id: snap.id, ...review }] : [{ id: snap.id, ...review }]
 
     if (!isNew) {
