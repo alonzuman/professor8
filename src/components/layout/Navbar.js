@@ -29,12 +29,12 @@ const Navbar = () => {
                 {heb.home}
               </Button>
             </NavLink>
-            {anonymous &&
+            {/* {anonymous &&
             <NavLink className='navbar__link' exact to='/sign-in'>
               <Button>
                 {heb.signIn}
               </Button>
-            </NavLink>}
+            </NavLink>} */}
             {role >= 3 &&
             <NavLink className='navbar__link' exact to='/admin'>
               <Button>
