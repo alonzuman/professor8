@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProfessorAndReview } from '../../actions/professors';
 import { Autocomplete } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
+import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 
 const AddProfessorAndReview = ({ onClose }) => {
   const dispatch = useDispatch()
@@ -26,6 +27,12 @@ const AddProfessorAndReview = ({ onClose }) => {
   const [wouldTakeAgain, setWouldTakeAgain] = useState(false)
   const [courses, setCourses] = useState([])
   const [tagsArray, setTagsArray] = useState([])
+
+  const filterOptions = createFilterOptions({
+    matchFrom: 'start',
+    stringify: option => option,
+    limit: 5
+  });
 
   const handleAddCourse = newCourses => {
     if (courses.length <= 5) {
@@ -76,9 +83,11 @@ const AddProfessorAndReview = ({ onClose }) => {
   }
 
   useEffect(() => {
-    return history.push({
-      pathname: `/professor/${newId}`
-    })
+    if (newId) {
+      return history.push({
+        pathname: `/professor/${newId}`
+      })
+    }
   }, [newId])
 
   if (loading) {
@@ -105,6 +114,7 @@ const AddProfessorAndReview = ({ onClose }) => {
           <SearchBar
             search={school}
             setSearch={setSchool}
+            filterOptions={filterOptions}
             collection={'tags'}
             doc={'schools'}
             filter={'names'}
@@ -122,6 +132,7 @@ const AddProfessorAndReview = ({ onClose }) => {
           <Autocomplete
             multiple
             dir='rtl'
+            filterOptions={filterOptions}
             options={courseOptions?.map(v => v)}
             defaultValue={[courseOptions[2]]}
             value={courses}
@@ -147,6 +158,7 @@ const AddProfessorAndReview = ({ onClose }) => {
             value={tagsArray}
             onChange={(event, newTags) => handleAddTag(newTags)}
             freeSolo
+            filterOptions={filterOptions}
             size='small'
             renderOption={v => <div style={{ textAlign: 'right', width: '100%' }} >{v}</div>}
             renderTags={(value, getTagProps) =>

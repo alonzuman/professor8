@@ -31,7 +31,7 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
     const newProfessor = { id: snapshot.id, ...professor }
     const newReview = { pid: snapshot.id, ...review }
 
-    await dispatch(addReview({ review: newReview, professor: newProfessor }))
+    await dispatch(addReview({ review: newReview, professor: newProfessor, isNew: true }))
 
     dispatch({
       type: 'PROFESSORS/ADD_ONE',
@@ -135,7 +135,7 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
   }
 }
 
-export const addReview = ({ review, professor }) => async dispatch => {
+export const addReview = ({ review, professor, isNew }) => async dispatch => {
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
@@ -169,7 +169,7 @@ export const addReview = ({ review, professor }) => async dispatch => {
     const snap = await db.collection('professors').doc(pid).collection('reviews').add(review)
     const newReviews = professor?.reviews ? [...professor.reviews, { id: snap.id, ...review }] : [{ id: snap.id, ...review }]
 
-    if (professor?.reviews.length !== 0) {
+    if (!isNew) {
       dispatch({
         type: 'PROFESSORS/SET_ONE',
         payload: {
@@ -225,7 +225,8 @@ export const deleteProfessor = professor => async dispatch => {
     type: 'PROFESSORS/LOADING'
   })
   try {
-    await professorsRef.doc(professor.id).collection('reviews').delete()
+    const reviewsSnap = await professorsRef.doc(professor.id).collection('reviews').get()
+    reviewsSnap.forEach(async doc => await professorsRef.doc(professor.id).collection('reviews').doc(doc.id).delete())
     await professorsRef.doc(professor.id).delete()
     await tagsRef.doc('professors').update({
       [professor.school]: firebase.firestore.FieldValue.arrayRemove(professor.name)

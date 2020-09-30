@@ -6,6 +6,7 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Button, Dialog, DialogContent, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
+import ApprovalDialog from '../../containers/dialogs/ApprovalDialog';
 
 const ReviewActions = ({ review, professor }) => {
   const { upVotesArray, downVotesArray } = review
@@ -16,8 +17,11 @@ const ReviewActions = ({ review, professor }) => {
   const { uid } = useSelector(state => state.auth)
   const pid = professor.id
 
+  const upVoted = upVotes.includes(uid)
+  const downVoted = downVotes.includes(uid)
+
   const handleClick = async type => {
-    if (!downVotes.includes(uid) && !upVotes.includes(uid)) {
+    if (!downVoted && !upVoted) {
       if (type === 'up') {
         await dispatch(upVoteReview({ review, uid, pid }))
         setUpVotes([...upVotes, uid])
@@ -35,24 +39,14 @@ const ReviewActions = ({ review, professor }) => {
 
   return (
     <>
-      <Dialog open={isDeleting} onClose={() => setIsDeleting(false)}>
-        <DialogContent className='flex mh-128 flex__column align__center justify__around'>
-          <Typography className='rtl' variant='h4'>
-            {heb.areYouSure}
-          </Typography>
-          <div>
-            <Button onClick={handleDelete} variant='contained' color='primary'>{heb.approve}</Button>
-            <Button className='ml-1' onClick={() => setIsDeleting(false)} variant='outlined' color='default'>{heb.decline}</Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <ApprovalDialog open={isDeleting} onClose={() => setIsDeleting(false)} action={handleDelete} />
       <div className='flex align__center  justify__center'>
         <Typography variant='subtitle1'>{upVotes?.length}</Typography>
-        <IconButton onClick={() => handleClick('up')}>
+        <IconButton disabled={upVoted || upVoted} onClick={() => handleClick('up')}>
           <ThumbUpAltIcon />
         </IconButton>
         <Typography variant='subtitle1'>{downVotes?.length}</Typography>
-        <IconButton onClick={() => handleClick('down')}>
+        <IconButton disabled={downVoted || upVoted} onClick={() => handleClick('down')}>
           <ThumbDownAltIcon />
         </IconButton>
       </div>

@@ -26,7 +26,6 @@ const ProfessorsList = () => {
 
   useEffect(() => {
     if (schools || (name && schools)) {
-      console.log('loading')
       dispatch(getProfessors())
     }
   }, [schools, name])

@@ -6,8 +6,10 @@ import heb from '../../utils/translation/heb'
 import { Button, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import NoReviews from './NoReviews'
+import { useSelector } from 'react-redux'
 
 const ReviewsList = ({ addReview, professor, reviews, loading }) => {
+  const { isAuth } = useSelector(state => state.auth)
   const [width, setWidth] = useState()
   const [show, setShow] = useState(false)
 
@@ -22,11 +24,11 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
 
   return (
     <div className='page__section carousel__fix'>
-      {!loading && reviews?.length !== 0 && <Button variant='contained' className='mt-1 mb-2' color='primary' onClick={addReview}>{heb.addReview}</Button>}
+      {!loading && reviews?.length !== 0 && isAuth && <Button variant='contained' className='mt-1 mb-2' color='primary' onClick={addReview}>{heb.addReview}</Button>}
       {loading && <Skeleton width={104} height={64} />}
       <div className='flex align__center justify__between'>
         <Typography variant='subtitle1'>{!loading ? reviews?.length > 0 ? heb.reviews : '' : <Skeleton width={120} />}</Typography>
-        {reviews?.length > 4 && <Button className='small__btn ml-2' color='primary' onClick={() => setShow(!show)}>{loading ? <Skeleton width={80} /> : show ? heb.hide : heb.showAll}</Button>}
+        {reviews?.length > 4 && <Button className='small__btn mobile__hide ml-2' color='primary' onClick={() => setShow(!show)}>{loading ? <Skeleton width={80} /> : show ? heb.hide : heb.showAll}</Button>}
         {loading && <Button className='small__btn ml-2' color='primary'><Skeleton width={80} /></Button>}
       </div>
       <div className='reviews_list__container'>

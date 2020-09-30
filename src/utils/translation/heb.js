@@ -55,7 +55,9 @@ const heb = {
   difficulty: 'רמת קושי',
   overall: 'סה״כ',
   fullProfessorName: 'שם הפרופסור',
-  annonymous: 'אנונימי'
+  annonymous: 'אנונימי',
+  overallRatingBasedOn: 'דירוג ממוצע בהתבסס על',
+  delete: 'מחיקה'
 }
 
 export default heb;

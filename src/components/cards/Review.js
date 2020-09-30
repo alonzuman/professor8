@@ -3,14 +3,19 @@ import React from 'react'
 import './Review.css'
 import Rating from '../general/Rating';
 import ReviewActions from './ReviewActions';
+import moment from 'moment'
+import 'moment/locale/he'
+moment.locale('he')
 
 const Review = ({ review, professor }) => {
   const { content, rating, author, dateCreated } = review
+
+  const timeAgo = moment(new Date(dateCreated)).fromNow()
   return (
       <Card className='review_card__container'>
         <CardHeader
           title={author}
-          subheader={dateCreated}
+          subheader={timeAgo}
           avatar={<Rating rating={rating} icon='star' />}
         />
         <CardContent>

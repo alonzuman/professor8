@@ -423,3 +423,9 @@ code {
 .mw-248 {
   max-width: 248px;
 }
+
+@media (max-width: 768px) {
+  .mobile__hide {
+    display: none!important;
+  }
+}

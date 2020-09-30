@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { FormControl, InputLabel, OutlinedInput, TextField } from '@material-ui/core'
-import { db } from '../../firebase'
+import { TextField } from '@material-ui/core'
 import './SearchBar.css'
 import { Autocomplete } from '@material-ui/lab'
 import heb from '../../utils/translation/heb'
 import { useSelector } from 'react-redux'
+import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 
 const SearchBar = ({ size = 'small', search, setSearch, collection, doc, filter, placeholder, noOptionsText = `${heb.noResults}`, style, className, ...rest }) => {
   const allTags = useSelector(state => state.tags)
@@ -18,6 +18,12 @@ const SearchBar = ({ size = 'small', search, setSearch, collection, doc, filter,
     }
   }
 
+  const filterOptions = createFilterOptions({
+    matchFrom: 'start',
+    stringify: option => option,
+    limit: 5
+  });
+
   useEffect(() => {if (allTags && allTags[doc]) return mapTagsToArray()}, [allTags, filter])
 
   return (
@@ -30,6 +36,7 @@ const SearchBar = ({ size = 'small', search, setSearch, collection, doc, filter,
         noOptionsText={noOptionsText}
         value={search}
         size={size}
+        filterOptions={filterOptions}
         onChange={(event, newValue) => setSearch(newValue)}
         options={options?.map(v => v)}
         renderInput={(params) => <AutoCompleteInput size={size} label={placeholder} variant="outlined" {...params} />}
