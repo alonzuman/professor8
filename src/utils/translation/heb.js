@@ -58,7 +58,8 @@ const heb = {
   annonymous: 'אנונימי',
   overallRatingBasedOn: 'דירוג ממוצע בהתבסס על',
   delete: 'מחיקה',
-  manage: 'ניהול'
+  manage: 'ניהול',
+  signIn: 'התחברות'
 }
 
 export default heb;

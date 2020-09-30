@@ -11,13 +11,13 @@ export const setUser = user => async dispatch => {
     if (isAnonymous) {
       dispatch({
         type: 'AUTH/LOAD_USER',
-        payload: { uid }
+        payload: { uid, anonymous: true }
       })
     } else {
       const snapshot = await usersRef.doc(uid).get()
       dispatch({
         type: 'AUTH/LOAD_USER',
-        payload: { uid, ...snapshot.data() }
+        payload: { uid, ...snapshot.data(), anonymous: false }
       })
     }
   } catch (error) {
@@ -38,6 +38,12 @@ export const anonymousAuth = () => async dispatch => {
   })
   try {
     await auth.signInAnonymously()
+    dispatch({
+      type: 'AUTH/SET_USER',
+      payload: {
+        anonymous: true
+      }
+    })
     // TODO create a db record for anonymous users and store all data there
   } catch (error) {
     console.log(error)
@@ -94,12 +100,12 @@ export const signInWithProvider = (provider) => async dispatch => {
         await usersRef.doc(uid).set(newUser, { merge: true })
         dispatch({
           type: 'AUTH/SET_USER',
-          payload: { ...newUser }
+          payload: { ...newUser, anonymous: false }
         })
       } else {
         dispatch({
           type: 'AUTH/SET_USER',
-          payload: { ...user }
+          payload: { ...user, anonymous: false }
         })
       }
     })
