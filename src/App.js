@@ -12,6 +12,9 @@ import Footer from './components/layout/Footer';
 import TermsOfService from './pages/Static/TermsOfService';
 import PrivacyPolicy from './pages/Static/PrivacyPolicy';
 import AboutUs from './pages/Static/AboutUs';
+import Admin from './pages/Admin/Admin';
+import ProtectedRoute from './components/layout/ProtectedRoute';
+import Auth from './pages/Auth/Auth';
 
 function App() {
   return (
@@ -19,16 +22,18 @@ function App() {
       <DirectionProvider>
         <Router>
           <Navbar />
-          <Switch>
-            <PageContainer>
-              <Route exact path='/' component={Home} />
-              <Route path='/search' component={Results} />
-              <Route path='/professor/:id' component={Professor} />
-              <Route path='/terms-of-service' component={TermsOfService} />
-              <Route path='/privacy-policy' component={PrivacyPolicy} />
-              <Route path='/about-us' component={AboutUs} />
-            </PageContainer>
-          </Switch>
+          <PageContainer>
+            <Switch>
+              <Route exact exact path='/' component={Home} />
+              <Route exact path='/search' component={Results} />
+              <Route exact path='/professor/:id' component={Professor} />
+              <Route exact path='/terms-of-service' component={TermsOfService} />
+              <Route exact path='/privacy-policy' component={PrivacyPolicy} />
+              <Route exact path='/about-us' component={AboutUs} />
+              <Route exact path='/sign-in' component={Auth} />
+              <ProtectedRoute exact minRole={3} path='/admin' component={Admin} />
+            </Switch>
+          </PageContainer>
           <Footer />
         </Router>
       </DirectionProvider>

@@ -187,6 +187,10 @@ code {
   margin-bottom: 32px!important;
 }
 
+.mb-4 {
+  margin-bottom: 64px!important;
+}
+
 .mt-2 {
   margin-top: 16px!important;
 }
@@ -422,6 +426,10 @@ code {
 
 .mw-248 {
   max-width: 248px;
+}
+
+.mw-512 {
+  max-width: 512px;
 }
 
 @media (max-width: 768px) {

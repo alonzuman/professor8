@@ -7,7 +7,8 @@ import heb from '../../../utils/translation/heb'
 const AverageRating = ({ loading, averageRating, reviewsCount }) => {
   return (
     <div className='page__section flex flex__column align__baseline'>
-      {<Typography className='text__right rtl' variant='subtitle1'>{loading && !averageRating ? <Skeleton width={104} /> : averageRating !== 0 ? `${heb.overallRatingBasedOn} ${reviewsCount} ${heb.reviews}` : ''}</Typography>}
+      {loading && <Typography className='text__right rtl' variant='subtitle1'><Skeleton width={104} /></Typography>}
+      {!loading && reviewsCount && <Typography className='text__right rtl' variant='subtitle1'>{`${heb.overallRatingBasedOn} ${reviewsCount} ${heb.reviews}`}</Typography>}
       <Rating big={true} rating={averageRating} loading={loading} icon='star' />
     </div>
   )

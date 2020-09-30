@@ -8,7 +8,7 @@ import './Navbar.css';
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
-  const { isAuth, loading } = useSelector(state => state.auth)
+  const { isAuth, loading, role } = useSelector(state => state.auth)
   const [addingProfessorAndReview, setAddingProfessorAndReview] = useState(false)
 
   if (loading || !isAuth) {
@@ -23,11 +23,19 @@ const Navbar = () => {
             <AddIcon className='mr-1' />
             {heb.addReview}
           </Button>}
-          <NavLink activeClassName='hidden' className='navbar__link' exact to='/'>
-            <Button>
-              {heb.home}
-            </Button>
-          </NavLink>
+          <div dir='rtl'>
+            <NavLink activeClassName='hidden' className='navbar__link' exact to='/'>
+              <Button>
+                {heb.home}
+              </Button>
+            </NavLink>
+            {role >= 3 &&
+            <NavLink className='navbar__link' exact to='/admin'>
+              <Button>
+                {heb.manage}
+              </Button>
+            </NavLink>}
+          </div>
         </div>
       </div>
     )

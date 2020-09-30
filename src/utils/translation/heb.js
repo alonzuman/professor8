@@ -57,7 +57,8 @@ const heb = {
   fullProfessorName: 'שם הפרופסור',
   annonymous: 'אנונימי',
   overallRatingBasedOn: 'דירוג ממוצע בהתבסס על',
-  delete: 'מחיקה'
+  delete: 'מחיקה',
+  manage: 'ניהול'
 }
 
 export default heb;

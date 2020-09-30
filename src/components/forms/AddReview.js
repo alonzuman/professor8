@@ -70,7 +70,6 @@ const AddReview = ({ professor, onClose }) => {
           value={tagsArray}
           onChange={(event, newTags) => handleAddTag(newTags)}
           size='small'
-          freeSolo
           renderTags={(value, getTagProps) =>
             value.map((option, index) => (
               <Chip label={option} {...getTagProps({ index })} />

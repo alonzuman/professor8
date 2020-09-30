@@ -18,7 +18,7 @@ const Professor = ({ match }) => {
   const [editing, setEditing] = useState(false)
   const dispatch = useDispatch()
   const { loading, professor } = useSelector(state => state.professors)
-  const { name, tags, overallRating, avatar, reviews, school, fieldOfResearch, courses } = professor;
+  const { name, tags, overallRating, avatar, reviews, school, courses } = professor;
 
   const handleAddReview = () => {
     setAddReview(true)
@@ -35,10 +35,10 @@ const Professor = ({ match }) => {
         {uid === professor.uid && <EditButton onClick={() => setEditing(true)} sticky={true} variant='contained' />}
       </div>
       <ProfessorHeader name={name} avatar={avatar} school={school} loading={!name && loading}/>
-      <ProfessorTags tags={tags} loading={!tags && loading} />
+      <ProfessorTags tags={tags} loading={!tags && loading && !professor} />
       <AverageRating reviewsCount={reviews?.length} averageRating={overallRating} loading={!overallRating && loading} />
-      <Courses courses={courses} loading={!courses && loading} />
-      <ReviewsList professor={professor} reviews={reviews} loading={!reviews && loading} addReview={handleAddReview} />
+      <Courses courses={courses} loading={!courses && loading && !professor} />
+      <ReviewsList professor={professor} reviews={reviews} loading={!reviews && loading && !professor} addReview={handleAddReview} />
     </div>
   )
 }

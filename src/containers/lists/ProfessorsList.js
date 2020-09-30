@@ -7,22 +7,15 @@ import ProfessorCard from '../../components/cards/ProfessorCard'
 import qs from 'query-string'
 import './ProfessorsList.css'
 import { getSchool } from '../../actions/schools'
-import SchoolContainer from '../dialogs/SchoolContainer'
 import heb from '../../utils/translation/heb'
 import { Skeleton } from '@material-ui/lab'
 import NoResults from '../../pages/Results/components/NoResults'
 
 const ProfessorsList = () => {
-  const [schoolOpen, setSchoolOpen] = useState(false)
   const { professors, loading } = useSelector(state => state.professors)
   const filters = qs.parse(useHistory().location.search)
   const { schools, name } = filters;
   const dispatch = useDispatch()
-
-  const handleSchoolClick = () => {
-    dispatch(getSchool(schools))
-    setSchoolOpen(true)
-  }
 
   useEffect(() => {
     if (schools || (name && schools)) {
@@ -64,14 +57,13 @@ const ProfessorsList = () => {
   } else {
     return (
       <div dir='rtl' className='professors_list__container'>
-        <SchoolContainer open={schoolOpen} onClose={() => setSchoolOpen(false)} />
         {schools &&
         <span style={spanStyle}>
           <Typography variant='body1'>
             {professors?.length === 1 && `${heb.foundOneResult}`}
             {professors?.length > 1 && `${heb.found} ${professors?.length} ${heb.results} ${heb.for}`}
           </Typography>
-          <Chip className='results_school__chip' size='small' color='secondary' onClick={handleSchoolClick} label={schools} />
+          <Chip className='results_school__chip' size='small' color='secondary' label={schools} />
         </span>}
         {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
       </div>

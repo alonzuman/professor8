@@ -17,7 +17,6 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
     let oldResults = []
     let snapshot;
     if (professorSnap.size !== 0) {
-      console.log('here')
       professorSnap.forEach(doc => oldResults.push({ id: doc.id, ...doc.data() }))
 
       snapshot = await professorsRef.doc(oldResults[0].id).set({
@@ -31,8 +30,6 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
         tags: tagsObj
       })
     }
-
-
 
     await tagsRef.doc('professors').update({
       [school]: firebase.firestore.FieldValue.arrayUnion(name)
@@ -129,9 +126,19 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
       overall = (((overallRating * total) - rating) / (total - 1))
     }
 
+    let newTagsObj = {}
+    Object.keys(professor.tags).map((v, i) => {
+      if (review.tags.includes(v)) {
+        return newTagsObj[v] = professor.tags[v] - 1
+      } else {
+        return newTagsObj[v] = professor.tags[v]
+      }
+    })
+
     await db.collection('professors').doc(pid).set({
       numberOfReviews: firebase.firestore.FieldValue.increment(-1),
-      overallRating: overall
+      overallRating: overall,
+      tags: newTagsObj
     }, { merge: true })
 
     await db.collection('professors').doc(pid).collection('reviews').doc(review.id).delete()
@@ -184,6 +191,7 @@ export const addReview = ({ review, professor, isNew }) => async dispatch => {
 
     const snap = await db.collection('professors').doc(pid).collection('reviews').add({
       ...review,
+      approved: false,
       dateCreated: Date.now()
     })
     const newReviews = professor?.reviews ? [...professor.reviews, { id: snap.id, ...review }] : [{ id: snap.id, ...review }]

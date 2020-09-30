@@ -6,7 +6,7 @@ import heb from '../../utils/translation/heb'
 const NoReviews = ({ handleClick }) => {
   return (
     <div className='rtl p-2 full__width text__center'>
-      <Typography variant='h3'>
+      <Typography className='mb-4' variant='h3'>
         {heb.noReviewsFound},
         <br/>
         {heb.beTheFirst} <span onClick={handleClick} className='primary__light underline pointer'>{heb.toAdd}</span>

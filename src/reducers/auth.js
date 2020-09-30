@@ -24,6 +24,7 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case 'AUTH/SET_USER':
     case 'AUTH/LOAD_USER':
     case 'AUTH/SIGN_UP':
     case 'AUTH/SIGN_IN':

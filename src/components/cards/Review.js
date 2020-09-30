@@ -1,14 +1,15 @@
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Dialog, DialogContent, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Chip, Dialog, DialogContent, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
 import React from 'react'
 import './Review.css'
 import Rating from '../general/Rating';
 import ReviewActions from './ReviewActions';
 import moment from 'moment'
 import 'moment/locale/he'
+import heb from '../../utils/translation/heb';
 moment.locale('he')
 
 const Review = ({ review, professor }) => {
-  const { content, rating, author, dateCreated } = review
+  const { content, rating, author, dateCreated, tags, wouldTakeAgain } = review
 
   const timeAgo = moment(new Date(dateCreated)).fromNow()
   return (
@@ -19,6 +20,10 @@ const Review = ({ review, professor }) => {
           avatar={<Rating rating={rating} icon='star' />}
         />
         <CardContent>
+          <div className='mb-1'>
+            {tags?.map((v, i) => <Chip key={i} label={v} size='small' className='ml-5' />)}
+            {wouldTakeAgain && <Chip label={heb.wouldTakeAgain} size='small' className='ml-4' />}
+          </div>
           <Typography variant='body1'>
             {content}
           </Typography>

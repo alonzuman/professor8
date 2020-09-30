@@ -15,6 +15,7 @@ const ReviewActions = ({ review, professor }) => {
   const [upVotes, setUpVotes] = useState(upVotesArray)
   const [downVotes, setDownVotes] = useState(downVotesArray)
   const { uid } = useSelector(state => state.auth)
+  const { loading } = useSelector(state => state.professors)
   const pid = professor.id
 
   const upVoted = upVotes.includes(uid)
@@ -39,7 +40,7 @@ const ReviewActions = ({ review, professor }) => {
 
   return (
     <>
-      <ApprovalDialog open={isDeleting} onClose={() => setIsDeleting(false)} action={handleDelete} />
+      <ApprovalDialog loading={loading} open={isDeleting} onClose={() => setIsDeleting(false)} action={handleDelete} />
       <div className='flex align__center  justify__center'>
         <Typography variant='subtitle1'>{upVotes?.length}</Typography>
         <IconButton disabled={upVoted || upVoted} onClick={() => handleClick('up')}>
