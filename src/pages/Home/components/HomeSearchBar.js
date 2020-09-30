@@ -21,7 +21,6 @@ const HomeSearchBar = ({ loading, handleSubmit, schools, setSchools, name, setNa
               filter='keys'
               search={schools}
               setSearch={setSchools}
-              freeSolo
               className='ml-1 bg-00'
             />
             <SearchBar
@@ -31,8 +30,8 @@ const HomeSearchBar = ({ loading, handleSubmit, schools, setSchools, name, setNa
               filter={schools}
               search={name}
               setSearch={setName}
-              freeSolo
               className='bg-00'
+              freeSolo
             />
           </div>
           <Button

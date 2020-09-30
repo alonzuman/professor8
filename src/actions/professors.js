@@ -13,10 +13,26 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
     let tagsObj = {}
     tags.map(v => tagsObj[v] = 1)
 
-    const snapshot = await professorsRef.add({
-      ...professor,
-      tags: tagsObj
-    })
+    const professorSnap = await professorsRef.where('name', '==', name).get()
+    let oldResults = []
+    let snapshot;
+    if (professorSnap.size !== 0) {
+      console.log('here')
+      professorSnap.forEach(doc => oldResults.push({ id: doc.id, ...doc.data() }))
+
+      snapshot = await professorsRef.doc(oldResults[0].id).set({
+        ...professor,
+        tags: tagsObj,
+        numberOfReviews: firebase.firestore.FieldValue.increment(1)
+      }, { merge: true })
+    } else {
+      snapshot = await professorsRef.add({
+        ...professor,
+        tags: tagsObj
+      })
+    }
+
+
 
     await tagsRef.doc('professors').update({
       [school]: firebase.firestore.FieldValue.arrayUnion(name)

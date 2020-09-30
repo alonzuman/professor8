@@ -25,7 +25,7 @@ export const professorsReducer = (state = initialState, action) => {
         newId: payload.id,
         loading: false
       }
-    case 'PROFESSORS/REMOVE_ONE':
+    case 'PROFESSORS/DELETE_ONE':
       return {
         ...state,
         professors: [...state.professors.filter(professor => professor.id !== payload)],
