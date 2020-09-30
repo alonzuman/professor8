@@ -5,11 +5,12 @@ import Rating from '../general/Rating';
 import ReviewActions from './ReviewActions';
 
 const Review = ({ review, professor }) => {
-  const { content, rating, author } = review
+  const { content, rating, author, dateCreated } = review
   return (
       <Card className='review_card__container'>
         <CardHeader
           title={author}
+          subheader={dateCreated}
           avatar={<Rating rating={rating} icon='star' />}
         />
         <CardContent>

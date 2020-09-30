@@ -47,11 +47,11 @@ const ReviewActions = ({ review, professor }) => {
         </DialogContent>
       </Dialog>
       <div className='flex align__center  justify__center'>
-        <Typography variant='h5'>{upVotes?.length}</Typography>
+        <Typography variant='subtitle1'>{upVotes?.length}</Typography>
         <IconButton onClick={() => handleClick('up')}>
           <ThumbUpAltIcon />
         </IconButton>
-        <Typography variant='h5'>{downVotes?.length}</Typography>
+        <Typography variant='subtitle1'>{downVotes?.length}</Typography>
         <IconButton onClick={() => handleClick('down')}>
           <ThumbDownAltIcon />
         </IconButton>
