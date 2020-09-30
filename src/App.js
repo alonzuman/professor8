@@ -24,7 +24,7 @@ function App() {
           <Navbar />
           <PageContainer>
             <Switch>
-              <Route exact exact path='/' component={Home} />
+              <Route exact path='/' component={Home} />
               <Route exact path='/search' component={Results} />
               <Route exact path='/professor/:id' component={Professor} />
               <Route exact path='/terms-of-service' component={TermsOfService} />

@@ -11,7 +11,7 @@ const AddProfessorAndReviewContainer = ({ open, onClose }) => {
 
   return (
     <Dialog scroll='body' fullWidth maxWidth='xs' dir='rtl' open={open} onClose={onClose}>
-      {!tags || loading && <CircularProgress />}
+      {(!tags || loading) && <CircularProgress />}
       {tags && !loading &&
         <>
         <div className='header__container'>
