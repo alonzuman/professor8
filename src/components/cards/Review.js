@@ -1,52 +1,16 @@
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Dialog, DialogContent, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
-import DeleteIcon from '@material-ui/icons/Delete';
+import React from 'react'
 import './Review.css'
-import { deleteReview, downVoteReview, upVoteReview } from '../../actions/professors';
-import { useDispatch, useSelector } from 'react-redux';
-import heb from '../../utils/translation/heb';
 import Rating from '../general/Rating';
+import ReviewActions from './ReviewActions';
 
 const Review = ({ review, professor }) => {
-  const [isDeleting, setIsDeleting] = useState(false)
-  const { pid, content, rating, author, avatar, upVotesArray, downVotesArray, votes } = review
-  const { uid } = useSelector(state => state.auth)
-  const [votesCount, setVotesCount] = useState(votes)
-  const [canVote, setCanVote] = useState(false)
-  const dispatch = useDispatch()
-
-  useEffect(() => { if (!upVotesArray.includes(uid) && !downVotesArray.includes(uid)) return setCanVote(true) }, [review])
-
-  const handleClick = type => {
-    if (canVote) {
-      if (type === 'up') {
-        dispatch(upVoteReview({ review, uid }))
-        setVotesCount(votesCount + 1)
-        setCanVote(false)
-      } else {
-        dispatch(downVoteReview({ review, uid }))
-        setVotesCount(votesCount - 1)
-        setCanVote(false)
-      }
-    }
-  }
-
+  const { content, rating, author } = review
   return (
       <Card className='review_card__container'>
-        <Dialog open={isDeleting} onClose={() => setIsDeleting(false)}>
-          <DialogContent>
-            <Typography variant='body1'>
-              {heb.areYouSure}
-            </Typography>
-            <Button onClick={() => dispatch(deleteReview({ review, professor }))} variant='contained' color='primary'>{heb.approve}</Button>
-            <Button onClick={() => setIsDeleting(false)} variant='outlined' color='default'>{heb.decline}</Button>
-          </DialogContent>
-        </Dialog>
         <CardHeader
           title={author}
-          avatar={<Rating rating={rating} />}
+          avatar={<Rating rating={rating} icon='star' />}
         />
         <CardContent>
           <Typography variant='body1'>
@@ -54,19 +18,7 @@ const Review = ({ review, professor }) => {
           </Typography>
         </CardContent>
         <CardActions className='justify__between'>
-          <div className='flex align__center  justify__center'>
-            <IconButton onClick={() => handleClick('up')}>
-              <ThumbUpAltIcon />
-            </IconButton>
-            <Typography variant='h5'>{votesCount}</Typography>
-            <IconButton onClick={() => handleClick('down')}>
-              <ThumbDownAltIcon />
-            </IconButton>
-          </div>
-          {review?.uid === uid &&
-          <IconButton onClick={() => setIsDeleting(true)}>
-            <DeleteIcon />
-          </IconButton>}
+          <ReviewActions review={review} professor={professor} />
         </CardActions>
       </Card>
   )

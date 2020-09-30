@@ -29,9 +29,9 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
     })
 
     const newProfessor = { id: snapshot.id, ...professor }
-    const newReview = { pid: newProfessor.id, ...review }
+    const newReview = { pid: snapshot.id, ...review }
 
-    await dispatch(addReview(newReview, newProfessor))
+    await dispatch(addReview({ review: newReview, professor: newProfessor }))
 
     dispatch({
       type: 'PROFESSORS/ADD_ONE',
@@ -135,7 +135,7 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
   }
 }
 
-export const addReview = (review, professor) => async dispatch => {
+export const addReview = ({ review, professor }) => async dispatch => {
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
@@ -160,40 +160,44 @@ export const addReview = (review, professor) => async dispatch => {
       }
     })
 
-    await db.collection('professors').doc(professor.id).set({
+    await db.collection('professors').doc(pid).set({
       numberOfReviews: firebase.firestore.FieldValue.increment(1),
       overallRating: overall,
       tags: tagsObj
     }, { merge: true })
 
-    const snap = await db.collection('professors').doc(professor.id).collection('reviews').add(review)
+    const snap = await db.collection('professors').doc(pid).collection('reviews').add(review)
+    const newReviews = professor?.reviews ? [...professor.reviews, { id: snap.id, ...review }] : [{ id: snap.id, ...review }]
 
-    dispatch({
-      type: 'PROFESSORS/SET_ONE',
-      payload: {
-        professor: {
-          ...professor,
-          numberOfReviews: (professor.numberOfReviews + 1),
-          overallRating: overall
-        },
-        reviews: [...professor?.reviews, { id: snap.id, ...review }]
-      }
-    })
+    if (professor?.reviews.length !== 0) {
+      dispatch({
+        type: 'PROFESSORS/SET_ONE',
+        payload: {
+          professor: {
+            ...professor,
+            numberOfReviews: (professor.numberOfReviews + 1),
+            overallRating: overall
+          },
+          reviews: newReviews
+        }
+      })
+    }
   } catch (error) {
     console.log(error);
   }
 }
 
-export const upVoteReview = ({ review, uid }) => async dispatch => {
+export const upVoteReview = ({ review, uid, pid }) => async dispatch => {
+  const { id } = review;
   try {
-    await professorsRef.doc(review.pid).collection('reviews').doc(review.id).update({
+    await professorsRef.doc(pid).collection('reviews').doc(id).update({
       votes: firebase.firestore.FieldValue.increment(1),
       upVotesArray: firebase.firestore.FieldValue.arrayUnion(uid),
       downVotesArray: firebase.firestore.FieldValue.arrayRemove(uid)
     })
     dispatch({
       type: 'PROFESSORS/UPVOTE_REVIEW',
-      payload: review.id
+      payload: id
     })
   } catch (error) {
     console.log(error)

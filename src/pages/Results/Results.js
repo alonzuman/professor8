@@ -6,11 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import ResultsSearchBar from './components/ResultsSearchBar'
 
 const Results = () => {
-  const { loading, filters } = useSelector(state => state.professors)
+  const { loading, professors } = useSelector(state => state.professors)
   const [schools, setSchools] = useState('')
   const [name, setName] = useState('')
   const history = useHistory()
-  const dispatch = useDispatch()
 
   useEffect(() => {
     const query = history.location.search;

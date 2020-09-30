@@ -15,7 +15,6 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
     const handleResize = () => {
       setWidth(window.innerWidth)
     }
-    console.log(width)
     window.addEventListener('resize', handleResize)
     handleResize()
     return () => window.removeEventListener('resize', handleResize)

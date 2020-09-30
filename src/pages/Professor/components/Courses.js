@@ -23,7 +23,7 @@ const Courses = ({ courses, loading }) => {
           }}
         )}
       </div>
-      {courses && <Button className='small__btn' color='primary' onClick={() => setShow(!show)}>{loading ? <Skeleton width={80} /> : show ? heb.hide : heb.showAll}</Button>}
+      {courses?.length > 2 && <Button className='small__btn' color='primary' onClick={() => setShow(!show)}>{loading ? <Skeleton width={80} /> : show ? heb.hide : heb.showAll}</Button>}
       {loading && <Button className='small__btn' color='primary'><Skeleton width={80} /></Button>}
     </div>
   )

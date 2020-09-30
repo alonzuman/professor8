@@ -6,10 +6,12 @@ import SearchBar from '../general/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProfessorAndReview } from '../../actions/professors';
 import { Autocomplete } from '@material-ui/lab';
+import { useHistory } from 'react-router-dom';
 
 const AddProfessorAndReview = ({ onClose }) => {
   const dispatch = useDispatch()
-  const { loading } = useSelector(state => state.professors)
+  const history = useHistory()
+  const { loading, newId } = useSelector(state => state.professors)
   const { uid } = useSelector(state => state.auth)
   const tagOptions = useSelector(state => state.tags.professorTags.tags)
   const courseOptions = useSelector(state => state.tags.courses.names)
@@ -49,13 +51,11 @@ const AddProfessorAndReview = ({ onClose }) => {
       numberOfReviews: 0,
       courses,
       overallRating: rating,
-      numberOfReviews: 1
     }
 
     const review = {
-      pid: '',
       uid,
-      author: heb.annonymous,
+      author: author || heb.annonymous,
       rating,
       content,
       wouldTakeAgain,
@@ -67,7 +67,6 @@ const AddProfessorAndReview = ({ onClose }) => {
       upVotesArray: []
     }
 
-    // TODO ALON validate values
     if (validateStringInputs([name, school, departure, content])) {
       await dispatch(addProfessorAndReview({ professor, review }))
       onClose()
@@ -75,6 +74,12 @@ const AddProfessorAndReview = ({ onClose }) => {
       console.log('string not full')
     }
   }
+
+  useEffect(() => {
+    return history.push({
+      pathname: `/professor/${newId}`
+    })
+  }, [newId])
 
   if (loading) {
     return <CircularProgress />
@@ -143,6 +148,7 @@ const AddProfessorAndReview = ({ onClose }) => {
             onChange={(event, newTags) => handleAddTag(newTags)}
             freeSolo
             size='small'
+            renderOption={v => <div style={{ textAlign: 'right', width: '100%' }} >{v}</div>}
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
                 <Chip label={option} {...getTagProps({ index })} />
@@ -168,6 +174,9 @@ const AddProfessorAndReview = ({ onClose }) => {
           <Slider value={rating} onChange={(e, newValue) => setRating(newValue)} step={1} min={1} max={5} marks />
         </FormGroup>
         <FormGroup className='form__group'>
+          <TextField size='small' variant='outlined' label={heb.author} onChange={e => setAuthor(e.target.value)} />
+        </FormGroup>
+        <FormGroup className='form__group'>
           <TextField
             label={heb.content}
             multiline
@@ -178,7 +187,7 @@ const AddProfessorAndReview = ({ onClose }) => {
             onChange={e => setContent(e.target.value)}
           />
         </FormGroup>
-        <Button className='full__width mt-1 mb-1' color='primary' variant='contained' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : heb.submit}</Button>
+        <Button className='full__width mt-1 mb-2' color='primary' variant='contained' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : heb.submit}</Button>
       </form>
     )
   }

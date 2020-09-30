@@ -20,7 +20,7 @@ const Professor = ({ match }) => {
     setAddReview(true)
   }
 
-  useEffect(() => { dispatch(getProfessor(id)) }, [])
+  useEffect(() => { dispatch(getProfessor(id)) }, [id])
 
   return (
     <div dir='rtl'>

@@ -10,7 +10,7 @@ const AddProfessorAndReviewContainer = ({ open, onClose }) => {
   const { loading } = useSelector(state => state.tags)
 
   return (
-    <Dialog fullWidth maxWidth='xs' dir='rtl' open={open} onClose={onClose}>
+    <Dialog scroll='body' fullWidth maxWidth='xs' dir='rtl' open={open} onClose={onClose}>
       {!tags || loading && <CircularProgress />}
       {tags && !loading &&
         <>

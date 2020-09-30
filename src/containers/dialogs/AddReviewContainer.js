@@ -5,13 +5,6 @@ import CloseIcon from '@material-ui/icons/Close'
 import heb from '../../utils/translation/heb'
 
 const AddReviewContainer = ({ open, onClose, professor }) => {
-  const headerStyle = {
-    padding: '16px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  }
-
   return (
     <Dialog dir='rtl' fullWidth maxWidth='sm' open={open} onClose={onClose}>
       <div className='header__container'>
