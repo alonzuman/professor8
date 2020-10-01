@@ -1,23 +1,21 @@
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Chip, Dialog, DialogContent, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
+import { Card, CardActions, CardContent, CardHeader, Chip, Typography } from '@material-ui/core'
 import React from 'react'
-import './Review.css'
-import Rating from '../general/Rating';
-import ReviewActions from './ReviewActions';
+import Rating from '../../../components/general/Rating'
+import heb from '../../../utils/translation/heb'
 import moment from 'moment'
 import 'moment/locale/he'
-import heb from '../../utils/translation/heb';
 moment.locale('he')
 
-const Review = ({ review, professor }) => {
-  const { content, rating, author, dateCreated, tags, wouldTakeAgain } = review
-
+const ApproveReviewCard = ({ review }) => {
+  const { author, dateCreated, rating, tags, wouldTakeAgain, content } = review;
   const timeAgo = moment(new Date(dateCreated)).fromNow()
+
   return (
-    <Card className='review_card__container'>
+    <Card className='review_card__container rtl'>
       <CardHeader
         title={author}
         subheader={timeAgo}
-        avatar={<Rating rating={rating} icon='star' />}
+        avatar={<Rating rating={rating} />}
       />
       <CardContent>
         <div className='mb-1'>
@@ -29,10 +27,10 @@ const Review = ({ review, professor }) => {
         </Typography>
       </CardContent>
       <CardActions className='justify__between'>
-        <ReviewActions review={review} professor={professor} />
+        {/* <ReviewActions review={review} professor={professor} /> */}
       </CardActions>
     </Card>
   )
 }
 
-export default Review
+export default ApproveReviewCard

@@ -22,6 +22,8 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+
+
   return (
     <div className='page__section carousel__fix'>
       {!loading && reviews?.length && professor !== 0 && isAuth && <Button variant='contained' className='mt-1 mb-2' color='primary' onClick={addReview}>{heb.addReview}</Button>}
@@ -35,9 +37,7 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
         {loading && [0, 0, 0, 0]?.map((v, i) => <ReviewSkeleton key={i} />)}
         {!loading && reviews?.map((review, i) => {
           if (review.approved) {
-            if (width <= 768) {
-              return <Review professor={professor} review={review} key={i} />
-            } else if (show) {
+            if (width <= 768 || show) {
               return <Review professor={professor} review={review} key={i} />
             } else if (i <= 3) {
               return <Review professor={professor} review={review} key={i} />

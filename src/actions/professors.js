@@ -189,12 +189,20 @@ export const addReview = ({ review, professor, isNew }) => async dispatch => {
       tags: tagsObj
     }, { merge: true })
 
-    const snap = await db.collection('professors').doc(pid).collection('reviews').add({
+    const snap = await db.collection('reviews').add({
       ...review,
       approved: false,
       dateCreated: Date.now()
     })
-    const newReviews = professor?.reviews ? [...professor.reviews, { id: snap.id, ...review }] : [{ id: snap.id, ...review }]
+
+    // const snap = await db.collection('professors').doc(pid).collection('reviews').add({
+    //   ...review,
+    //   approved: false,
+    //   dateCreated: Date.now()
+    // })
+    // const newReviews = professor?.reviews ? [...professor.reviews, { id: snap.id, ...review }] : [{ id: snap.id, ...review }]
+
+    // TODO ALON dispatch alert saying it needs to be reviewed
 
     if (!isNew) {
       dispatch({
@@ -205,10 +213,24 @@ export const addReview = ({ review, professor, isNew }) => async dispatch => {
             numberOfReviews: (professor.numberOfReviews + 1),
             overallRating: overall
           },
-          reviews: newReviews
+          reviews: professor?.reviews || []
         }
       })
     }
+
+    // if (!isNew) {
+    //   dispatch({
+    //     type: 'PROFESSORS/SET_ONE',
+    //     payload: {
+    //       professor: {
+    //         ...professor,
+    //         numberOfReviews: (professor.numberOfReviews + 1),
+    //         overallRating: overall
+    //       },
+    //       reviews: newReviews
+    //     }
+    //   })
+    // }
   } catch (error) {
     console.log(error);
   }

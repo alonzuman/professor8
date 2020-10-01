@@ -15,6 +15,7 @@ import AboutUs from './pages/Static/AboutUs';
 import Admin from './pages/Admin/Admin';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import Auth from './pages/Auth/Auth';
+import ApproveReviewsContainer from './pages/Admin/pages/ApproveReviewsContainer';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route exact path='/about-us' component={AboutUs} />
               <Route exact path='/sign-in' component={Auth} />
               <ProtectedRoute exact minRole={3} path='/admin' component={Admin} />
+              <ProtectedRoute exact minRole={3} path='/admin/approve-reviews' component={ApproveReviewsContainer} />
             </Switch>
           </PageContainer>
           <Footer />

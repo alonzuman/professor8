@@ -21,7 +21,7 @@ const SearchBar = ({ size = 'small', search, setSearch, collection, doc, filter,
   const filterOptions = createFilterOptions({
     matchFrom: 'start',
     stringify: option => option,
-    limit: 5
+    limit: 30
   });
 
   useEffect(() => {if (allTags && allTags[doc]) return mapTagsToArray()}, [allTags, filter])
