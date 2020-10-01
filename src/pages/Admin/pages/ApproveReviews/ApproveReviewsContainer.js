@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAdminReviews } from '../../../actions/admin'
+import { getAdminReviews } from '../../../../actions/admin'
 import ApproveReviewsList from './ApproveReviewsList'
 
 const ApproveReviewsContainer = () => {

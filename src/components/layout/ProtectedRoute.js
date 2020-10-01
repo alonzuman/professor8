@@ -7,33 +7,32 @@ import { app } from '../../firebase'
 
 const ProtectedRoute = ({ component: Component, path, minRole, ...rest }) => {
   const [pageLoading, setPageLoading] = useState(true)
-  const { role, isAuth, loading } = useSelector(state => state.auth)
+  const { role, isAuth, loading, anonymous } = useSelector(state => state.auth)
   const [condition, setCondition] = useState(false)
   const dispatch = useDispatch()
   const currentUser = app.auth().currentUser
 
   useEffect(() => {
+    setCondition(role >= minRole)
     app.auth().onAuthStateChanged(async user => {
       if (user) {
         await dispatch(setUser(user))
-        setPageLoading(false)
+        await setPageLoading(false)
       } else {
         dispatch(signOut())
-        setPageLoading(false)
-        return <Redirect to='/' />
+        await setPageLoading(false)
       }
     })
 
-    setCondition(true)
-  }, [dispatch, currentUser])
+  }, [dispatch, currentUser, role])
 
-  return (
-    <>
-      {pageLoading && <CircularProgress color='primary' />}
-      {!pageLoading && isAuth && condition && <Route {...rest} render={props => <Component {...props} />} />}
-      {!pageLoading && !isAuth && !condition && <Redirect to='/' />}
-    </>
-  )
+  if (pageLoading || loading) {
+    return <CircularProgress color='primary' />
+  } else if (!pageLoading && isAuth && condition) {
+    return <Route {...rest} render={props => <Component {...props} />} />
+  } else if (!pageLoading && anonymous && !condition) {
+    return <Redirect to='/' />
+  }
 }
 
 export default ProtectedRoute

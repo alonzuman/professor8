@@ -20,10 +20,11 @@ export const adminReducer = (state = initialState, action) => {
         ...payload,
         loading: false
       }
+    case 'ADMIN/DECLINE_REVIEW':
     case 'ADMIN/APPROVE_REVIEW':
       return {
         ...state,
-        ...payload,
+        reviews: [...state.reviews.filter(v => v.id !== payload)],
         loading: false
       }
     case 'ADMIN/UNAPPROVE_REVIEW':

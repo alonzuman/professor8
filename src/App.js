@@ -15,7 +15,7 @@ import AboutUs from './pages/Static/AboutUs';
 import Admin from './pages/Admin/Admin';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import Auth from './pages/Auth/Auth';
-import ApproveReviewsContainer from './pages/Admin/pages/ApproveReviewsContainer';
+import ApproveReviewsContainer from './pages/Admin/pages/ApproveReviews/ApproveReviewsContainer';
 
 function App() {
   return (

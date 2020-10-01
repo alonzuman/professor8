@@ -1,9 +1,10 @@
 import { Card, CardActions, CardContent, CardHeader, Chip, Typography } from '@material-ui/core'
 import React from 'react'
-import Rating from '../../../components/general/Rating'
-import heb from '../../../utils/translation/heb'
+import Rating from '../../../../components/general/Rating'
+import heb from '../../../../utils/translation/heb'
 import moment from 'moment'
 import 'moment/locale/he'
+import ApproveReviewCardActions from './ApproveReviewCardActions'
 moment.locale('he')
 
 const ApproveReviewCard = ({ review }) => {
@@ -27,7 +28,7 @@ const ApproveReviewCard = ({ review }) => {
         </Typography>
       </CardContent>
       <CardActions className='justify__between'>
-        {/* <ReviewActions review={review} professor={professor} /> */}
+        <ApproveReviewCardActions review={review} />
       </CardActions>
     </Card>
   )

@@ -10,7 +10,7 @@ const Auth = () => {
     <div>
       {!loading && isAuth && role >= 1 && <Redirect to='/' />}
       <SignInWithSocialMedia />
-      <SignUp />
+      {/* <SignUp /> */}
     </div>
   )
 }

@@ -11,7 +11,7 @@ const SignInWithSocialMedia = () => {
 
   return (
     <div>
-      <Button onClick={() => handleClick('google')}>GOOGLE</Button>
+      <Button className='full__width' onClick={() => handleClick('google')}>GOOGLE</Button>
       {/* <Button onClick={() => handleClick('facebook')}>FACEBOOK</Button> */}
     </div>
   )
