@@ -52,7 +52,7 @@ const ProfessorsList = () => {
   } else if (!loading && !schools && !name) {
     return <div/>
   } else if (!loading && professors.length === 0) {
-    return <NoResults msg={`${ heb.noResultsFor } "${name}" ${heb.in}${schools}`} />
+    return <NoResults msg={`${ heb.noResultsForYourSearchIn} "${schools}"`} />
   } else {
     return (
       <div dir='rtl' className='professors_list__container'>

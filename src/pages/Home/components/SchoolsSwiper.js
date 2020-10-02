@@ -1,5 +1,5 @@
 import { Typography } from '@material-ui/core';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss';
@@ -12,25 +12,31 @@ const schools = [
   { name: 'האוניברסיטה הפתוחה', icon: 'bye' },
   { name: 'אוניברסיטת תל אביב', icon: 'bye' },
   { name: 'האוניברסיטה העברית', icon: 'bye' },
+  { name: 'המרכז הבינתחומי הרצליה', icon: 'bye' },
+  { name: 'המרכז האקדמי למשפט ועסקים', icon: 'bye' },
 ]
 
 const SchoolsSwiper = () => {
   const history = useHistory()
+  const [width, setWidth] = useState(null)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth)
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    return () => window.removeEventListener('resize', handleResize)
+  })
+
   const options = {
-    slidesPerView: 2.4,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
+    slidesPerView: width < 768 ? 1.5 : 4,
+    spaceBetween: 16
   }
 
   const handleClick = school => {
     const query = {
-      schools: school
+      schools: school,
     }
 
     const stringifiedQuery = qs.stringify(query)
@@ -42,11 +48,13 @@ const SchoolsSwiper = () => {
   }
 
   return (
-    <div className='schools_swiper__container'>
+    <div className='schools_section'>
       <Typography variant='h3'>{heb.schools}</Typography>
-      <Swiper {...options}>
-        {schools?.map((v, i) => <SwiperSlide onClick={() => handleClick(v.name)} key={i}><SchoolCard school={v} /></SwiperSlide>)}
-      </Swiper>
+      <div className='schools_swiper__container'>
+        <Swiper {...options}>
+          {schools?.map((v, i) => <SwiperSlide onClick={() => handleClick(v.name)} key={i}><SchoolCard school={v} /></SwiperSlide>)}
+        </Swiper>
+      </div>
     </div>
   )
 }

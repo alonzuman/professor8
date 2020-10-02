@@ -53,6 +53,12 @@ export const professorsReducer = (state = initialState, action) => {
         },
         loading: false,
       }
+    case 'PROFESSORS/CLEAR_ALL':
+      return {
+        ...state,
+        professors: [],
+        loading: false
+      }
     case 'PROFESSORS/CLEAR_ONE':
       return {
         ...state,

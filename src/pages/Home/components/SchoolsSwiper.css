@@ -1,11 +1,8 @@
-.schools_swiper__container {
+.schools_section {
   width: 100%;
 }
 
-.school_swiper_card__wrapper {
-
-}
-
-.school_swiper_card__container {
-
+.schools_swiper__container .swiper-container {
+  padding: 8px;
+  width: 100%;
 }

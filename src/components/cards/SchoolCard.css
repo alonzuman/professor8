@@ -1,14 +1,10 @@
 .school_card__wrapper {
-  padding: 16px;
   cursor: pointer;
-}
-
-.school_card__wrapper:first-of-type {
-  padding: 8px 0 8px 16px;
 }
 
 .school_card__container {
   padding: 16px;
+  background-color: var(--bg-00);
   box-shadow: 0px 0px 10px #00000015;
   border-radius: 16px;
   transition: .2s ease-in-out background-color, .25s ease-in-out border;

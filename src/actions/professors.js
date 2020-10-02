@@ -59,6 +59,9 @@ export const getProfessors = () => async dispatch => {
   const parsed = qs.parse(window.location.search)
   const { schools, name } = parsed
   dispatch({
+    type: 'PROFESSORS/CLEAR_ALL'
+  })
+  dispatch({
     type: 'PROFESSORS/LOADING'
   })
   if (schools || name) {
@@ -85,6 +88,9 @@ export const getProfessors = () => async dispatch => {
 
 export const getProfessor = (id) => async dispatch => {
   dispatch({
+    type: 'PROFESSORS/CLEAR_ONE'
+  })
+  dispatch({
     type: 'PROFESSORS/LOADING'
   })
   try {
@@ -101,13 +107,6 @@ export const getProfessor = (id) => async dispatch => {
     console.log(error)
   }
 }
-
-export const clearProfessor = () => {
-  return ({
-    type: 'PROFESSORS/CLEAR_ONE'
-  })
-}
-
 
 export const deleteReview = ({ review, professor }) => async dispatch => {
   const { pid } = review;

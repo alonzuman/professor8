@@ -66,7 +66,8 @@ const heb = {
   remaining: 'נותרו',
   chars: 'תוים',
   schools: 'מוסדות',
-  howItWorks: 'איך זה עובד'
+  howItWorks: 'איך זה עובד',
+  noResultsForYourSearchIn: 'לא נמצאו תוצאות עבור חיפושך ב-'
 }
 
 export default heb;
