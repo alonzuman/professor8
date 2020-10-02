@@ -1,6 +1,6 @@
 import { Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@material-ui/core'
 import React from 'react'
-import './Review.css'
+import './ReviewCard.css'
 import { Skeleton } from '@material-ui/lab';
 
 const ReviewSkeleton = () => {

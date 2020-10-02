@@ -28,7 +28,6 @@ code {
 }
 
 #root {
-  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
 }
@@ -42,9 +41,9 @@ code {
   --primary-dark: #302a8b;
 
   --bg-00: #fff;
-  --bg-01: #f7f7f7;
+  --bg-01: #f5f5f5;
   --bg-02: #f4f4f4;
-  --bg-03: #f4f4f4;
+  --bg-03: #e2e2e2;
   --bg-04: #f4f4f4;
   --bg-05: #f4f4f4;
   --bg-06: #f4f4f4;

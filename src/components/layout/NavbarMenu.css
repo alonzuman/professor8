@@ -5,10 +5,6 @@
   direction: rtl;
 }
 
-.menu__item:hover {
-  color: var(--primary-light)!important;
-}
-
 .menu__item--active {
   font-weight: 600!important;
   color: var(--primary-main)!important;
@@ -25,3 +21,6 @@
   width: 24px!important;
 }
 
+.menu__button {
+  box-shadow: 0px 0px 10px #00000015;
+}

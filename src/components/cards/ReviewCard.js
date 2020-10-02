@@ -1,6 +1,6 @@
 import { Card, CardActions, CardContent, CardHeader, Chip, Typography } from '@material-ui/core'
 import React from 'react'
-import './Review.css'
+import './ReviewCard.css'
 import Rating from '../general/Rating';
 import ReviewActions from './ReviewActions';
 import moment from 'moment'

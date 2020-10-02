@@ -1,7 +1,7 @@
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss';
-import Review from '../../components/cards/Review';
+import ReviewCard from '../../components/cards/ReviewCard';
 
 const ReviewsSwiper = ({ loading, reviews, professor, viewWidth }) => {
   const slidesCount = () => {
@@ -29,8 +29,8 @@ const ReviewsSwiper = ({ loading, reviews, professor, viewWidth }) => {
   }
 
   return (
-    <Swiper {...options}>
-      { !loading && reviews?.map((v, i) => <SwiperSlide key={i}><Review professor={professor} review={v} /></SwiperSlide>) }
+    <Swiper style={{ marginLeft: viewWidth <= 768 ? -16 : '' }} {...options}>
+      { !loading && reviews?.map((v, i) => <SwiperSlide key={i}><ReviewCard professor={professor} review={v} /></SwiperSlide>) }
     </Swiper>
   )
 }

@@ -37,7 +37,7 @@ const NavbarMenu = () => {
 
   return (
     <div className='menu__container'>
-      <Button onClick={handleOpen}>
+      <Button className='menu__button' onClick={handleOpen}>
         <Avatar src={avatar} alt={firstName} className='menu__avatar'>{firstName?.split('')[0]}</Avatar>
         <MenuIcon className='menu__icon' />
       </Button>

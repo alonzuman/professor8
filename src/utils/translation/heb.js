@@ -64,7 +64,9 @@ const heb = {
   signOut: 'התנתקות',
   signInWithGoogle: 'התחברות באמצעות גוגל',
   remaining: 'נותרו',
-  chars: 'תוים'
+  chars: 'תוים',
+  schools: 'מוסדות',
+  howItWorks: 'איך זה עובד'
 }
 
 export default heb;
