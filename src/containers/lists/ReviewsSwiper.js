@@ -2,7 +2,6 @@ import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper.scss';
 import Review from '../../components/cards/Review';
-import ReviewSkeleton from '../../components/cards/ReviewSkeleton';
 
 const ReviewsSwiper = ({ loading, reviews, professor, viewWidth }) => {
   const options = {
@@ -19,7 +18,6 @@ const ReviewsSwiper = ({ loading, reviews, professor, viewWidth }) => {
 
   return (
     <Swiper {...options}>
-      { loading && [0, 0, 0].map((v, i) => <SwiperSlide key={i}><ReviewSkeleton /></SwiperSlide>) }
       { !loading && reviews?.map((v, i) => <SwiperSlide key={i}><Review professor={professor} review={v} /></SwiperSlide>) }
     </Swiper>
   )

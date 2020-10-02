@@ -4,6 +4,8 @@
 
 .review_card__container {
   width: 100%;
+  min-width: 212px;
+  max-width: 348px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
