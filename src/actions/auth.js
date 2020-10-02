@@ -44,7 +44,7 @@ export const anonymousAuth = () => async dispatch => {
         anonymous: true
       }
     })
-    // TODO create a db record for anonymous users and store all data there
+    return window.location.reload()
   } catch (error) {
     console.log(error)
     dispatch({
@@ -90,8 +90,7 @@ export const signInWithProvider = (provider) => async dispatch => {
         const newUser = {
           uid,
           email,
-          firstName: displayName?.split(' ')[0] || '',
-          lastName: displayName?.split(' ')[1] || '',
+          name: `${displayName?.split(' ')[0] || ''} ${displayName?.split(' ')[0] || ''}`,
           avatar: photoURL || '',
           phone: phoneNumber || '',
           role: 1,

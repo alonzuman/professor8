@@ -9,30 +9,32 @@ import { Skeleton } from '@material-ui/lab';
 
 const ReviewSkeleton = () => {
   return (
-    <Card className='review_card__container'>
-      <CardHeader
-        title={<Skeleton width={120} />}
-        avatar={<Skeleton height={40} width={40} variant='circle' />}
-      />
-      <CardContent>
-        <Typography variant='body1'><Skeleton width={'100%'} /></Typography>
-        <Typography variant='body1'><Skeleton width={'100%'} /></Typography>
-      </CardContent>
-      <CardActions>
-        <div className='flex align__center  justify__center'>
+    <div className='review_card__wrapper'>
+      <Card className='review_card__container'>
+        <CardHeader
+          title={<Skeleton width={120} />}
+          avatar={<Skeleton height={40} width={40} variant='circle' />}
+        />
+        <CardContent>
+          <Typography variant='body1'><Skeleton width={'100%'} /></Typography>
+          <Typography variant='body1'><Skeleton width={'100%'} /></Typography>
+        </CardContent>
+        <CardActions>
+          <div className='flex align__center  justify__center'>
+            <IconButton>
+              <Skeleton variant='circle' height={32} width={32} />
+            </IconButton>
+            <Typography variant='subtitle1'><Skeleton width={40} /></Typography>
+            <IconButton>
+              <Skeleton variant='circle' height={32} width={32} />
+            </IconButton>
+          </div>
           <IconButton>
-            <Skeleton variant='circle' height={32} width={32} />
+            <Skeleton height={32} width={32} variant='circle' />
           </IconButton>
-          <Typography variant='subtitle1'><Skeleton width={40} /></Typography>
-          <IconButton>
-            <Skeleton variant='circle' height={32} width={32} />
-          </IconButton>
-        </div>
-        <IconButton>
-          <Skeleton height={32} width={32} variant='circle' />
-        </IconButton>
-      </CardActions>
-    </Card>
+        </CardActions>
+      </Card>
+    </div>
   )
 }
 

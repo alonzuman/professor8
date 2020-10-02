@@ -7,6 +7,7 @@ import { Button, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import NoReviews from './NoReviews'
 import { useSelector } from 'react-redux'
+import ReviewsSwiper from './ReviewsSwiper'
 
 const ReviewsList = ({ addReview, professor, reviews, loading }) => {
   const { isAuth } = useSelector(state => state.auth)
@@ -22,10 +23,8 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
-
-
   return (
-    <div className='page__section carousel__fix'>
+    <div className='page__section'>
       {!loading && reviews?.length && professor !== 0 && isAuth && <Button variant='contained' className='mt-1 mb-2' color='primary' onClick={addReview}>{heb.addReview}</Button>}
       {loading && <Skeleton width={104} height={64} />}
       <div className='flex align__center justify__between'>
@@ -33,19 +32,9 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
         {reviews?.length > 4 && <Button className='small__btn mobile__hide ml-2' color='primary' onClick={() => setShow(!show)}>{loading ? <Skeleton width={80} /> : show ? heb.hide : heb.showAll}</Button>}
         {loading && <Button className='small__btn ml-2' color='primary'><Skeleton width={80} /></Button>}
       </div>
-      <div className='reviews_list__container'>
-        {loading && [0, 0, 0, 0]?.map((v, i) => <ReviewSkeleton key={i} />)}
-        {!loading && reviews?.map((review, i) => {
-          if (review.approved) {
-            if (width <= 768 || show) {
-              return <Review professor={professor} review={review} key={i} />
-            } else if (i <= 3) {
-              return <Review professor={professor} review={review} key={i} />
-            }
-          }
-        })}
-        {!loading && reviews?.length === 0 && <NoReviews handleClick={addReview} />}
-      </div>
+
+      <ReviewsSwiper loading={loading} reviews={reviews} professor={professor} viewWidth={width} />
+      {!loading && reviews?.length === 0 && <NoReviews handleClick={addReview} />}
     </div>
   )
 }

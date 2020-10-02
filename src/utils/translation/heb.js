@@ -62,7 +62,9 @@ const heb = {
   signIn: 'התחברות',
   manageReviews: 'ניהול ביקורות',
   signOut: 'התנתקות',
-  signInWithGoogle: 'התחברות באמצעות גוגל'
+  signInWithGoogle: 'התחברות באמצעות גוגל',
+  remaining: 'נותרו',
+  chars: 'תוים'
 }
 
 export default heb;

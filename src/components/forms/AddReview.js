@@ -13,6 +13,7 @@ const AddReview = ({ professor, onClose }) => {
   const [tagsArray, setTagsArray] = useState([])
   const [author, setAuthor] = useState('')
   const [content, setContent] = useState('')
+  const [contentHelperText, setContentHelperText] = useState('')
   const dispatch = useDispatch()
   const { id } = professor
 
@@ -22,7 +23,8 @@ const AddReview = ({ professor, onClose }) => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if (validateStringInput(content)) {
+
+    if (validateStringInput(content) && content.split('').length <= 120) {
       const review = {
         pid: id,
         uid,
@@ -36,6 +38,20 @@ const AddReview = ({ professor, onClose }) => {
       }
       dispatch(addReview({ review, professor }))
       onClose()
+    }
+  }
+
+  const handleContentChange = e => {
+    const contentLength = content.split('').length
+    const newContentLength = e.target.value.split('').length
+    const remaining = 120 - (newContentLength - 2)
+
+    if (contentLength <= 120 || newContentLength < contentLength) {
+      setContent(e.target.value)
+    }
+
+    if (contentLength >= 100) {
+      setContentHelperText(`${heb.remaining} ${remaining} ${heb.chars}`)
     }
   }
 
@@ -57,9 +73,10 @@ const AddReview = ({ professor, onClose }) => {
           multiline
           rows={4}
           variant='outlined'
-          name='content'
           size='small'
-          onChange={e => setContent(e.target.value)}
+          value={content}
+          helperText={contentHelperText}
+          onChange={handleContentChange}
           />
       </FormGroup>
       <FormGroup className='form__group'>
