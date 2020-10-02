@@ -59,7 +59,10 @@ const heb = {
   overallRatingBasedOn: 'דירוג ממוצע בהתבסס על',
   delete: 'מחיקה',
   manage: 'ניהול',
-  signIn: 'התחברות'
+  signIn: 'התחברות',
+  manageReviews: 'ניהול ביקורות',
+  signOut: 'התנתקות',
+  signInWithGoogle: 'התחברות באמצעות גוגל'
 }
 
 export default heb;

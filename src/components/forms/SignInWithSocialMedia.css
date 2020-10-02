@@ -1,0 +1,13 @@
+.sign_in_with_social_media__container {
+
+}
+
+.sign_in_with_social_media__container .MuiButton-label {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.sign_in_with_social_media__container .button__label {
+  flex: 2;
+}

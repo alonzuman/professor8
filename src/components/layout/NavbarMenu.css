@@ -1,0 +1,27 @@
+.menu__item {
+  color: var(--bg-07)!important;
+  font-size: 14px!important;
+  min-width: 248px;
+  direction: rtl;
+}
+
+.menu__item:hover {
+  color: var(--primary-light)!important;
+}
+
+.menu__item--active {
+  font-weight: 600!important;
+  color: var(--primary-main)!important;
+}
+
+.menu__avatar {
+  height: 24px!important;
+  width: 24px!important;
+  margin-left: 2px;
+}
+
+.menu__icon {
+  height: 24px!important;
+  width: 24px!important;
+}
+

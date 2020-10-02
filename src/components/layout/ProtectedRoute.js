@@ -27,7 +27,7 @@ const ProtectedRoute = ({ component: Component, path, minRole, ...rest }) => {
   }, [dispatch, currentUser, role])
 
   if (pageLoading || loading) {
-    return <CircularProgress color='primary' />
+    return <div className='page__container flex flex__column align__center justify__center'><CircularProgress color='primary' /></div>
   } else if (!pageLoading && isAuth && condition) {
     return <Route {...rest} render={props => <Component {...props} />} />
   } else if (!pageLoading && anonymous && !condition) {
