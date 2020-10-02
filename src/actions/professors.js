@@ -95,7 +95,7 @@ export const getProfessor = (id) => async dispatch => {
     reviewsSnapshot.forEach(doc => reviews.push({ id: doc.id, ...doc.data() }))
     dispatch({
       type: 'PROFESSORS/SET_ONE',
-      payload: { professor, reviews }
+      payload: { professor, reviews: reviews.filter(v => v.approved) }
     })
   } catch (error) {
     console.log(error)

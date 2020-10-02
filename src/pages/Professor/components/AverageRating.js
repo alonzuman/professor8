@@ -12,7 +12,7 @@ const AverageRating = ({ loading, averageRating, reviewsCount }) => {
         <Skeleton width={48} height={68} />
       </div>
     )
-  } else if (!loading && averageRating !== 0) {
+  } else if (!loading && averageRating !== 0 && reviewsCount !== 0) {
     return (
       <div className='page__section flex flex__column align__baseline'>
         {!loading && reviewsCount && <Typography className='text__right rtl' variant='subtitle1'>{`${heb.overallRatingBasedOn} ${reviewsCount} ${heb.reviews}`}</Typography>}

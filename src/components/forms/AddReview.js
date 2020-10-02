@@ -1,41 +1,66 @@
-import { Button, Chip, FormGroup, Slider, TextField, Typography } from '@material-ui/core';
+import { Button, Checkbox, Chip, FormControlLabel, FormGroup, Slider, TextField, Typography } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addReview } from '../../actions/professors';
 import { validateStringInput } from '../../utils/form';
 import heb from '../../utils/translation/heb';
+import { createFilterOptions } from '@material-ui/lab/Autocomplete';
+
 
 const AddReview = ({ professor, onClose }) => {
   const { uid } = useSelector(state => state.auth)
   const tagOptions = useSelector(state => state.tags.professorTags.tags)
+  const courseOptions = useSelector(state => state.tags.courses.names)
   const [rating, setRating] = useState(5);
   const [tagsArray, setTagsArray] = useState([])
-  const [author, setAuthor] = useState('')
+  const [author, setAuthor] = useState(heb.annonymous)
   const [content, setContent] = useState('')
+  const [attendance, setAttendance] = useState(false)
+  const [wouldTakeAgain, setWouldTakeAgain] = useState(false)
+  const [courses, setCourses] = useState([])
+  const [difficulty, setDifficulty] = useState(5)
+
   const [contentHelperText, setContentHelperText] = useState('')
   const dispatch = useDispatch()
   const { id } = professor
 
+  const filterOptions = createFilterOptions({
+    matchFrom: 'start',
+    stringify: option => option,
+    limit: 5
+  });
+
+  const handleAddCourse = newCourses => {
+    if (courses.length <= 5) {
+      setCourses(newCourses)
+    }
+  }
+
   const handleAddTag = newTags => {
-    setTagsArray(newTags)
+    if (tagsArray.length <= 5) {
+      setTagsArray(newTags)
+    }
   }
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (validateStringInput(content) && content.split('').length <= 120) {
+    if (validateStringInput(content) && content.split('').length <= 120 && tagsArray.length !== 0) {
       const review = {
-        pid: id,
         uid,
-        author,
-        content,
+        author: author,
         rating,
-        dateCreated: Date.now(),
+        content,
+        wouldTakeAgain,
+        attendance,
+        difficulty,
+        courses,
         tags: tagsArray,
-        upVotesArray: [],
         downVotesArray: [],
+        upVotesArray: []
       }
+
       dispatch(addReview({ review, professor }))
       onClose()
     }
@@ -82,6 +107,27 @@ const AddReview = ({ professor, onClose }) => {
       <FormGroup className='form__group'>
         <Autocomplete
           multiple
+          dir='rtl'
+          filterOptions={filterOptions}
+          options={courseOptions?.map(v => v)}
+          defaultValue={[courseOptions[2]]}
+          value={courses}
+          onChange={(event, newCourses) => handleAddCourse(newCourses)}
+          size='small'
+          renderOption={v => <div style={{ textAlign: 'right', width: '100%' }} >{v}</div>}
+          renderTags={(value, getTagProps) =>
+            value?.map((option, index) => (
+              <Chip label={option} {...getTagProps({ index })} />
+            ))
+          }
+          renderInput={(params) => (
+            <TextField {...params} variant='outlined' label={heb.courses} placeholder={heb.courseName} />
+          )}
+        />
+      </FormGroup>
+      <FormGroup className='form__group'>
+        <Autocomplete
+          multiple
           options={tagOptions?.map((v) => v)}
           defaultValue={[tagOptions[2]]}
           value={tagsArray}
@@ -96,6 +142,25 @@ const AddReview = ({ professor, onClose }) => {
             <TextField {...params} variant='outlined' label={heb.tags} placeholder={heb.tag} />
           )}
         />
+      </FormGroup>
+      <FormGroup className='form__group'>
+        <FormControlLabel
+          control={<Checkbox className='width__fit--content' checked={attendance} onChange={e => setAttendance(e.target.checked)} />}
+          label={heb.attendance}
+        />
+      </FormGroup>
+      <FormGroup className='form__group'>
+        <FormControlLabel
+          control={<Checkbox className='width__fit--content' checked={wouldTakeAgain} onChange={e => setWouldTakeAgain(e.target.checked)} />}
+          label={heb.wouldTakeAgain}
+        />
+      </FormGroup>
+      <FormGroup className='form__group'>
+        <div className='flex justify__between align__center'>
+          <Typography variant='subtitle1'>{heb.difficulty}</Typography>
+          <Typography variant='h4'>{difficulty}/5</Typography>
+        </div>
+        <Slider value={difficulty} onChange={(e, newValue) => setDifficulty(newValue)} step={1} min={1} max={5} marks />
       </FormGroup>
       <FormGroup className='form__group'>
         <div className='flex justify__between align__center'>

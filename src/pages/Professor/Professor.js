@@ -12,7 +12,7 @@ import EditButton from '../../components/general/EditButton';
 import EditProfessorDialog from '../../containers/dialogs/EditProfessorDialog';
 
 const Professor = ({ match }) => {
-  const uid = useSelector(state => state.auth.uid)
+  const { uid, role } = useSelector(state => state.auth)
   const { id } = match.params
   const [addReview, setAddReview] = useState(false)
   const [editing, setEditing] = useState(false)
@@ -32,10 +32,10 @@ const Professor = ({ match }) => {
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
       <div className='flex justify__between'>
         <BackButton sticky={true} variant='contained' />
-        {uid === professor.uid && <EditButton onClick={() => setEditing(true)} sticky={true} variant='contained' />}
+        {(uid === professor.uid || role >= 3) && <EditButton onClick={() => setEditing(true)} sticky={true} variant='contained' />}
       </div>
       <ProfessorHeader name={name} avatar={avatar} school={school} loading={!name && loading}/>
-      <ProfessorTags tags={tags} loading={!tags && loading && !professor} />
+      <ProfessorTags reviewsCount={reviews?.length} tags={tags} loading={!tags && loading && !professor} />
       <AverageRating reviewsCount={reviews?.length} averageRating={overallRating} loading={!overallRating && loading} />
       <Courses courses={courses} loading={!courses && loading && !professor} />
       <ReviewsList professor={professor} reviews={reviews} loading={loading} addReview={handleAddReview} />

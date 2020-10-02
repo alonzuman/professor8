@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 const ProfessorCard = ({ professor }) => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const { name, avatar, id, numberOfReviews, overallRating } = professor
+  const { name, avatar, id, overallRating, school } = professor
 
   const handleClick = () => {
     dispatch({
@@ -25,7 +25,7 @@ const ProfessorCard = ({ professor }) => {
       <ListItemAvatar>
         <Avatar src={avatar} alt={name}>{name ? name[0] : ''}</Avatar>
       </ListItemAvatar>
-      <ListItemText primary={name} secondary={`${numberOfReviews === 1 ? heb.oneReview : `${numberOfReviews ? numberOfReviews : 0} ${heb.reviews}`}`} />
+      <ListItemText primary={name} secondary={school} />
       <ListItemSecondaryAction>
         {overallRating > 0 && <Rating rating={overallRating} icon={'star'} />}
       </ListItemSecondaryAction>

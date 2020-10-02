@@ -315,6 +315,7 @@ code {
 
 .page__section {
   margin-top: 16px;
+  width: 100%;
 }
 
 .hide__scrollbar_x {

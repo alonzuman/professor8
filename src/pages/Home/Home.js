@@ -5,6 +5,7 @@ import { validateStringInput } from '../../utils/form'
 import HeroSvg from '../../assets/svgs/Students'
 import HomeSearchBar from './components/HomeSearchBar'
 import './Home.css'
+import SchoolsSwiper from './components/SchoolsSwiper'
 
 const Home = () => {
   const history = useHistory()
@@ -41,6 +42,7 @@ const Home = () => {
         schools={schools}
         setSchools={setSchools}
       />
+      <SchoolsSwiper />
     </div>
   )
 }

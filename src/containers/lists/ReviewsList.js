@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import ReviewSkeleton from '../../components/cards/ReviewSkeleton'
-import Review from '../../components/cards/Review'
 import './ReviewsList.css'
 import heb from '../../utils/translation/heb'
 import { Button, Typography } from '@material-ui/core'
@@ -12,7 +11,6 @@ import ReviewsSwiper from './ReviewsSwiper'
 const ReviewsList = ({ addReview, professor, reviews, loading }) => {
   const { isAuth } = useSelector(state => state.auth)
   const [width, setWidth] = useState()
-  const [show, setShow] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -34,6 +32,7 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
   } else if (!loading && reviews?.length !== 0) {
     return (
       <div className='page__section'>
+        {isAuth && <Button color='primary' variant='contained' className='mb-1' onClick={addReview}>{heb.addReview}</Button>}
         <Typography variant='subtitle1'>{reviews?.length > 0 ? heb.reviews : ''}</Typography>
         <ReviewsSwiper loading={loading} reviews={reviews} professor={professor} viewWidth={width} />
       </div>

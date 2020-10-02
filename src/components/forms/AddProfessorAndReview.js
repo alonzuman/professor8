@@ -139,7 +139,7 @@ const AddProfessorAndReview = ({ onClose }) => {
       </>}
       {school && name &&
       <div className='form__section'>
-          <FormGroup className='form__group'>
+        <FormGroup className='form__group'>
           <Autocomplete
             multiple
             dir='rtl'
