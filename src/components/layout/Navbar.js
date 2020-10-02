@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import NavbarMenu from './NavbarMenu';
 
 const Navbar = () => {
-  const { isAuth, loading, role, anonymous } = useSelector(state => state.auth)
+  const { isAuth, loading } = useSelector(state => state.auth)
   const [addingProfessorAndReview, setAddingProfessorAndReview] = useState(false)
 
   if (loading || !isAuth) {

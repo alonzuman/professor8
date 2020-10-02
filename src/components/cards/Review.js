@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Chip, Dialog, DialogContent, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
+import { Card, CardActions, CardContent, CardHeader, Chip, Typography } from '@material-ui/core'
 import React from 'react'
 import './Review.css'
 import Rating from '../general/Rating';

@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle, IconButton, Typography } from '@material-ui/core'
+import { Dialog, DialogContent, IconButton, Typography } from '@material-ui/core'
 import React from 'react'
 import AddReview from '../../components/forms/AddReview'
 import CloseIcon from '@material-ui/icons/Close'

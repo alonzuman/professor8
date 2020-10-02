@@ -189,11 +189,11 @@ export const addReview = ({ review, professor, isNew }) => async dispatch => {
       tags: tagsObj
     }, { merge: true })
 
-    const snap = await db.collection('reviews').add({
-      ...review,
-      approved: false,
-      dateCreated: Date.now()
-    })
+    // const snap = await db.collection('reviews').add({
+    //   ...review,
+    //   approved: false,
+    //   dateCreated: Date.now()
+    // })
 
     // const snap = await db.collection('professors').doc(pid).collection('reviews').add({
     //   ...review,

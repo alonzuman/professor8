@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { anonymousAuth, setUser } from '../actions/auth'
 import { getTags } from '../actions/tags'
 import { auth } from '../firebase'
@@ -26,7 +26,7 @@ const PageContainer = ({ children }) => {
         dispatch(anonymousAuth())
       }
     })
-  }, [])
+  }, [dispatch])
 
   return (
     <div style={{ minHeight: height }} className='page__container'>

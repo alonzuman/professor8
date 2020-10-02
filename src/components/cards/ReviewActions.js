@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteReview, downVoteReview, upVoteReview } from '../../actions/professors';
-import heb from '../../utils/translation/heb';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Button, Dialog, DialogContent, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
+import { IconButton, Typography } from '@material-ui/core'
 import ApprovalDialog from '../../containers/dialogs/ApprovalDialog';
 
 const ReviewActions = ({ review, professor }) => {

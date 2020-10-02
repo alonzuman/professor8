@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Avatar, Divider, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, Typography } from '@material-ui/core';
+import React from 'react';
+import { Avatar, Divider, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import heb from '../../utils/translation/heb';
 import Rating from '../general/Rating';
@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 const ProfessorCard = ({ professor }) => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const { name, avatar, id, numberOfReviews, university, reviews, role, overallRating } = professor
+  const { name, avatar, id, numberOfReviews, overallRating } = professor
 
   const handleClick = () => {
     dispatch({

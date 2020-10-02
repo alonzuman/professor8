@@ -1,10 +1,6 @@
-import { Avatar, Card, CardActions, CardContent, CardHeader, IconButton, ListItem, Paper, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
+import { Card, CardActions, CardContent, CardHeader, IconButton, Typography } from '@material-ui/core'
+import React from 'react'
 import './Review.css'
-import { deleteReview, downVoteReview, upVoteReview } from '../../actions/professors';
-import { useDispatch } from 'react-redux';
 import { Skeleton } from '@material-ui/lab';
 
 const ReviewSkeleton = () => {

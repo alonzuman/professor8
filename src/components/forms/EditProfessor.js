@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Dialog, Typography } from '@material-ui/core'
+import { Button, CircularProgress, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'

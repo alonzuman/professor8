@@ -24,7 +24,7 @@ const SearchBar = ({ size = 'small', search, setSearch, collection, doc, filter,
     limit: 30
   });
 
-  useEffect(() => {if (allTags && allTags[doc]) return mapTagsToArray()}, [allTags, filter])
+  useEffect(() => {if (allTags && allTags[doc]) return mapTagsToArray()}, [allTags, filter, doc])
 
   return (
     <div style={style} className={`search_bar__container ${className}`}>

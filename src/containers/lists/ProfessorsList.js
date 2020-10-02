@@ -1,12 +1,11 @@
-import { Chip, CircularProgress, Divider, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core'
-import React, { useEffect, useState } from 'react'
+import { Chip, Divider, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { getProfessors } from '../../actions/professors'
 import ProfessorCard from '../../components/cards/ProfessorCard'
 import qs from 'query-string'
 import './ProfessorsList.css'
-import { getSchool } from '../../actions/schools'
 import heb from '../../utils/translation/heb'
 import { Skeleton } from '@material-ui/lab'
 import NoResults from '../../pages/Results/components/NoResults'
@@ -21,7 +20,7 @@ const ProfessorsList = () => {
     if (schools || (name && schools)) {
       dispatch(getProfessors())
     }
-  }, [schools, name])
+  }, [schools, name, dispatch])
 
   const spanStyle = {
     display: 'flex',

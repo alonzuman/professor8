@@ -14,8 +14,8 @@ const Courses = ({ courses, loading }) => {
       <div>
         {loading && [0, 0, 0, 0].map((v, i) => <Chip className='ml-1 mb-1' size='small' key={i} style={{ width: 60 }} />)}
         {!loading && courses?.map((v, i) => {
-          if (!show) {
-            if (i <= 2) return <Chip className='ml-1 mb-1' size='small' variant='outlined' key={i} label={v} />
+          if (!show && i <= 2) {
+            return <Chip className='ml-1 mb-1' size='small' variant='outlined' key={i} label={v} />
           } else {
             return <Chip className='ml-1 mb-1' size='small' variant='outlined' key={i} label={v} />
           }}
