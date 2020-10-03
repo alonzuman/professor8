@@ -46,7 +46,7 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
     console.log(error)
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }
@@ -80,7 +80,7 @@ export const getProfessors = () => async dispatch => {
       console.log(error)
       dispatch(setAlert({
         msg: heb.serverError,
-        type: 'error'
+        severity: 'error'
       }))
     }
   }
@@ -107,7 +107,7 @@ export const getProfessor = (id) => async dispatch => {
     console.log(error)
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }
@@ -157,14 +157,14 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
       }
     })
     dispatch(setAlert({
-      type: 'success',
+      severity: 'success',
       msg: heb.reviewDeleted
     }))
   } catch (error) {
     console.log(error);
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }
@@ -185,14 +185,14 @@ export const addReview = ({ review, professor, isNew }) => async dispatch => {
       type: 'PROFESSORS/CLEAR_LOADING',
     })
     dispatch(setAlert({
-      type: 'success',
+      severity: 'success',
       msg: heb.actionSuccessAndPending
     }))
   } catch (error) {
     console.log(error);
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }
@@ -213,7 +213,7 @@ export const upVoteReview = ({ review, uid, pid }) => async dispatch => {
     console.log(error)
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }
@@ -233,7 +233,7 @@ export const downVoteReview = ({ review, uid }) => async dispatch => {
     console.log(error)
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }
@@ -255,14 +255,14 @@ export const deleteProfessor = professor => async dispatch => {
       payload: professor.id
     })
     dispatch(setAlert({
-      type: 'success',
+      severity: 'success',
       msg: heb.deletedSuccessfully
     }))
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }

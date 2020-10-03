@@ -1,10 +1,10 @@
-export const setAlert = ({ msg, type }) => async dispatch => {
+export const setAlert = ({ msg, severity }) => async dispatch => {
   console.log('hi from alerts')
   dispatch({
     type: 'ALERTS/SET_ONE',
     payload: {
       msg,
-      type
+      severity
     }
   })
   setTimeout(() => {

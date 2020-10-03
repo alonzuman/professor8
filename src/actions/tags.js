@@ -21,7 +21,7 @@ export const getTags = () => async dispatch => {
       type: 'TAGS/ERROR'
     })
     dispatch(setAlert({
-      type: 'error',
+      severity: 'error',
       msg: heb.serverError
     }))
   }

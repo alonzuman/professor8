@@ -1,6 +1,6 @@
 const initialState = {
   msg: '',
-  type: '',
+  severity: '',
   on: false
 }
 
@@ -9,19 +9,19 @@ export const alertsReducer = (state = initialState, action) => {
 
   switch (type) {
     case 'ALERTS/SET_ONE':
-      const { msg, type } = payload
+      const { msg, severity } = payload
       console.log('hi from reducer')
       return {
         ...state,
         msg,
-        type,
+        severity,
         on: true
       }
     case 'ALERTS/CLEAR_ONE':
       return {
         ...state,
         msg: '',
-        type: '',
+        severity: '',
         on: false
       }
     default: return state;

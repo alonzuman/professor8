@@ -24,7 +24,7 @@ export const getAdminReviews = () => async dispatch => {
     console.log(error)
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }
@@ -85,13 +85,13 @@ export const adminApproveReview = review => async dispatch => {
     })
     dispatch(setAlert({
       msg: heb.reviewAdded,
-      type: 'success'
+      severity: 'success'
     }))
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }
@@ -110,13 +110,13 @@ export const adminDeclineReview = review => async dispatch => {
     })
     dispatch(setAlert({
       msg: heb.reviewDeleted,
-      type: 'success'
+      severity: 'success'
     }))
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
       msg: heb.serverError,
-      type: 'error'
+      severity: 'error'
     }))
   }
 }

@@ -25,7 +25,7 @@ export const setUser = user => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
-      type: 'error',
+      severity: 'error',
       msg: heb.serverError
     }))
     dispatch({
@@ -54,7 +54,7 @@ export const anonymousAuth = () => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
-      type: 'error',
+      severity: 'error',
       msg: heb.serverError
     }))
     dispatch({
@@ -73,7 +73,7 @@ export const signUp = () => async dispatch => {
   } catch (error) {
     console.log(error)
     dispatch(setAlert({
-      type: 'error',
+      severity: 'error',
       msg: heb.serverError
     }))
     dispatch({
@@ -123,7 +123,7 @@ export const signInWithProvider = (provider) => async dispatch => {
       }
     })
     dispatch(setAlert({
-      type: 'success',
+      severity: 'success',
       msg: heb.welcome
     }))
   } catch (error) {
@@ -135,7 +135,7 @@ export const signInWithProvider = (provider) => async dispatch => {
       }
     }
     dispatch(setAlert({
-      type: 'error',
+      severity: 'error',
       msg: msg()
     }))
     dispatch({
