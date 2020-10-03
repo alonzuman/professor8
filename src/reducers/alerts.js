@@ -1,6 +1,7 @@
 const initialState = {
   msg: '',
   type: '',
+  on: false
 }
 
 export const alertsReducer = (state = initialState, action) => {
@@ -13,12 +14,15 @@ export const alertsReducer = (state = initialState, action) => {
       return {
         ...state,
         msg,
-        type
+        type,
+        on: true
       }
     case 'ALERTS/CLEAR_ONE':
       return {
+        ...state,
         msg: '',
-        type: ''
+        type: '',
+        on: false
       }
     default: return state;
   }

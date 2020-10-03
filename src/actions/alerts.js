@@ -1,15 +1,18 @@
-export const clearAlert = () => {
-  return {
-    type: 'ALERTS/CLEAR_ONE'
-  }
-}
-
 export const setAlert = ({ msg, type }) => async dispatch => {
   dispatch({
     type: 'ALERTS/SET_ONE',
-    payload: { msg, type }
+    payload: {
+      msg,
+      type
+    }
   })
   setTimeout(() => {
     dispatch(clearAlert())
-  }, 3500);
+  }, 3000);
+}
+
+export const clearAlert = () => async dispatch => {
+  dispatch({
+    type: 'ALERTS/CLEAR_ONE'
+  })
 }
