@@ -2,7 +2,7 @@
   position: fixed;
   cursor: pointer;
   bottom: 32px;
-  z-index: 9;
+  z-index: 9999;
   width: 100%;
   max-width: 320px;
   left: 50%;

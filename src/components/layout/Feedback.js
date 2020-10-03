@@ -1,19 +1,19 @@
 import React from 'react'
 import { Alert } from '@material-ui/lab'
-import './CustomAlert.css'
+import './Feedback.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearAlert } from '../../actions/alerts'
+import { clearFeedback } from '../../actions'
 
-const CustomAlert = () => {
-  const { msg, type } = useSelector(state => state.alerts)
+const Feedback = () => {
+  const { msg, severity } = useSelector(state => state.feedback)
   const dispatch = useDispatch()
 
-  const handleClick = () => dispatch(clearAlert())
+  const handleClick = () => dispatch(clearFeedback())
 
   if (Boolean(msg)) {
     return (
       <div onClick={handleClick} className='alert__container rtl'>
-        <Alert severity={type}>{msg}</Alert>
+        <Alert severity={severity}>{msg}</Alert>
       </div>
     )
   } else {
@@ -21,4 +21,4 @@ const CustomAlert = () => {
   }
 }
 
-export default CustomAlert
+export default Feedback

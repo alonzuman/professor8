@@ -1,5 +1,5 @@
 .MuiPaper-elevation8 {
-  box-shadow: 0px 0px 10px #00000030!important;
+  box-shadow: 0px 2px 6px #00000030!important;
 }
 
 .menu__item {
@@ -26,5 +26,9 @@
 }
 
 .menu__button {
-  box-shadow: 0px 0px 10px #00000015;
+  box-shadow: 0px 2px 6px #00000015;
+}
+
+.menu__button:hover {
+  background-color: var(--bg-01)!important;
 }

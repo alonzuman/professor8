@@ -1,7 +1,7 @@
 import { db } from "../firebase"
 import firebase from 'firebase'
-import { setAlert } from "./alerts"
 import heb from "../utils/translation/heb"
+import { setFeedback } from "./feedback"
 const tagsRef = db.collection('tags')
 
 export const getAdminReviews = () => async dispatch => {
@@ -22,7 +22,7 @@ export const getAdminReviews = () => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))
@@ -83,13 +83,13 @@ export const adminApproveReview = review => async dispatch => {
       type: 'ADMIN/APPROVE_REVIEW',
       payload: id
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.reviewAdded,
       severity: 'success'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))
@@ -108,13 +108,13 @@ export const adminDeclineReview = review => async dispatch => {
       type: 'ADMIN/SET_REVIEWS',
       payload: id
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.reviewDeleted,
       severity: 'success'
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))

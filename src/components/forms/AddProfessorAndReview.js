@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Checkbox, Chip, CircularProgress, FormControlLabel, FormGroup, InputLabel, MenuItem, Select, Slider, TextField, Typography } from '@material-ui/core';
-import { validateArrays, validateNumbers, validateStringInput, validateStringInputs } from '../../utils';
+import { Button, CircularProgress, Step, StepLabel, Stepper } from '@material-ui/core';
+import { validateStringInputs } from '../../utils';
 import heb from '../../utils/translation/heb';
-import SearchBar from '../general/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProfessorAndReview } from '../../actions/professors';
-import { Autocomplete } from '@material-ui/lab';
 import { useHistory } from 'react-router-dom';
+import SchoolAndName from './AddProfessorAndReview/SchoolAndName';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import ReviewAndDetails from './AddProfessorAndReview/ReviewAndDetails';
+import ContentAndTags from './AddProfessorAndReview/ContentAndTags';
+import { setFeedback } from '../../actions';
+
+const steps = [
+  heb.generalInfo,
+  heb.additionalInformation,
+  heb.personalWords
+]
 
 const AddProfessorAndReview = ({ onClose }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const { loading, newId } = useSelector(state => state.professors)
   const { uid } = useSelector(state => state.auth)
-  const tagOptions = useSelector(state => state.tags.professorTags.tags)
-  const courseOptions = useSelector(state => state.tags.courses.names)
-  const professorOptions = useSelector(state => state.tags.professors)
   const [name, setName] = useState('')
-  const [author, setAuthor] = useState('')
+  const [author, setAuthor] = useState(heb.annonymous)
   const [school, setSchool] = useState('')
   const [content, setContent] = useState('')
   const [difficulty, setDifficulty] = useState(5)
@@ -27,23 +32,42 @@ const AddProfessorAndReview = ({ onClose }) => {
   const [wouldTakeAgain, setWouldTakeAgain] = useState(false)
   const [courses, setCourses] = useState([])
   const [tagsArray, setTagsArray] = useState([])
+  const [activeStep, setActiveStep] = useState(0)
 
   const filterOptions = createFilterOptions({
     matchFrom: 'start',
     stringify: option => option,
-    limit: 5
+    limit: 30
   });
 
-  const handleAddCourse = newCourses => {
-    if (courses.length <= 5) {
-      setCourses(newCourses)
+  const handleFirstStep = () => {
+    if (school && name && courses) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      dispatch(setFeedback({
+        type: 'warning',
+        msg: heb.fillAllFields
+      }))
     }
   }
 
-  const handleAddTag = newTags => {
-    if (tagsArray.length <= 5) {
-      setTagsArray(newTags)
+  const handleSecondStep = () => {
+    if (tagsArray.length !== 0) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      dispatch(setFeedback({
+        type: 'warning',
+        msg: heb.fillAllFields
+      }))
     }
+  }
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  }
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   }
 
   const handleSubmit = async e => {
@@ -77,7 +101,10 @@ const AddProfessorAndReview = ({ onClose }) => {
       await dispatch(addProfessorAndReview({ professor, review }))
       onClose()
     } else {
-      console.log('string not full')
+      dispatch(setFeedback({
+        severity: 'error',
+        msg: heb.fillAllFields
+      }))
     }
   }
 
@@ -90,127 +117,60 @@ const AddProfessorAndReview = ({ onClose }) => {
   }, [newId])
 
   return (
+    <>
+    <Stepper activeStep={activeStep} alternativeLabel>
+      {steps.map((label) => (
+        <Step key={label}>
+          <StepLabel>{label}</StepLabel>
+        </Step>
+      ))}
+    </Stepper>
     <form dir='rtl' onSubmit={handleSubmit}>
-      <FormGroup className='form__group'>
-        <SearchBar
-          search={school}
-          setSearch={setSchool}
-          filterOptions={filterOptions}
-          collection={'tags'}
-          doc={'schools'}
-          filter={'names'}
-          placeholder={heb.institution}
-          dir='rtl'
-          size='small'
-          style={{ marginTop: 0 }}
-        />
-      </FormGroup>
-      {school &&
-      <FormGroup className='form__group'>
-        <Autocomplete
-          style={{ marginTop: 0 }}
-          dir='rtl'
-          handleHomeEndKeys
-          autoHighlight
-          size='small'
-          placeholder={heb.fullProfessorName}
-          options={professorOptions[school] || []}
-          freeSolo
-          value={name}
-          onChange={(event, newValue) => setName(newValue)}
-          renderInput={(params) => <TextField value={name} onChange={e => setName(e.target.value)} size='small' variant='outlined' label={heb.fullProfessorName} {...params} />}
-          renderOption={option => <div style={{ textAlign: 'right', width: '100%' }} >{option}</div>}
-        />
-      </FormGroup>}
-      {school && name &&
-      <>
-        <FormGroup className='form__group'>
-          <FormControlLabel
-            control={<Checkbox className='width__fit--content' checked={attendance} onChange={e => setAttendance(e.target.checked)} />}
-            label={heb.attendance}
-          />
-        </FormGroup>
-        <FormGroup className='form__group'>
-          <FormControlLabel
-            control={<Checkbox className='width__fit--content' checked={wouldTakeAgain} onChange={e => setWouldTakeAgain(e.target.checked)} />}
-            label={heb.wouldTakeAgain}
-          />
-        </FormGroup>
-      </>}
-      {school && name &&
-      <div className='form__section'>
-        <FormGroup className='form__group'>
-          <Autocomplete
-            multiple
-            dir='rtl'
-            filterOptions={filterOptions}
-            options={courseOptions?.map(v => v)}
-            defaultValue={[courseOptions[2]]}
-            value={courses}
-            onChange={(event, newCourses) => handleAddCourse(newCourses)}
-            size='small'
-            renderOption={v => <div style={{ textAlign: 'right', width: '100%' }} >{v}</div>}
-            renderTags={(value, getTagProps) =>
-              value?.map((option, index) => (
-                <Chip label={option} {...getTagProps({ index })} />
-              ))
-            }
-            renderInput={(params) => (
-              <TextField {...params} variant='outlined' label={heb.courses} placeholder={heb.courseName} />
-            )}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Autocomplete
-            multiple
-            options={tagOptions?.map((v) => v)}
-            defaultValue={[tagOptions[2]]}
-            value={tagsArray}
-            onChange={(event, newTags) => handleAddTag(newTags)}
-            filterOptions={filterOptions}
-            size='small'
-            renderOption={v => <div style={{ textAlign: 'right', width: '100%' }} >{v}</div>}
-            renderTags={(value, getTagProps) =>
-              value?.map((option, index) => (
-                <Chip label={option} {...getTagProps({ index })} />
-              ))
-            }
-            renderInput={(params) => (
-              <TextField {...params} variant='outlined' label={heb.tags} placeholder={heb.tag} />
-            )}
-          />
-        </FormGroup>
-        <FormGroup className='form__group'>
-          <div className='flex justify__between align__center'>
-            <Typography variant='subtitle1'>{heb.difficulty}</Typography>
-            <Typography variant='h4'>{difficulty}/5</Typography>
-          </div>
-          <Slider value={difficulty} onChange={(e, newValue) => setDifficulty(newValue)} step={1} min={1} max={5} marks />
-        </FormGroup>
-        <FormGroup className='form__group'>
-          <div className='flex justify__between align__center'>
-            <Typography variant='subtitle1'>{heb.overall}</Typography>
-            <Typography variant='h4'>{rating}/5</Typography>
-          </div>
-          <Slider value={rating} onChange={(e, newValue) => setRating(newValue)} step={1} min={1} max={5} marks />
-        </FormGroup>
-        <FormGroup className='form__group'>
-          <TextField size='small' variant='outlined' label={heb.author} onChange={e => setAuthor(e.target.value)} />
-        </FormGroup>
-        <FormGroup className='form__group'>
-          <TextField
-            label={heb.content}
-            multiline
-            rows={4}
-            variant='outlined'
-            name='content'
-            size='small'
-            onChange={e => setContent(e.target.value)}
-          />
-        </FormGroup>
-      </div>}
-      <Button disabled={loading} className='full__width mt-1 mb-2' color='primary' variant='contained' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : heb.submit}</Button>
+      {activeStep === 0 &&
+      <SchoolAndName
+        school={school}
+        setSchool={setSchool}
+        name={name}
+        setName={setName}
+        courses={courses}
+        setCourses={setCourses}
+        filterOptions={filterOptions}
+        />}
+      {activeStep === 1 &&
+      <ReviewAndDetails
+        attendance={attendance}
+        setAttendance={setAttendance}
+        wouldTakeAgain={wouldTakeAgain}
+        setWouldTakeAgain={setWouldTakeAgain}
+        tagsArray={tagsArray}
+        setTagsArray={setTagsArray}
+        filterOptions={filterOptions}
+        difficulty={difficulty}
+        setDifficulty={setDifficulty}
+        rating={rating}
+        setRating={setRating}
+      />}
+      {activeStep === 2 &&
+      <ContentAndTags
+        content={content}
+        setContent={setContent}
+        author={author}
+        setAuthor={setAuthor}
+      />}
     </form>
+    {activeStep > 0 && <Button onClick={handleBack}>{heb.back}</Button>}
+    {activeStep === 0 && <Button disabled={!name || !school || courses.length === 0} variant='contained' color='primary' className='mr-1' onClick={handleFirstStep}>{heb.next}</Button>}
+    {activeStep === 1 && <Button disabled={tagsArray.length === 0} variant='contained' color='primary' className='mr-1' onClick={handleSecondStep}>{heb.next}</Button>}
+    {activeStep === 2 &&
+      <Button
+        className='mr-1'
+        disabled={loading}
+        color='primary'
+        variant='contained'
+        onClick={handleSubmit}
+      >{loading ? <CircularProgress className='spinner__small' /> : heb.submit}
+      </Button>}
+    </>
   )
 }
 

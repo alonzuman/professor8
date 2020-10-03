@@ -1,7 +1,7 @@
 import { db } from "../firebase"
 import qs from 'query-string'
 import firebase from 'firebase'
-import { setAlert } from "./alerts"
+import { setFeedback } from '../actions'
 import heb from "../utils/translation/heb"
 const professorsRef = db.collection('professors')
 const tagsRef = db.collection('tags')
@@ -44,7 +44,7 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))
@@ -78,7 +78,7 @@ export const getProfessors = () => async dispatch => {
       })
     } catch (error) {
       console.log(error)
-      dispatch(setAlert({
+      dispatch(setFeedback({
         msg: heb.serverError,
         severity: 'error'
       }))
@@ -105,7 +105,7 @@ export const getProfessor = (id) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))
@@ -156,13 +156,13 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
         reviews: [...professor.reviews.filter(v => v.id !== review.id)]
       }
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       severity: 'success',
       msg: heb.reviewDeleted
     }))
   } catch (error) {
     console.log(error);
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))
@@ -184,13 +184,13 @@ export const addReview = ({ review, professor, isNew }) => async dispatch => {
     dispatch({
       type: 'PROFESSORS/CLEAR_LOADING',
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       severity: 'success',
       msg: heb.actionSuccessAndPending
     }))
   } catch (error) {
     console.log(error);
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))
@@ -211,7 +211,7 @@ export const upVoteReview = ({ review, uid, pid }) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))
@@ -231,7 +231,7 @@ export const downVoteReview = ({ review, uid }) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))
@@ -254,13 +254,13 @@ export const deleteProfessor = professor => async dispatch => {
       type: 'PROFESSORS/DELETE_ONE',
       payload: professor.id
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       severity: 'success',
       msg: heb.deletedSuccessfully
     }))
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
     }))

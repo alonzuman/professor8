@@ -55,7 +55,7 @@ const heb = {
   difficulty: 'רמת קושי',
   overall: 'סה״כ',
   fullProfessorName: 'שם הפרופסור',
-  annonymous: 'אנונימי',
+  annonymous: 'אנונימי/ת',
   overallRatingBasedOn: 'דירוג ממוצע בהתבסס על',
   delete: 'מחיקה',
   manage: 'ניהול',
@@ -74,7 +74,14 @@ const heb = {
   accountAlreadyExists: 'החשבון כבר קיים עם מייל אחר',
   welcome: 'ברוכים הבאים',
   deletedSuccessfully: 'נמחק בהצלחה',
-  actionSuccessAndPending: 'הפעולה בוצעה בהצלחה וכעת ממתינה לאישור מנהל'
+  actionSuccessAndPending: 'הפעולה בוצעה בהצלחה וכעת ממתינה לאישור מנהל',
+  signOutSuccessfully: 'התנתקת בהצלחה',
+  back: 'חזרה',
+  next: 'הבא',
+  fillAllFields: 'אנא מלאו את כל השדות המסומנים',
+  generalInfo: 'מידע כללי',
+  additionalInformation: 'פירוט',
+  personalWords: 'בנימה אישית'
 }
 
 export default heb;

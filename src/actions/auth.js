@@ -1,7 +1,7 @@
 import firebase from 'firebase'
 import { auth, db } from "../firebase"
 import heb from '../utils/translation/heb'
-import { setAlert } from './alerts'
+import { setFeedback } from './feedback'
 const usersRef = db.collection('users')
 
 export const setUser = user => async dispatch => {
@@ -24,7 +24,7 @@ export const setUser = user => async dispatch => {
     }
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       severity: 'error',
       msg: heb.serverError
     }))
@@ -35,7 +35,14 @@ export const setUser = user => async dispatch => {
 }
 
 export const signOut = () => async dispatch => {
-  return await auth.signOut()
+  await auth.signOut()
+  return dispatch({
+    type: 'FEEDBACK/SET_ONE',
+    payload: {
+      msg: heb.signOutSuccessfully,
+      severity: 'success'
+    }
+  })
 }
 
 export const anonymousAuth = () => async dispatch => {
@@ -53,7 +60,7 @@ export const anonymousAuth = () => async dispatch => {
     return window.location.reload()
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       severity: 'error',
       msg: heb.serverError
     }))
@@ -72,7 +79,7 @@ export const signUp = () => async dispatch => {
 
   } catch (error) {
     console.log(error)
-    dispatch(setAlert({
+    dispatch(setFeedback({
       severity: 'error',
       msg: heb.serverError
     }))
@@ -122,7 +129,7 @@ export const signInWithProvider = (provider) => async dispatch => {
         })
       }
     })
-    dispatch(setAlert({
+    dispatch(setFeedback({
       severity: 'success',
       msg: heb.welcome
     }))
@@ -134,7 +141,7 @@ export const signInWithProvider = (provider) => async dispatch => {
         default: return heb.serverError
       }
     }
-    dispatch(setAlert({
+    dispatch(setFeedback({
       severity: 'error',
       msg: msg()
     }))
