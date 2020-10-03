@@ -9,6 +9,7 @@ export const alertsReducer = (state = initialState, action) => {
   switch (type) {
     case 'ALERTS/SET_ONE':
       const { msg, type } = payload
+      console.log(msg, type)
       return {
         ...state,
         msg,
