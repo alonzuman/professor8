@@ -4,6 +4,7 @@ import { schoolsReducer } from './schools';
 import { authReducer } from './auth';
 import { tagsReducer } from './tags';
 import { adminReducer } from './admin';
+import { alertsReducer } from './alerts';
 
 export default combineReducers({
   professors: professorsReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   auth: authReducer,
   tags: tagsReducer,
   admin: adminReducer,
+  alerts: alertsReducer,
 });

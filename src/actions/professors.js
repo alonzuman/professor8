@@ -1,6 +1,8 @@
 import { db } from "../firebase"
 import qs from 'query-string'
 import firebase from 'firebase'
+import { setAlert } from "./alerts"
+import heb from "../utils/translation/heb"
 const professorsRef = db.collection('professors')
 const tagsRef = db.collection('tags')
 
@@ -8,37 +10,27 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
-  const { tags, school, name } = professor
+  const { name, school } = professor
   try {
-    let tagsObj = {}
-    tags.map(v => tagsObj[v] = 1)
-
     const professorSnap = await professorsRef.where('name', '==', name).get()
     let oldResults = []
     let snapshot;
+
     if (professorSnap.size !== 0) {
       professorSnap.forEach(doc => oldResults.push({ id: doc.id, ...doc.data() }))
-
       snapshot = await professorsRef.doc(oldResults[0].id).set({
         ...professor,
-        tags: tagsObj,
-        numberOfReviews: firebase.firestore.FieldValue.increment(1)
       }, { merge: true })
     } else {
       snapshot = await professorsRef.add({
         ...professor,
-        tags: tagsObj
+        tags: []
       })
     }
 
+
     await tagsRef.doc('professors').update({
       [school]: firebase.firestore.FieldValue.arrayUnion(name)
-    })
-
-    tags.forEach(async v => {
-      await tagsRef.doc('professorTags').update({
-        tags: firebase.firestore.FieldValue.arrayUnion(v)
-      })
     })
 
     const newProfessor = { id: snapshot.id, ...professor }
@@ -52,6 +44,10 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
     })
   } catch (error) {
     console.log(error)
+    dispatch(setAlert({
+      msg: heb.serverError,
+      type: 'error'
+    }))
   }
 }
 
@@ -82,6 +78,10 @@ export const getProfessors = () => async dispatch => {
       })
     } catch (error) {
       console.log(error)
+      dispatch(setAlert({
+        msg: heb.serverError,
+        type: 'error'
+      }))
     }
   }
 }
@@ -105,6 +105,10 @@ export const getProfessor = (id) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
+    dispatch(setAlert({
+      msg: heb.serverError,
+      type: 'error'
+    }))
   }
 }
 
@@ -152,8 +156,16 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
         reviews: [...professor.reviews.filter(v => v.id !== review.id)]
       }
     })
+    dispatch(setAlert({
+      type: 'success',
+      msg: heb.reviewDeleted
+    }))
   } catch (error) {
     console.log(error);
+    dispatch(setAlert({
+      msg: heb.serverError,
+      type: 'error'
+    }))
   }
 }
 
@@ -162,76 +174,26 @@ export const addReview = ({ review, professor, isNew }) => async dispatch => {
     type: 'PROFESSORS/LOADING'
   })
   try {
-    const { overallRating } = professor
-    const { rating, tags, pid } = review
-    const total = professor?.reviews?.length || 0
-    let overall;
-
-    if (total === 0) {
-      overall = rating
-    } else {
-      overall = (((overallRating * total) + rating) / (total + 1))
-    }
-
-    let tagsObj = {}
-    tags.map(v => {
-      if (Object.keys(professor.tags).includes(v)) {
-        tagsObj[v] = (professor.tags[v] + 1)
-      } else {
-        tagsObj[v] = 1
-      }
+    await db.collection('reviews').add({
+      dateCreated: Date.now(),
+      pid: professor.id,
+      ...review,
+      approved: false
     })
 
-    await db.collection('professors').doc(pid).set({
-      numberOfReviews: firebase.firestore.FieldValue.increment(1),
-      overallRating: overall,
-      tags: tagsObj
-    }, { merge: true })
-
-    // const snap = await db.collection('reviews').add({
-    //   ...review,
-    //   approved: false,
-    //   dateCreated: Date.now()
-    // })
-
-    // const snap = await db.collection('professors').doc(pid).collection('reviews').add({
-    //   ...review,
-    //   approved: false,
-    //   dateCreated: Date.now()
-    // })
-    // const newReviews = professor?.reviews ? [...professor.reviews, { id: snap.id, ...review }] : [{ id: snap.id, ...review }]
-
-    // TODO ALON dispatch alert saying it needs to be reviewed
-
-    if (!isNew) {
-      dispatch({
-        type: 'PROFESSORS/SET_ONE',
-        payload: {
-          professor: {
-            ...professor,
-            numberOfReviews: (professor.numberOfReviews + 1),
-            overallRating: overall
-          },
-          reviews: professor?.reviews || []
-        }
-      })
-    }
-
-    // if (!isNew) {
-    //   dispatch({
-    //     type: 'PROFESSORS/SET_ONE',
-    //     payload: {
-    //       professor: {
-    //         ...professor,
-    //         numberOfReviews: (professor.numberOfReviews + 1),
-    //         overallRating: overall
-    //       },
-    //       reviews: newReviews
-    //     }
-    //   })
-    // }
+    dispatch({
+      type: 'PROFESSORS/CLEAR_LOADING',
+    })
+    dispatch(setAlert({
+      type: 'success',
+      msg: heb.actionSuccessAndPending
+    }))
   } catch (error) {
     console.log(error);
+    dispatch(setAlert({
+      msg: heb.serverError,
+      type: 'error'
+    }))
   }
 }
 
@@ -249,6 +211,10 @@ export const upVoteReview = ({ review, uid, pid }) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
+    dispatch(setAlert({
+      msg: heb.serverError,
+      type: 'error'
+    }))
   }
 }
 
@@ -265,6 +231,10 @@ export const downVoteReview = ({ review, uid }) => async dispatch => {
     })
   } catch (error) {
     console.log(error)
+    dispatch(setAlert({
+      msg: heb.serverError,
+      type: 'error'
+    }))
   }
 }
 
@@ -284,7 +254,15 @@ export const deleteProfessor = professor => async dispatch => {
       type: 'PROFESSORS/DELETE_ONE',
       payload: professor.id
     })
+    dispatch(setAlert({
+      type: 'success',
+      msg: heb.deletedSuccessfully
+    }))
   } catch (error) {
     console.log(error)
+    dispatch(setAlert({
+      msg: heb.serverError,
+      type: 'error'
+    }))
   }
 }

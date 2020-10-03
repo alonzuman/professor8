@@ -1,4 +1,6 @@
 import { db } from "../firebase"
+import heb from "../utils/translation/heb"
+import { setAlert } from "./alerts"
 const tagsRef = db.collection('tags')
 
 export const getTags = () => async dispatch => {
@@ -18,5 +20,9 @@ export const getTags = () => async dispatch => {
     dispatch({
       type: 'TAGS/ERROR'
     })
+    dispatch(setAlert({
+      type: 'error',
+      msg: heb.serverError
+    }))
   }
 }

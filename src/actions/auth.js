@@ -1,5 +1,7 @@
 import firebase from 'firebase'
 import { auth, db } from "../firebase"
+import heb from '../utils/translation/heb'
+import { setAlert } from './alerts'
 const usersRef = db.collection('users')
 
 export const setUser = user => async dispatch => {
@@ -22,6 +24,10 @@ export const setUser = user => async dispatch => {
     }
   } catch (error) {
     console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: heb.serverError
+    }))
     dispatch({
       type: 'AUTH/ERROR'
     })
@@ -47,6 +53,10 @@ export const anonymousAuth = () => async dispatch => {
     return window.location.reload()
   } catch (error) {
     console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: heb.serverError
+    }))
     dispatch({
       type: 'AUTH/ERROR'
     })
@@ -62,6 +72,10 @@ export const signUp = () => async dispatch => {
 
   } catch (error) {
     console.log(error)
+    dispatch(setAlert({
+      type: 'error',
+      msg: heb.serverError
+    }))
     dispatch({
       type: 'AUTH/ERROR'
     })
@@ -108,14 +122,22 @@ export const signInWithProvider = (provider) => async dispatch => {
         })
       }
     })
+    dispatch(setAlert({
+      type: 'success',
+      msg: heb.welcome
+    }))
   } catch (error) {
     console.log(error)
-    // const msg = () => {
-    //   switch (error.code) {
-    //     case 'auth/account-exists-with-different-credential': return 'accountAlreadyExistsWithEmail'
-    //     default: return 'Server error'
-    //   }
-    // }
+    const msg = () => {
+      switch (error.code) {
+        case 'auth/account-exists-with-different-credential': return heb.accountAlreadyExists
+        default: return heb.serverError
+      }
+    }
+    dispatch(setAlert({
+      type: 'error',
+      msg: msg()
+    }))
     dispatch({
       type: 'AUTH/ERROR'
     })

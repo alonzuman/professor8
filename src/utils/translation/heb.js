@@ -67,7 +67,14 @@ const heb = {
   chars: 'תוים',
   schools: 'מוסדות',
   howItWorks: 'איך זה עובד',
-  noResultsForYourSearchIn: 'לא נמצאו תוצאות עבור חיפושך ב-'
+  noResultsForYourSearchIn: 'לא נמצאו תוצאות עבור חיפושך ב-',
+  serverError: 'שגיאה, אנא נסו שנית',
+  reviewDeleted: 'ביקורת נמחקה בהצלחה',
+  reviewAdded: 'ביקורת אושרה בהצלחה',
+  accountAlreadyExists: 'החשבון כבר קיים עם מייל אחר',
+  welcome: 'ברוכים הבאים',
+  deletedSuccessfully: 'נמחק בהצלחה',
+  actionSuccessAndPending: 'הפעולה בוצעה בהצלחה וכעת ממתינה לאישור מנהל'
 }
 
 export default heb;

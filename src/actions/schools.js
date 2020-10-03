@@ -1,18 +1,6 @@
 import { db } from "../firebase"
 const schoolsRef = db.collection('schools')
 
-export const getSchools = () => async dispatch => {
-  dispatch({
-    type: 'SCHOOLS/LOADING'
-  })
-
-  try {
-
-  } catch (error) {
-    console.log(error)
-  }
-}
-
 export const getSchool = name => async dispatch => {
   dispatch({
     type: 'SCHOOLS/LOADING'

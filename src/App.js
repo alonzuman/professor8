@@ -16,6 +16,7 @@ import Admin from './pages/Admin/Admin';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import Auth from './pages/Auth/Auth';
 import ApproveReviewsContainer from './pages/Admin/pages/ApproveReviews/ApproveReviewsContainer';
+import CustomAlert from './components/layout/CustomAlert';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Router>
           <Navbar />
           <PageContainer>
+          <CustomAlert />
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/search' component={Results} />
