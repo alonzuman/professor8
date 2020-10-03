@@ -9,7 +9,6 @@ const ResultsSearchBar = ({ loading, handleSubmit, schools, setSchools, name, se
   const [scroll, setScroll] = useState(window.scrollY);
 
   const handleScroll = () => {
-    console.log(scroll)
     setScroll(window.scrollY)
   }
 
