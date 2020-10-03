@@ -8,10 +8,6 @@ const CustomAlert = () => {
   const { msg, type } = useSelector(state => state.alerts)
   const dispatch = useDispatch()
 
-  if (msg) {
-    console.log('hi from component')
-  }
-
   const handleClick = () => dispatch(clearAlert())
 
   if (Boolean(msg)) {
