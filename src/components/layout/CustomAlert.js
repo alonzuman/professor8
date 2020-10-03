@@ -9,7 +9,7 @@ const CustomAlert = () => {
   const dispatch = useDispatch()
 
   if (msg) {
-    console.log(msg)
+    console.log('hi from component')
   }
 
   const handleClick = () => dispatch(clearAlert())

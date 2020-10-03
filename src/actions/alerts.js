@@ -1,4 +1,5 @@
 export const setAlert = ({ msg, type }) => async dispatch => {
+  console.log('hi from alerts')
   dispatch({
     type: 'ALERTS/SET_ONE',
     payload: {
