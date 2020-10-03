@@ -20,7 +20,6 @@ const AddReview = ({ professor, onClose }) => {
   const [wouldTakeAgain, setWouldTakeAgain] = useState(false)
   const [courses, setCourses] = useState([])
   const [difficulty, setDifficulty] = useState(5)
-
   const [contentHelperText, setContentHelperText] = useState('')
   const dispatch = useDispatch()
   const { id } = professor

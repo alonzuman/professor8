@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -30,7 +30,7 @@ const SchoolsSwiper = () => {
   })
 
   const options = {
-    slidesPerView: width < 768 ? 1.5 : 4,
+    slidesPerView: width < 768 ? 1.2 : 4,
     spaceBetween: 16
   }
 
@@ -47,9 +47,18 @@ const SchoolsSwiper = () => {
     })
   }
 
+  const handleLinkClick = () => {
+    history.push({
+      pathname: '/schools'
+    })
+  }
+
   return (
     <div className='schools_section'>
-      <Typography variant='h3'>{heb.schools}</Typography>
+      <div className='flex align__center justify__between'>
+        <Typography variant='h3'>{heb.schools}</Typography>
+        <Button onClick={handleLinkClick} color='primary' className='small__btn'>{heb.showAll}</Button>
+      </div>
       <div className='schools_swiper__container'>
         <Swiper {...options}>
           {schools?.map((v, i) => <SwiperSlide onClick={() => handleClick(v.name)} key={i}><SchoolCard school={v} /></SwiperSlide>)}

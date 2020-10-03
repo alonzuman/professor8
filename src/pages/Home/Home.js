@@ -9,7 +9,7 @@ const Home = () => {
     <div className='home_content__container' dir='rtl'>
       <HomeHero />
       <SchoolsSwiper />
-      <HowItWorks />
+      {/* <HowItWorks /> */}
     </div>
   )
 }

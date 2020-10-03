@@ -81,7 +81,8 @@ const heb = {
   fillAllFields: 'אנא מלאו את כל השדות המסומנים',
   generalInfo: 'מידע כללי',
   additionalInformation: 'פירוט',
-  personalWords: 'בנימה אישית'
+  personalWords: 'בנימה אישית',
+  schoolsList: 'רשימת מוסדות'
 }
 
 export default heb;
