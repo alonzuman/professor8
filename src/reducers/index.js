@@ -5,6 +5,7 @@ import { authReducer } from './auth';
 import { tagsReducer } from './tags';
 import { adminReducer } from './admin';
 import { feedbackReducer } from './feedback';
+import { reviewsReducer } from './reviews';
 
 export default combineReducers({
   professors: professorsReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   tags: tagsReducer,
   admin: adminReducer,
   feedback: feedbackReducer,
+  reviews: reviewsReducer,
 });

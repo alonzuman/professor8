@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ReviewSkeleton from '../../components/cards/ReviewSkeleton'
 import './ReviewsList.css'
 import heb from '../../utils/translation/heb'
-import { Button, Typography } from '@material-ui/core'
+import { Button, Grid, Typography } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 import NoReviews from './NoReviews'
 import { useSelector } from 'react-redux'
@@ -26,7 +26,14 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
     return (
       <div className='page__section rtl'>
         <Skeleton width={120} height={24} />
-        <ReviewSkeleton />
+        <Grid container>
+          <Grid item xs={12} md={4} lg={4}>
+            <ReviewSkeleton />
+          </Grid>
+          <Grid item xs={12} md={4} lg={4}>
+            <ReviewSkeleton />
+          </Grid>
+        </Grid>
       </div>
     )
   } else if (!loading && reviews?.length !== 0) {

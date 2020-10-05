@@ -83,7 +83,8 @@ const heb = {
   additionalInformation: 'פירוט',
   personalWords: 'בנימה אישית',
   schoolsList: 'רשימת מוסדות',
-  manageProfessors: 'ניהול פרופסורים'
+  manageProfessors: 'ניהול פרופסורים',
+  latestReviews: 'ביקורות אחרונות'
 }
 
 export default heb;

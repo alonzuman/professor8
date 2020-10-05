@@ -8,7 +8,7 @@ import 'moment/locale/he'
 import heb from '../../utils/translation/heb';
 moment.locale('he')
 
-const Review = ({ review, professor }) => {
+const ReviewCard = ({ review, professor, showActions = true }) => {
   const { content, rating, author, dateCreated, tags, wouldTakeAgain } = review
 
   const timeAgo = moment(new Date(dateCreated)).fromNow()
@@ -29,12 +29,13 @@ const Review = ({ review, professor }) => {
             {content}
           </Typography>
         </CardContent>
+        {showActions &&
         <CardActions className='justify__between'>
           <ReviewActions review={review} professor={professor} />
-        </CardActions>
+        </CardActions>}
       </Card>
     </div>
   )
 }
 
-export default Review
+export default ReviewCard

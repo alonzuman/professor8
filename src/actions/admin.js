@@ -99,12 +99,18 @@ export const adminApproveReview = review => async dispatch => {
       tags: tagsObj
     }, { merge: true })
 
+    // 4. add review to professor reviews collection
     await db.collection('professors').doc(pid).collection('reviews').doc(id).set({
       ...review,
       approved: true
     })
 
-    await db.collection('reviews').doc(id).delete()
+    // 5. set review as approved on the reviews collection
+    await db.collection('reviews').doc(id).set({
+      pid,
+      approved: true
+    }, { merge: true })
+
     dispatch({
       type: 'ADMIN/APPROVE_REVIEW',
       payload: id

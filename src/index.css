@@ -8,6 +8,11 @@ li {
   list-style: none;
 }
 
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 body, html {
   height: 100%;
   width: 100%;
@@ -172,6 +177,10 @@ code {
 
 .mt-3  {
   margin-top: 32px!important;
+}
+
+.mt-4  {
+  margin-top: 64px!important;
 }
 
 .mb-5 {

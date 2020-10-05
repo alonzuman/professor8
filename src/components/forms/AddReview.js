@@ -1,4 +1,4 @@
-import { Button, Checkbox, Chip, FormControlLabel, FormGroup, Slider, TextField, Typography } from '@material-ui/core';
+import { Button, Checkbox, Chip, CircularProgress, FormControlLabel, FormGroup, Slider, TextField, Typography } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ const AddReview = ({ professor, onClose }) => {
   const { uid } = useSelector(state => state.auth)
   const tagOptions = useSelector(state => state.tags.professorTags.tags)
   const courseOptions = useSelector(state => state.tags.courses.names)
+  const { loading } = useSelector(state => state.professors)
   const [rating, setRating] = useState(5);
   const [tagsArray, setTagsArray] = useState([])
   const [author, setAuthor] = useState(heb.annonymous)
@@ -22,7 +23,6 @@ const AddReview = ({ professor, onClose }) => {
   const [difficulty, setDifficulty] = useState(5)
   const [contentHelperText, setContentHelperText] = useState('')
   const dispatch = useDispatch()
-  const { id } = professor
 
   const filterOptions = createFilterOptions({
     matchFrom: 'start',
@@ -60,8 +60,8 @@ const AddReview = ({ professor, onClose }) => {
         upVotesArray: []
       }
 
-      dispatch(addReview({ review, professor }))
-      onClose()
+      await dispatch(addReview({ review, professor }))
+      await onClose()
     }
   }
 
@@ -168,7 +168,7 @@ const AddReview = ({ professor, onClose }) => {
         </div>
         <Slider value={rating} onChange={(e, newValue) => setRating(parseInt(newValue))} step={1} min={1} max={5} marks />
       </FormGroup>
-      <Button className='full__width mb-1' color='primary' variant='contained' type='submit'>{heb.submit}</Button>
+      <Button disabled={loading} className='full__width mb-1' color='primary' variant='contained' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : heb.submit}</Button>
     </form>
   )
 }
