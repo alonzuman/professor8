@@ -62,10 +62,6 @@ const AddProfessorAndReview = ({ onClose }) => {
     }
   }
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  }
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   }
@@ -99,7 +95,7 @@ const AddProfessorAndReview = ({ onClose }) => {
 
     if (validateStringInputs([name, school, content])) {
       await dispatch(addProfessorAndReview({ professor, review }))
-      onClose()
+      await onClose()
     } else {
       dispatch(setFeedback({
         severity: 'error',

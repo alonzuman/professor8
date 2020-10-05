@@ -105,7 +105,7 @@ export const adminDeclineReview = review => async dispatch => {
     await db.collection('reviews').doc(id).delete()
 
     dispatch({
-      type: 'ADMIN/SET_REVIEWS',
+      type: 'ADMIN/DECLINE_REVIEW',
       payload: id
     })
     dispatch(setFeedback({

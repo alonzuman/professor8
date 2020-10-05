@@ -86,6 +86,11 @@ export const professorsReducer = (state = initialState, action) => {
           reviews: [...state.professor.reviews]
         }
       }
+    case 'PROFESSORS/ERROR':
+      return {
+        ...state,
+        loading: false
+      }
     default: return state;
   }
 }

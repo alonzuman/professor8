@@ -14,11 +14,12 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
   try {
     const professorSnap = await professorsRef.where('name', '==', name).get()
     let oldResults = []
-    let snapshot;
+    let snapshot = {};
 
     if (professorSnap.size !== 0) {
       professorSnap.forEach(doc => oldResults.push({ id: doc.id, ...doc.data() }))
-      snapshot = await professorsRef.doc(oldResults[0].id).set({
+      snapshot = oldResults[0]
+      await professorsRef.doc(snapshot.id).set({
         ...professor,
       }, { merge: true })
     } else {
@@ -27,7 +28,6 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
         tags: []
       })
     }
-
 
     await tagsRef.doc('professors').update({
       [school]: firebase.firestore.FieldValue.arrayUnion(name)
@@ -44,6 +44,9 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
     })
   } catch (error) {
     console.log(error)
+    dispatch({
+      type: 'PROFESSORS/FAIL'
+    })
     dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
