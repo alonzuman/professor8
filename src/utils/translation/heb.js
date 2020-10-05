@@ -82,7 +82,8 @@ const heb = {
   generalInfo: 'מידע כללי',
   additionalInformation: 'פירוט',
   personalWords: 'בנימה אישית',
-  schoolsList: 'רשימת מוסדות'
+  schoolsList: 'רשימת מוסדות',
+  manageProfessors: 'ניהול פרופסורים'
 }
 
 export default heb;

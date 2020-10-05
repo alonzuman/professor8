@@ -18,6 +18,7 @@ import Auth from './pages/Auth/Auth';
 import ApproveReviewsContainer from './pages/Admin/pages/ApproveReviews/ApproveReviewsContainer';
 import Feedback from './components/layout/Feedback';
 import Schools from './pages/Schools/Schools';
+import ApproveProfessorsContainer from './pages/Admin/pages/ApproveProfessors/ApproveProfessorsContainer';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
               <Route exact path='/schools' component={Schools} />
               <ProtectedRoute exact minRole={3} path='/admin' component={Admin} />
               <ProtectedRoute exact minRole={3} path='/admin/approve-reviews' component={ApproveReviewsContainer} />
+              <ProtectedRoute exact minRole={3} path='/admin/approve-professors' component={ApproveProfessorsContainer} />
             </Switch>
           </PageContainer>
           {/* <Footer /> */}

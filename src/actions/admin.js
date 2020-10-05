@@ -4,6 +4,32 @@ import heb from "../utils/translation/heb"
 import { setFeedback } from "./feedback"
 const tagsRef = db.collection('tags')
 
+export const getAdminProfessors = () => async dispatch => {
+  dispatch({
+    type: 'ADMIN/LOADING'
+  })
+  try {
+    const snapshot = await db.collection('professors').where('approved', '==', false).get()
+    let results = []
+    snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+    dispatch({
+      type: 'ADMIN/SET_PROFESSORS',
+      payload: {
+        professors: results
+      }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      severity: 'error',
+      msg: 'fuq'
+    }))
+    dispatch({
+      type: 'ADMIN/ERROR'
+    })
+  }
+}
+
 export const getAdminReviews = () => async dispatch => {
   dispatch({
     type: 'ADMIN/LOADING'
@@ -118,5 +144,51 @@ export const adminDeclineReview = review => async dispatch => {
       msg: heb.serverError,
       severity: 'error'
     }))
+  }
+}
+
+export const adminApproveProfessor = pid => async dispatch => {
+  dispatch({
+    type: 'ADMIN/LOADING'
+  })
+  try {
+    await db.collection('professors').doc(pid).set({
+      approved: true
+    }, { merge: true })
+    dispatch({
+      type: 'ADMIN/APPROVE_PROFESSOR',
+      payload: pid
+    })
+  } catch (error) {
+    console.log(error);
+    dispatch(setFeedback({
+      severity: 'error',
+      msg: 'fuq'
+    }))
+    dispatch({
+      type: 'ADMIN/ERROR'
+    })
+  }
+}
+
+export const adminDeclineProfessor = pid => async dispatch => {
+  dispatch({
+    type: 'ADMIN/LOADING'
+  })
+  try {
+    await db.collection('professors').doc(pid).delete()
+    dispatch({
+      type: 'ADMIN/DECLINE_PROFESSOR',
+      payload: pid
+    })
+  } catch (error) {
+    console.log(error);
+    dispatch(setFeedback({
+      severity: 'error',
+      msg: 'fuq'
+    }))
+    dispatch({
+      type: 'ADMIN/ERROR'
+    })
   }
 }

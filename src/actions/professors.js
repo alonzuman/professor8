@@ -21,11 +21,14 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
       snapshot = oldResults[0]
       await professorsRef.doc(snapshot.id).set({
         ...professor,
+        dateUpdated: Date.now()
       }, { merge: true })
     } else {
       snapshot = await professorsRef.add({
+        approved: false,
         ...professor,
-        tags: []
+        tags: [],
+        dateCreated: Date.now()
       })
     }
 
@@ -91,7 +94,7 @@ export const getProfessors = () => async dispatch => {
 
 export const getProfessor = (id) => async dispatch => {
   dispatch({
-    type: 'PROFESSORS/CLEAR_ONE'
+    type: 'PROFESSORS/CLEAR_PROFESSOR'
   })
   dispatch({
     type: 'PROFESSORS/LOADING'

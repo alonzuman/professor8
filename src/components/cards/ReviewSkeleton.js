@@ -5,7 +5,7 @@ import { Skeleton } from '@material-ui/lab';
 
 const ReviewSkeleton = () => {
   return (
-    <div className='review_card__wrapper'>
+    <div className='review_card__wrapper full__width'>
       <Card className='review_card__container'>
         <CardHeader
           title={<Skeleton width={120} />}

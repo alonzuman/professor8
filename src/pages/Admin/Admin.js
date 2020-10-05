@@ -6,7 +6,6 @@ import heb from '../../utils/translation/heb'
 
 const Admin = () => {
   const history = useHistory()
-
   const handleMenuClick = path => history.push({ pathname: path })
 
   return (
@@ -16,6 +15,12 @@ const Admin = () => {
         <ListItem onClick={() => handleMenuClick('/admin/approve-reviews')} button>
           <ListItemText>
             {heb.manageReviews}
+          </ListItemText>
+        </ListItem>
+        <Divider />
+        <ListItem onClick={() => handleMenuClick('/admin/approve-professors')} button>
+          <ListItemText>
+            {heb.manageProfessors}
           </ListItemText>
         </ListItem>
         <Divider />

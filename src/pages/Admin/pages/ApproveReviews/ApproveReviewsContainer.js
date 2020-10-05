@@ -10,12 +10,14 @@ const ApproveReviewsContainer = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAdminReviews())
+    if (reviews.length === 0) {
+      dispatch(getAdminReviews())
+    }
   }, [dispatch])
 
   return (
     <div className='rtl'>
-      <PageHeader sticky backButton={true} title={heb.manageReviews} />
+      <PageHeader sticky backButton title={heb.manageReviews} />
       <ApproveReviewsList reviews={reviews} loading={loading} />
     </div>
   )

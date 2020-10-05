@@ -4,12 +4,19 @@ import Rating from '../../../../components/general/Rating'
 import heb from '../../../../utils/translation/heb'
 import moment from 'moment'
 import 'moment/locale/he'
+import { useDispatch } from 'react-redux'
+import { adminApproveReview, adminDeclineReview } from '../../../../actions/admin'
 import ApproveReviewCardActions from './ApproveReviewCardActions'
 moment.locale('he')
 
-const ApproveReviewCard = ({ review }) => {
+const ApproveReviewCard = ({ loading, review }) => {
   const { author, dateCreated, rating, tags, wouldTakeAgain, content } = review;
   const timeAgo = moment(new Date(dateCreated)).fromNow()
+  const dispatch = useDispatch()
+
+  const handleApprove = () => dispatch(adminApproveReview(review))
+
+  const handleDecline = () => dispatch(adminDeclineReview(review))
 
   return (
     <Card className='review_card__container rtl'>
@@ -28,7 +35,7 @@ const ApproveReviewCard = ({ review }) => {
         </Typography>
       </CardContent>
       <CardActions className='justify__between'>
-        <ApproveReviewCardActions review={review} />
+        <ApproveReviewCardActions loading={loading} handleApprove={handleApprove} handleDecline={handleDecline} />
       </CardActions>
     </Card>
   )

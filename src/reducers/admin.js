@@ -14,10 +14,23 @@ export const adminReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case 'ADMIN/SET_PROFESSORS':
+      return {
+        ...state,
+        ...payload,
+        loading: false
+      }
     case 'ADMIN/SET_REVIEWS':
       return {
         ...state,
         ...payload,
+        loading: false
+      }
+    case 'ADMIN/APPROVE_PROFESSOR':
+    case 'ADMIN/DECLINE_PROFESSOR':
+      return {
+        ...state,
+        professors: [...state.professors.filter(v => v.id !== payload)],
         loading: false
       }
     case 'ADMIN/DECLINE_REVIEW':
