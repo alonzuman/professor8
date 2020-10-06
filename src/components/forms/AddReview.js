@@ -7,7 +7,6 @@ import { validateStringInput } from '../../utils/form';
 import heb from '../../utils/translation/heb';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
 
-
 const AddReview = ({ professor, onClose }) => {
   const { uid } = useSelector(state => state.auth)
   const tagOptions = useSelector(state => state.tags.professorTags.tags)

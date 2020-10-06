@@ -55,18 +55,19 @@ export const getLatestReviews = () => async dispatch => {
 
 export const addReview = ({ review, professor }) => async dispatch => {
   dispatch({
-    type: 'PROFESSORS/LOADING'
+    type: 'REVIEWS/LOADING'
   })
   try {
     await db.collection('reviews').add({
       dateCreated: Date.now(),
+      professor,
       pid: professor.id,
       ...review,
       approved: false
     })
 
     dispatch({
-      type: 'PROFESSORS/CLEAR_LOADING',
+      type: 'REVIEWS/CLEAR_LOADING',
     })
     dispatch(setFeedback({
       severity: 'success',

@@ -5,7 +5,7 @@ import { getLatestReviews } from '../../../actions/reviews';
 import ReviewCard from '../../../components/cards/ReviewCard';
 import 'swiper/swiper.scss';
 import './LatestReviews.css';
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import heb from '../../../utils/translation/heb';
 import { Link } from 'react-router-dom';
 import ReviewSkeleton from '../../../components/cards/ReviewSkeleton';
@@ -41,11 +41,10 @@ const LatestReviews = () => {
     <div className='latest_reviews__container mt-4'>
       <div className='flex align__center justify__between'>
         <Typography variant='h3'>{heb.latestReviews}</Typography>
-        {/* <Button onClick={handleLinkClick} color='primary' className='small__btn'>{heb.showAll}</Button> */}
       </div>
       {loading && <ReviewSkeleton />}
       {!loading && <Swiper style={{ marginLeft: viewWidth <= 768 ? -16 : '' }} {...options}>
-        {reviews?.map((v, i) => <SwiperSlide key={i}><Link to={`/professor/${v.pid}`}><ReviewCard showActions={false} professor={{ id: v.pid }} review={v} /></Link></SwiperSlide>) }
+        {reviews?.map((v, i) => <SwiperSlide key={i}><Link to={`/professor/${v.pid}`}><ReviewCard showActions={false} professor={{ id: v.pid }} showProfessor review={v} /></Link></SwiperSlide>) }
       </Swiper>}
     </div>
   )

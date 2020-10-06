@@ -8,8 +8,10 @@ import 'moment/locale/he'
 import heb from '../../utils/translation/heb';
 moment.locale('he')
 
-const ReviewCard = ({ review, professor, showActions = true }) => {
-  const { content, rating, author, dateCreated, tags, wouldTakeAgain } = review
+const ReviewCard = ({ review, showActions = true, showProfessor = false }) => {
+  const { content, rating, author, dateCreated, tags, wouldTakeAgain, professor } = review
+
+  // TODO set if show professor true an arrow who commented on what professor
 
   const timeAgo = moment(new Date(dateCreated)).fromNow()
   return (

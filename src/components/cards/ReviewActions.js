@@ -15,7 +15,7 @@ const ReviewActions = ({ review, professor }) => {
   const [downVotes, setDownVotes] = useState(downVotesArray)
   const { uid } = useSelector(state => state.auth)
   const { loading } = useSelector(state => state.professors)
-  const pid = professor.id
+  const pid = professor?.id
 
   const upVoted = upVotes.includes(uid)
   const downVoted = downVotes.includes(uid)

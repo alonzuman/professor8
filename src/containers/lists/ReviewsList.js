@@ -39,7 +39,7 @@ const ReviewsList = ({ addReview, professor }) => {
       <div className='page__section'>
         {isAuth && <Button color='primary' variant='contained' className='mb-1' onClick={addReview}>{heb.addReview}</Button>}
         <Typography variant='subtitle1'>{reviews?.length > 0 ? `${heb.reviews} (${reviews.length})` : ''}</Typography>
-        <ReviewsSwiper loading={loading} reviews={reviews} professor={professor} viewWidth={width} />
+        <ReviewsSwiper loading={loading} reviews={reviews} viewWidth={width} />
       </div>
     )
   } else {

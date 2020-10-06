@@ -28,6 +28,7 @@ export const reviewsReducer = (state = initialState, action) => {
         ...state,
         reviews: [...state.reviews]
       }
+    case 'REVIEWS/CLEAR_LOADING':
     case 'REVIEWS/ERROR':
       return {
         ...state,
