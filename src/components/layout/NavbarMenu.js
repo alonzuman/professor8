@@ -42,21 +42,25 @@ const NavbarMenu = () => {
         <MenuIcon className='menu__icon' />
       </Button>
       <Menu dir='rtl' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={() => handleLinkClick('/')} className={`menu__item ${path === '/' ? 'menu__item--active' : ''}`}>
+        <MenuItem onClick={() => handleLinkClick('/')} className={`nav__item ${path === '/' ? 'nav__item--active' : ''}`}>
           {heb.home}
         </MenuItem>
         {anonymous &&
-        <MenuItem onClick={() => handleLinkClick('/sign-in')} className={`menu__item ${path === '/sign-in' ? 'menu__item--active' : ''}`}>
+        <MenuItem onClick={() => handleLinkClick('/sign-in')} className={`nav__item ${path === '/sign-in' ? 'nav__item--active' : ''}`}>
           {heb.signIn}
         </MenuItem>}
         {!anonymous && role >= 3 &&
-        <MenuItem onClick={() => handleLinkClick('/admin')} className={`menu__item ${path === '/admin' ? 'menu__item--active' : ''}`}>
+        <MenuItem onClick={() => handleLinkClick('/admin')} className={`nav__item ${path === '/admin' ? 'nav__item--active' : ''}`}>
           {heb.manage}
+        </MenuItem>}
+        {!anonymous &&
+        <MenuItem onClick={() => handleLinkClick('/saved-professors')} className={`nav__item ${path === '/admin' ? 'nav__item--active' : ''}`}>
+          {heb.savedProfessors}
         </MenuItem>}
         {!anonymous &&
         <div>
           <Divider className='mt-1 mb-1' />
-          <MenuItem className='menu__item' onClick={handleSignOut}>
+          <MenuItem className='nav__item' onClick={handleSignOut}>
             {heb.signOut}
           </MenuItem>
         </div>}

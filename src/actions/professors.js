@@ -4,9 +4,11 @@ import firebase from 'firebase'
 import { setFeedback } from '../actions'
 import heb from "../utils/translation/heb"
 import { addReview, getProfessorReviews } from "./reviews"
+import store from "../store"
 const professorsRef = db.collection('professors')
 const tagsRef = db.collection('tags')
 const reviewsRef = db.collection('reviews')
+const authRef = db.collection('users')
 
 export const addProfessorAndReview = ({ professor, review }) => async dispatch => {
   dispatch({
@@ -146,6 +148,51 @@ export const deleteProfessor = professor => async dispatch => {
     dispatch(setFeedback({
       msg: heb.serverError,
       severity: 'error'
+    }))
+  }
+}
+
+export const saveProfessor = professor => async dispatch => {
+  const { uid } = store.getState().auth
+  dispatch({
+    type: 'AUTH/LOADING',
+  })
+  try {
+    await authRef.doc(uid).set({
+      savedProfessors: firebase.firestore.FieldValue.arrayUnion(professor)
+    }, { merge: true })
+    dispatch({
+      type: 'AUTH/SAVE_PROFESSOR',
+      payload: professor
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      severity: 'error',
+      msg: heb.serverError
+    }))
+  }
+}
+
+export const unsaveProfessor = professor => async dispatch => {
+  const { uid } = store.getState().auth
+  dispatch({
+    type: 'AUTH/LOADING'
+  })
+  try {
+    await authRef.doc(uid).set({
+      savedProfessors: firebase.firestore.FieldValue.arrayRemove(professor)
+    }, { merge: true })
+
+    dispatch({
+      type: 'AUTH/UNSAVE_PROFESSOR',
+      payload: professor
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      severity: 'error',
+      msg: heb.serverError
     }))
   }
 }

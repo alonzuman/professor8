@@ -11,6 +11,7 @@ li {
 a {
   text-decoration: inherit;
   color: inherit;
+  font-family: inherit!important;
 }
 
 body, html {

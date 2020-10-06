@@ -11,7 +11,7 @@ const Navbar = () => {
   const { isAuth, loading } = useSelector(state => state.auth)
   const [addingProfessorAndReview, setAddingProfessorAndReview] = useState(false)
 
-  if (loading || !isAuth) {
+  if (loading && !isAuth) {
     return <div className='navbar__container'/>
   } else {
     return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfessor } from '../../actions/professors';
+import { getProfessor, saveProfessor, unsaveProfessor } from '../../actions/professors';
 import AddReviewContainer from '../../containers/dialogs/AddReviewContainer';
 import ReviewsList from '../../containers/lists/ReviewsList';
 import BackButton from '../../components/general/BackButton';
@@ -10,21 +10,42 @@ import AverageRating from './components/AverageRating';
 import ProfessorHeader from './components/ProfessorHeader';
 import EditButton from '../../components/general/EditButton';
 import EditProfessorDialog from '../../containers/dialogs/EditProfessorDialog';
+import ProfessorAction from './components/ProfessorAction';
 
 const Professor = ({ match }) => {
-  const { uid, role } = useSelector(state => state.auth)
+  const { uid, role, anonymous, savedProfessors } = useSelector(state => state.auth)
   const { id } = match.params
   const [addReview, setAddReview] = useState(false)
   const [editing, setEditing] = useState(false)
+  const [saved, setSaved] = useState(false)
   const dispatch = useDispatch()
   const { loading, professor } = useSelector(state => state.professors)
   const { name, tags, overallRating, avatar, reviews, school, courses } = professor;
+
+  const handleSave = async () => {
+    if (saved) {
+      await dispatch(unsaveProfessor(professor))
+    } else {
+      await dispatch(saveProfessor(professor))
+    }
+    await setSaved(v => !v)
+  }
 
   const handleAddReview = () => {
     setAddReview(true)
   }
 
-  useEffect(() => { dispatch(getProfessor(id)) }, [id, dispatch])
+  useEffect(() => {
+    const isSaved = savedProfessors?.find(v => v.id === id)
+    if (isSaved) {
+      setSaved(true)
+    }
+  }, [savedProfessors])
+
+  useEffect(() => {
+    dispatch(getProfessor(id))
+    console.log(savedProfessors)
+  }, [id, dispatch])
 
   return (
     <div dir='rtl'>
@@ -32,7 +53,15 @@ const Professor = ({ match }) => {
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
       <div className='flex justify__between'>
         <BackButton sticky={true} variant='contained' />
-        {(uid === professor.uid || role >= 3) && <EditButton onClick={() => setEditing(true)} sticky={true} variant='contained' />}
+        <ProfessorAction
+          saved={saved}
+          setSaved={handleSave}
+          anonymous={anonymous}
+          uid={uid}
+          professor={professor}
+          setEditing={() => setEditing(true)}
+          role={role}
+        />
       </div>
       <ProfessorHeader name={name} avatar={avatar} school={school} loading={!name && loading}/>
       <ProfessorTags reviewsCount={reviews?.length} tags={tags} loading={!tags && loading && !professor} />
