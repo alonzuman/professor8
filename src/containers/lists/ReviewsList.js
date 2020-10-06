@@ -8,9 +8,10 @@ import NoReviews from './NoReviews'
 import { useSelector } from 'react-redux'
 import ReviewsSwiper from './ReviewsSwiper'
 
-const ReviewsList = ({ addReview, professor, reviews, loading }) => {
+const ReviewsList = ({ addReview, professor }) => {
   const { isAuth } = useSelector(state => state.auth)
   const [width, setWidth] = useState()
+  const { loading, reviews } = useSelector(state => state.reviews)
 
   useEffect(() => {
     const handleResize = () => {
@@ -30,9 +31,6 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
           <Grid item xs={12} md={4} lg={4}>
             <ReviewSkeleton />
           </Grid>
-          <Grid item xs={12} md={4} lg={4}>
-            <ReviewSkeleton />
-          </Grid>
         </Grid>
       </div>
     )
@@ -40,7 +38,7 @@ const ReviewsList = ({ addReview, professor, reviews, loading }) => {
     return (
       <div className='page__section'>
         {isAuth && <Button color='primary' variant='contained' className='mb-1' onClick={addReview}>{heb.addReview}</Button>}
-        <Typography variant='subtitle1'>{reviews?.length > 0 ? heb.reviews : ''}</Typography>
+        <Typography variant='subtitle1'>{reviews?.length > 0 ? `${heb.reviews} (${reviews.length})` : ''}</Typography>
         <ReviewsSwiper loading={loading} reviews={reviews} professor={professor} viewWidth={width} />
       </div>
     )

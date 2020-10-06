@@ -2,6 +2,7 @@ import { db } from "../firebase"
 import firebase from 'firebase'
 import heb from "../utils/translation/heb"
 import { setFeedback } from "./feedback"
+import { deleteProfessor } from "."
 const tagsRef = db.collection('tags')
 
 export const getAdminProfessors = () => async dispatch => {
@@ -129,12 +130,13 @@ export const adminApproveReview = review => async dispatch => {
 }
 
 export const adminDeclineReview = review => async dispatch => {
-  const { id } = review
+  const { id, pid } = review
   dispatch({
     type: 'ADMIN/LOADING'
   })
   try {
-    await db.collection('reviews').doc(id).delete()
+    const snapshot = await db.collection('professors').doc(pid).get()
+    await dispatch(deleteProfessor({ id: snapshot.id, ...snapshot.data() }))
 
     dispatch({
       type: 'ADMIN/DECLINE_REVIEW',
@@ -153,7 +155,7 @@ export const adminDeclineReview = review => async dispatch => {
   }
 }
 
-export const adminApproveProfessor = pid => async dispatch => {
+export const adminApproveProfessor = ({ pid, school, name }) => async dispatch => {
   dispatch({
     type: 'ADMIN/LOADING'
   })
@@ -161,6 +163,12 @@ export const adminApproveProfessor = pid => async dispatch => {
     await db.collection('professors').doc(pid).set({
       approved: true
     }, { merge: true })
+
+
+    await db.collection('tags').doc('professors').update({
+      [school]: firebase.firestore.FieldValue.arrayUnion(name)
+    })
+
     dispatch({
       type: 'ADMIN/APPROVE_PROFESSOR',
       payload: pid
@@ -177,12 +185,13 @@ export const adminApproveProfessor = pid => async dispatch => {
   }
 }
 
-export const adminDeclineProfessor = pid => async dispatch => {
+export const adminDeclineProfessor = ({ pid, name, school }) => async dispatch => {
   dispatch({
     type: 'ADMIN/LOADING'
   })
   try {
-    await db.collection('professors').doc(pid).delete()
+    await dispatch(deleteProfessor({ id: pid, name, school }))
+
     dispatch({
       type: 'ADMIN/DECLINE_PROFESSOR',
       payload: pid

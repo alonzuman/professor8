@@ -49,12 +49,11 @@ export const professorsReducer = (state = initialState, action) => {
         loading: false
       }
     case 'PROFESSORS/SET_ONE':
-      const { professor, reviews } = payload;
+      const { professor } = payload;
       return {
         ...state,
         professor: {
           ...professor,
-          reviews: [...reviews]
         },
         loading: false,
       }
@@ -69,22 +68,6 @@ export const professorsReducer = (state = initialState, action) => {
         ...state,
         professor: {},
         loading: false
-      }
-    case 'PROFESSORS/UPVOTE_REVIEW':
-      return {
-        ...state,
-        professor: {
-          ...state.professor,
-          reviews: [...state.professor.reviews]
-        }
-      }
-    case 'PROFESSORS/DOWNVOTE_REVIEW':
-      return {
-        ...state,
-        professor: {
-          ...state.professor,
-          reviews: [...state.professor.reviews]
-        }
       }
     case 'PROFESSORS/ERROR':
       return {

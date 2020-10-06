@@ -38,7 +38,7 @@ const Professor = ({ match }) => {
       <ProfessorTags reviewsCount={reviews?.length} tags={tags} loading={!tags && loading && !professor} />
       <AverageRating reviewsCount={reviews?.length} averageRating={overallRating} loading={!overallRating && loading} />
       <Courses courses={courses} loading={!courses && loading && !professor} />
-      <ReviewsList professor={professor} reviews={reviews} loading={loading} addReview={handleAddReview} />
+      <ReviewsList professor={professor} addReview={handleAddReview} />
     </div>
   )
 }

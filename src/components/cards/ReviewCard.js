@@ -23,7 +23,7 @@ const ReviewCard = ({ review, professor, showActions = true }) => {
         <CardContent>
           <div className='mb-1'>
             {tags?.map((v, i) => <Chip key={i} label={v} size='small' className='ml-5 mb-5' />)}
-            {wouldTakeAgain && <Chip label={heb.wouldTakeAgain} size='small' className='ml-4' />}
+            {wouldTakeAgain && <Chip label={heb.wouldTakeAgain} size='small' className='ml-5 mb-5' />}
           </div>
           <Typography variant='body1'>
             {content}

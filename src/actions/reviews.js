@@ -1,7 +1,33 @@
+import firebase from 'firebase'
 import { db } from "../firebase"
+import store from '../store'
 import heb from "../utils/translation/heb"
 import { setFeedback } from "./feedback"
 const reviewsRef = db.collection('reviews')
+const professorsRef = db.collection('professors')
+
+export const getProfessorReviews = pid => async dispatch => {
+  dispatch({
+    type: 'REVIEWS/LOADING'
+  })
+  try {
+    const snapshot = await professorsRef.doc(pid).collection('reviews').orderBy('dateCreated', 'desc').get()
+    let results = []
+    snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
+    dispatch({
+      type: 'REVIEWS/SET_ALL',
+      payload: {
+        reviews: results.filter(v => v.approved)
+      }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      severity: 'error',
+      msg: heb.serverError
+    }))
+  }
+}
 
 export const getLatestReviews = () => async dispatch => {
   dispatch({
@@ -22,6 +48,140 @@ export const getLatestReviews = () => async dispatch => {
     dispatch(setFeedback({
       severity: 'error',
       msg: heb.serverError
+    }))
+  }
+}
+
+
+export const addReview = ({ review, professor }) => async dispatch => {
+  dispatch({
+    type: 'PROFESSORS/LOADING'
+  })
+  try {
+    await db.collection('reviews').add({
+      dateCreated: Date.now(),
+      pid: professor.id,
+      ...review,
+      approved: false
+    })
+
+    dispatch({
+      type: 'PROFESSORS/CLEAR_LOADING',
+    })
+    dispatch(setFeedback({
+      severity: 'success',
+      msg: heb.actionSuccessAndPending
+    }))
+  } catch (error) {
+    console.log(error);
+    dispatch(setFeedback({
+      msg: heb.serverError,
+      severity: 'error'
+    }))
+  }
+}
+
+export const deleteReview = ({ review, professor }) => async dispatch => {
+  const { pid } = review;
+  const { reviews } = store.getState().reviews
+  dispatch({
+    type: 'PROFESSORS/LOADING'
+  })
+  try {
+    const { overallRating } = professor
+    const { rating } = review
+    const total = reviews.length
+
+    let overall;
+    if (total === 1) {
+      overall = 0
+    } else {
+      overall = (((overallRating * total) - rating) / (total - 1))
+    }
+
+    let newTagsObj = {}
+    Object.keys(professor.tags).map((v, i) => {
+      if (review.tags.includes(v)) {
+        return newTagsObj[v] = professor.tags[v] - 1
+      } else {
+        return newTagsObj[v] = professor.tags[v]
+      }
+    })
+
+    await db.collection('professors').doc(pid).set({
+      numberOfReviews: firebase.firestore.FieldValue.increment(-1),
+      overallRating: overall,
+      tags: newTagsObj
+    }, { merge: true })
+
+    await db.collection('professors').doc(pid).collection('reviews').doc(review.id).delete()
+    dispatch({
+      type: 'REVIEWS/SET_ALL',
+      payload: {
+        reviews: [...reviews.filter(v => v.id !== review.id)]
+      }
+    })
+    dispatch({
+      type: 'PROFESSORS/SET_ONE',
+      payload: {
+        professor: {
+          ...professor,
+          numberOfReviews: (professor.numberOfReviews - 1),
+          overallRating: overall
+        }
+      }
+    })
+    dispatch(setFeedback({
+      severity: 'success',
+      msg: heb.reviewDeleted
+    }))
+  } catch (error) {
+    console.log(error);
+    dispatch(setFeedback({
+      msg: heb.serverError,
+      severity: 'error'
+    }))
+  }
+}
+
+
+export const upVoteReview = ({ review, uid, pid }) => async dispatch => {
+  const { id } = review;
+  try {
+    await professorsRef.doc(pid).collection('reviews').doc(id).update({
+      votes: firebase.firestore.FieldValue.increment(1),
+      upVotesArray: firebase.firestore.FieldValue.arrayUnion(uid),
+      downVotesArray: firebase.firestore.FieldValue.arrayRemove(uid)
+    })
+    dispatch({
+      type: 'PROFESSORS/UPVOTE_REVIEW',
+      payload: id
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      msg: heb.serverError,
+      severity: 'error'
+    }))
+  }
+}
+
+export const downVoteReview = ({ review, uid }) => async dispatch => {
+  try {
+    await professorsRef.doc(review.pid).collection('reviews').doc(review.id).update({
+      votes: firebase.firestore.FieldValue.increment(-1),
+      upVotesArray: firebase.firestore.FieldValue.arrayRemove(uid),
+      downVotesArray: firebase.firestore.FieldValue.arrayUnion(uid)
+    })
+    dispatch({
+      type: 'PROFESSORS/DOWNVOTE_REVIEW',
+      payload: review.id
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      msg: heb.serverError,
+      severity: 'error'
     }))
   }
 }

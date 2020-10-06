@@ -18,6 +18,16 @@ export const reviewsReducer = (state = initialState, action) => {
         ...payload,
         loading: false
       }
+    case 'PROFESSORS/UPVOTE_REVIEW':
+      return {
+        ...state,
+        reviews: [...state.reviews]
+      }
+    case 'PROFESSORS/DOWNVOTE_REVIEW':
+      return {
+        ...state,
+        reviews: [...state.reviews]
+      }
     case 'REVIEWS/ERROR':
       return {
         ...state,

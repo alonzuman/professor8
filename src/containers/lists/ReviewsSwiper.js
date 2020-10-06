@@ -12,7 +12,7 @@ const ReviewsSwiper = ({ loading, reviews, professor, viewWidth }) => {
     } else if (768 < viewWidth && viewWidth <= 900) {
       return 2.4
     } else {
-      return 3.2
+      return 3
     }
   }
 

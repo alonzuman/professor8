@@ -2,7 +2,7 @@ import { Button, Checkbox, Chip, CircularProgress, FormControlLabel, FormGroup, 
 import { Autocomplete } from '@material-ui/lab';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addReview } from '../../actions/professors';
+import { addReview } from '../../actions';
 import { validateStringInput } from '../../utils/form';
 import heb from '../../utils/translation/heb';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';

@@ -14,8 +14,8 @@ const ApproveProfessorCard = ({ professor, loading }) => {
   const timeAgo = moment(new Date(dateCreated || Date.now())).fromNow()
   const dispatch = useDispatch()
 
-  const handleApprove = () => dispatch(adminApproveProfessor(professor.id))
-  const handleDecline = () => dispatch(adminDeclineProfessor(professor.id))
+  const handleApprove = () => dispatch(adminApproveProfessor({ pid: professor.id, school, name }))
+  const handleDecline = () => dispatch(adminDeclineProfessor({ pid: professor.id, school, name }))
 
   return (
     <Card className='full__width'>
@@ -28,11 +28,6 @@ const ApproveProfessorCard = ({ professor, loading }) => {
       <div className='mb-1 p-1'>
         <Typography variant='subtitle1'>{heb.courses}</Typography>
         {courses?.map((v, i) => <Chip key={i} label={v} size='small' className='ml-5' />)}
-      </div>}
-      {tags &&
-      <div className='mb-1 p-1'>
-        <Typography variant='subtitle1'>{heb.tags}</Typography>
-        {Object.keys(tags)?.map((v, i) => <Chip key={i} label={v} size='small' className='ml-5' />)}
       </div>}
 
       <CardActions className='justify__between'>
