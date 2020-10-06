@@ -21,9 +21,9 @@ const LatestReviews = () => {
     } else if (512 < viewWidth && viewWidth <= 768) {
       return 1.8
     } else if (768 < viewWidth && viewWidth <= 900) {
-      return 2.4
+      return 2
     } else {
-      return 3.2
+      return 3
     }
   }
 
@@ -32,9 +32,7 @@ const LatestReviews = () => {
   }
 
   useEffect(() => {
-    if (reviews.length === 0) {
-      dispatch(getLatestReviews())
-    }
+    dispatch(getLatestReviews())
   }, [])
 
   return (

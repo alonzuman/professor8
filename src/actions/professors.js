@@ -129,6 +129,7 @@ export const deleteProfessor = professor => async dispatch => {
     await tagsRef.doc('professors').update({
       [school]: firebase.firestore.FieldValue.arrayRemove(name)
     })
+
     const generalReviewsSnap = await reviewsRef.where('pid', '==', id).get()
     generalReviewsSnap.forEach(async doc => await reviewsRef.doc(doc.id).delete())
 

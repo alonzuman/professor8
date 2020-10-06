@@ -9,7 +9,7 @@ const SchoolCard = ({ school }) => {
     <div className='school_card__wrapper'>
       <div className='school_card__container'>
         <Typography variant='h5'>{name}</Typography>
-        <Icon />
+        {/* <Icon /> */}
       </div>
     </div>
   )
