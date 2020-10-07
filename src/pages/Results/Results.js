@@ -34,7 +34,7 @@ const Results = () => {
   }
 
   return (
-    <div className='flex full__height align__center flex__column'>
+    <div className='flex full__height align__center flex__column p-2'>
       <ResultsSearchBar
         loading={loading}
         schools={schools}
