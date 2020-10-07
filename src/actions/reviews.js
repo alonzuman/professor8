@@ -112,16 +112,6 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
         reviews: [...reviews.filter(v => v.id !== review.id)]
       }
     })
-    dispatch({
-      type: 'PROFESSORS/SET_ONE',
-      payload: {
-        professor: {
-          ...professor,
-          numberOfReviews: (professor.numberOfReviews - 1),
-          overallRating
-        }
-      }
-    })
     dispatch(setFeedback({
       severity: 'success',
       msg: heb.reviewDeleted
