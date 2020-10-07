@@ -31,6 +31,38 @@ exports.deleteReview = functions.firestore
     }
   })
 
+exports.addReview = functions.firestore
+  .document('/professors/{pid}/reviews/{rid}')
+  .onCreate(async (change, context) => {
+    const pid = context.params.pid;
+    const { tags, approved } = change.after.data()
+
+    if (approved === true) {
+      const reviewsSnap = await admin.firestore().collection('professors').doc(pid).collection('reviews').get()
+      let reviews = []
+      reviewsSnap.forEach(doc => reviews.push({ id: doc.id, ...doc.data() }))
+      const filteredReviews = reviews.filter(v => v.approved).map(v => { return v.rating })
+
+      const sum = filteredReviews.reduce((a, b) => a + b, 0)
+      const overallRating = (sum / filteredReviews.length)
+
+      if (tags) {
+        tags.forEach(async v => {
+          await admin.firestore().collection('professors').doc(pid).update({
+            tags: admin.firestore.FieldValue.arrayUnion(v)
+          })
+        })
+      }
+
+      return admin.firestore().collection('professors').doc(pid).set({
+        overallRating,
+        numberOfReviews: filteredReviews.length
+      }, { merge: true })
+    } else {
+      return null
+    }
+  })
+
 exports.updateReview = functions.firestore
   .document('/professors/{pid}/reviews/{rid}')
   .onUpdate(async (change, context) => {

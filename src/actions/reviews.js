@@ -96,22 +96,13 @@ export const addReview = ({ review, professor }) => async dispatch => {
 }
 
 export const deleteReview = ({ review, professor }) => async dispatch => {
-  const { pid, rating, id } = review;
-  const { overallRating, tags } = professor
+  const { pid, id } = review;
+  const { overallRating } = professor
   const { reviews } = store.getState().reviews
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
   try {
-    const total = reviews.length
-
-    let overall;
-    if (total === 1) {
-      overall = 0
-    } else {
-      overall = (((overallRating * total) - rating) / (total - 1))
-    }
-
     await db.collection('professors').doc(pid).collection('reviews').doc(review.id).delete()
     await db.collection('reviews').doc(id).delete()
 
@@ -127,7 +118,7 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
         professor: {
           ...professor,
           numberOfReviews: (professor.numberOfReviews - 1),
-          overallRating: overall
+          overallRating
         }
       }
     })
