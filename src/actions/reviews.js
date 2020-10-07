@@ -81,9 +81,7 @@ export const addReview = ({ review, professor }) => async dispatch => {
       dispatch({
         type: 'REVIEWS/CLEAR_LOADING',
       })
-
     }
-
     dispatch(setFeedback({
       severity: 'success',
       msg: heb.actionSuccessAndPending
@@ -114,16 +112,7 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
       overall = (((overallRating * total) - rating) / (total - 1))
     }
 
-    // TODO remove tags from old array
-
-    await db.collection('professors').doc(pid).set({
-      numberOfReviews: firebase.firestore.FieldValue.increment(-1),
-      overallRating: overall,
-      tags
-    }, { merge: true })
-
     await db.collection('professors').doc(pid).collection('reviews').doc(review.id).delete()
-
     await db.collection('reviews').doc(id).delete()
 
     dispatch({

@@ -17,7 +17,7 @@ const ProfessorTags = ({ tags, reviewsCount, loading }) => {
   } else {
     return (
       <div className='page__section flex flex__wrap--wrap'>
-        {tags?.map((v, i) => {
+        {typeof tags === Array && tags?.map((v, i) => {
           if (i <= 4) {
             return (
             <Chip
