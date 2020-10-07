@@ -15,6 +15,7 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
     type: 'PROFESSORS/LOADING'
   })
   const { name, school } = professor
+  const { tags } = review
   try {
     const professorSnap = await professorsRef.where('name', '==', name).get()
     let oldResults = []
@@ -25,13 +26,14 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
       snapshot = oldResults[0]
       await professorsRef.doc(snapshot.id).set({
         ...professor,
+        tags: firebase.firestore.FieldValue.arrayUnion(tags),
         dateUpdated: Date.now()
       }, { merge: true })
     } else {
       snapshot = await professorsRef.add({
         approved: false,
         ...professor,
-        tags: [],
+        tags,
         dateCreated: Date.now()
       })
     }

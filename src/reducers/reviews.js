@@ -12,6 +12,12 @@ export const reviewsReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case 'REVIEWS/ADD_ONE':
+      return {
+        ...state,
+        reviews: [...state.reviews, payload],
+        loading: false
+      }
     case 'REVIEWS/SET_ALL':
       return {
         ...state,

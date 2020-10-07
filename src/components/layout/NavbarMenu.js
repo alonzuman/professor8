@@ -7,9 +7,8 @@ import heb from '../../utils/translation/heb'
 import './NavbarMenu.css'
 import MenuIcon from '@material-ui/icons/Menu';
 import { signOut } from '../../actions/auth';
-import { Skeleton } from '@material-ui/lab';
 
-const NavbarMenu = ({ loading }) => {
+const NavbarMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const { avatar, firstName, anonymous, role } = useSelector(state => state.auth)
   const history = useHistory()
@@ -37,12 +36,12 @@ const NavbarMenu = ({ loading }) => {
   }
 
   return (
-    <div className='menu__container'>
+    <>
       <Button className='menu__button' onClick={handleOpen}>
         <Avatar src={avatar} alt={firstName} className='menu__avatar'>{firstName?.split('')[0]}</Avatar>
         <MenuIcon className='menu__icon' />
       </Button>
-      <Menu dir='rtl' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+      <Menu className='menu__container' dir='rtl' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={() => handleLinkClick('/')} className={`nav__item ${path === '/' ? 'nav__item--active' : ''}`}>
           {heb.home}
         </MenuItem>
@@ -66,7 +65,7 @@ const NavbarMenu = ({ loading }) => {
           </MenuItem>
         </div>}
       </Menu>
-    </div>
+    </>
   )
 }
 

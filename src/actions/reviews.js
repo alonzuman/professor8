@@ -54,21 +54,36 @@ export const getLatestReviews = () => async dispatch => {
 
 
 export const addReview = ({ review, professor }) => async dispatch => {
+  const { role } = store.getState().auth
   dispatch({
     type: 'REVIEWS/LOADING'
   })
   try {
-    await db.collection('reviews').add({
+    let newReview = {
       dateCreated: Date.now(),
       professor,
       pid: professor.id,
       ...review,
-      approved: false
-    })
+      approved: role >= 3 ? true : false
+    }
 
-    dispatch({
-      type: 'REVIEWS/CLEAR_LOADING',
-    })
+    const snapshot = await db.collection('reviews').add(newReview)
+
+    newReview = { ...newReview, id: snapshot.id }
+
+    if (role >= 3) {
+      await db.collection('professors').doc(professor.id).collection('reviews').doc(snapshot.id).set(newReview)
+      dispatch({
+        type: 'REVIEWS/ADD_ONE',
+        payload: newReview
+      })
+    } else {
+      dispatch({
+        type: 'REVIEWS/CLEAR_LOADING',
+      })
+
+    }
+
     dispatch(setFeedback({
       severity: 'success',
       msg: heb.actionSuccessAndPending
@@ -83,14 +98,13 @@ export const addReview = ({ review, professor }) => async dispatch => {
 }
 
 export const deleteReview = ({ review, professor }) => async dispatch => {
-  const { pid } = review;
+  const { pid, rating, id } = review;
+  const { overallRating, tags } = professor
   const { reviews } = store.getState().reviews
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
   try {
-    const { overallRating } = professor
-    const { rating } = review
     const total = reviews.length
 
     let overall;
@@ -100,22 +114,18 @@ export const deleteReview = ({ review, professor }) => async dispatch => {
       overall = (((overallRating * total) - rating) / (total - 1))
     }
 
-    let newTagsObj = {}
-    Object.keys(professor.tags).map((v, i) => {
-      if (review.tags.includes(v)) {
-        return newTagsObj[v] = professor.tags[v] - 1
-      } else {
-        return newTagsObj[v] = professor.tags[v]
-      }
-    })
+    // TODO remove tags from old array
 
     await db.collection('professors').doc(pid).set({
       numberOfReviews: firebase.firestore.FieldValue.increment(-1),
       overallRating: overall,
-      tags: newTagsObj
+      tags
     }, { merge: true })
 
     await db.collection('professors').doc(pid).collection('reviews').doc(review.id).delete()
+
+    await db.collection('reviews').doc(id).delete()
+
     dispatch({
       type: 'REVIEWS/SET_ALL',
       payload: {

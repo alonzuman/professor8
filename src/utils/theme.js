@@ -57,7 +57,7 @@ const light = {
     },
   },
   shape: {
-    borderRadius: 16
+    borderRadius: 8
   }
 }
 

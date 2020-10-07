@@ -8,7 +8,7 @@ const EditProfessorDialog = ({ open, onClose }) => {
   return (
     <Dialog dir='rtl' open={open} onClose={onClose}>
       <div className='header__container'>
-        <Typography variant='h5'>{heb.addReview}</Typography>
+        <Typography variant='h5'>{heb.editProfessor}</Typography>
         <IconButton onClick={onClose} style={{ marginLeft: -8 }}><CloseIcon /></IconButton>
       </div>
       <EditProfessor />

@@ -17,14 +17,14 @@ const ProfessorTags = ({ tags, reviewsCount, loading }) => {
   } else {
     return (
       <div className='page__section flex flex__wrap--wrap'>
-        {tags && Object.keys(tags)?.sort((a, b) => { return tags[b] - tags[a] }).map((v, i) => {
-          if (i <= 4 && tags[v] !== 0) {
+        {tags?.map((v, i) => {
+          if (i <= 4) {
             return (
             <Chip
               className='width__fit--content mb-1 ml-1'
               dir='rtl'
               color='secondary'
-              label={<span>{v} ({tags[v]})</span>}
+              label={<span>{v}</span>}
               key={i}
             />)
           }

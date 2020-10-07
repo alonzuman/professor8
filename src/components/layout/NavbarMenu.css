@@ -1,5 +1,6 @@
-.MuiPaper-elevation8 {
-  box-shadow: 0px 2px 6px #00000030!important;
+.menu__container .MuiPopover-paper {
+  border-radius: 16px!important;
+  box-shadow: 0px 4px 8px #00000015!important;
 }
 
 .nav__item {
@@ -28,6 +29,7 @@
 
 .menu__button {
   box-shadow: 0px 2px 6px #00000015;
+  border-radius: 16px!important;
 }
 
 .menu__button:hover {

@@ -83,30 +83,20 @@ export const adminApproveReview = review => async dispatch => {
       })
     })
 
-    // 2. correct overall settings of professor
-    let tagsObj = {}
-    tags.map(v => {
-      if (Object.keys(professor.tags).includes(v)) {
-        tagsObj[v] = (professor.tags[v] + 1)
-      } else {
-        tagsObj[v] = 1
-      }
-    })
-
-    // 3. add rating to professors average rating and increment reviews count
+    // 2. add rating to professors average rating and increment reviews count
     await db.collection('professors').doc(pid).set({
       numberOfReviews: firebase.firestore.FieldValue.increment(1),
       overallRating: overall,
-      tags: tagsObj
+      tags
     }, { merge: true })
 
-    // 4. add review to professor reviews collection
+    // 3. add review to professor reviews collection
     await db.collection('professors').doc(pid).collection('reviews').doc(id).set({
       ...review,
       approved: true
     })
 
-    // 5. set review as approved on the reviews collection
+    // 4. set review as approved on the reviews collection
     await db.collection('reviews').doc(id).set({
       pid,
       approved: true

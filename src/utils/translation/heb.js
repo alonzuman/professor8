@@ -90,7 +90,8 @@ const heb = {
   newListName: 'שם רשימה חדשה',
   saveProfessor: 'שמירת מרצה',
   existingLists: 'רשימות קיימות',
-  createANewList: 'יצירת רשימה חדשה'
+  createANewList: 'יצירת רשימה חדשה',
+  editProfessor: 'עריכת מרצה'
 }
 
 export default heb;
