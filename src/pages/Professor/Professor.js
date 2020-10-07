@@ -14,7 +14,8 @@ import ProfessorFooter from './components/ProfessorFooter';
 import SaveProfessorContainer from '../../containers/dialogs/SaveProfessorContainer';
 
 const Professor = ({ match }) => {
-  const { uid, role, anonymous, savedProfessors } = useSelector(state => state.auth)
+  const { uid, role, anonymous } = useSelector(state => state.auth)
+  const tagsLoading = useSelector(state => state.tags.loading)
   const { ids, lists } = useSelector(state => state.saved)
   const { id } = match.params
   const [addReview, setAddReview] = useState(false)
@@ -82,7 +83,7 @@ const Professor = ({ match }) => {
       <AverageRating reviewsCount={reviews?.length} averageRating={overallRating} loading={!overallRating && loading} />
       <Courses courses={courses} loading={!courses && loading && !professor} />
       <ReviewsList professor={professor} addReview={handleAddReview} />
-      <ProfessorFooter addReview={handleAddReview} />
+      <ProfessorFooter loading={tagsLoading} onClick={handleAddReview} />
     </div>
   )
 }

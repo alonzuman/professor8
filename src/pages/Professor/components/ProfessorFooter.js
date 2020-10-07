@@ -1,12 +1,14 @@
 import { Button } from '@material-ui/core'
+import { Skeleton } from '@material-ui/lab'
 import React from 'react'
 import heb from '../../../utils/translation/heb'
 import './ProfessorFooter.css'
 
-const ProfessorFooter = () => {
+const ProfessorFooter = ({ onClick, loading }) => {
   return (
     <div className='professor_footer__container mobile__show'>
-      <Button color='primary' className='full__width' variant='contained'>{heb.addReview}</Button>
+      {loading && <Skeleton height={36} width={'100%'} />}
+      {!loading && <Button onClick={onClick} color='primary' className='full__width' variant='contained'>{heb.addReview}</Button>}
     </div>
   )
 }
