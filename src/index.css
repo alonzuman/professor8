@@ -163,6 +163,10 @@ code {
   margin: 0 auto;
 }
 
+.m-2 {
+  margin: 16px!important
+}
+
 .mt-0 {
   margin-top: 0!important;
 }

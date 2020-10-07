@@ -30,7 +30,7 @@ const ProtectedRoute = ({ component: Component, path, minRole, ...rest }) => {
     return <div className='page__container flex flex__column align__center justify__center'><CircularProgress color='primary' /></div>
   } else if (!pageLoading && isAuth && condition) {
     return <Route {...rest} render={props => <Component {...props} />} />
-  } else if (!pageLoading && anonymous && !condition) {
+  } else if (!pageLoading && (anonymous || !condition || !role)) {
     return <Redirect to='/' />
   }
 }

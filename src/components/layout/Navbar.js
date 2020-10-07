@@ -19,7 +19,7 @@ const Navbar = () => {
           <NavbarMenu loading={loading} />
         </div>
         {isAuth &&
-        <Button className='add__btn' color='primary' variant='outlined' onClick={() => setAddingProfessorAndReview(!addingProfessorAndReview)}>
+        <Button className='add__btn ltr' color='primary' variant='outlined' onClick={() => setAddingProfessorAndReview(!addingProfessorAndReview)}>
           <AddIcon className='mr-1' />
           {heb.addReview}
         </Button>}

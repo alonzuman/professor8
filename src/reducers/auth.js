@@ -12,7 +12,6 @@ const initialState = {
   professorsCount: 0,
   professorsAdded: [],
   dateCreated: '',
-  savedProfessors: [],
   loading: false
 }
 
@@ -38,18 +37,6 @@ export const authReducer = (state = initialState, action) => {
     case 'AUTH/ERROR':
       return {
         ...state,
-        loading: false
-      }
-    case 'AUTH/SAVE_PROFESSOR':
-      return {
-        ...state,
-        savedProfessors: [...state.savedProfessors, payload],
-        loading: false
-      }
-    case 'AUTH/UNSAVE_PROFESSOR':
-      return {
-        ...state,
-        savedProfessors: [...state.savedProfessors.filter(v => v.id !== payload.id)],
         loading: false
       }
     case 'AUTH/SIGN_OUT':

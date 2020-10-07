@@ -38,7 +38,8 @@ function App() {
               <Route exact path='/about-us' component={AboutUs} />
               <Route exact path='/sign-in' component={Auth} />
               <Route exact path='/schools' component={Schools} />
-              <ProtectedRoute exact minRole={1} path='/saved-professors' component={SavedProfessors} />
+              <ProtectedRoute exact minRole={1} path='/saved' component={SavedProfessors} />
+              <ProtectedRoute exact minRole={1} path='/saved/:name' component={SavedProfessors} />
               <ProtectedRoute exact minRole={3} path='/admin' component={Admin} />
               <ProtectedRoute exact minRole={3} path='/admin/approve-reviews' component={ApproveReviewsContainer} />
               <ProtectedRoute exact minRole={3} path='/admin/approve-professors' component={ApproveProfessorsContainer} />

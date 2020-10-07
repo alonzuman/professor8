@@ -14,11 +14,13 @@ const Auth = () => {
     return <Redirect to='/' />
   } else {
     return (
-      <div className='auth__container rtl'>
-        {!loading && isAuth && !anonymous && <Redirect to='/' />}
-        <Typography variant='h1'>{heb.signIn}</Typography>
-        <SignInWithSocialMedia />
-        {/* <SignUp /> */}
+      <div className='auth__container rtl p-2 m-2'>
+        <div className='auth_options__container'>
+          {!loading && isAuth && !anonymous && <Redirect to='/' />}
+          <Typography variant='h1'>{heb.signIn}</Typography>
+          <SignInWithSocialMedia />
+          {/* <SignUp /> */}
+        </div>
       </div>
     )
   }

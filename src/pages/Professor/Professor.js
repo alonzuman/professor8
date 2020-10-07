@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfessor, saveProfessor, unsaveProfessor } from '../../actions/professors';
+import { getProfessor, getSavedLists, saveProfessor, unsaveProfessor } from '../../actions';
 import AddReviewContainer from '../../containers/dialogs/AddReviewContainer';
 import ReviewsList from '../../containers/lists/ReviewsList';
 import BackButton from '../../components/general/BackButton';
@@ -13,6 +13,7 @@ import ProfessorAction from './components/ProfessorAction';
 
 const Professor = ({ match }) => {
   const { uid, role, anonymous, savedProfessors } = useSelector(state => state.auth)
+  const { ids } = useSelector(state => state.saved)
   const { id } = match.params
   const [addReview, setAddReview] = useState(false)
   const [editing, setEditing] = useState(false)
@@ -23,9 +24,9 @@ const Professor = ({ match }) => {
 
   const handleSave = async () => {
     if (saved) {
-      await dispatch(unsaveProfessor(professor))
+      await dispatch(unsaveProfessor({ professor, list: 'general' }))
     } else {
-      await dispatch(saveProfessor(professor))
+      await dispatch(saveProfessor({ professor, list: 'general' }))
     }
     await setSaved(v => !v)
   }
@@ -35,15 +36,16 @@ const Professor = ({ match }) => {
   }
 
   useEffect(() => {
-    const isSaved = savedProfessors?.find(v => v.id === id)
-    if (isSaved) {
-      setSaved(true)
+    if (ids) {
+      const isSaved = ids.includes(id)
+      if (isSaved) {
+        setSaved(true)
+      }
     }
-  }, [savedProfessors])
+  }, [ids])
 
   useEffect(() => {
     dispatch(getProfessor(id))
-    console.log(savedProfessors)
   }, [id, dispatch])
 
   return (

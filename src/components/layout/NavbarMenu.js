@@ -39,7 +39,7 @@ const NavbarMenu = ({ loading }) => {
   return (
     <div className='menu__container'>
       <Button className='menu__button' onClick={handleOpen}>
-        <Avatar src={avatar} alt={firstName} className='menu__avatar'>{loading ? <Skeleton className='menu_avatar__skeleton' /> : firstName?.split('')[0]}</Avatar>
+        <Avatar src={avatar} alt={firstName} className='menu__avatar'>{firstName?.split('')[0]}</Avatar>
         <MenuIcon className='menu__icon' />
       </Button>
       <Menu dir='rtl' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
@@ -55,7 +55,7 @@ const NavbarMenu = ({ loading }) => {
           {heb.manage}
         </MenuItem>}
         {!anonymous &&
-        <MenuItem onClick={() => handleLinkClick('/saved-professors')} className={`nav__item ${path === '/saved-professors' ? 'nav__item--active' : ''}`}>
+        <MenuItem onClick={() => handleLinkClick('/saved')} className={`nav__item ${path === '/saved' ? 'nav__item--active' : ''}`}>
           {heb.savedProfessors}
         </MenuItem>}
         {!anonymous &&

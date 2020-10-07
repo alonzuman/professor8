@@ -17,10 +17,17 @@ export const setUser = user => async dispatch => {
       })
     } else {
       const snapshot = await usersRef.doc(uid).get()
-      dispatch({
-        type: 'AUTH/LOAD_USER',
-        payload: { uid, ...snapshot.data(), anonymous: false }
-      })
+      if (snapshot.data()) {
+        dispatch({
+          type: 'AUTH/LOAD_USER',
+          payload: { uid, ...snapshot.data(), anonymous: false }
+        })
+      } else {
+        dispatch({
+          type: 'AUTH/LOAD_USER',
+          payload: { uid, anonymous: true }
+        })
+      }
     }
   } catch (error) {
     console.log(error)
