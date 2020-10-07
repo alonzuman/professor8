@@ -8,7 +8,6 @@ import Courses from './components/Courses';
 import ProfessorTags from './components/ProfessorTags';
 import AverageRating from './components/AverageRating';
 import ProfessorHeader from './components/ProfessorHeader';
-import EditButton from '../../components/general/EditButton';
 import EditProfessorDialog from '../../containers/dialogs/EditProfessorDialog';
 import ProfessorAction from './components/ProfessorAction';
 
@@ -51,7 +50,7 @@ const Professor = ({ match }) => {
     <div dir='rtl'>
       <EditProfessorDialog open={editing} onClose={() => setEditing(false)} />
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
-      <div className='flex justify__between'>
+      <div className='flex justify__between pr-2 pl-2'>
         <BackButton sticky={true} variant='contained' />
         <ProfessorAction
           saved={saved}

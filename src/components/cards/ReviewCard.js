@@ -15,28 +15,26 @@ const ReviewCard = ({ review, showActions = true, showProfessor = false }) => {
 
   const timeAgo = moment(new Date(dateCreated)).fromNow()
   return (
-    <div className='review_card__wrapper'>
-      <Card className='review_card__container'>
-        <CardHeader
-          title={author}
-          subheader={timeAgo}
-          avatar={<Rating rating={rating} icon='star' />}
-        />
-        <CardContent>
-          <div className='mb-1'>
-            {tags?.map((v, i) => <Chip key={i} label={v} size='small' className='ml-5 mb-5' />)}
-            {wouldTakeAgain && <Chip label={heb.wouldTakeAgain} size='small' className='ml-5 mb-5' />}
-          </div>
-          <Typography variant='body1'>
-            {content}
-          </Typography>
-        </CardContent>
-        {showActions &&
-        <CardActions className='justify__between'>
-          <ReviewActions review={review} professor={professor} />
-        </CardActions>}
-      </Card>
-    </div>
+    <Card className='review_card__container'>
+      <CardHeader
+        title={author}
+        subheader={timeAgo}
+        avatar={<Rating rating={rating} icon='star' />}
+      />
+      <CardContent>
+        <div className='mb-1'>
+          {tags?.map((v, i) => <Chip key={i} label={v} size='small' className='ml-5 mb-5' />)}
+          {wouldTakeAgain && <Chip label={heb.wouldTakeAgain} size='small' className='ml-5 mb-5' />}
+        </div>
+        <Typography variant='body1'>
+          {content}
+        </Typography>
+      </CardContent>
+      {showActions &&
+      <CardActions className='justify__between'>
+        <ReviewActions review={review} professor={professor} />
+      </CardActions>}
+    </Card>
   )
 }
 

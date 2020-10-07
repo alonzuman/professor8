@@ -44,7 +44,7 @@ const SchoolAndName = ({ school, setSchool, name, setName, filterOptions, course
           value={name}
           onChange={(event, newValue) => setName(newValue)}
           renderInput={(params) => <TextField value={name} onChange={e => setName(e.target.value)} size='small' variant='outlined' label={heb.fullProfessorName} {...params} />}
-          renderOption={option => <div style={{ textAlign: 'right', width: '100%' }} >{option}</div>}
+          renderOption={option => <div className='autocomplete__option'>{option}</div>}
         />
       </FormGroup>
       <FormGroup className='form__group'>
@@ -53,11 +53,10 @@ const SchoolAndName = ({ school, setSchool, name, setName, filterOptions, course
           dir='rtl'
           filterOptions={filterOptions}
           options={courseOptions?.map(v => v)}
-          // defaultValue={[courseOptions[2]]}
           value={courses}
           onChange={(event, newCourses) => handleAddCourse(newCourses)}
           size='small'
-          renderOption={v => <div style={{ textAlign: 'right', width: '100%' }} >{v}</div>}
+          renderOption={v => <div className='autocomplete__option'>{v}</div>}
           renderTags={(value, getTagProps) =>
             value?.map((option, index) => (
               <Chip label={option} {...getTagProps({ index })} />

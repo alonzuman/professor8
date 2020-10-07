@@ -40,7 +40,7 @@ const SearchBar = ({ size = 'small', search, setSearch, collection, doc, filter,
         onChange={(event, newValue) => setSearch(newValue)}
         options={options?.map(v => v)}
         renderInput={(params) => <AutoCompleteInput size={size} label={placeholder} variant="outlined" {...params} />}
-        renderOption={option => <div style={{ textAlign: 'right', width: '100%' }} >{option}</div>}
+        renderOption={option => <div className='autocomplete__option'>{option}</div>}
         {...rest}
       />
     </div>

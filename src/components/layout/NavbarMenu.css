@@ -38,3 +38,9 @@
   text-decoration: inherit;
   color: inherit;
 }
+
+.menu_avatar__skeleton {
+  height: 32px!important;
+  width: 32px!important;
+  border-radius: 50%!important;
+}

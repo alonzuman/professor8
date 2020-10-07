@@ -13,3 +13,10 @@
   direction: rtl;
   margin-top: 8px;
 }
+
+.autocomplete__option {
+  font-size: 0.9rem;
+  text-align: right;
+  direction: rtl;
+  width: 100%;
+}

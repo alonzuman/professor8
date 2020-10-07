@@ -8,7 +8,10 @@ const PageContainer = ({ children }) => {
   const dispatch = useDispatch()
   const [height, setHeight] = useState()
 
-  useEffect(() => { dispatch(getTags()) }, [])
+  useEffect(() => {
+    dispatch(getTags())
+  }, [])
+
   useEffect(() => {
     const handleResize = () => {
       setHeight(window.innerHeight - 136)

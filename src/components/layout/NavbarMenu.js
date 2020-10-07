@@ -7,8 +7,9 @@ import heb from '../../utils/translation/heb'
 import './NavbarMenu.css'
 import MenuIcon from '@material-ui/icons/Menu';
 import { signOut } from '../../actions/auth';
+import { Skeleton } from '@material-ui/lab';
 
-const NavbarMenu = () => {
+const NavbarMenu = ({ loading }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const { avatar, firstName, anonymous, role } = useSelector(state => state.auth)
   const history = useHistory()
@@ -38,7 +39,7 @@ const NavbarMenu = () => {
   return (
     <div className='menu__container'>
       <Button className='menu__button' onClick={handleOpen}>
-        <Avatar src={avatar} alt={firstName} className='menu__avatar'>{firstName?.split('')[0]}</Avatar>
+        <Avatar src={avatar} alt={firstName} className='menu__avatar'>{loading ? <Skeleton className='menu_avatar__skeleton' /> : firstName?.split('')[0]}</Avatar>
         <MenuIcon className='menu__icon' />
       </Button>
       <Menu dir='rtl' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
@@ -54,7 +55,7 @@ const NavbarMenu = () => {
           {heb.manage}
         </MenuItem>}
         {!anonymous &&
-        <MenuItem onClick={() => handleLinkClick('/saved-professors')} className={`nav__item ${path === '/admin' ? 'nav__item--active' : ''}`}>
+        <MenuItem onClick={() => handleLinkClick('/saved-professors')} className={`nav__item ${path === '/saved-professors' ? 'nav__item--active' : ''}`}>
           {heb.savedProfessors}
         </MenuItem>}
         {!anonymous &&

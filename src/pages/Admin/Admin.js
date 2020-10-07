@@ -9,7 +9,7 @@ const Admin = () => {
   const handleMenuClick = path => history.push({ pathname: path })
 
   return (
-    <div className='rtl'>
+    <div className='rtl p-2'>
       <PageHeader title={heb.manage} />
       <List>
         <ListItem onClick={() => handleMenuClick('/admin/approve-reviews')} button>

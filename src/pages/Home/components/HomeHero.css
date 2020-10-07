@@ -1,13 +1,19 @@
 .hero__container {
-  min-height: 618px;
+  min-height: 512px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 16px;
 }
-
 
 .hero_svg {
   width: 100%;
-  top: 72px;
+  padding: 32px;
+  top: 0;
   z-index: -1;
-  width: 360px;
+  position: absolute;
 }
 
 @media (min-width: 768px) {
@@ -15,13 +21,10 @@
     position: absolute;
     left: 0;
     top: 20px;
-    transform: none;
-    min-width: 824px;
+    max-width: 812px;
   }
-}
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  .hero_svg {
-    min-width: 420px;
+  .hero__container {
+    justify-content: center;
   }
 }

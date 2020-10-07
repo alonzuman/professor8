@@ -19,16 +19,17 @@ const LatestReviews = () => {
     if (viewWidth <= 512) {
       return 1.2
     } else if (512 < viewWidth && viewWidth <= 768) {
-      return 1.8
+      return 1.2
     } else if (768 < viewWidth && viewWidth <= 900) {
       return 2
     } else {
-      return 3
+      return 2.98
     }
   }
 
   const options = {
     slidesPerView: slidesCount(),
+    spaceBetween: 16
   }
 
   useEffect(() => {
@@ -36,14 +37,18 @@ const LatestReviews = () => {
   }, [])
 
   return (
-    <div className='latest_reviews__container mt-4'>
-      <div className='flex align__center justify__between'>
+    <div className='latest_reviews__container'>
+      <div className='flex align__center justify__between pr-2'>
         <Typography variant='h3'>{heb.latestReviews}</Typography>
       </div>
-      {loading && <ReviewSkeleton />}
-      {!loading && <Swiper style={{ marginLeft: viewWidth <= 768 ? -16 : '' }} {...options}>
-        {reviews?.map((v, i) => <SwiperSlide key={i}><Link to={`/professor/${v.pid}`}><ReviewCard showActions={false} professor={{ id: v.pid }} showProfessor review={v} /></Link></SwiperSlide>) }
-      </Swiper>}
+      {loading &&
+        <div className='p-2'>
+          <ReviewSkeleton className='mw-512' />
+        </div>}
+      {!loading &&
+        <Swiper {...options}>
+          {reviews?.map((v, i) => <SwiperSlide key={i}><Link to={`/professor/${v.pid}`}><ReviewCard showActions={false} professor={{ id: v.pid }} showProfessor review={v} /></Link></SwiperSlide>)}
+        </Swiper>}
     </div>
   )
 }

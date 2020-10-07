@@ -48,7 +48,7 @@ const ReviewAndDetails = ({
           onChange={(event, newTags) => handleAddTag(newTags)}
           filterOptions={filterOptions}
           size='small'
-          renderOption={v => <div style={{ textAlign: 'right', width: '100%' }} >{v}</div>}
+          renderOption={v => <div className='autocomplete__option'>{v}</div>}
           renderTags={(value, getTagProps) =>
             value?.map((option, index) => (
               <Chip label={option} {...getTagProps({ index })} />

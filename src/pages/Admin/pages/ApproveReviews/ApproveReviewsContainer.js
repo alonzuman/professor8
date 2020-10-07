@@ -16,7 +16,7 @@ const ApproveReviewsContainer = () => {
   }, [dispatch])
 
   return (
-    <div className='rtl'>
+    <div className='rtl p-2'>
       <PageHeader sticky backButton title={heb.manageReviews} />
       <ApproveReviewsList reviews={reviews} loading={loading} />
     </div>

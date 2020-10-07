@@ -26,19 +26,21 @@ const ReviewsList = ({ addReview, professor }) => {
   if (loading) {
     return (
       <div className='page__section rtl'>
-        <Skeleton width={120} height={24} />
+        <Skeleton className='mb-2' width={120} height={24} />
         <Grid container>
           <Grid item xs={12} md={4} lg={4}>
-            <ReviewSkeleton />
+            <ReviewSkeleton className='mw-512' />
           </Grid>
         </Grid>
       </div>
     )
   } else if (!loading && reviews?.length !== 0) {
     return (
-      <div className='page__section'>
-        {isAuth && <Button color='primary' variant='contained' className='mb-1' onClick={addReview}>{heb.addReview}</Button>}
-        <Typography variant='subtitle1'>{reviews?.length > 0 ? `${heb.reviews} (${reviews.length})` : ''}</Typography>
+      <div className='flex flex__column align__center pl-0 pr-0'>
+        <div className='page__section'>
+          {isAuth && <Button color='primary' variant='contained' className='mb-1' onClick={addReview}>{heb.addReview}</Button>}
+          <Typography variant='subtitle1'>{reviews?.length > 0 ? `${heb.reviews} (${reviews.length})` : ''}</Typography>
+        </div>
         <ReviewsSwiper loading={loading} reviews={reviews} viewWidth={width} />
       </div>
     )

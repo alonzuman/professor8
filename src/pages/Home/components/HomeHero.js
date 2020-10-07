@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import HeroSvg from '../../../assets/svgs/Students'
+import ProfessorSvg from '../../../assets/svgs/Professor';
 import { validateStringInput } from '../../../utils/form'
 import HomeSearchBar from './HomeSearchBar'
 import qs from 'query-string'
@@ -32,7 +33,7 @@ const HomeHero = () => {
 
   return (
     <div className='hero__container'>
-      <HeroSvg className='hero_svg' />
+      <ProfessorSvg className='hero_svg' />
       <HomeSearchBar
         loading={loading}
         handleSubmit={handleSubmit}

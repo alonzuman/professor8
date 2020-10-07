@@ -11,7 +11,7 @@ const AddReview = ({ professor, onClose }) => {
   const { uid } = useSelector(state => state.auth)
   const tagOptions = useSelector(state => state.tags.professorTags.tags)
   const courseOptions = useSelector(state => state.tags.courses.names)
-  const { loading } = useSelector(state => state.professors)
+  const { loading } = useSelector(state => state.reviews)
   const [rating, setRating] = useState(5);
   const [tagsArray, setTagsArray] = useState([])
   const [author, setAuthor] = useState(heb.annonymous)
@@ -112,7 +112,7 @@ const AddReview = ({ professor, onClose }) => {
           value={courses}
           onChange={(event, newCourses) => handleAddCourse(newCourses)}
           size='small'
-          renderOption={v => <div style={{ textAlign: 'right', width: '100%' }} >{v}</div>}
+          renderOption={v => <div className='autocomplete__option'>{v}</div>}
           renderTags={(value, getTagProps) =>
             value?.map((option, index) => (
               <Chip label={option} {...getTagProps({ index })} />

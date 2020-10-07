@@ -3,9 +3,9 @@ import React from 'react'
 import './ReviewCard.css'
 import { Skeleton } from '@material-ui/lab';
 
-const ReviewSkeleton = () => {
+const ReviewSkeleton = ({ className }) => {
   return (
-    <div className='review_card__wrapper full__width'>
+    <div className={`${className} review_card__wrapper full__width`}>
       <Card className='review_card__container'>
         <CardHeader
           title={<Skeleton width={120} />}

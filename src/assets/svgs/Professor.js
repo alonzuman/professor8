@@ -3,8 +3,7 @@ import React from 'react'
 const Professor = ({ className }) => {
   return (
     <div className={className}>
-      <svg xmlns="http://www.w3.org/2000/svg" id="e7b3b0c3-1e4f-480c-906c-c03021e90d10" data-name="Layer 1" width="991.13988"
-        height="770.17774" viewBox="0 0 991.13988 770.17774">
+      <svg xmlns="http://www.w3.org/2000/svg" id="e7b3b0c3-1e4f-480c-906c-c03021e90d10" viewBox="0 0 991.13988 770.17774">
         <path
           d="M394.01076,64.91113,236.15757,150.41336a40.156,40.156,0,1,1-70.5866,38.23373l-53.82344,29.15382L251.16683,475.1951,533.43006,322.30535Z"
           transform="translate(-104.43006 -64.91113)" fill="#f2f2f2" />

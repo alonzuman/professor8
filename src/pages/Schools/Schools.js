@@ -24,13 +24,13 @@ const Schools = () => {
   }
 
   return (
-    <div className='rtl'>
+    <div className='rtl p-2'>
       <PageHeader backButton title={heb.schoolsList} />
-      { !schools &&
+      {!schools &&
         <div className='page__container flex flex__column align__center justify__center'>
           <CircularProgress />
         </div>}
-      { schools?.map((v, i) => <Button key={i} className='ml-1 mb-1' variant='outlined' onClick={() => handleClick(v)}>{v}</Button>) }
+      {schools?.map((v, i) => <Button key={i} className='ml-1 mb-1' variant='outlined' onClick={() => handleClick(v)}>{v}</Button>) }
     </div>
   )
 }

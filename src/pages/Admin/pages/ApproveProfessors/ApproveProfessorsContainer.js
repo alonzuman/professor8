@@ -16,7 +16,7 @@ const ApproveProfessorsContainer = () => {
   }, [])
 
   return (
-    <div className='rtl'>
+    <div className='rtl p-2'>
       <PageHeader sticky backButton title={heb.manageProfessors} />
       <ApproveProfessorsList loading={loading} professors={professors} />
     </div>

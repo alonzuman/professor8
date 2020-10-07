@@ -12,6 +12,7 @@
   background-color: var(--bg-00);
   padding: 16px;
   border-radius: 32px;
+  box-shadow: 0px 4px 8px #00000015;
 }
 
 @media (min-width: 768px) {
@@ -26,6 +27,5 @@
   .home_search_bar__container {
     padding: 24px;
     box-shadow: 0px 0px 10px #00000015;
-    margin-top: 180px;
   }
 }

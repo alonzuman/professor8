@@ -30,7 +30,7 @@ const SchoolsSwiper = () => {
   })
 
   const options = {
-    slidesPerView: width < 768 ? 1.2 : 4,
+    slidesPerView: width < 768 ? 1.2 : 3.98,
     spaceBetween: 16
   }
 
@@ -55,15 +55,13 @@ const SchoolsSwiper = () => {
 
   return (
     <div className='schools_section'>
-      <div className='flex align__center justify__between'>
+      <div className='flex align__center justify__between pr-2 pl-2'>
         <Typography variant='h3'>{heb.schools}</Typography>
         <Button onClick={handleLinkClick} color='primary' className='small__btn'>{heb.showAll}</Button>
       </div>
-      <div className='schools_swiper__container'>
-        <Swiper {...options}>
-          {schools?.map((v, i) => <SwiperSlide onClick={() => handleClick(v.name)} key={i}><SchoolCard school={v} /></SwiperSlide>)}
-        </Swiper>
-      </div>
+      <Swiper {...options}>
+        {schools?.map((v, i) => <SwiperSlide onClick={() => handleClick(v.name)} key={i}><SchoolCard school={v} /></SwiperSlide>)}
+      </Swiper>
     </div>
   )
 }

@@ -11,25 +11,21 @@ const Navbar = () => {
   const { isAuth, loading } = useSelector(state => state.auth)
   const [addingProfessorAndReview, setAddingProfessorAndReview] = useState(false)
 
-  if (loading && !isAuth) {
-    return <div className='navbar__container'/>
-  } else {
-    return (
-      <div className='navbar__container'>
-        <AddProfessorContainer open={addingProfessorAndReview} onClose={() => setAddingProfessorAndReview(false)} />
-        <div className='navbar__menu'>
-          {isAuth &&
-          <Button className='add__btn' color='primary' variant='outlined' onClick={() => setAddingProfessorAndReview(!addingProfessorAndReview)}>
-            <AddIcon className='mr-1' />
-            {heb.addReview}
-          </Button>}
-          <div dir='rtl'>
-            <NavbarMenu />
-          </div>
+  return (
+    <div className='navbar__container'>
+      <AddProfessorContainer open={addingProfessorAndReview} onClose={() => setAddingProfessorAndReview(false)} />
+      <div className='navbar__menu'>
+        <div dir='rtl'>
+          <NavbarMenu loading={loading} />
         </div>
+        {isAuth &&
+        <Button className='add__btn' color='primary' variant='outlined' onClick={() => setAddingProfessorAndReview(!addingProfessorAndReview)}>
+          <AddIcon className='mr-1' />
+          {heb.addReview}
+        </Button>}
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Navbar
