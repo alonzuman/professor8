@@ -1,0 +1,21 @@
+.professor_footer__container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 8px 16px;
+  box-shadow: 0px 0px 10px #00000015;
+  background-color: var(--bg-00);
+  z-index: 9;
+}
+
+@media (min-height: 724px) and (width: 375px) {
+  .professor_footer__container {
+    padding: 8px 16px 24px 16px;
+  }
+}
+
+@media (min-height: 724px) and (width: 414px) {
+  .professor_footer__container {
+    padding: 8px 16px 24px 16px;
+  }
+}

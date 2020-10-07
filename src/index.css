@@ -481,3 +481,15 @@ code {
   width: 100%;
   padding: 16px!important;
 }
+
+@media (max-width: 768px) {
+  .mobile__hide {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile__show {
+    display: none;
+  }
+}

@@ -8,7 +8,7 @@ import NoReviews from './NoReviews'
 import { useSelector } from 'react-redux'
 import ReviewsSwiper from './ReviewsSwiper'
 
-const ReviewsList = ({ addReview, professor }) => {
+const ReviewsList = ({ addReview }) => {
   const { isAuth } = useSelector(state => state.auth)
   const [width, setWidth] = useState()
   const { loading, reviews } = useSelector(state => state.reviews)
@@ -38,7 +38,7 @@ const ReviewsList = ({ addReview, professor }) => {
     return (
       <div className='flex flex__column align__center pl-0 pr-0'>
         <div className='page__section'>
-          {isAuth && <Button color='primary' variant='contained' className='mb-1' onClick={addReview}>{heb.addReview}</Button>}
+          {isAuth && <Button color='primary' variant='contained' className='mb-1 mobile__hide' onClick={addReview}>{heb.addReview}</Button>}
           <Typography variant='subtitle1'>{reviews?.length > 0 ? `${heb.reviews} (${reviews.length})` : ''}</Typography>
         </div>
         <ReviewsSwiper loading={loading} reviews={reviews} viewWidth={width} />

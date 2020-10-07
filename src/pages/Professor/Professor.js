@@ -10,6 +10,7 @@ import AverageRating from './components/AverageRating';
 import ProfessorHeader from './components/ProfessorHeader';
 import EditProfessorDialog from '../../containers/dialogs/EditProfessorDialog';
 import ProfessorAction from './components/ProfessorAction';
+import ProfessorFooter from './components/ProfessorFooter';
 
 const Professor = ({ match }) => {
   const { uid, role, anonymous, savedProfessors } = useSelector(state => state.auth)
@@ -69,6 +70,7 @@ const Professor = ({ match }) => {
       <AverageRating reviewsCount={reviews?.length} averageRating={overallRating} loading={!overallRating && loading} />
       <Courses courses={courses} loading={!courses && loading && !professor} />
       <ReviewsList professor={professor} addReview={handleAddReview} />
+      <ProfessorFooter addReview={handleAddReview} />
     </div>
   )
 }

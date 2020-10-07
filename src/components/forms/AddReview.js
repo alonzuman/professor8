@@ -131,6 +131,7 @@ const AddReview = ({ professor, onClose }) => {
           value={tagsArray}
           onChange={(event, newTags) => handleAddTag(newTags)}
           size='small'
+          renderOption={v => <div className='autocomplete__option'>{v}</div>}
           renderTags={(value, getTagProps) =>
             value.map((option, index) => (
               <Chip label={option} {...getTagProps({ index })} />
