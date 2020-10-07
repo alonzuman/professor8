@@ -7,6 +7,7 @@ import ProfessorCard from '../../../../components/cards/ProfessorCard'
 import PageHeader from '../../../../components/layout/PageHeader'
 import SavedListDialog from '../../../../containers/dialogs/SavedListDialog'
 import heb from '../../../../utils/translation/heb'
+import NoResults from '../../../Results/components/NoResults'
 import SavedListCard from './components/SavedListCard'
 import './SavedProfessors.css'
 
@@ -47,6 +48,7 @@ const SavedProfessors = ({ match }) => {
       <SavedListDialog list={list} name={name} open={open} onClose={handleClose} />
       <PageHeader divider title={heb.savedProfessors} />
       <Grid container spacing={2}>
+        {Object.keys(lists).length === 0 && !loading && <NoResults msg={heb.noListsFound} centered />}
         {Object.keys(lists)?.map((v, i) => {
           return (
             <Grid item xs={6} md={4} lg={4}>

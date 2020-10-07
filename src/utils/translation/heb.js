@@ -91,7 +91,8 @@ const heb = {
   saveProfessor: 'שמירת מרצה',
   existingLists: 'רשימות קיימות',
   createANewList: 'יצירת רשימה חדשה',
-  editProfessor: 'עריכת מרצה'
+  editProfessor: 'עריכת מרצה',
+  noListsFound: 'לא נמצאו רשימות'
 }
 
 export default heb;
