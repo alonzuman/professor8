@@ -33,9 +33,9 @@ exports.deleteReview = functions.firestore
 
 exports.addReview = functions.firestore
   .document('/professors/{pid}/reviews/{rid}')
-  .onCreate(async (change, context) => {
+  .onCreate(async (snap, context) => {
     const pid = context.params.pid;
-    const { tags, approved } = change.after.data()
+    const { tags, approved } = snap.data()
 
     if (approved === true) {
       const reviewsSnap = await admin.firestore().collection('professors').doc(pid).collection('reviews').get()
