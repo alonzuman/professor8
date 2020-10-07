@@ -11,25 +11,36 @@ import ProfessorHeader from './components/ProfessorHeader';
 import EditProfessorDialog from '../../containers/dialogs/EditProfessorDialog';
 import ProfessorAction from './components/ProfessorAction';
 import ProfessorFooter from './components/ProfessorFooter';
+import SaveProfessorContainer from '../../containers/dialogs/SaveProfessorContainer';
 
 const Professor = ({ match }) => {
   const { uid, role, anonymous, savedProfessors } = useSelector(state => state.auth)
-  const { ids } = useSelector(state => state.saved)
+  const { ids, lists } = useSelector(state => state.saved)
   const { id } = match.params
   const [addReview, setAddReview] = useState(false)
   const [editing, setEditing] = useState(false)
+  const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const dispatch = useDispatch()
   const { loading, professor } = useSelector(state => state.professors)
   const { name, tags, overallRating, avatar, reviews, school, courses } = professor;
 
-  const handleSave = async () => {
+  const handleSave = async listName => {
+
     if (saved) {
-      await dispatch(unsaveProfessor({ professor, list: 'general' }))
+      let oldName;
+      Object.keys(lists).forEach(v => {
+        if (Boolean(lists[v].filter(prof => prof.id !== id))) {
+          oldName = v
+        }
+      })
+      await dispatch(unsaveProfessor({ professor, list: oldName }))
+      await setSaved(false)
     } else {
-      await dispatch(saveProfessor({ professor, list: 'general' }))
+      await dispatch(saveProfessor({ professor, list: listName }))
+      await setSaved(true)
     }
-    await setSaved(v => !v)
+    await setSaving(false)
   }
 
   const handleAddReview = () => {
@@ -51,13 +62,14 @@ const Professor = ({ match }) => {
 
   return (
     <div dir='rtl'>
+      <SaveProfessorContainer open={saving} onClose={() => setSaving(false)} action={handleSave} />
       <EditProfessorDialog open={editing} onClose={() => setEditing(false)} />
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
       <div className='flex justify__between pr-2 pl-2'>
         <BackButton sticky={true} variant='contained' />
         <ProfessorAction
           saved={saved}
-          setSaved={handleSave}
+          setSaving={saved ? handleSave : () => setSaving(true)}
           anonymous={anonymous}
           uid={uid}
           professor={professor}

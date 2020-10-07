@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import './SavedListCard.css'
 
 const SavedListCard = ({ name }) => {
   return (
-    <div>
+    <div className='saved_list_card__container'>
       <p>{name}</p>
     </div>
   )

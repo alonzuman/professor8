@@ -49,11 +49,11 @@ const SavedProfessors = ({ match }) => {
       <Grid container spacing={2}>
         {Object.keys(lists)?.map((v, i) => {
           return (
-            <Link key={i} to={`/saved/${v}`}>
-              <Grid item xs={12} md={4} lg={4}>
+            <Grid item xs={6} md={4} lg={4}>
+              <Link key={i} to={`/saved/${v}`}>
                 <SavedListCard name={v} />
-              </Grid>
-            </Link>
+              </Link>
+            </Grid>
           )
         })}
       </Grid>

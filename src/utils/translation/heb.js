@@ -85,7 +85,12 @@ const heb = {
   schoolsList: 'רשימת מוסדות',
   manageProfessors: 'ניהול פרופסורים',
   latestReviews: 'ביקורות אחרונות',
-  savedProfessors: 'שמור'
+  savedProfessors: 'הרשימות שלי',
+  save: 'שמירה',
+  newListName: 'שם רשימה חדשה',
+  saveProfessor: 'שמירת מרצה',
+  existingLists: 'רשימות קיימות',
+  createANewList: 'יצירת רשימה חדשה'
 }
 
 export default heb;
