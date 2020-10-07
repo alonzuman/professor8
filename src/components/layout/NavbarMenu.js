@@ -25,6 +25,8 @@ const NavbarMenu = () => {
 
   const handleSignOut = () => {
     dispatch(signOut())
+
+    handleClose()
   }
 
   const handleLinkClick = path => {
