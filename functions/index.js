@@ -54,7 +54,8 @@ exports.addReview = functions.firestore
         })
       }
 
-      return admin.firestore().collection('professors').doc(pid).set({
+      await admin.firestore().collection('latestReviews').doc(rid).set(snap.data())
+      return await admin.firestore().collection('professors').doc(pid).set({
         overallRating,
         numberOfReviews: filteredReviews.length
       }, { merge: true })
@@ -67,6 +68,7 @@ exports.updateReview = functions.firestore
   .document('/professors/{pid}/reviews/{rid}')
   .onUpdate(async (change, context) => {
     const pid = context.params.pid;
+    const rid = context.params.rid;
     const { tags, approved } = change.after.data()
 
     const reviewsSnap = await admin.firestore().collection('professors').doc(pid).collection('reviews').get()
@@ -91,7 +93,8 @@ exports.updateReview = functions.firestore
       })
     }
 
-    return admin.firestore().collection('professors').doc(pid).set({
+    await admin.firestore().collection('latestReviews').doc(rid).set(change.after.data())
+    return await admin.firestore().collection('professors').doc(pid).set({
       overallRating,
       numberOfReviews: filteredReviews.length
     }, { merge: true })

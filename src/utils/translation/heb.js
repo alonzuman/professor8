@@ -92,7 +92,9 @@ const heb = {
   existingLists: 'רשימות קיימות',
   createANewList: 'יצירת רשימה חדשה',
   editProfessor: 'עריכת מרצה',
-  noListsFound: 'לא נמצאו רשימות'
+  noListsFound: 'לא נמצאו רשימות',
+  noReviewsFound: 'לא נמצאו ביקורות לאשר',
+  noProfessorsFound: 'לא נמצאו מרצים לאשר'
 }
 
 export default heb;

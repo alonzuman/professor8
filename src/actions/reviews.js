@@ -3,7 +3,7 @@ import { db } from "../firebase"
 import store from '../store'
 import heb from "../utils/translation/heb"
 import { setFeedback } from "./feedback"
-const reviewsRef = db.collection('reviews')
+const reviewsRef = db.collection('latestReviews')
 const professorsRef = db.collection('professors')
 
 export const getProfessorReviews = pid => async dispatch => {
