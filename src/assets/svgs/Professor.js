@@ -6,14 +6,14 @@ const Professor = ({ className }) => {
       <svg xmlns="http://www.w3.org/2000/svg" id="e7b3b0c3-1e4f-480c-906c-c03021e90d10" viewBox="0 0 991.13988 770.17774">
         <path
           d="M394.01076,64.91113,236.15757,150.41336a40.156,40.156,0,1,1-70.5866,38.23373l-53.82344,29.15382L251.16683,475.1951,533.43006,322.30535Z"
-          transform="translate(-104.43006 -64.91113)" fill="#f2f2f2" />
+          transform="translate(-104.43006 -64.91113)" fill="var(--bg-01)" />
         <circle cx="94.60365" cy="105.66791" r="32.5874" fill="#6c63ff" />
         <path
           d="M790.38464,753.97532l170.67214-55.67116a40.156,40.156,0,1,1,76.31882-24.89429l58.19434-18.98228-90.777-278.29668L699.60765,475.6786Z"
-          transform="translate(-104.43006 -64.91113)" fill="#f2f2f2" />
+          transform="translate(-104.43006 -64.91113)" fill="var(--bg-01)" />
         <circle cx="896.77566" cy="620.24394" r="32.5874" fill="#6c63ff" />
         <rect x="115.5" y="152.67774" width="788" height="358" fill="#3f3d56" />
-        <rect x="128.5" y="165.67774" width="762" height="325" fill="#fff" />
+        <rect x="128.5" y="165.67774" width="762" height="325" fill="var(--bg-00)" />
         <rect x="739" y="475.17774" width="74" height="25" fill="#3f3d56" />
         <rect x="681" y="494.17774" width="54" height="7" fill="#6c63ff" />
         <polyline points="190.5 288.678 481.5 288.678 526.616 310.657 598.5 345.678 645.5 257.678 778.5 257.678" fill="none"
@@ -49,7 +49,7 @@ const Professor = ({ className }) => {
           stroke-miterlimit="10" stroke-width="2" />
         <circle cx="809.54207" cy="75.52974" r="14.75556" fill="none" stroke="#3f3d56" stroke-miterlimit="10"
           stroke-width="2" />
-        <ellipse cx="152" cy="742.17774" rx="152" ry="28" fill="#f2f2f2" />
+        <ellipse cx="152" cy="742.17774" rx="152" ry="28" fill="var(--bg-01)" />
         <polygon points="256.389 493.658 229.272 507.339 231.027 510.834 258.143 497.153 256.389 493.658" fill="#6c63ff" />
         <path
           d="M356.41026,533.12245l-1.21823,7.3094s1.82735,50.55672-11.57323,34.71968-4.26382-37.15614-4.26382-37.15614l3.65471-6.09117Z"

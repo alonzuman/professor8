@@ -30,7 +30,7 @@ const Navbar = () => {
           <FormControlLabel
             className='mr-1'
             control={<Switch checked={checked} onChange={handleThemeChange} />}
-            label={<Brightness4Icon />}
+            label={<Brightness4Icon className='mt-1' />}
           />
         </div>
         {isAuth &&
