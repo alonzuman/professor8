@@ -492,3 +492,7 @@ code {
 .icon__button:hover {
   background-color: var(--bg-01)!important;
 }
+
+.MuiStepper-root {
+  padding: 24px 8px!important;
+}
