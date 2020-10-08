@@ -36,6 +36,7 @@ const heb = {
   tags: 'תגיות',
   tag: 'תיוג',
   overallRating: 'דירוג ממוצע',
+  rating: 'דירוג ממוצע',
   showAll: "הצג הכל",
   hide: "הסתר",
   in: 'ב',

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Rating from '../general/Rating';
 
 const ProfessorCard = ({ professor }) => {
-  const { name, avatar, id, overallRating, school } = professor
+  const { name, avatar, id, rating, school } = professor
 
   return (
     <Link to={`/professor/${id}`}>
@@ -14,7 +14,7 @@ const ProfessorCard = ({ professor }) => {
       </ListItemAvatar>
       <ListItemText primary={name} secondary={school} />
       <ListItemSecondaryAction>
-        {overallRating > 0 && <Rating rating={overallRating} icon={'star'} />}
+        {rating > 0 && <Rating rating={rating} icon={'star'} />}
       </ListItemSecondaryAction>
     </ListItem>
     <Divider />

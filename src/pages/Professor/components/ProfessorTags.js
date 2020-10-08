@@ -4,7 +4,7 @@ import { Skeleton } from '@material-ui/lab'
 
 const ProfessorTags = ({ tags, reviewsCount, loading }) => {
 
-  if (loading) {
+  if (loading || !tags) {
     return (
       <div className='page__section flex flex__wrap--wrap'>
         {!tags && [0, 0, 0, 0].map((v, i) => <Skeleton key={i} className='ml-2' height={48} width={68} />)}
@@ -17,15 +17,15 @@ const ProfessorTags = ({ tags, reviewsCount, loading }) => {
   } else {
     return (
       <div className='page__section flex flex__wrap--wrap'>
-        {typeof tags === Array && tags?.map((v, i) => {
+        {tags && Object.keys(tags)?.sort((a, b) => { return tags[b] - tags[a] }).map((v, i) => {
           if (i <= 4) {
             return (
             <Chip
               className='width__fit--content mb-1 ml-1'
               dir='rtl'
               color='secondary'
-              label={<span>{v}</span>}
-              key={i}
+              label={<span>{v} ({tags[v]})</span>}
+              key={v}
             />)
           }
         })}

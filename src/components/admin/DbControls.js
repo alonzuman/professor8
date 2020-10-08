@@ -36,7 +36,7 @@ const DbControls = () => {
       for (let i = 0; i < 10; i++) {
         const professor = {
           name: faker.name.findName(),
-          overallRating: Math.floor(Math.random() * 5),
+          rating: Math.floor(Math.random() * 5),
           role: 'Professor',
           tags: [],
           school: {

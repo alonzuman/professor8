@@ -76,7 +76,7 @@ const AddProfessorAndReview = ({ onClose }) => {
       tags: tagsArray,
       numberOfReviews: 0,
       courses,
-      overallRating: rating,
+      rating,
     }
 
     const review = {

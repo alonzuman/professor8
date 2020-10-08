@@ -97,7 +97,7 @@ export const addReview = ({ review, professor }) => async dispatch => {
 
 export const deleteReview = ({ review, professor }) => async dispatch => {
   const { pid, id } = review;
-  const { overallRating } = professor
+  const { rating } = professor
   const { reviews } = store.getState().reviews
   dispatch({
     type: 'PROFESSORS/LOADING'

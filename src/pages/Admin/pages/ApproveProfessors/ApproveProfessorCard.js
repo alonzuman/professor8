@@ -10,7 +10,7 @@ import heb from '../../../../utils/translation/heb'
 moment.locale('he')
 
 const ApproveProfessorCard = ({ professor, loading }) => {
-  const { name, approved, courses, overallRating, school, tags, uid, dateCreated } = professor;
+  const { name, approved, courses, rating, school, tags, uid, dateCreated } = professor;
   const timeAgo = moment(new Date(dateCreated || Date.now())).fromNow()
   const dispatch = useDispatch()
 
@@ -22,7 +22,7 @@ const ApproveProfessorCard = ({ professor, loading }) => {
       <CardHeader
         title={name}
         subheader={timeAgo}
-        avatar={<Rating rating={overallRating} />}
+        avatar={<Rating rating={rating} />}
       />
       {courses?.length !== 0 &&
       <div className='mb-1 p-1'>

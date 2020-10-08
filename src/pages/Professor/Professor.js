@@ -24,7 +24,7 @@ const Professor = ({ match }) => {
   const [saved, setSaved] = useState(false)
   const dispatch = useDispatch()
   const { loading, professor } = useSelector(state => state.professors)
-  const { name, tags, overallRating, avatar, reviews, school, courses } = professor;
+  const { name, tags, rating, avatar, reviews, school, courses } = professor;
 
   const handleSave = async listName => {
 
@@ -80,7 +80,7 @@ const Professor = ({ match }) => {
       </div>
       <ProfessorHeader name={name} avatar={avatar} school={school} loading={!name && loading}/>
       <ProfessorTags reviewsCount={reviews?.length} tags={tags} loading={!tags && loading && !professor} />
-      <AverageRating reviewsCount={reviews?.length} averageRating={overallRating} loading={!overallRating && loading} />
+      <AverageRating reviewsCount={reviews?.length} averageRating={rating} loading={!rating && loading} />
       <Courses courses={courses} loading={!courses && loading && !professor} />
       <ReviewsList professor={professor} addReview={handleAddReview} />
       <ProfessorFooter loading={tagsLoading} onClick={handleAddReview} />
