@@ -14,7 +14,7 @@ const BackButton = ({ variant, sticky = false }) => {
     backgroundColor: 'var(--bg-00)'
   }
 
-  return <IconButton style={buttonStyle} onClick={() => history.goBack()}><KeyboardArrowRightIcon /></IconButton>
+  return <IconButton className='icon__button' style={buttonStyle} onClick={() => history.goBack()}><KeyboardArrowRightIcon /></IconButton>
 }
 
 export default BackButton

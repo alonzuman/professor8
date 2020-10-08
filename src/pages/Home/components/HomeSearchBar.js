@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Typography } from '@material-ui/core'
+import { Button, CircularProgress, Paper, Typography } from '@material-ui/core'
 import React from 'react'
 import SearchBar from '../../../components/general/SearchBar'
 import heb from '../../../utils/translation/heb'
@@ -8,7 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 const HomeSearchBar = ({ loading, handleSubmit, schools, setSchools, name, setName }) => {
   return (
     <div className='home_search_bar__wrapper'>
-      <div className='rtl home_search_bar__container'>
+      <Paper className='rtl home_search_bar__container'>
         <Typography className='home__search_bar-title' variant='h1'>
           {heb.heroSlogan1} <span className='primary__light'>{heb.heroSlogan2}</span> {heb.heroSlogan3}
         </Typography>
@@ -47,7 +47,7 @@ const HomeSearchBar = ({ loading, handleSubmit, schools, setSchools, name, setNa
             </span>}
           </Button>
         </form>
-      </div>
+      </Paper>
     </div>
   )
 }

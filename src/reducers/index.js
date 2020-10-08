@@ -7,6 +7,7 @@ import { adminReducer } from './admin';
 import { feedbackReducer } from './feedback';
 import { reviewsReducer } from './reviews';
 import { savedReducer } from './saved';
+import { themeReducer } from './theme';
 
 export default combineReducers({
   professors: professorsReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   feedback: feedbackReducer,
   saved: savedReducer,
   reviews: reviewsReducer,
+  theme: themeReducer
 });

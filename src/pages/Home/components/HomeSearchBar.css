@@ -9,9 +9,9 @@
 }
 
 .home_search_bar__container {
-  background-color: var(--bg-00);
+  background-color: var(--bg-01);
   padding: 16px;
-  border-radius: 32px;
+  border-radius: 32px!important;
   box-shadow: 0px 4px 8px #00000015;
 }
 

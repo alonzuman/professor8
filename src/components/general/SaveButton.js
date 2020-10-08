@@ -13,7 +13,7 @@ const SaveButton = ({ sticky = false, saved, setSaved, variant }) => {
   }
 
   return (
-    <IconButton style={buttonStyle} onClick={setSaved}>
+    <IconButton className='icon__button' style={buttonStyle} onClick={setSaved}>
       {saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
     </IconButton>
   )

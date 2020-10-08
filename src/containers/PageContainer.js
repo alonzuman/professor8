@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSavedLists } from '../actions'
+import { getSavedLists, setTheme } from '../actions'
 import { anonymousAuth, setUser } from '../actions/auth'
 import { getTags } from '../actions/tags'
 import { auth } from '../firebase'
@@ -9,6 +9,10 @@ const PageContainer = ({ children }) => {
   const dispatch = useDispatch()
   const { uid } = useSelector(state => state.auth)
   const [height, setHeight] = useState()
+
+  useEffect(() => {
+    dispatch(setTheme())
+  }, [])
 
   useEffect(() => {
     dispatch(getTags())
@@ -22,7 +26,7 @@ const PageContainer = ({ children }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setHeight(window.innerHeight - 136)
+      setHeight(window.innerHeight)
     }
     window.addEventListener('resize', handleResize)
     handleResize()

@@ -7,7 +7,6 @@ import PageContainer from './containers/PageContainer';
 import DirectionProvider from './contexts/DirectionProvider';
 import Home from './pages/Home/Home';
 import Results from './pages/Results/Results';
-import theme from './utils/theme';
 import Footer from './components/layout/Footer';
 import TermsOfService from './pages/Static/TermsOfService';
 import PrivacyPolicy from './pages/Static/PrivacyPolicy';
@@ -20,10 +19,14 @@ import Feedback from './components/layout/Feedback';
 import Schools from './pages/Schools/Schools';
 import ApproveProfessorsContainer from './pages/Admin/pages/ApproveProfessors/ApproveProfessorsContainer';
 import SavedProfessors from './pages/Admin/pages/SavedProfessors/SavedProfessors';
+import { useSelector } from 'react-redux';
+import { darkTheme, lightTheme } from './utils/theme';
 
 function App() {
+  const { theme } = useSelector(state => state.theme)
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <DirectionProvider>
         <Router>
           <Navbar />

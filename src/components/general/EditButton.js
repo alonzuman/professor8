@@ -13,7 +13,7 @@ const EditButton = ({ variant, sticky = false, onClick }) => {
   }
 
   return (
-    <IconButton onClick={onClick} style={buttonStyle}>
+    <IconButton className='icon__button' onClick={onClick} style={buttonStyle}>
       <EditIcon />
     </IconButton>
   )

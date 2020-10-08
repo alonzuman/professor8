@@ -94,7 +94,6 @@ const heb = {
   createANewList: 'יצירת רשימה חדשה',
   editProfessor: 'עריכת מרצה',
   noListsFound: 'לא נמצאו רשימות',
-  noReviewsFound: 'לא נמצאו ביקורות לאשר',
   noProfessorsFound: 'לא נמצאו מרצים לאשר'
 }
 

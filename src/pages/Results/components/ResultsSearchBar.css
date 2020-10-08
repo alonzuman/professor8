@@ -1,12 +1,16 @@
-.results_search_bar__container {
+.results_search_bar__wrapper {
   display: flex;
   position: sticky;
-  background-color: var(--bg-00);
   z-index: 2;
   top: 16px;
   width: 100%;
   max-width: 564px;
-  border-radius: 32px;
-  padding: 16px;
+  border-radius: 32px!important;
   transition: box-shadow .15s ease-in-out;
+}
+
+.results_search_bar__container {
+  display: flex;
+  width: 100%;
+  padding: 16px;
 }
