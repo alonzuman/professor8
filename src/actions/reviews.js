@@ -67,12 +67,10 @@ export const addReview = ({ review, professor }) => async dispatch => {
       approved: role >= 3 ? true : false
     }
 
-    const snapshot = await db.collection('reviews').add(newReview)
-
+    const snapshot = await db.collection('professors').doc(professor.id).collection('reviews').add(newReview)
     newReview = { ...newReview, id: snapshot.id }
 
     if (role >= 3) {
-      await db.collection('professors').doc(professor.id).collection('reviews').doc(snapshot.id).set(newReview)
       dispatch({
         type: 'REVIEWS/ADD_ONE',
         payload: newReview
@@ -97,14 +95,12 @@ export const addReview = ({ review, professor }) => async dispatch => {
 
 export const deleteReview = ({ review, professor }) => async dispatch => {
   const { pid, id } = review;
-  const { rating } = professor
   const { reviews } = store.getState().reviews
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
   try {
     await db.collection('professors').doc(pid).collection('reviews').doc(review.id).delete()
-    await db.collection('reviews').doc(id).delete()
 
     dispatch({
       type: 'REVIEWS/SET_ALL',

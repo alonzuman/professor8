@@ -18,7 +18,7 @@ admin.initializeApp()
 // ###################################################
 // ###################################################
 
-exports.adminApproveReview = functions.firestore
+exports.onAdminWriteReview = functions.firestore
   .document('pendingReviews/{rid}')
   .onWrite(async (change, context) => {
     const { rid } = context.params
@@ -34,11 +34,14 @@ exports.adminApproveReview = functions.firestore
         await admin.firestore().collection('latestReviews').doc(rid).set(review)
       }
     } catch (error) {
+      console.log('###########################')
+      console.log('########## ERROR ##########')
+      console.log('###########################')
       console.log(error)
     }
   })
 
-exports.updateProfessorOnReviewAdd = functions.firestore
+exports.onWriteProfessorsReview = functions.firestore
   .document('professors/{pid}/reviews/{rid}')
   .onWrite(async (change, context) => {
     const { pid } = context.params;
@@ -59,11 +62,13 @@ exports.updateProfessorOnReviewAdd = functions.firestore
 
       // calculate new rating
       let newOverallRating;
-      if (approvedRatingsArr.length > 1) {
+      if (approvedReviewsSize > 1) {
         const sum = approvedRatingsArr.reduce((a, b) => a + b, 0)
         newOverallRating = (sum / approvedReviewsSize)
-      } else {
+      } else if (approvedReviewsSize === 1) {
         newOverallRating = approvedRatingsArr[0]
+      } else {
+        newOverallRating = 0
       }
 
       // count tags
@@ -104,6 +109,45 @@ exports.updateProfessorOnReviewAdd = functions.firestore
     }
   })
 
-// // TODO
-// // 1. add functions that adds professor names to the tags collection
-// // 2. ... for the rest of the content added
+// ###################################################
+// ###################################################
+// ###################################################
+// ###################################################
+// ###################################################
+// ###################################################
+// ###################################################
+// PROFESSORS
+// ###################################################
+// ###################################################
+// ###################################################
+// ###################################################
+// ###################################################
+// ###################################################
+// ###################################################
+
+exports.onWriteProfessor = functions.firestore
+  .document('professors/{pid}')
+  .onWrite(async (change, context) => {
+    const tagsRef = admin.firestore().collection('tags')
+    try {
+      if (change.after.data()) {
+        const name = change.after.data().name
+        const school = change.after.data().school
+        tagsRef.doc('professors').update({
+          [school]: admin.firestore.FieldValue.arrayUnion(name)
+        })
+      } else {
+        const name = change.before.data().name
+        const school = change.before.data().school
+        tagsRef.doc('professors').update({
+          [school]: admin.firestore.FieldValue.arrayRemove(name)
+        })
+      }
+
+    } catch (error) {
+      console.log('###########################')
+      console.log('########## ERROR ##########')
+      console.log('###########################')
+      console.log(error)
+    }
+  })

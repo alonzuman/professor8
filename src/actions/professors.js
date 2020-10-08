@@ -4,18 +4,14 @@ import firebase from 'firebase'
 import { setFeedback } from '../actions'
 import heb from "../utils/translation/heb"
 import { addReview, getProfessorReviews } from "./reviews"
-import store from "../store"
 const professorsRef = db.collection('professors')
 const tagsRef = db.collection('tags')
-const reviewsRef = db.collection('reviews')
-const authRef = db.collection('users')
 
 export const addProfessorAndReview = ({ professor, review }) => async dispatch => {
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
-  const { name, school } = professor
-  const { tags } = review
+  const { name } = professor
   try {
     const professorSnap = await professorsRef.where('name', '==', name).get()
     let oldResults = []
@@ -26,14 +22,12 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
       snapshot = oldResults[0]
       await professorsRef.doc(snapshot.id).set({
         ...professor,
-        tags: firebase.firestore.FieldValue.arrayUnion(tags),
         dateUpdated: Date.now()
       }, { merge: true })
     } else {
       snapshot = await professorsRef.add({
         approved: false,
         ...professor,
-        tags,
         dateCreated: Date.now()
       })
     }
@@ -127,15 +121,10 @@ export const deleteProfessor = professor => async dispatch => {
   })
   const { id, school, name } = professor
   try {
-    const reviewsSnap = await professorsRef.doc(id).collection('reviews').get()
-    reviewsSnap.forEach(async doc => await professorsRef.doc(id).collection('reviews').doc(doc.id).delete())
     await professorsRef.doc(id).delete()
     await tagsRef.doc('professors').update({
       [school]: firebase.firestore.FieldValue.arrayRemove(name)
     })
-
-    const generalReviewsSnap = await reviewsRef.where('pid', '==', id).get()
-    generalReviewsSnap.forEach(async doc => await reviewsRef.doc(doc.id).delete())
 
     dispatch({
       type: 'PROFESSORS/DELETE_ONE',

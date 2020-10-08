@@ -36,7 +36,7 @@ export const getAdminReviews = () => async dispatch => {
     type: 'ADMIN/LOADING'
   })
   try {
-    const snapshot = await db.collection('reviews').where('approved', '==', false).get()
+    const snapshot = await db.collection('pendingReviews').orderBy('dateCreated', 'desc').get()
     let results = []
 
     snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
@@ -62,7 +62,7 @@ export const adminApproveReview = review => async dispatch => {
     type: 'ADMIN/LOADING'
   })
   try {
-    await db.collection('professors').doc(pid).collection('review').doc(id).update({
+    await db.collection('professors').doc(pid).collection('reviews').doc(id).update({
       approved: true
     })
 

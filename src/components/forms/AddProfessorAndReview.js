@@ -73,7 +73,6 @@ const AddProfessorAndReview = ({ onClose }) => {
       name,
       school,
       difficulty,
-      tags: tagsArray,
       numberOfReviews: 0,
       courses,
       rating,
