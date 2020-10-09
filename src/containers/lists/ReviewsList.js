@@ -25,11 +25,11 @@ const ReviewsList = ({ addReview }) => {
 
   if (loading) {
     return (
-      <div className='page__section rtl'>
+      <div className='page__section rtl ml-2 mr-2'>
         <Skeleton className='mb-2' width={120} height={24} />
         <Grid container>
           <Grid item xs={12} md={4} lg={4}>
-            <ReviewSkeleton className='mw-512' />
+            <ReviewSkeleton className='mw-348px' />
           </Grid>
         </Grid>
       </div>
@@ -37,7 +37,7 @@ const ReviewsList = ({ addReview }) => {
   } else if (!loading && reviews?.length !== 0) {
     return (
       <div className='flex flex__column align__center pl-0 pr-0'>
-        <div className='page__section'>
+        <div className='full__width mt-2 pr-2 pl-2'>
           {isAuth && <Button color='primary' variant='contained' className='mb-1 mobile__hide' onClick={addReview}>{heb.addReview}</Button>}
           <Typography variant='subtitle1'>{reviews?.length > 0 ? `${heb.reviews} (${reviews.length})` : ''}</Typography>
         </div>

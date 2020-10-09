@@ -23,6 +23,7 @@ const heb = {
   submit: "הוספה",
   fieldOfResearch: "תחומי מחקר",
   reviews: "ביקורות",
+  oneReview: 'ביקורת אחת',
   heroSlogan1: "מצאו את המרצים והמרצות",
   heroSlogan2: "הטובים",
   heroSlogan3: "ביותר",

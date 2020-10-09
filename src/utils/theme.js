@@ -13,6 +13,9 @@ const light = {
       light: '#8c85ff',
       main: '#8c85ff',
       dark: '#8c85ff'
+    },
+    background: {
+      paper: '#fff'
     }
   },
   typography: {
@@ -77,6 +80,10 @@ const dark = {
       main: '#8c85ff',
       dark: '#8c85ff'
     },
+    background: {
+      default: '#18191a',
+      paper: '#232526'
+    }
   },
   typography: {
     fontFamily: ['Heebo', 'Arimo', 'sans-serif'],

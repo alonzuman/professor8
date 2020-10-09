@@ -5,7 +5,7 @@ export const setTheme = () => async dispatch => {
   })
 
   document.getElementById('root').className = theme ? theme : 'light'
-  document.body.style.backgroundColor = (theme === 'light' || !theme) ? '#fff' : '#272727'
+  setBackgroundColor(theme)
 
   if (!theme) {
     localStorage.setItem('theme', 'light')
@@ -24,6 +24,7 @@ export const changeTheme = newTheme => async dispatch => {
   dispatch({
     type: 'THEME/LOADING'
   })
+  setBackgroundColor(newTheme)
   localStorage.setItem('theme', newTheme)
   document.getElementById('root').className = newTheme
 
@@ -31,4 +32,8 @@ export const changeTheme = newTheme => async dispatch => {
     type: 'THEME/SET_THEME',
     payload: newTheme
   })
+}
+
+const setBackgroundColor = (theme) => {
+  document.body.style.backgroundColor = (theme === 'light' || !theme) ? '#f0f2f5' : '#18191a'
 }

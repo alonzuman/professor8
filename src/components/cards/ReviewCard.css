@@ -2,7 +2,6 @@
   width: 100%;
   min-width: 212px;
   border-radius: 16px!important;
-  /* max-width: 424px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;

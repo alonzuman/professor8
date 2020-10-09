@@ -1,4 +1,4 @@
-import { Chip, Divider, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core'
+import { Chip, Divider, ListItem, ListItemAvatar, ListItemText, Paper, Typography } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -22,31 +22,27 @@ const ProfessorsList = () => {
     }
   }, [schools, name, dispatch])
 
-  const spanStyle = {
-    display: 'flex',
-    alignItems: 'center',
-    padding: 8
-  }
-
   if (loading && professors.length === 0) {
     return (
-      <div dir='rtl' className='professors_list__container'>
-        <span style={spanStyle}>
+      <div className='professors_list__container rtl'>
+        <span className='flex align__center p-1 mb-2'>
           <Typography variant='body1'><Skeleton width={180} /></Typography>
         </span>
-        {[0, 0, 0].map((v, i) => {
-          return (
-            <div key={i}>
-            <ListItem>
-              <ListItemAvatar>
-                <Skeleton variant='circle' height={40} width={40} />
-              </ListItemAvatar>
-              <ListItemText primary={<Skeleton width={120} />} secondary={<Skeleton width={160} />} />
-            </ListItem>
-            <Divider />
+        <Paper className='pt-1 pb-1 pl-1 pr-1'>
+          {[0, 0, 0].map((v, i) => {
+            return (
+              <div key={i}>
+              <ListItem>
+                <ListItemAvatar>
+                  <Skeleton variant='circle' height={40} width={40} />
+                </ListItemAvatar>
+                <ListItemText primary={<Skeleton width={120} />} secondary={<Skeleton width={160} />} />
+              </ListItem>
+              <Divider />
             </div>
-          )
-        })}
+            )
+          })}
+        </Paper>
       </div>
     )
   } else if (!loading && !schools && !name) {
@@ -55,16 +51,18 @@ const ProfessorsList = () => {
     return <NoResults msg={`${ heb.noResultsForYourSearchIn} "${schools}"`} />
   } else {
     return (
-      <div dir='rtl' className='professors_list__container'>
+      <div className='professors_list__container rtl'>
         {schools &&
-        <span style={spanStyle}>
+        <span className='flex align__center p-1 mb-2'>
           <Typography variant='body1'>
             {professors?.length === 1 && `${heb.foundOneResult}`}
             {professors?.length > 1 && `${heb.found} ${professors?.length} ${heb.results} ${heb.for}`}
           </Typography>
           <Chip className='results_school__chip' size='small' color='secondary' label={schools} />
         </span>}
-        {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
+        <Paper className='pt-1 pb-1 pl-1 pr-1'>
+          {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
+        </Paper>
       </div>
     )
   }

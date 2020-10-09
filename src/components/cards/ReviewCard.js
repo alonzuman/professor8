@@ -30,10 +30,7 @@ const ReviewCard = ({ review, showActions = true, showProfessor = false }) => {
           {content}
         </Typography>
       </CardContent>
-      {showActions &&
-      <CardActions className='justify__between'>
-        <ReviewActions review={review} professor={professor} />
-      </CardActions>}
+      {showActions && <ReviewActions review={review} professor={professor} />}
     </Card>
   )
 }

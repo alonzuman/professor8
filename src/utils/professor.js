@@ -1,8 +1,11 @@
-export const getCorrectCount = professor => {
-  if (professor?.reviews) {
-    const { reviews } = professor;
-    console.log(reviews)
-    let approved = reviews?.filter(v => v.approved)
-    console.log(approved)
+import heb from "./translation/heb"
+
+export const professorCardSubtitle = ({ num, school }) => {
+  if (!num) {
+    return school
+  } else if (num === 1) {
+    return `${heb.oneReview}`
+  } else if (num > 1) {
+    return `${num} ${heb.reviews}`
   }
 }

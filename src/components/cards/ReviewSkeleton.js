@@ -15,7 +15,7 @@ const ReviewSkeleton = ({ className }) => {
           <Typography variant='body1'><Skeleton width={'100%'} /></Typography>
           <Typography variant='body1'><Skeleton width={'100%'} /></Typography>
         </CardContent>
-        <CardActions>
+        <CardActions className='justify__between'>
           <div className='flex align__center  justify__center'>
             <IconButton>
               <Skeleton variant='circle' height={32} width={32} />

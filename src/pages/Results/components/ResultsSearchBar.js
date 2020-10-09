@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Paper } from '@material-ui/core'
+import { Button, CircularProgress, IconButton, Paper } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import SearchBar from '../../../components/general/SearchBar'
 import heb from '../../../utils/translation/heb'
@@ -22,6 +22,10 @@ const ResultsSearchBar = ({ loading, handleSubmit, schools, setSchools, name, se
     width: '100%'
   }
 
+  const iconStyle = {
+    color: '#fff'
+  }
+
   return (
     <Paper className='results_search_bar__wrapper' style={containerStyle}>
       <form className='rtl results_search_bar__container' onSubmit={handleSubmit}>
@@ -43,7 +47,11 @@ const ResultsSearchBar = ({ loading, handleSubmit, schools, setSchools, name, se
           freeSolo
           className='mr-5 ml-1 mt-0'
         />
-        <Button className='br-32' variant='contained' color='primary' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : <SearchIcon />}</Button>
+        <Paper className='results_search_bar_button__wrapper'>
+          <IconButton className='results_search_bar_button__container' variant='contained' type='submit'>
+            {loading ? <CircularProgress className='spinner__small' /> : <SearchIcon style={iconStyle} />}
+          </IconButton>
+        </Paper>
       </form>
     </Paper>
   )

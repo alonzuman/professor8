@@ -45,16 +45,6 @@ code {
   --primary-light: #8c85ff;
   --primary-main: #6c63ff;
   --primary-dark: #302a8b;
-
-  --bg-00: #fff;
-  --bg-01: #fafafa;
-  --bg-02: #f4f4f4;
-  --bg-03: #e2e2e2;
-  --bg-04: #f4f4f4;
-  --bg-05: #f4f4f4;
-  --bg-06: #f4f4f4;
-  --bg-07: #262626;
-  --bg-08: #222222;
 }
 
 .light {
@@ -64,12 +54,16 @@ code {
   --primary-main: #6c63ff;
   --primary-dark: #302a8b;
 
-  --bg-00: #fcfcfc;
+  --bg-00: #f0f2f5;
   --bg-01: #fff;
-  --bg-02: #f4f4f4;
-  --bg-03: #f4f4f4;
+  --bg-02: #f0f2f5;
+
+  --text-00: black;
+  --text-01: black;
+  --text-02: black;
 
   background-color: var(--bg-00);
+  color: var(--text-00);
 }
 
 .dark {
@@ -79,13 +73,16 @@ code {
   --primary-main: #6c63ff;
   --primary-dark: #302a8b;
 
-  --bg-00: #272727;
-  --bg-01: #424242;
-  --bg-02: #f4f4f4;
-  --bg-03: #f4f4f4;
+  --bg-00: #18191a;
+  --bg-01: #232526;
+  --bg-02: #3a3b3d;
+
+  --text-00: #fff;
+  --text-01: #fcfcfc;
+  --text-02: #f7f7f7;
 
   background-color: var(--bg-00);
-  color: var(--bg-03);
+  color: var(--text-00);
 }
 
 /* Layout */
@@ -287,6 +284,18 @@ code {
   padding-bottom: 0!important;
 }
 
+.pb-1 {
+  padding-bottom: 8px!important;
+}
+
+.pb-2 {
+  padding-bottom: 16px!important;
+}
+
+.pb-4 {
+  padding-bottom: 64px!important;
+}
+
 @media (min-width: 768px) {
   .full__width-mobile {
     width: auto;
@@ -324,6 +333,10 @@ code {
   flex: 2;
 }
 
+.flex__group {
+
+}
+
 .flex__row {
   flex-direction: row!important;
 }
@@ -342,7 +355,7 @@ code {
 
 .page__section {
   margin-top: 16px;
-  padding: 0 16px;
+  margin-bottom: 16px;
   width: 100%;
 }
 
@@ -386,7 +399,19 @@ code {
 }
 
 .bg-00 {
-  background-color: var(--bg-00);
+  background-color: var(--bg-00)!important;
+}
+
+.bg-01 {
+  background-color: var(--bg-01)!important;
+}
+
+.bg-02 {
+  background-color: var(--bg-02)!important;
+}
+
+.br-2 {
+  border-radius: 16px!important;
 }
 
 .br-4 {
@@ -461,6 +486,10 @@ code {
   max-width: 248px;
 }
 
+.mw-348px {
+  max-width: 348px;
+}
+
 .mw-512 {
   max-width: 512px;
 }
@@ -474,7 +503,7 @@ code {
 /* SWIPER */
 .swiper-container {
   width: 100%;
-  padding: 16px!important;
+  padding: 8px 16px!important;
 }
 
 @media (max-width: 768px) {
@@ -489,10 +518,10 @@ code {
   }
 }
 
-.icon__button:hover {
-  background-color: var(--bg-01)!important;
-}
-
 .MuiStepper-root {
   padding: 24px 8px!important;
+}
+
+.text-00 {
+  color: var(--text-00)!important;
 }

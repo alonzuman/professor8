@@ -43,7 +43,7 @@ const LatestReviews = () => {
       </div>
       {loading &&
         <div className='p-2'>
-          <ReviewSkeleton className='mw-512' />
+          <ReviewSkeleton className='mw-348px' />
         </div>}
       {!loading &&
         <Swiper {...options}>

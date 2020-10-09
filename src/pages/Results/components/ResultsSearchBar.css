@@ -14,3 +14,17 @@
   width: 100%;
   padding: 16px;
 }
+
+.results_search_bar_button__wrapper {
+  border-radius: 50%!important;
+}
+
+.results_search_bar_button__container {
+  background-color: var(--primary-main)!important;
+  padding: 0!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  min-width: 40px;
+}

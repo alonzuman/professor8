@@ -3,18 +3,14 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
-const BackButton = ({ variant, sticky = false }) => {
+const BackButton = () => {
   const history = useHistory()
 
-  const buttonStyle = {
-    boxShadow: variant === 'contained' ? '0px 0px 10px #00000015' : '',
-    position: sticky ? 'sticky' : 'relative',
-    top: sticky ? '16px' : '',
-    zIndex: 9,
-    backgroundColor: 'var(--bg-00)'
+  const handleClick = () => {
+    history.goBack()
   }
 
-  return <IconButton className='icon__button' style={buttonStyle} onClick={() => history.goBack()}><KeyboardArrowRightIcon /></IconButton>
+  return <IconButton className='bg-02' onClick={handleClick}><KeyboardArrowRightIcon /></IconButton>
 }
 
 export default BackButton

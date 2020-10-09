@@ -4,7 +4,7 @@ import { deleteReview, downVoteReview, upVoteReview } from '../../actions';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ThumbDownAltIcon from '@material-ui/icons/ThumbDownAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { IconButton, Typography } from '@material-ui/core'
+import { CardActions, IconButton, Typography } from '@material-ui/core'
 import ApprovalDialog from '../../containers/dialogs/ApprovalDialog';
 
 const ReviewActions = ({ review, professor }) => {
@@ -38,11 +38,11 @@ const ReviewActions = ({ review, professor }) => {
   }
 
   return (
-    <>
+    <CardActions className='justify__between'>
       <ApprovalDialog loading={loading} open={isDeleting} onClose={() => setIsDeleting(false)} action={handleDelete} />
-      <div className='flex align__center  justify__center'>
+      <div className='flex align__center justify__center mr-1'>
         <Typography variant='subtitle1'>{upVotes?.length}</Typography>
-        <IconButton disabled={upVoted || upVoted} onClick={() => handleClick('up')}>
+        <IconButton className='ml-5' disabled={upVoted || upVoted} onClick={() => handleClick('up')}>
           <ThumbUpAltIcon />
         </IconButton>
         <Typography variant='subtitle1'>{downVotes?.length}</Typography>
@@ -54,7 +54,7 @@ const ReviewActions = ({ review, professor }) => {
         <IconButton onClick={() => setIsDeleting(true)}>
           <DeleteIcon />
         </IconButton>}
-    </>
+    </CardActions>
   )
 }
 

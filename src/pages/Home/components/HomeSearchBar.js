@@ -21,7 +21,7 @@ const HomeSearchBar = ({ loading, handleSubmit, schools, setSchools, name, setNa
               filter='keys'
               search={schools}
               setSearch={setSchools}
-              className='ml-1 bg-00'
+              className='ml-1 bg-02'
             />
             <SearchBar
               placeholder={heb.professorName}
@@ -30,7 +30,7 @@ const HomeSearchBar = ({ loading, handleSubmit, schools, setSchools, name, setNa
               filter={schools}
               search={name}
               setSearch={setName}
-              className='bg-00'
+              className='bg-02'
               freeSolo
             />
           </div>
