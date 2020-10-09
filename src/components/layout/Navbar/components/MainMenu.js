@@ -25,7 +25,7 @@ const MainMenu = ({ handleClose, anonymous, role, setMenu, handleSignOut }) => {
           </MenuItem>
         </NavLink>}
       {!anonymous &&
-        <NavLink onClick={handleClose} exact activeClassName='menu__item--active' to='/saved'>
+        <NavLink onClick={handleClose} exact activeClassName='menu__item--active' to='/saved-lists'>
           <MenuItem>
             {heb.savedProfessors}
           </MenuItem>

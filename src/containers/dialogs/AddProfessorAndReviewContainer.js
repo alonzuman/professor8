@@ -4,6 +4,7 @@ import AddProfessorAndReview from '../../components/forms/AddProfessorAndReview'
 import heb from '../../utils/translation/heb';
 import CloseIcon from '@material-ui/icons/Close';
 import { useSelector } from 'react-redux';
+import CustomDialogHeader from './components/CustomDialogHeader';
 
 const AddProfessorAndReviewContainer = ({ open, onClose }) => {
   const tags = useSelector(state => state.tags)
@@ -14,10 +15,10 @@ const AddProfessorAndReviewContainer = ({ open, onClose }) => {
       {(!tags || loading) && <CircularProgress />}
       {tags && !loading &&
         <>
-        <div className='header__container'>
-          <Typography variant='h5'>{heb.addReview}</Typography>
-          <IconButton onClick={onClose} style={{ marginLeft: -8 }}><CloseIcon /></IconButton>
-        </div>
+        <CustomDialogHeader
+          onClose={onClose}
+          title={heb.addReview}
+        />
         <DialogContent>
           <AddProfessorAndReview onClose={onClose} />
         </DialogContent>

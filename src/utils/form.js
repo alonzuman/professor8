@@ -1,4 +1,10 @@
-export const validateStringInput = input => input.trim() === '' ? false : true
+export const validateStringInput = input => {
+  if (input) {
+    return input.trim() === '' ? false : true
+  } else {
+    return false
+  }
+}
 
 export const validateStringInputs = arr => {
   let i;

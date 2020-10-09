@@ -6,39 +6,27 @@ import './Navbar.css';
 import { useSelector } from 'react-redux';
 import NavbarMenu from './components/NavbarMenu';
 import AddProfessorAndReviewContainer from '../../../containers/dialogs/AddProfessorAndReviewContainer';
-import { Skeleton } from '@material-ui/lab';
 
 
 const Navbar = () => {
   const { isAuth, loading } = useSelector(state => state.auth)
   const [addingProfessorAndReview, setAddingProfessorAndReview] = useState(false)
 
-  if (loading || !isAuth) {
-    return (
-      <div className='navbar__container'>
-        <div className='navbar__menu'>
-          <Skeleton className='br-2' height={36} width={72} />
-          <Skeleton className='br-2' height={36} width={120} />
+  return (
+    <div className='navbar__container'>
+      <AddProfessorAndReviewContainer open={addingProfessorAndReview} onClose={() => setAddingProfessorAndReview(false)} />
+      <div className='navbar__menu'>
+        <div className='rtl'>
+          <NavbarMenu loading={loading} />
         </div>
+        {isAuth &&
+        <Button className='add__btn ltr' color='primary' variant='outlined' onClick={() => setAddingProfessorAndReview(!addingProfessorAndReview)}>
+          <AddIcon className='mr-1' />
+          {heb.addReview}
+        </Button>}
       </div>
-    )
-  } else {
-    return (
-      <div className='navbar__container'>
-        <AddProfessorAndReviewContainer open={addingProfessorAndReview} onClose={() => setAddingProfessorAndReview(false)} />
-        <div className='navbar__menu'>
-          <div className='rtl'>
-            <NavbarMenu loading={loading} />
-          </div>
-          {isAuth &&
-          <Button className='add__btn ltr' color='primary' variant='outlined' onClick={() => setAddingProfessorAndReview(!addingProfessorAndReview)}>
-            <AddIcon className='mr-1' />
-            {heb.addReview}
-          </Button>}
-        </div>
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Navbar

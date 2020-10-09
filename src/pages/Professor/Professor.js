@@ -8,17 +8,15 @@ import Courses from './components/Courses';
 import ProfessorTags from './components/ProfessorTags';
 import AverageRating from './components/AverageRating';
 import ProfessorHeader from './components/ProfessorHeader';
-import EditProfessorDialog from '../../containers/dialogs/EditProfessorDialog';
-import ProfessorAction from './components/ProfessorAction';
+import EditProfessorContainer from '../../containers/dialogs/EditProfessorContainer';
 import ProfessorFooter from './components/ProfessorFooter';
 import SaveProfessorContainer from '../../containers/dialogs/SaveProfessorContainer';
 import { Paper } from '@material-ui/core';
 import ProfessorHeaderControls from './components/ProfessorHeaderControls';
 
 const Professor = ({ match }) => {
-  const { uid, role, anonymous } = useSelector(state => state.auth)
+  const { uid, role, anonymous, savedIds } = useSelector(state => state.auth)
   const tagsLoading = useSelector(state => state.tags.loading)
-  const { ids, lists } = useSelector(state => state.saved)
   const { id } = match.params
   const [addReview, setAddReview] = useState(false)
   const [editing, setEditing] = useState(false)
@@ -26,21 +24,14 @@ const Professor = ({ match }) => {
   const [saved, setSaved] = useState(false)
   const dispatch = useDispatch()
   const { loading, professor } = useSelector(state => state.professors)
-  const { name, tags, rating, avatar, reviews, reviewsCount, school, courses } = professor;
+  const { name, tags, rating, avatar, reviewsCount, school, courses } = professor;
 
-  const handleSave = async listName => {
-
+  const handleSave = async ({ list }) => {
     if (saved) {
-      let oldName;
-      Object.keys(lists).forEach(v => {
-        if (Boolean(lists[v].filter(prof => prof.id !== id))) {
-          oldName = v
-        }
-      })
-      await dispatch(unsaveProfessor({ professor, list: oldName }))
+      await dispatch(unsaveProfessor({ pid: id }))
       await setSaved(false)
     } else {
-      await dispatch(saveProfessor({ professor, list: listName }))
+      await dispatch(saveProfessor({ pid: id, list }))
       await setSaved(true)
     }
     await setSaving(false)
@@ -51,13 +42,13 @@ const Professor = ({ match }) => {
   }
 
   useEffect(() => {
-    if (ids) {
-      const isSaved = ids.includes(id)
+    if (savedIds) {
+      const isSaved = savedIds.includes(id)
       if (isSaved) {
         setSaved(true)
       }
     }
-  }, [ids])
+  }, [savedIds])
 
   useEffect(() => {
     dispatch(getProfessor(id))
@@ -66,7 +57,7 @@ const Professor = ({ match }) => {
   return (
     <div className='rtl pb-4'>
       <SaveProfessorContainer open={saving} onClose={() => setSaving(false)} action={handleSave} />
-      <EditProfessorDialog open={editing} onClose={() => setEditing(false)} />
+      <EditProfessorContainer open={editing} onClose={() => setEditing(false)} />
       <AddReviewContainer professor={professor} open={addReview} onClose={() => setAddReview(false)} />
       <ProfessorHeaderControls
         saved={saved}

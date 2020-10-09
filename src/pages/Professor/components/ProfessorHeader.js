@@ -15,7 +15,7 @@ const ProfessorHeader = ({ avatar, school, name, loading }) => {
   }
 
   return (
-    <div className='page__section flex align__center'>
+    <div className='pt-1 pb- flex align__center'>
       {!loading && <Avatar style={avatarStyle} src={avatar} alt={name}>{name?.split('')[0]}</Avatar>}
       {loading && <Skeleton style={avatarStyle} variant='circle'/>}
       <div>

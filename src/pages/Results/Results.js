@@ -4,6 +4,7 @@ import ProfessorsList from '../../containers/lists/ProfessorsList'
 import qs from 'query-string'
 import { useDispatch, useSelector } from 'react-redux'
 import ResultsSearchBar from './components/ResultsSearchBar'
+import { validateStringInput } from '../../utils/form'
 
 const Results = () => {
   const { loading, professors } = useSelector(state => state.professors)
@@ -21,16 +22,19 @@ const Results = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const query = {
-      schools,
-      name
-    }
-    const stringifiedQuery = qs.stringify(query)
 
-    history.push({
-      pathname: '/search',
-      search: stringifiedQuery
-    })
+    if (validateStringInput(schools)) {
+      const query = {
+        schools,
+        name
+      }
+      const stringifiedQuery = qs.stringify(query)
+
+      history.push({
+        pathname: '/search',
+        search: stringifiedQuery
+      })
+    }
   }
 
   return (

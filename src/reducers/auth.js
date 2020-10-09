@@ -24,6 +24,11 @@ export const authReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case 'AUTH/SET_SAVED_IDS':
+      return {
+        ...state,
+        ...payload
+      }
     case 'AUTH/SET_USER':
     case 'AUTH/LOAD_USER':
     case 'AUTH/SIGN_UP':

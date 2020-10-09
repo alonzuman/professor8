@@ -5,10 +5,10 @@ import heb from '../../utils/translation/heb';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProfessorAndReview } from '../../actions/professors';
 import { useHistory } from 'react-router-dom';
-import SchoolAndName from './AddProfessorAndReview/SchoolAndName';
 import { createFilterOptions } from '@material-ui/lab/Autocomplete';
-import ReviewAndDetails from './AddProfessorAndReview/ReviewAndDetails';
-import ContentAndTags from './AddProfessorAndReview/ContentAndTags';
+import SchoolAndName from './components/SchoolAndName';
+import ReviewAndDetails from './components/ReviewAndDetails';
+import ContentAndTags from './components/ContentAndTags';
 import { setFeedback } from '../../actions';
 
 const steps = [

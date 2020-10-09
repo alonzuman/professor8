@@ -2,7 +2,7 @@ import { Button, CircularProgress, Dialog, DialogContent, Typography } from '@ma
 import React from 'react'
 import heb from '../../utils/translation/heb'
 
-const ApprovalDialog = ({ open, onClose, action, loading }) => {
+const ApprovalContainer = ({ open, onClose, action, loading }) => {
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogContent className='flex mh-128 flex__column align__center justify__around'>
@@ -18,4 +18,4 @@ const ApprovalDialog = ({ open, onClose, action, loading }) => {
   )
 }
 
-export default ApprovalDialog
+export default ApprovalContainer

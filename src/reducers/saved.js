@@ -1,6 +1,6 @@
 const initialState = {
-  lists: {},
-  ids: [],
+  lists: [],
+  list: {},
   loading: false
 }
 
@@ -13,6 +13,17 @@ export const savedReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
+    case 'SAVED/CLEAR_ONE':
+      return {
+        ...state,
+        list: {},
+      }
+    case 'SAVED/SET_ONE':
+      return {
+        ...state,
+        list: payload,
+        loading: false
+      }
     case 'SAVED/SET_ALL':
       return {
         ...state,
@@ -20,22 +31,16 @@ export const savedReducer = (state = initialState, action) => {
         loading: false
       }
     case 'SAVED/SAVE_PROFESSOR':
-      const { list, professor } = payload
-      const lists = {
-        ...state.lists,
-        [list]: state.lists[list] ? [...state.lists[list], professor] : [professor]
-      }
       return {
         ...state,
-        lists,
-        ids: [...state.ids, professor.id],
+        savedIds: [...state.savedIds, payload.pid],
         loading: false
       }
     case 'SAVED/UNSAVE_PROFESSOR':
       return {
         ...state,
         lists: payload.lists,
-        ids: [...state.ids.filter(v => v !== payload.professor.id)],
+        savedIds: [...state.savedIds.filter(v => v.pid !== payload.pid)],
         loading: false
       }
     case 'SAVED/ERROR':

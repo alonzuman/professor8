@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { deleteProfessor } from '../../actions/professors'
-import ApprovalDialog from '../../containers/dialogs/ApprovalDialog'
+import ApprovalContainer from '../../containers/dialogs/ApprovalContainer'
 import heb from '../../utils/translation/heb'
 
 const EditProfessor = () => {
@@ -21,7 +21,7 @@ const EditProfessor = () => {
 
   return (
     <>
-      <ApprovalDialog loading={loading} open={deleting} onClose={() => setDeleting(false)} action={handleDelete} />
+      <ApprovalContainer loading={loading} open={deleting} onClose={() => setDeleting(false)} action={handleDelete} />
       {loading && <CircularProgress />}
       {!loading &&
       <form>

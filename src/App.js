@@ -17,10 +17,11 @@ import ApproveReviewsContainer from './pages/Admin/pages/ApproveReviews/ApproveR
 import Feedback from './components/layout/Feedback';
 import Schools from './pages/Schools/Schools';
 import ApproveProfessorsContainer from './pages/Admin/pages/ApproveProfessors/ApproveProfessorsContainer';
-import SavedProfessors from './pages/Admin/pages/SavedProfessors/SavedProfessors';
+import SavedLists from './pages/Admin/pages/SavedLists/SavedLists';
 import { useSelector } from 'react-redux';
 import { darkTheme, lightTheme } from './utils/theme';
 import Navbar from './components/layout/Navbar/Navbar';
+import SavedList from './pages/Admin/pages/SavedList/SavedList';
 
 function App() {
   const { theme } = useSelector(state => state.theme)
@@ -41,8 +42,8 @@ function App() {
               <Route exact path='/about-us' component={AboutUs} />
               <Route exact path='/sign-in' component={Auth} />
               <Route exact path='/schools' component={Schools} />
-              <ProtectedRoute exact minRole={1} path='/saved' component={SavedProfessors} />
-              <ProtectedRoute exact minRole={1} path='/saved/:name' component={SavedProfessors} />
+              <ProtectedRoute exact minRole={1} path='/saved-lists' component={SavedLists} />
+              <ProtectedRoute exact minRole={1} path='/saved-lists/:uid/:lid' component={SavedList} />
               <ProtectedRoute exact minRole={3} path='/admin' component={Admin} />
               <ProtectedRoute exact minRole={3} path='/admin/approve-reviews' component={ApproveReviewsContainer} />
               <ProtectedRoute exact minRole={3} path='/admin/approve-professors' component={ApproveProfessorsContainer} />

@@ -94,12 +94,16 @@ const heb = {
   savedProfessors: 'הרשימות שלי',
   save: 'שמירה',
   newListName: 'שם רשימה חדשה',
+  newListNamePlaceholder: 'לדוגמא: ״מתמטיקה בדידה טכניון״',
   saveProfessor: 'שמירת מרצה',
   existingLists: 'רשימות קיימות',
   createANewList: 'יצירת רשימה חדשה',
   editProfessor: 'עריכת מרצה',
   noListsFound: 'לא נמצאו רשימות',
-  noProfessorsFound: 'לא נמצאו מרצים לאשר'
+  noProfessorsFound: 'לא נמצאו מרצים לאשר',
+  oneProfessor: 'מרצה אחד/ת',
+  professors: 'מרצים',
+  manageLists: 'ניהול רשימות'
 }
 
 export default heb;

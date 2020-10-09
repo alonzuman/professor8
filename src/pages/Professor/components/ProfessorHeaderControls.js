@@ -8,7 +8,7 @@ const ProfessorHeaderControls = ({ saved, handleSave, setSaving, anonymous, uid,
       <BackButton sticky={true} variant='contained' />
       <ProfessorAction
         saved={saved}
-        setSaving={saved ? handleSave : () => setSaving(true)}
+        setSaving={setSaving}
         anonymous={anonymous}
         uid={uid}
         professor={professor}
