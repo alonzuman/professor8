@@ -1,6 +1,7 @@
 .home_search_bar__wrapper {
   width: 100%;
   max-width: 524px;
+  z-index: 1;
 }
 
 .home__search_bar-title {
@@ -9,7 +10,6 @@
 }
 
 .home_search_bar__container {
-  background-color: var(--bg-01);
   padding: 16px;
   border-radius: 32px!important;
   box-shadow: 0px 4px 8px #00000015;

@@ -2,7 +2,6 @@ import { ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Professor from './pages/Professor/Professor';
-import Navbar from './components/layout/Navbar';
 import PageContainer from './containers/PageContainer';
 import DirectionProvider from './contexts/DirectionProvider';
 import Home from './pages/Home/Home';
@@ -21,6 +20,7 @@ import ApproveProfessorsContainer from './pages/Admin/pages/ApproveProfessors/Ap
 import SavedProfessors from './pages/Admin/pages/SavedProfessors/SavedProfessors';
 import { useSelector } from 'react-redux';
 import { darkTheme, lightTheme } from './utils/theme';
+import Navbar from './components/layout/Navbar/Navbar';
 
 function App() {
   const { theme } = useSelector(state => state.theme)

@@ -5,6 +5,7 @@ export const setTheme = () => async dispatch => {
   })
 
   document.getElementById('root').className = theme ? theme : 'light'
+  document.body.style.backgroundColor = (theme === 'light' || !theme) ? '#fff' : '#272727'
 
   if (!theme) {
     localStorage.setItem('theme', 'light')

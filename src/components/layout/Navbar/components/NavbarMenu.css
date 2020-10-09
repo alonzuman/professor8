@@ -1,16 +1,25 @@
 .menu__container .MuiPopover-paper {
   border-radius: 16px!important;
   box-shadow: 0px 4px 8px #00000015!important;
+  min-width: 196px;
 }
 
-.nav__item {
-  font-size: 14px!important;
-  min-width: 248px;
-  direction: rtl;
-  padding: 8px 16px;
+.menu__subtitle {
+  display: flex;
+  padding: 8px 12px;
+  align-items: center;
 }
 
-.nav__item--active {
+.menu__item {
+}
+
+.menu__item--with-icon {
+  display: flex!important;
+  justify-content: space-between!important;
+  align-items: center!important;
+}
+
+.menu__item--active {
   font-weight: 600!important;
   color: var(--primary-main)!important;
 }

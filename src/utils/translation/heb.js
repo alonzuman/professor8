@@ -1,6 +1,10 @@
 const heb = {
   addProfessor: "הוספת מרצה",
   search: "חיפוש",
+  settings: 'הגדרות',
+  appearanceSettings: 'הגדרות תצוגה',
+  light: 'מצב יום',
+  dark: 'מצב לילה',
   findProfessorByName: "מצא מרצה לפי שם",
   findProfessorBySchool: "מצא מרצה לפי מוסד",
   findByProfessor: "חיפוש לפי שם",
