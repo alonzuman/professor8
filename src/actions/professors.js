@@ -66,11 +66,11 @@ export const getProfessors = () => async dispatch => {
     try {
       let snapshot;
       if (schools && name) {
-        snapshot = await professorsRef.where("school", "==", schools).where('name', '==', name).get()
+        snapshot = await professorsRef.where("school", "==", schools).where('name', '==', name).orderBy('dateCreated', 'desc').limit(10).get()
       } else if (schools) {
-        snapshot = await professorsRef.where("school", "==", schools).get()
+        snapshot = await professorsRef.where("school", "==", schools).orderBy('dateCreated', 'desc').limit(10).get()
       } else {
-        snapshot = await professorsRef.where("name", "==", name).get()
+        snapshot = await professorsRef.where("name", "==", name).orderBy('dateCreated', 'desc').limit(10).get()
       }
       let results = []
       snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))

@@ -17,8 +17,8 @@ const Navbar = () => {
     return (
       <div className='navbar__container'>
         <div className='navbar__menu'>
-          <Skeleton className='br-2' height={38} width={72} />
-          <Skeleton className='br-2' height={38} width={120} />
+          <Skeleton className='br-2' height={36} width={72} />
+          <Skeleton className='br-2' height={36} width={120} />
         </div>
       </div>
     )

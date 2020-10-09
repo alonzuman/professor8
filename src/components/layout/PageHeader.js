@@ -11,7 +11,7 @@ const PageHeader = ({ title, backButton, sticky, divider = false }) => {
 
   return (
     <div style={containerStyle} className='page_header__container'>
-      {backButton && <BackButton variant='contained mb-2' />}
+      {backButton && <BackButton className='mb-2' />}
       <Typography className='page_header__title' variant='h1'>{title}</Typography>
       {divider && <Divider className='mt-3' />}
     </div>

@@ -34,7 +34,7 @@ const NavbarMenu = () => {
         <Avatar src={avatar} alt={firstName} className='menu__avatar'>{firstName?.split('')[0]}</Avatar>
         <MenuIcon className='menu__icon' />
       </Button>
-      <Menu className='menu__container' dir='rtl' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+      <Menu className='menu__container rtl' anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         {menu === 0 && <MainMenu handleClose={handleClose} setMenu={setMenu} anonymous={anonymous} role={role} />}
         {menu === 1 && <SettingsMenu handleClose={handleClose} setMenu={setMenu} anonymous={anonymous} handleSignOut={handleSignOut} />}
       </Menu>

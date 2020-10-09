@@ -1,4 +1,4 @@
-import { Button, CircularProgress } from '@material-ui/core'
+import { Button, CircularProgress, Grid } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
@@ -30,7 +30,13 @@ const Schools = () => {
         <div className='page__container flex flex__column align__center justify__center'>
           <CircularProgress />
         </div>}
-      {schools?.map((v, i) => <Button key={i} className='ml-1 mb-1' variant='outlined' onClick={() => handleClick(v)}>{v}</Button>) }
+      <Grid container spacing={1}>
+        {schools?.map((v, i) => (
+          <Grid item key={i}>
+            <Button variant='outlined' onClick={() => handleClick(v)}>{v}</Button>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   )
 }
