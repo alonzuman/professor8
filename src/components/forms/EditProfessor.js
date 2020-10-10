@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Typography } from '@material-ui/core'
+import { Button, CircularProgress, DialogContent, Typography } from '@material-ui/core'
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -20,7 +20,7 @@ const EditProfessor = () => {
   }
 
   return (
-    <>
+    <DialogContent className='rtl'>
       <ApprovalContainer loading={loading} open={deleting} onClose={() => setDeleting(false)} action={handleDelete} />
       {loading && <CircularProgress />}
       {!loading &&
@@ -30,7 +30,7 @@ const EditProfessor = () => {
         </Typography>
         <Button type='button' onClick={() => setDeleting(true)} variant='contained'>{heb.delete}</Button>
       </form>}
-    </>
+    </DialogContent>
   )
 }
 

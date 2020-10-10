@@ -309,7 +309,7 @@ code {
 }
 
 .header__container {
-  padding: 8px 16px;
+  padding: 8px 24px;
   padding-bottom: 0;
   display: flex;
   align-items: center;
@@ -388,8 +388,6 @@ code {
   font-size: 16px!important;
   padding: 4px 8px!important;
   border-radius: 64px!important;
-
-
   background-color: var(--primary-light-transparent)!important;
   color: var(--primary-dark)!important;
 }

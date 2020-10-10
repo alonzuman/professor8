@@ -6,9 +6,9 @@ const ProfessorTags = ({ tags, reviewsCount, loading }) => {
 
   if (loading || !tags) {
     return (
-      <div className='page__section flex flex__wrap--wrap'>
-        {!tags && [0, 0, 0, 0].map((v, i) => <Skeleton key={i} className='ml-2' height={48} width={68} />)}
-      </div>
+      <Grid container spacing={2}>
+        {!tags && [0, 0, 0, 0].map((v, i) => <Grid key={i} item><Skeleton height={48} width={68} /></Grid>)}
+      </Grid>
     )
   } else if (reviewsCount > 0 && !loading && tags) {
     return (

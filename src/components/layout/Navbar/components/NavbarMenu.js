@@ -3,10 +3,12 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Menu from '@material-ui/core/Menu';
 import './NavbarMenu.css'
-import MenuIcon from '@material-ui/icons/Menu';
 import { signOut } from '../../../../actions';
 import MainMenu from './MainMenu';
 import SettingsMenu from './SettingsMenu';
+
+// Icons
+import MenuIcon from '@material-ui/icons/Menu';
 
 const NavbarMenu = () => {
   const [menu, setMenu] = useState(0)

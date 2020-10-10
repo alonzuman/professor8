@@ -7,7 +7,7 @@ import CustomDialogHeader from './components/CustomDialogHeader';
 
 const EditProfessorContainer = ({ open, onClose }) => {
   return (
-    <Dialog dir='rtl' open={open} onClose={onClose}>
+    <Dialog maxWidth='md' fullWidth open={open} onClose={onClose}>
       <CustomDialogHeader
         title={heb.editProfessor}
         onClose={onClose}

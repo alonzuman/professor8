@@ -29,11 +29,10 @@ const SearchBar = ({ size = 'small', search, setSearch, collection, doc, filter,
   return (
     <div style={style} className={`search_bar__container ${className}`}>
       <Autocomplete
-        dir='rtl'
-        style={{ width: '100%', direction: 'rtl' }}
+        className='full__width rtl'
         handleHomeEndKeys
         autoHighlight
-        noOptionsText={noOptionsText}
+        noOptionsText={<span className='rtl full__width text__right'>{noOptionsText}</span>}
         value={search}
         size={size}
         filterOptions={filterOptions}

@@ -12,12 +12,12 @@ const ProfessorAction = ({ uid, role, professor, setEditing, anonymous, saved, s
   } else if (uid === professor?.uid || role >= 3) {
     return (
       <div className='flex__group'>
-        <IconButton  className='bg-02 ml-1' onClick={setEditing}><EditIcon /></IconButton>
-        <IconButton  className='bg-02' onClick={setSaving}>{saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}</IconButton>
+        <IconButton  className='bg-01 ml-1' onClick={setEditing}><EditIcon /></IconButton>
+        <IconButton  className='bg-01' onClick={setSaving}>{saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}</IconButton>
       </div>
     )
   } else {
-    return <IconButton  className='bg-02' onClick={setSaving}>{saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}</IconButton>
+    return <IconButton  className='bg-01' onClick={setSaving}>{saved ? <BookmarkIcon /> : <BookmarkBorderIcon />}</IconButton>
   }
 }
 

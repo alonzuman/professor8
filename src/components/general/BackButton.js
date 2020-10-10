@@ -10,7 +10,7 @@ const BackButton = ({ className }) => {
     history.goBack()
   }
 
-  return <IconButton className={`${className} bg-02`} onClick={handleClick}><KeyboardArrowRightIcon /></IconButton>
+  return <IconButton className={`${className} bg-01`} onClick={handleClick}><KeyboardArrowRightIcon /></IconButton>
 }
 
 export default BackButton
