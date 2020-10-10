@@ -22,6 +22,7 @@ import { useSelector } from 'react-redux';
 import { darkTheme, lightTheme } from './utils/theme';
 import Navbar from './components/layout/Navbar/Navbar';
 import SavedList from './pages/Admin/pages/SavedList/SavedList';
+import ScrollTopTop from './hooks/ScrollTopTop';
 
 function App() {
   const { theme } = useSelector(state => state.theme)
@@ -33,6 +34,7 @@ function App() {
           <Navbar />
           <PageContainer>
           <Feedback />
+          <ScrollTopTop />
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/search' component={Results} />

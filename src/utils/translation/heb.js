@@ -103,7 +103,8 @@ const heb = {
   noProfessorsFound: 'לא נמצאו מרצים לאשר',
   oneProfessor: 'מרצה אחד/ת',
   professors: 'מרצים',
-  manageLists: 'ניהול רשימות'
+  manageLists: 'ניהול רשימות',
+  loadMore: 'טען עוד תוצאות חיפוש'
 }
 
 export default heb;

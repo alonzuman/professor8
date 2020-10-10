@@ -1,4 +1,4 @@
-import { Chip, Divider, ListItem, ListItemAvatar, ListItemText, Paper, Typography } from '@material-ui/core'
+import { Button, Chip, Divider, ListItem, ListItemAvatar, ListItemText, Paper, Typography } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -21,6 +21,10 @@ const ProfessorsList = () => {
       dispatch(getProfessors())
     }
   }, [schools, name, dispatch])
+
+  const loadMore = () => {
+    dispatch(getProfessors())
+  }
 
   if (loading && professors.length === 0) {
     return (
@@ -63,6 +67,7 @@ const ProfessorsList = () => {
         <Paper className='pt-1 pb-1 pl-1 pr-1'>
           {professors?.map((professor, index) => <ProfessorCard professor={professor} key={index} />)}
         </Paper>
+        <Button onClick={loadMore}>{heb.loadMore}</Button>
       </div>
     )
   }

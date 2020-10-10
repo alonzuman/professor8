@@ -8,6 +8,9 @@ import { validateStringInput } from '../../utils/form'
 
 const Results = () => {
   const { loading, professors } = useSelector(state => state.professors)
+  const [page, setPage] = useState(1)
+  const [pageLength, setPageLength] = useState(window.innerHeight)
+  const [scroll, setScroll] = useState(window.scrollY)
   const [schools, setSchools] = useState('')
   const [name, setName] = useState('')
   const history = useHistory()
@@ -36,6 +39,22 @@ const Results = () => {
       })
     }
   }
+
+  const handleScroll = () => {
+    setScroll(window.scrollY)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    // if (scroll > 68) {
+    //   setPageLength(oldVal => oldVal + 68)
+    //   setPage(oldVal => oldVal + 1)
+    //   console.log(page)
+    //   console.log(pageLength)
+    // }
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [window.scrollY])
 
   return (
     <div className='flex full__height align__center flex__column p-2'>
