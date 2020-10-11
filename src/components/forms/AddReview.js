@@ -168,7 +168,7 @@ const AddReview = ({ professor, onClose }) => {
         </div>
         <Slider value={rating} onChange={(e, newValue) => setRating(parseInt(newValue))} step={1} min={1} max={5} marks />
       </FormGroup>
-      <Button disabled={loading} className='full__width mb-1' color='primary' variant='contained' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : heb.submit}</Button>
+      <Button disabled={loading} className='full__width' color='primary' variant='contained' type='submit'>{loading ? <CircularProgress className='spinner__small' /> : heb.submit}</Button>
     </form>
   )
 }

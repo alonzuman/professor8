@@ -12,17 +12,17 @@ const PageContainer = ({ children }) => {
 
   useEffect(() => {
     dispatch(setTheme())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(getTags())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if (uid) {
       dispatch(getSavedLists(uid))
     }
-  }, [uid])
+  }, [uid, dispatch])
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,7 +31,7 @@ const PageContainer = ({ children }) => {
     window.addEventListener('resize', handleResize)
     handleResize()
     return () => window.removeEventListener('resize', handleResize)
-  })
+  }, [dispatch])
 
   useEffect(() => {
     auth.onAuthStateChanged(async user => {

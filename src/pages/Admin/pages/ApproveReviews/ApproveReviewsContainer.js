@@ -13,7 +13,7 @@ const ApproveReviewsContainer = () => {
     if (reviews.length === 0) {
       dispatch(getAdminReviews())
     }
-  }, [dispatch])
+  }, [dispatch, reviews.length])
 
   return (
     <div className='rtl p-2'>

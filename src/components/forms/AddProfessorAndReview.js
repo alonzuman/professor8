@@ -109,7 +109,7 @@ const AddProfessorAndReview = ({ onClose }) => {
         pathname: `/professor/${newId}`
       })
     }
-  }, [newId])
+  }, [newId, history])
 
   return (
     <>

@@ -10,7 +10,7 @@ import heb from '../../../../utils/translation/heb'
 moment.locale('he')
 
 const ApproveProfessorCard = ({ professor, loading }) => {
-  const { name, approved, courses, rating, school, tags, uid, dateCreated } = professor;
+  const { name, courses, rating, school, dateCreated } = professor;
   const timeAgo = moment(new Date(dateCreated || Date.now())).fromNow()
   const dispatch = useDispatch()
 

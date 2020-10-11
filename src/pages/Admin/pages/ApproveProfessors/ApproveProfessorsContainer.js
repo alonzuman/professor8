@@ -13,7 +13,7 @@ const ApproveProfessorsContainer = () => {
     if (professors.length === 0) {
       dispatch(getAdminProfessors())
     }
-  }, [])
+  }, [dispatch, professors.length])
 
   return (
     <div className='rtl p-2'>
