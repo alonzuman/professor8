@@ -24,9 +24,7 @@ const heb = {
   fieldOfResearch: "תחומי מחקר",
   reviews: "ביקורות",
   oneReview: 'ביקורת אחת',
-  heroSlogan1: "מצאו את המרצים והמרצות",
-  heroSlogan2: "הטובים",
-  heroSlogan3: "ביותר",
+  heroSlogan: "מצאו את המרצים והמרצות הטובים ביותר",
   home: 'דף הבית',
   schoolName: 'שם מוסד',
   professorName: 'שם מרצה',
@@ -105,7 +103,8 @@ const heb = {
   professors: 'מרצים',
   manageLists: 'ניהול רשימות',
   loadMore: 'טען עוד תוצאות חיפוש',
-  noMoreResults: 'לא נמצאו עוד תוצאות חיפוש'
+  noMoreResults: 'לא נמצאו עוד תוצאות חיפוש',
+  latestProfessors: 'פרסומים אחרונים'
 }
 
 export default heb;
