@@ -104,7 +104,8 @@ const heb = {
   oneProfessor: 'מרצה אחד/ת',
   professors: 'מרצים',
   manageLists: 'ניהול רשימות',
-  loadMore: 'טען עוד תוצאות חיפוש'
+  loadMore: 'טען עוד תוצאות חיפוש',
+  noMoreResults: 'לא נמצאו עוד תוצאות חיפוש'
 }
 
 export default heb;

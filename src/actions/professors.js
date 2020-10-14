@@ -4,6 +4,7 @@ import firebase from 'firebase'
 import { setFeedback } from '../actions'
 import heb from "../utils/translation/heb"
 import { addReview, getProfessorReviews } from "./reviews"
+import store from "../store"
 const professorsRef = db.collection('professors')
 const tagsRef = db.collection('tags')
 
@@ -53,30 +54,69 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
   }
 }
 
-export const getProfessors = () => async dispatch => {
-  const parsed = qs.parse(window.location.search)
-  const { schools, name } = parsed
-  dispatch({
-    type: 'PROFESSORS/CLEAR_ALL'
-  })
+export const loadMoreProfessors = ({ last }) => async dispatch => {
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
+
+  dispatch({
+    type: 'PROFESSORS/SET_LAST_PROFESSOR',
+    payload: last.id
+  })
+
+  try {
+    dispatch(getProfessors(last))
+  } catch (error) {
+    console.log(error)
+    dispatch({
+      type: 'PROFESSORS/ERROR'
+    })
+    dispatch(setFeedback({
+      msg: heb.serverError,
+      severity: 'error'
+    }))
+  }
+}
+
+export const getProfessors = (last) => async dispatch => {
+  const parsed = qs.parse(window.location.search)
+  const { professors } = store.getState().professors
+  const { schools, name } = parsed
+
+  if (!last) {
+    dispatch({
+      type: 'PROFESSORS/CLEAR_ALL'
+    })
+    dispatch({
+      type: 'PROFESSORS/LOADING'
+    })
+  } else {
+    dispatch({
+      type: 'PROFESSORS/FETCHING_MORE'
+    })
+  }
+
   if (schools || name) {
     try {
       let snapshot;
       if (schools && name) {
-        snapshot = await professorsRef.where("school", "==", schools).where('name', '==', name).orderBy('dateCreated', 'desc').limit(10).get()
+        if (last) {
+          snapshot = await professorsRef.where("school", "==", schools).where('name', '==', name).orderBy('dateCreated', 'desc').startAfter(last?.dateCreated).limit(10).get()
+        } else {
+          snapshot = await professorsRef.where("school", "==", schools).where('name', '==', name).orderBy('dateCreated', 'desc').limit(10).get()
+        }
       } else if (schools) {
-        snapshot = await professorsRef.where("school", "==", schools).orderBy('dateCreated', 'desc').limit(10).get()
-      } else {
-        snapshot = await professorsRef.where("name", "==", name).orderBy('dateCreated', 'desc').limit(10).get()
+        if (last) {
+          snapshot = await professorsRef.where("school", "==", schools).orderBy('dateCreated', 'desc').startAfter(last?.dateCreated).limit(10).get()
+        } else {
+          snapshot = await professorsRef.where("school", "==", schools).orderBy('dateCreated', 'desc').limit(10).get()
+        }
       }
       let results = []
       snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
       dispatch({
         type: 'PROFESSORS/SET_ALL',
-        payload: results.filter(v => v.approved)
+        payload: last ? [...professors, ...results.filter(v => v.approved)] : [...results.filter(v => v.approved)]
       })
     } catch (error) {
       console.log(error)

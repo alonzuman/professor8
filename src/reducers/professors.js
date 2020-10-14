@@ -1,7 +1,9 @@
 const initialState = {
   professors: [],
+  lastProfessorId: '',
   professor: {},
   loading: false,
+  isFetchingMore: false
 }
 
 export const professorsReducer = (state = initialState, action) => {
@@ -12,6 +14,11 @@ export const professorsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true
+      }
+    case 'PROFESSORS/FETCHING_MORE':
+      return {
+        ...state,
+        isFetchingMore: true
       }
     case 'PROFESSORS/CLEAR_LOADING':
       return {
@@ -40,7 +47,13 @@ export const professorsReducer = (state = initialState, action) => {
       return {
         ...state,
         professors: [...payload],
+        isFetchingMore: false,
         loading: false
+      }
+    case 'PROFESSORS/SET_LAST_PROFESSOR':
+      return {
+        ...state,
+        lastProfessorId: payload
       }
     case 'PROFESSORS/SET_FILTERS':
       return {
@@ -72,6 +85,7 @@ export const professorsReducer = (state = initialState, action) => {
     case 'PROFESSORS/ERROR':
       return {
         ...state,
+        isFetchingMore: false,
         loading: false
       }
     default: return state;

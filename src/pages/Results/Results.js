@@ -5,22 +5,24 @@ import qs from 'query-string'
 import { useDispatch, useSelector } from 'react-redux'
 import ResultsSearchBar from './components/ResultsSearchBar'
 import { validateStringInput } from '../../utils/form'
+import { getProfessors, loadMoreProfessors } from '../../actions/professors'
 
 const Results = () => {
-  const { loading, professors } = useSelector(state => state.professors)
-  const [page, setPage] = useState(1)
-  const [pageLength, setPageLength] = useState(window.innerHeight)
-  const [scroll, setScroll] = useState(window.scrollY)
-  const [schools, setSchools] = useState('')
-  const [name, setName] = useState('')
+  const filters = qs.parse(useHistory().location.search)
+  const { loading, professors, lastProfessorId } = useSelector(state => state.professors)
+  const { schools, name } = filters;
+  const [schoolsQuery, setSchoolsQuery] = useState('')
+  const [nameQuery, setNameQuery] = useState('')
   const history = useHistory()
+  const dispatch = useDispatch()
+  const lastProfessor = professors[professors?.length - 1]?.id
 
   useEffect(() => {
     const query = history.location.search;
     const parsedQuery = qs.parse(query)
 
-    setSchools(parsedQuery.schools)
-    setName(parsedQuery.name)
+    setSchoolsQuery(parsedQuery.schools)
+    setNameQuery(parsedQuery.name)
   }, [])
 
   const handleSubmit = e => {
@@ -28,8 +30,8 @@ const Results = () => {
 
     if (validateStringInput(schools)) {
       const query = {
-        schools,
-        name
+        schools: schoolsQuery,
+        name: nameQuery
       }
       const stringifiedQuery = qs.stringify(query)
 
@@ -40,33 +42,35 @@ const Results = () => {
     }
   }
 
-  const handleScroll = () => {
-    setScroll(window.scrollY)
-  }
-
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true })
+    if (schools || (name && schools)) {
+      dispatch(getProfessors())
+    }
+  }, [schools, name, dispatch])
 
-    // if (scroll > 68) {
-    //   setPageLength(oldVal => oldVal + 68)
-    //   setPage(oldVal => oldVal + 1)
-    //   console.log(page)
-    //   console.log(pageLength)
-    // }
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [window.scrollY])
+  const loadMore = () => {
+    const last = professors[professors?.length - 1]
+    dispatch(loadMoreProfessors({ last }))
+  }
 
   return (
     <div className='flex full__height align__center flex__column p-2'>
       <ResultsSearchBar
         loading={loading}
-        schools={schools}
-        setSchools={setSchools}
-        name={name}
-        setName={setName}
+        schools={schoolsQuery}
+        setSchools={setSchoolsQuery}
+        name={nameQuery}
+        setName={setNameQuery}
         handleSubmit={handleSubmit}
       />
-      <ProfessorsList />
+      <ProfessorsList
+        loading={loading}
+        professors={professors}
+        name={name}
+        schools={schools}
+        loadMore={loadMore}
+        noMoreResults={lastProfessorId === lastProfessor}
+      />
     </div>
   )
 }

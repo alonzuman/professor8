@@ -7,8 +7,8 @@ import './ProfessorFooter.css'
 const ProfessorFooter = ({ onClick, loading }) => {
   return (
     <div className='professor_footer__container mobile__show bg-01'>
-      {loading && <Skeleton height={36} width={'100%'} />}
-      {!loading && <Button onClick={onClick} color='primary' className='full__width' variant='contained'>{heb.addReview}</Button>}
+      {loading && <Skeleton height={42} width={'100%'} />}
+      {!loading && <Button size='large' onClick={onClick} color='primary' className='full__width' variant='contained'>{heb.addReview}</Button>}
     </div>
   )
 }

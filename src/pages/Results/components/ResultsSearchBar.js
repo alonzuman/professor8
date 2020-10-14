@@ -6,28 +6,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import './ResultsSearchBar.css';
 
 const ResultsSearchBar = ({ loading, handleSubmit, schools, setSchools, name, setName }) => {
-  const [scroll, setScroll] = useState(window.scrollY);
-
-  const handleScroll = () => {
-    setScroll(window.scrollY)
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [window.scrollY])
-
-  const containerStyle = {
-    boxShadow: scroll >= 64 ? '0px 0px 10px #00000015' : '',
-    width: '100%'
-  }
-
   const iconStyle = {
     color: '#fff'
   }
 
   return (
-    <Paper className='results_search_bar__wrapper' style={containerStyle}>
+    <Paper className='results_search_bar__wrapper'>
       <form className='rtl results_search_bar__container' onSubmit={handleSubmit}>
         <SearchBar
           placeholder={heb.schoolName}

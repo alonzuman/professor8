@@ -3,7 +3,6 @@ import { Chip, Grid } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 
 const ProfessorTags = ({ tags, reviewsCount, loading }) => {
-
   if (loading || !tags) {
     return (
       <Grid container spacing={2}>
