@@ -8,6 +8,13 @@ import store from "../store"
 const professorsRef = db.collection('professors')
 const tagsRef = db.collection('tags')
 
+export const setFilters = filters => {
+  return {
+    type: 'PROFESSORS/SET_FILTERS',
+    payload: filters
+  }
+}
+
 export const addProfessorAndReview = ({ professor, review }) => async dispatch => {
   dispatch({
     type: 'PROFESSORS/LOADING'
@@ -57,11 +64,6 @@ export const addProfessorAndReview = ({ professor, review }) => async dispatch =
 export const loadMoreProfessors = ({ last }) => async dispatch => {
   dispatch({
     type: 'PROFESSORS/LOADING'
-  })
-
-  dispatch({
-    type: 'PROFESSORS/SET_LAST_PROFESSOR',
-    payload: last.id
   })
 
   try {
@@ -116,7 +118,14 @@ export const getProfessors = (last) => async dispatch => {
       snapshot.forEach(doc => results.push({ id: doc.id, ...doc.data() }))
       dispatch({
         type: 'PROFESSORS/SET_ALL',
-        payload: last ? [...professors, ...results.filter(v => v.approved)] : [...results.filter(v => v.approved)]
+        payload: {
+          professors: last ? [...professors, ...results.filter(v => v.approved)] : [...results.filter(v => v.approved)],
+          lastProfessorId: last?.id,
+          filters: {
+            schools,
+            name
+          }
+        }
       })
     } catch (error) {
       console.log(error)

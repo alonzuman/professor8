@@ -7,6 +7,7 @@ import SchoolCard from '../../../components/cards/SchoolCard';
 import heb from '../../../utils/translation/heb';
 import './SchoolsSwiper.css'
 import qs from 'query-string'
+import useWindowSize from '../../../hooks/useWindowSize';
 
 const schools = [
   { name: 'האוניברסיטה הפתוחה', icon: 'bye' },
@@ -18,19 +19,10 @@ const schools = [
 
 const SchoolsSwiper = () => {
   const history = useHistory()
-  const [width, setWidth] = useState(null)
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWidth(window.innerWidth)
-    }
-    window.addEventListener('resize', handleResize)
-    handleResize()
-    return () => window.removeEventListener('resize', handleResize)
-  })
+  const { windowWidth } = useWindowSize()
 
   const options = {
-    slidesPerView: width < 768 ? 1.2 : 3.98,
+    slidesPerView: windowWidth <= 768 ? 1.2 : 3.98,
     spaceBetween: 16
   }
 

@@ -10,7 +10,7 @@ import SettingsMenu from './SettingsMenu';
 // Icons
 import MenuIcon from '@material-ui/icons/Menu';
 
-const NavbarMenu = () => {
+const NavbarMenu = ({ scrollPosition }) => {
   const [menu, setMenu] = useState(0)
   const [anchorEl, setAnchorEl] = useState(null)
   const { avatar, firstName, anonymous, role } = useSelector(state => state.auth)
@@ -32,7 +32,7 @@ const NavbarMenu = () => {
 
   return (
     <>
-      <Button className='menu__button' onClick={handleOpen}>
+      <Button className={`${scrollPosition >= 52 ? 'scroll_menu__button' : ''} menu__button`} onClick={handleOpen}>
         <Avatar src={avatar} alt={firstName} className='menu__avatar'>{firstName?.split('')[0]}</Avatar>
         <MenuIcon className='menu__icon' />
       </Button>

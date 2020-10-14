@@ -22,7 +22,6 @@ import { useSelector } from 'react-redux';
 import { darkTheme, lightTheme } from './utils/theme';
 import Navbar from './components/layout/Navbar/Navbar';
 import SavedList from './pages/Admin/pages/SavedList/SavedList';
-import ScrollTopTop from './hooks/ScrollTopTop';
 
 function App() {
   const { theme } = useSelector(state => state.theme)
@@ -34,16 +33,15 @@ function App() {
           <Navbar />
           <PageContainer>
           <Feedback />
-          <ScrollTopTop />
             <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/search' component={Results} />
-              <Route exact path='/professor/:id' component={Professor} />
-              <Route exact path='/terms-of-service' component={TermsOfService} />
-              <Route exact path='/privacy-policy' component={PrivacyPolicy} />
-              <Route exact path='/about-us' component={AboutUs} />
-              <Route exact path='/sign-in' component={Auth} />
-              <Route exact path='/schools' component={Schools} />
+              <ProtectedRoute exact minRole={0} path='/' component={Home} />
+              <ProtectedRoute exact minRole={0} path='/search' component={Results} />
+              <ProtectedRoute exact minRole={0} path='/professor/:id' component={Professor} />
+              <ProtectedRoute exact minRole={0} path='/terms-of-service' component={TermsOfService} />
+              <ProtectedRoute exact minRole={0} path='/privacy-policy' component={PrivacyPolicy} />
+              <ProtectedRoute exact minRole={0} path='/about-us' component={AboutUs} />
+              <ProtectedRoute exact minRole={0} path='/sign-in' component={Auth} />
+              <ProtectedRoute exact minRole={0} path='/schools' component={Schools} />
               <ProtectedRoute exact minRole={1} path='/saved-lists' component={SavedLists} />
               <ProtectedRoute exact minRole={1} path='/saved-lists/:uid/:lid' component={SavedList} />
               <ProtectedRoute exact minRole={3} path='/admin' component={Admin} />

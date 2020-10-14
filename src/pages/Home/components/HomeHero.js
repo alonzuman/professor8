@@ -1,47 +1,16 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import HeroSvg from '../../../assets/svgs/Students'
+import React from 'react'
 import ProfessorSvg from '../../../assets/svgs/Professor';
-import { validateStringInput } from '../../../utils/form'
-import HomeSearchBar from './HomeSearchBar'
-import qs from 'query-string'
+import useWindowSize from '../../../hooks/useWindowSize';
+import ResultsSearchBar from '../../Results/components/ResultsSearchBar';
 import './HomeHero.css'
 
 const HomeHero = () => {
-  const history = useHistory()
-  const [loading, setLoading] = useState(false)
-  const [schools, setSchools] = useState('')
-  const [name, setName] = useState('')
-
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    if (validateStringInput(schools)) {
-      setLoading(true)
-      const query = {
-        schools,
-        name
-      }
-
-      const stringifiedQuery = qs.stringify(query)
-      history.push({
-        pathname: '/search',
-        search: stringifiedQuery
-      })
-    }
-  }
+  const { windowWidth } = useWindowSize()
 
   return (
     <div className='hero__container'>
+      {windowWidth <= 768 && <ResultsSearchBar customClassName='mobile_hero_search_bar' />}
       <ProfessorSvg className='hero_svg' />
-      <HomeSearchBar
-        loading={loading}
-        handleSubmit={handleSubmit}
-        name={name}
-        setName={setName}
-        schools={schools}
-        setSchools={setSchools}
-      />
     </div>
   )
 }

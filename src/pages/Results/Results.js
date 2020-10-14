@@ -6,45 +6,22 @@ import { useDispatch, useSelector } from 'react-redux'
 import ResultsSearchBar from './components/ResultsSearchBar'
 import { validateStringInput } from '../../utils/form'
 import { getProfessors, loadMoreProfessors } from '../../actions/professors'
+import useWindowSize from '../../hooks/useWindowSize'
 
 const Results = () => {
   const filters = qs.parse(useHistory().location.search)
-  const { loading, professors, lastProfessorId } = useSelector(state => state.professors)
   const { schools, name } = filters;
-  const [schoolsQuery, setSchoolsQuery] = useState('')
-  const [nameQuery, setNameQuery] = useState('')
-  const history = useHistory()
+  const { loading, professors, lastProfessorId } = useSelector(state => state.professors)
+  const stateFilters = useSelector(state => state.professors.filters)
   const dispatch = useDispatch()
   const lastProfessor = professors[professors?.length - 1]?.id
-
-  useEffect(() => {
-    const query = history.location.search;
-    const parsedQuery = qs.parse(query)
-
-    setSchoolsQuery(parsedQuery.schools)
-    setNameQuery(parsedQuery.name)
-  }, [])
-
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    if (validateStringInput(schools)) {
-      const query = {
-        schools: schoolsQuery,
-        name: nameQuery
-      }
-      const stringifiedQuery = qs.stringify(query)
-
-      history.push({
-        pathname: '/search',
-        search: stringifiedQuery
-      })
-    }
-  }
+  const { windowWidth } = useWindowSize()
 
   useEffect(() => {
     if (schools || (name && schools)) {
-      dispatch(getProfessors())
+      if ((filters?.name !== stateFilters?.name) || (filters?.schools !== stateFilters?.schools)){
+        dispatch(getProfessors())
+      }
     }
   }, [schools, name, dispatch])
 
@@ -55,14 +32,7 @@ const Results = () => {
 
   return (
     <div className='flex full__height align__center flex__column p-2'>
-      <ResultsSearchBar
-        loading={loading}
-        schools={schoolsQuery}
-        setSchools={setSchoolsQuery}
-        name={nameQuery}
-        setName={setNameQuery}
-        handleSubmit={handleSubmit}
-      />
+      {windowWidth <= 768 && <ResultsSearchBar customClassName='mobile_results_search_bar' />}
       <ProfessorsList
         loading={loading}
         professors={professors}

@@ -46,9 +46,14 @@ export const professorsReducer = (state = initialState, action) => {
     case 'PROFESSORS/SET_ALL':
       return {
         ...state,
-        professors: [...payload],
+        ...payload,
         isFetchingMore: false,
         loading: false
+      }
+    case 'PROFESSORS/SET_FILTERS':
+      return {
+        ...state,
+        ...payload
       }
     case 'PROFESSORS/SET_LAST_PROFESSOR':
       return {

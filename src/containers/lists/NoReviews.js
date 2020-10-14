@@ -9,7 +9,7 @@ const NoReviews = ({ handleClick }) => {
       <Typography className='mb-4' variant='h3'>
         {heb.noReviewsFound},
         <br/>
-        {heb.beTheFirst} <span onClick={handleClick} className='primary__light pointer'>{heb.toAdd}</span>
+        {heb.beTheFirst} <span onClick={handleClick} className='primary text__underline pointer'>{heb.toAdd}</span>
       </Typography>
       <NoReviewsFound className='m__center mt-2 mw-248' />
     </div>

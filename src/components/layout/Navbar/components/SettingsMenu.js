@@ -1,4 +1,4 @@
-import { Divider, IconButton, MenuItem, Typography } from '@material-ui/core'
+import { Divider, IconButton, MenuItem } from '@material-ui/core'
 import React from 'react'
 import heb from '../../../../utils/translation/heb';
 import ThemeSelectionsMenu from './ThemeSelectionsMenu';

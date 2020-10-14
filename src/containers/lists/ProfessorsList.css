@@ -1,7 +1,7 @@
 .professors_list__container {
   width: 100%;
   min-height: 486px;
-  margin: 16px 0;
+  margin: 56px 0;
 }
 
 .results_school__chip {
@@ -12,5 +12,12 @@
 @media (min-width: 728px) {
   .results_school__chip {
     max-width: none;
+  }
+}
+
+
+@media (max-width:768px) {
+  .professors_list__container {
+    margin: 12px 0;
   }
 }

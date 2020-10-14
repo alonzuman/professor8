@@ -51,6 +51,7 @@ const Professor = ({ match }) => {
   }, [savedIds])
 
   useEffect(() => {
+    document.documentElement.scrollTop = 0
     dispatch(getProfessor(id))
   }, [id, dispatch])
 

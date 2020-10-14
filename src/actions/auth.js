@@ -13,7 +13,11 @@ export const setUser = user => async dispatch => {
     if (isAnonymous) {
       dispatch({
         type: 'AUTH/LOAD_USER',
-        payload: { uid, anonymous: true }
+        payload: {
+          uid,
+          anonymous: true,
+          role: 0
+        }
       })
     } else {
       const snapshot = await usersRef.doc(uid).get()
@@ -25,7 +29,11 @@ export const setUser = user => async dispatch => {
       } else {
         dispatch({
           type: 'AUTH/LOAD_USER',
-          payload: { uid, anonymous: true }
+          payload: {
+            uid,
+            anonymous: true,
+            role: 0
+          }
         })
       }
     }
@@ -61,7 +69,8 @@ export const anonymousAuth = () => async dispatch => {
     dispatch({
       type: 'AUTH/SET_USER',
       payload: {
-        anonymous: true
+        anonymous: true,
+        role: 0
       }
     })
     return window.location.reload()
@@ -76,7 +85,6 @@ export const anonymousAuth = () => async dispatch => {
     })
   }
 }
-
 
 export const signUp = () => async dispatch => {
   dispatch({

@@ -50,7 +50,7 @@ const ProfessorsList = ({ loading, professors, name, schools, loadMore, noMoreRe
         </Paper>
         {professors?.length >= 10 &&
         <div className='full__width flex align__center justify__center mt-2'>
-          {!noMoreResults && <Button onClick={loadMore}>{heb.loadMore}</Button>}
+          {!loading && !noMoreResults && <Button onClick={loadMore}>{heb.loadMore}</Button>}
           {loading && <CircularProgress color='primary' />}
           {!loading && noMoreResults && <Typography className='mt-2' variant='body2'>{heb.noMoreResults}</Typography>}
         </div>}

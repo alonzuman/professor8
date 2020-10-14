@@ -9,18 +9,20 @@ import { Typography } from '@material-ui/core';
 import heb from '../../../utils/translation/heb';
 import { Link } from 'react-router-dom';
 import ReviewSkeleton from '../../../components/cards/ReviewSkeleton';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 const LatestReviews = () => {
   const { reviews, loading } = useSelector(state => state.reviews)
-  const viewWidth = window.innerWidth
+  const { windowWidth } = useWindowSize()
   const dispatch = useDispatch()
 
+
   const slidesCount = () => {
-    if (viewWidth <= 512) {
+    if (windowWidth <= 512) {
       return 1.2
-    } else if (512 < viewWidth && viewWidth <= 768) {
+    } else if (512 < windowWidth && windowWidth <= 768) {
       return 1.2
-    } else if (768 < viewWidth && viewWidth <= 900) {
+    } else if (768 < windowWidth && windowWidth <= 900) {
       return 2
     } else {
       return 2.98

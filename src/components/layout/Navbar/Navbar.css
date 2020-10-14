@@ -1,15 +1,26 @@
 .navbar__container {
-  min-height: 68px;
+  min-height: 52px;
   background-color: var(--bg-00);
-  padding: 16px;
+  padding: 8px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   direction: rtl;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 1px solid transparent!important;
+}
+
+.scroll_navbar__container {
+  background-color: var(--bg-01);
+  border-bottom: 1px solid var(--bg-04)!important;
+  transition: background-color .3s ease-in-out, border-bottom ease-in-out .3s;
 }
 
 .navbar__menu {
   max-width: 1280px;
+  max-height: 40px;
   width: 100%;
   display: flex;
   align-items: center;

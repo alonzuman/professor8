@@ -8,7 +8,7 @@ const NoResults = ({ msg, centered = false }) => {
   }
 
   return (
-    <div style={style} className='rtl p-2'>
+    <div style={style} className='rtl p-2 mt-4'>
       <Typography variant='body1'>{msg}</Typography>
       <NoResultsFound className='m__center mt-2 mw-248'/>
     </div>
