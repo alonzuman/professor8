@@ -7,12 +7,14 @@ const useScrollPosition = () => {
     setScrollPosition(window.scrollY);
   };
 
+  const scrollToTop = () => document.documentElement.scrollTop = 0
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return { scrollPosition }
+  return { scrollPosition, scrollToTop }
 }
 
 export default useScrollPosition;

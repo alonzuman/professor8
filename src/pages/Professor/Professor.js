@@ -13,6 +13,7 @@ import ProfessorFooter from './components/ProfessorFooter';
 import SaveProfessorContainer from '../../containers/dialogs/SaveProfessorContainer';
 import { Paper } from '@material-ui/core';
 import ProfessorHeaderControls from './components/ProfessorHeaderControls';
+import useScrollPosition from '../../hooks/useScrollPosition';
 
 const Professor = ({ match }) => {
   const { uid, role, anonymous, savedIds } = useSelector(state => state.auth)
@@ -23,6 +24,7 @@ const Professor = ({ match }) => {
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
   const dispatch = useDispatch()
+  const { scrollToTop } = useScrollPosition()
   const { loading, professor } = useSelector(state => state.professors)
   const { name, tags, rating, avatar, reviewsCount, school, courses } = professor;
 
@@ -51,7 +53,7 @@ const Professor = ({ match }) => {
   }, [savedIds])
 
   useEffect(() => {
-    document.documentElement.scrollTop = 0
+    scrollToTop()
     dispatch(getProfessor(id))
   }, [id, dispatch])
 

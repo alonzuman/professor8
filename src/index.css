@@ -502,6 +502,10 @@ code {
   max-width: 512px;
 }
 
+.mw-768 {
+  max-width: 768px;
+}
+
 @media (max-width: 768px) {
   .mobile__hide {
     display: none!important;

@@ -49,7 +49,7 @@ function App() {
               <ProtectedRoute exact minRole={3} path='/admin/approve-professors' component={ApproveProfessorsContainer} />
             </Switch>
           </PageContainer>
-          {/* <Footer /> */}
+          <Footer />
         </Router>
       </DirectionProvider>
     </ThemeProvider>
