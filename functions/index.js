@@ -131,8 +131,13 @@ exports.onWriteProfessor = functions.firestore
     const tagsRef = admin.firestore().collection('tags')
     try {
       if (change.after.data()) {
+        const nameBefore = change.before.data().name
         const name = change.after.data().name
+        const schoolBefore = change.before.data().school
         const school = change.after.data().school
+        tagsRef.doc('professors').update({
+          [schoolBefore]: admin.firestore.FieldValue.arrayRemove(nameBefore)
+        })
         tagsRef.doc('professors').update({
           [school]: admin.firestore.FieldValue.arrayUnion(name)
         })
