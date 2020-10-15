@@ -3,7 +3,7 @@ import { Chip, Grid } from '@material-ui/core'
 import { Skeleton } from '@material-ui/lab'
 
 const ProfessorTags = ({ tags, reviewsCount, loading }) => {
-  if (loading || !tags) {
+  if (loading) {
     return (
       <Grid container spacing={2}>
         {!tags && [0, 0, 0, 0].map((v, i) => <Grid key={i} item><Skeleton height={48} width={68} /></Grid>)}

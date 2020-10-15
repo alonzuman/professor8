@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getSavedList } from '../../../../actions/saved'
 import ProfessorCard from '../../../../components/cards/ProfessorCard'
 import PageHeader from '../../../../components/layout/PageHeader'
+import EditList from './components/EditList'
 
 const SavedList = ({ match }) => {
   const { list, loading, lists } = useSelector(state => state.saved)
@@ -22,6 +23,7 @@ const SavedList = ({ match }) => {
       <PageHeader
         backButton
         title={loading ? <Skeleton width={104} /> : list.name}
+        action={<EditList id={lid} />}
       />
       {!loading && list?.professors?.map((v, i) => <ProfessorCard key={i} professor={v} />)}
     </div>

@@ -15,7 +15,7 @@ const HomeHero = () => {
         {windowWidth <= 768 && <ResultsSearchBar customClassName='mobile_hero_search_bar' />}
         <div className='hero__slogan'>
           <Typography className='mt-2' variant='h1'>{heb.heroSlogan}</Typography>
-          <Button className='mt-2' variant='contained' color='default'>{heb.latestProfessors}</Button>
+          <Button className='mt-2' variant='contained' color='secondary'>{heb.latestProfessors}</Button>
         </div>
       </div>
       <ProfessorSvg className='hero_svg' />

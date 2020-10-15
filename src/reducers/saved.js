@@ -30,6 +30,12 @@ export const savedReducer = (state = initialState, action) => {
         ...payload,
         loading: false
       }
+    case 'SAVED/DELETE_ONE':
+      return {
+        ...state,
+        lists: [...state.lists.filter(v => v.id !== payload)],
+        loading: false
+      }
     case 'SAVED/SAVE_PROFESSOR':
       return {
         ...state,

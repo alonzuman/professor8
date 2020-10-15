@@ -62,7 +62,7 @@ const ResultsSearchBar = ({ customClassName }) => {
   }
 
   return (
-    <div className={`results_search_bar__wrapper ${className} ${customClassName}`}>
+    <div className={`results_search_bar__wrapper ${customClassName || className}`}>
       <form className='rtl results_search_bar__container' onSubmit={handleSubmit}>
         <SearchBar
           placeholder={heb.schoolName}

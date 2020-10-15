@@ -104,7 +104,9 @@ const heb = {
   manageLists: 'ניהול רשימות',
   loadMore: 'טען עוד תוצאות חיפוש',
   noMoreResults: 'לא נמצאו עוד תוצאות חיפוש',
-  latestProfessors: 'פרסומים אחרונים'
+  latestProfessors: 'פרסומים אחרונים',
+  deleteList: 'מחיקת רשימה',
+  editList: 'עריכת רשימה'
 }
 
 export default heb;

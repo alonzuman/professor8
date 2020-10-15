@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core'
+import { Paper, Typography } from '@material-ui/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
@@ -15,12 +15,12 @@ const Auth = () => {
   } else {
     return (
       <div className='auth__container rtl p-2 m-2'>
-        <div className='auth_options__container'>
+        <Paper className='auth_options__container br-16'>
           {!loading && isAuth && !anonymous && <Redirect to='/' />}
           <Typography variant='h1'>{heb.signIn}</Typography>
           <SignInWithSocialMedia />
           {/* <SignUp /> */}
-        </div>
+        </Paper>
       </div>
     )
   }

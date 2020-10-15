@@ -102,7 +102,7 @@ export const saveProfessor = ({ pid, list }) => async dispatch => {
 
     dispatch({
       type: 'AUTH/SET_SAVED_IDS',
-      payload: { savedIds: [...savedIds, pid] }
+      payload: { savedIds: savedIds ? [...savedIds, pid] : [pid]}
     })
 
     dispatch({
@@ -126,7 +126,6 @@ export const unsaveProfessor = ({ pid }) => async dispatch => {
     type: 'SAVED/LOADING'
   })
   try {
-    // TODO set it up as a cloud function
     await authRef.doc(uid).set({
       savedIds: firebase.firestore.FieldValue.arrayRemove(pid)
     }, { merge: true })
@@ -155,6 +154,27 @@ export const unsaveProfessor = ({ pid }) => async dispatch => {
     dispatch({
       type: 'SAVED/SET_ALL',
       payload: { lists: newLists }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      severity: 'error',
+      msg: heb.serverError
+    }))
+  }
+}
+
+export const deleteSavedList = list => async dispatch => {
+  dispatch({
+    type: 'SAVED/LOADING'
+  })
+
+  try {
+    await list?.professorIds?.forEach(async id => await unsaveProfessor(id))
+    await savedRef.doc(list?.id).delete()
+    dispatch({
+      type: 'SAVED/DELETE_ONE',
+      payload: list.id
     })
   } catch (error) {
     console.log(error)

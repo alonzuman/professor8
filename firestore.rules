@@ -1,8 +1,42 @@
 rules_version = '2';
+
+function isAuthorOrAdmin(request) {
+  let isAdmin = true;
+  let isAuthor = request.resource.data.uid == request.auth.uid;
+  return (isAdmin || isAuthor);
+}
+
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if true;
+    match /professors/{professorID} {
+      allow read;
+      allow create;
+      allow update: if (isAuthorOrAdmin(request));
+      allow delete: if (isAuthorOrAdmin(request));
+    }
+
+    match /professors/{professorID}/reviews/{reviewID} {
+      allow read, write;
+    }
+
+    match /savedLists/{savedListID} {
+      allow read, write;
+    }
+
+    match /users/{userID} {
+      allow read, write;
+    }
+
+    match /tags/{tagID} {
+      allow read, write;
+    }
+
+    match /latestReviews/{latestReviewID} {
+      allow read, write;
+    }
+
+    match /schools/{schoolID} {
+      allow read, write;
     }
   }
 }

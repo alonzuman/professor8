@@ -191,3 +191,29 @@ export const deleteProfessor = professor => async dispatch => {
     }))
   }
 }
+
+export const updateProfessor = professor => async dispatch => {
+  dispatch({
+    type: 'PROFESSORS/LOADING'
+  })
+
+  await professorsRef.doc(professor.id).update({
+    name: professor?.name,
+    school: professor?.school
+  })
+
+  try {
+    dispatch({
+      type: 'PROFESSORS/SET_ONE',
+      payload: {
+        professor
+      }
+    })
+  } catch (error) {
+    console.log(error)
+    dispatch(setFeedback({
+      msg: heb.serverError,
+      severity: 'error'
+    }))
+  }
+}

@@ -12,7 +12,7 @@ const EditProfessorContainer = ({ open, onClose }) => {
         title={heb.editProfessor}
         onClose={onClose}
       />
-      <EditProfessor />
+      <EditProfessor onClose={onClose} />
     </Dialog>
   )
 }
