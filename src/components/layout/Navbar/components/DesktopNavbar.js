@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useScrollPosition from '../../../../hooks/useScrollPosition'
 import useWindowSize from '../../../../hooks/useWindowSize'
 import ResultsSearchBar from '../../../../pages/Results/components/ResultsSearchBar'

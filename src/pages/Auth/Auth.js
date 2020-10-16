@@ -3,7 +3,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import SignInWithSocialMedia from '../../components/forms/SignInWithSocialMedia'
-import SignUp from '../../components/forms/SignUp'
 import './Auth.css'
 import heb from '../../utils/translation/heb'
 
@@ -19,7 +18,6 @@ const Auth = () => {
           {!loading && isAuth && !anonymous && <Redirect to='/' />}
           <Typography variant='h1'>{heb.signIn}</Typography>
           <SignInWithSocialMedia />
-          {/* <SignUp /> */}
         </Paper>
       </div>
     )

@@ -15,15 +15,15 @@ export const professorsReducer = (state = initialState, action) => {
         ...state,
         loading: true
       }
-    case 'PROFESSORS/FETCHING_MORE':
-      return {
-        ...state,
-        isFetchingMore: true
-      }
     case 'PROFESSORS/CLEAR_LOADING':
       return {
         ...state,
         loading: false
+      }
+    case 'PROFESSORS/FETCHING_MORE':
+      return {
+        ...state,
+        isFetchingMore: true
       }
     case 'PROFESSORS/CLEAR_PROFESSOR':
       return {

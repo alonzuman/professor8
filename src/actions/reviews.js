@@ -93,20 +93,23 @@ export const addReview = ({ review, professor }) => async dispatch => {
   }
 }
 
-export const deleteReview = ({ review, professor }) => async dispatch => {
+export const deleteReview = ({ review }) => async dispatch => {
   const { pid, id } = review;
   const { reviews } = store.getState().reviews
   dispatch({
     type: 'PROFESSORS/LOADING'
   })
   try {
-    await db.collection('professors').doc(pid).collection('reviews').doc(review.id).delete()
+    await db.collection('professors').doc(pid).collection('reviews').doc(id).delete()
 
     dispatch({
       type: 'REVIEWS/SET_ALL',
       payload: {
-        reviews: [...reviews.filter(v => v.id !== review.id)]
+        reviews: [...reviews.filter(v => v.id !== id)]
       }
+    })
+    dispatch({
+      type: 'PROFESSORS/CLEAR_LOADING'
     })
     dispatch(setFeedback({
       severity: 'success',
